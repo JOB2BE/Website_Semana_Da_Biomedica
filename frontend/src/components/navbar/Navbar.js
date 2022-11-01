@@ -1,6 +1,35 @@
 import * as React from 'react';
-import { HStack, IconButton, Icon, Text, Box, StatusBar, Center } from 'native-base';
+import { HStack, Button, Box, StatusBar, Center } from 'native-base';
 import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+	container: {
+		borderBottomLeftRadius: '300px',
+		borderBottomRightRadius: '300px',
+		padding: '1em',
+	},
+	navButton: {
+		backgroundColor: 'transparent',
+	},
+});
+const navbarRoutes = [
+	{
+		name: 'Quem Somos',
+		icon: null,
+	},
+	{
+		name: 'Horários',
+		icon: null,
+	},
+	{
+		name: 'Actividades',
+		icon: null,
+	},
+	{
+		name: 'Convidados',
+		icon: null,
+	},
+];
 
 export const Navbar = () => {
 	return (
@@ -15,35 +44,13 @@ export const Navbar = () => {
 				justifyContent='space-between'
 				alignItems='center'
 			>
-				<HStack alignItems='stretch'>
-					<Text color='white' fontSize='20' fontWeight='bold'>
-						Home
-					</Text>
-					<Text color='white' fontSize='20' fontWeight='bold'>
-						Home
-					</Text>
-					<Text color='white' fontSize='20' fontWeight='bold'>
-						Home
-					</Text>
-					<Text color='white' fontSize='20' fontWeight='bold'>
-						Home
-					</Text>
-					<Text color='white' fontSize='20' fontWeight='bold'>
-						Home
-					</Text>
-					<Text color='white' fontSize='20' fontWeight='bold'>
-						Home
-					</Text>
-				</HStack>
+				{navbarRoutes.forEach((route, index) => (
+					<Button leftIcon={route.icon} key={index}>
+						{' '}
+						{route.name}{' '}
+					</Button>
+				))}
 			</HStack>
 		</Center>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		borderBottomLeftRadius: '300px',
-		borderBottomRightRadius: '300px',
-		padding: '1em',
-	},
-});
