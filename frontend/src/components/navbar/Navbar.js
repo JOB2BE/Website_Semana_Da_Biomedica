@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { HStack, Button, Center, Heading, VStack, ZStack, Box, Flex, Spacer } from 'native-base';
-import AboutUsIcon from '../../../assets/AboutUsIcon';
-import ScheduleIcon from '../../../assets/ScheduleIcon';
-import ActivitiesIcon from '../../../assets/ActivitiesIcon';
-import SpeakersIcon from '../../../assets/SpeakersIcon';
-// import Logo from '../../../assets/DarkBGLogo';
-import Logo from '../../../assets/WhiteBGLogo';
-import { StyleSheet, View } from 'react-native';
+import { Button, Center, Heading, Box, Flex } from 'native-base';
+import AboutUsIcon from '../../assets/images/AboutUsIcon';
+import ScheduleIcon from '../../assets/images/ScheduleIcon';
+import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
+import SpeakersIcon from '../../assets/images/SpeakersIcon';
+import Logo from '../../assets/images/WhiteBGLogo';
+import { StyleSheet } from 'react-native';
+import { Link } from '../../router';
 
 const styles = StyleSheet.create({
 	leftContainer: {
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
 		borderBottomRightRadius: 3600,
 		backgroundColor: '#FDBA35',
 		padding: '0.5em',
-		zIndex: 5,
 	},
 	navButton: {
 		backgroundColor: 'transparent',
@@ -40,23 +39,23 @@ const styles = StyleSheet.create({
 const navbarRoutes = [
 	{
 		name: 'Quem Somos',
-		isImage: false,
 		icon: <AboutUsIcon />,
+		route: '/AboutUs',
 	},
 	{
 		name: 'Horários',
-		isImage: false,
 		icon: <ScheduleIcon />,
+		route: '/Schedule',
 	},
 	{
 		name: 'Actividades',
-		isImage: false,
 		icon: <ActivitiesIcon />,
+		route: '/Activities',
 	},
 	{
 		name: 'Convidados',
-		isImage: false,
 		icon: <SpeakersIcon />,
+		route: '/Speakers',
 	},
 ];
 
@@ -69,27 +68,37 @@ export const Navbar = () => {
 						{navbarRoutes.slice(0, 2).map((route, index) => {
 							return (
 								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
-									<Heading style={{ color: 'white' }} size='md'>
-										{route.name}
-									</Heading>
+									<Link to={route.route} style={{ textDecoration: 'none' }}>
+										{' '}
+										<Heading style={{ color: 'white' }} size='md'>
+											{route.name}
+										</Heading>
+									</Link>
 								</Button>
 							);
 						})}
 					</Flex>
+
 					<Box
 						style={{
 							alignItems: 'center',
 						}}
 					>
-						<Logo style={styles.logoContainer} />
+						<Link to='/' style={{ textDecoration: 'none' }}>
+							<Logo style={styles.logoContainer} />
+						</Link>
 					</Box>
+
 					<Flex direction='row' style={styles.rightContainer} justifyContent='flex-end'>
 						{navbarRoutes.slice(2).map((route, index) => {
 							return (
 								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
-									<Heading style={{ color: 'white' }} size='md'>
-										{route.name}
-									</Heading>
+									<Link to={route.route} style={{ textDecoration: 'none' }}>
+										{' '}
+										<Heading style={{ color: 'white' }} size='md'>
+											{route.name}
+										</Heading>
+									</Link>
 								</Button>
 							);
 						})}
