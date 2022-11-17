@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Router, Route, Routes } from './router';
 import { NativeBaseProvider } from 'native-base';
 import { Navbar } from './components/navbar/Navbar';
@@ -18,13 +18,13 @@ export default function App() {
 				<Navbar />
 				<Routes>
 					<Route exact path='/' element={<LandingPage />} />
-					<Route path='AboutUs' element={<AboutUsPage />} />
-					<Route path='Schedule' element={<SchedulePage />} />
-					<Route path='Activity' element={<ActivityPage />} />
-					<Route path='Activities' element={<ActivitiesPage />} />
-					<Route path='Speakers' element={<SpeakersPage />} />
-					<Route path='Speaker' element={<SpeakerPage />} />
-					<Route path='Feedback' element={<FeedbackPage />} />
+					<Route path='/AboutUs' element={<AboutUsPage />} />
+					<Route path='/Schedule' element={<SchedulePage />} />
+					<Route path='/Activity' element={<ActivityPage />} />
+					<Route path='/Activities' element={<ActivitiesPage />} />
+					<Route path='/Speakers' element={<SpeakersPage />} />
+					<Route path='/Speaker' element={<SpeakerPage />} />
+					<Route path='/Feedback' element={<FeedbackPage />} />
 				</Routes>
 			</Router>
 		</NativeBaseProvider>
