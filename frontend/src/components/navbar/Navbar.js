@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HStack, Button, Center, Heading, VStack } from 'native-base';
+import { HStack, Button, Center, Heading, VStack, ZStack, Box, Flex, Spacer } from 'native-base';
 import AboutUsIcon from '../../../assets/AboutUsIcon';
 import ScheduleIcon from '../../../assets/ScheduleIcon';
 import ActivitiesIcon from '../../../assets/ActivitiesIcon';
@@ -9,17 +9,29 @@ import Logo from '../../../assets/WhiteBGLogo';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
-	container: {
+	leftContainer: {
 		borderBottomLeftRadius: 300,
+		padding: '0.1em',
+		paddingHorizontal: '1.5em',
+		backgroundColor: '#2D6793',
+		height: '40%',
+		marginRight: -2,
+	},
+	rightContainer: {
 		borderBottomRightRadius: 300,
-		padding: '0.5em',
-		backgroundColor: 'grey',
+		padding: '0.1em',
+		paddingHorizontal: '1.5em',
+		backgroundColor: '#2D6793',
+		height: '40%',
+		marginLeft: -2,
+		zIndex: -1,
 	},
 	logoContainer: {
-		borderBottomLeftRadius: 1600,
-		borderBottomRightRadius: 1600,
-		backgroundColor: 'yellow',
-		zIndex: 2,
+		borderBottomLeftRadius: 3600,
+		borderBottomRightRadius: 3600,
+		backgroundColor: '#FDBA35',
+		padding: '0.5em',
+		zIndex: 5,
 	},
 	navButton: {
 		backgroundColor: 'transparent',
@@ -50,38 +62,40 @@ const navbarRoutes = [
 
 export const Navbar = () => {
 	return (
-		<Center>
-			<View
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					right: 0,
-					bottom: 0,
-					zIndex: 2,
-					justifyContent: 'center',
-					alignItems: 'center',
-				}}
-			>
-				<VStack style={styles.logoContainer}>
-					<Logo />
-				</VStack>
-			</View>
-			<HStack style={styles.container} justifyContent='space-between' alignItems='center'>
-				<HStack alignItems={'stretch'}>
-					{navbarRoutes.map((route, index) => {
-						if (navbarRoutes.isImage) {
-							return null;
-						} else {
+		<>
+			<Center>
+				<Flex direction='row' justifyContent='space-around' alignContent='center'>
+					<Flex direction='row' style={styles.leftContainer} justifyContent='flex-start'>
+						{navbarRoutes.slice(0, 2).map((route, index) => {
 							return (
 								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
-									<Heading size='md'>{route.name}</Heading>
+									<Heading style={{ color: 'white' }} size='md'>
+										{route.name}
+									</Heading>
 								</Button>
 							);
-						}
-					})}
-				</HStack>
-			</HStack>
-		</Center>
+						})}
+					</Flex>
+					<Box
+						style={{
+							alignItems: 'center',
+						}}
+					>
+						<Logo style={styles.logoContainer} />
+					</Box>
+					<Flex direction='row' style={styles.rightContainer} justifyContent='flex-end'>
+						{navbarRoutes.slice(2).map((route, index) => {
+							return (
+								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
+									<Heading style={{ color: 'white' }} size='md'>
+										{route.name}
+									</Heading>
+								</Button>
+							);
+						})}
+					</Flex>
+				</Flex>
+			</Center>
+		</>
 	);
 };
