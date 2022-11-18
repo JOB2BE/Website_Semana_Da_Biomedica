@@ -10,10 +10,11 @@ import ActivitiesPage from './pages/ActivitiesPage';
 import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
+import GlobalTheme from './GlobalTheme';
 
 export default function App() {
 	return (
-		<NativeBaseProvider>
+		<NativeBaseProvider theme={GlobalTheme}>
 			<Router>
 				<Navbar />
 				<Routes>

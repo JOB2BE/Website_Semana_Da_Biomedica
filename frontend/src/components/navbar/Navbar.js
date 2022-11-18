@@ -35,6 +35,16 @@ const styles = StyleSheet.create({
 	navButton: {
 		backgroundColor: 'transparent',
 	},
+	shadow: {
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 3,
+		},
+		shadowOpacity: 0.34,
+		shadowRadius: 6.27,
+		elevation: 10,
+	},
 });
 const navbarRoutes = [
 	{
@@ -64,7 +74,11 @@ export const Navbar = () => {
 		<>
 			<Center>
 				<Flex direction='row' justifyContent='space-around' alignContent='center'>
-					<Flex direction='row' style={styles.leftContainer} justifyContent='flex-start'>
+					<Flex
+						direction='row'
+						style={[styles.leftContainer, styles.shadow]}
+						justifyContent='flex-start'
+					>
 						{navbarRoutes.slice(0, 2).map((route, index) => {
 							return (
 								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
@@ -85,11 +99,15 @@ export const Navbar = () => {
 						}}
 					>
 						<Link to='/' style={{ textDecoration: 'none' }}>
-							<Logo style={styles.logoContainer} />
+							<Logo style={[styles.logoContainer, styles.shadow]} />
 						</Link>
 					</Box>
 
-					<Flex direction='row' style={styles.rightContainer} justifyContent='flex-end'>
+					<Flex
+						direction='row'
+						style={[styles.rightContainer, styles.shadow]}
+						justifyContent='flex-end'
+					>
 						{navbarRoutes.slice(2).map((route, index) => {
 							return (
 								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
