@@ -19,7 +19,10 @@ export default function App() {
 		// eslint-disable-next-line no-undef
 		TextMe: require('./assets/fonts/TextMeOne-Regular.ttf'),
 	});
-	console.log(theme);
+	if (!fontsLoaded) {
+		//The user won't see the fonts loading
+		return null;
+	}
 	return (
 		<NativeBaseProvider theme={theme}>
 			<Router>
