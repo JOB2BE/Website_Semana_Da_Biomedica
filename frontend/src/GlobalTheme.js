@@ -1,6 +1,6 @@
 import { extendTheme } from 'native-base';
 
-export const theme = extendTheme({
+export const GlobalTheme = extendTheme({
 	colors: {
 		// Add new colors
 		darkBlue: {

@@ -11,8 +11,14 @@ import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
 import GlobalTheme from './GlobalTheme';
+import { useFonts } from 'expo-font';
 
 export default function App() {
+	// eslint-disable-next-line no-unused-vars
+	const [fontsLoaded] = useFonts({
+		// eslint-disable-next-line no-undef
+		TextMe: require('./assets/fonts/TextMeOne-Regular.ttf'),
+	});
 	return (
 		<NativeBaseProvider theme={GlobalTheme}>
 			<Router>
