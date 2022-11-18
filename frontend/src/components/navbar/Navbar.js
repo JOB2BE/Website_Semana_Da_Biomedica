@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Center, Heading, Box, Flex, theme } from 'native-base';
+import { Button, Center, Heading, Box, Flex } from 'native-base';
 import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
@@ -84,13 +84,7 @@ export const Navbar = () => {
 								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
 									<Link to={route.route} style={{ textDecoration: 'none' }}>
 										{' '}
-										<Heading
-											style={{ color: 'white' }}
-											fontFamily='body'
-											size='md'
-										>
-											{route.name}
-										</Heading>
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
 									</Link>
 								</Button>
 							);
@@ -117,9 +111,7 @@ export const Navbar = () => {
 								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
 									<Link to={route.route} style={{ textDecoration: 'none' }}>
 										{' '}
-										<Heading style={{ color: 'white' }} size='md'>
-											{route.name}
-										</Heading>
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
 									</Link>
 								</Button>
 							);

@@ -10,7 +10,7 @@ import ActivitiesPage from './pages/ActivitiesPage';
 import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
-import GlobalTheme from './GlobalTheme';
+import theme from './theme';
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -19,8 +19,9 @@ export default function App() {
 		// eslint-disable-next-line no-undef
 		TextMe: require('./assets/fonts/TextMeOne-Regular.ttf'),
 	});
+	console.log(theme);
 	return (
-		<NativeBaseProvider theme={GlobalTheme}>
+		<NativeBaseProvider theme={theme}>
 			<Router>
 				<Navbar />
 				<Routes>
