@@ -9,9 +9,6 @@ export default extendTheme({
 		cream: {
 			0: '#FFEFD3',
 		},
-		lightViolet: {
-			0: '#A7A5C6',
-		},
 		medYellow: {
 			0: '#FDBA35',
 		},
@@ -111,15 +108,15 @@ export default extendTheme({
 				},
 				engineering: () => {
 					return {
-						bgColor: '#A7A5C6',
+						bgColor: '#FFEFD3',
 						borderWidth: 1,
 						borderColor: '#2D6793',
 						_hover: {
-							bg: '#cac9dd',
+							bg: '#e6d7be',
 							shadow: 9,
 						},
 						_pressed: {
-							bg: '#dcdbe8',
+							bg: '#ccbfa9',
 						},
 						_text: {
 							color: '#2D6793',
