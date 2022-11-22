@@ -84,7 +84,7 @@ export default extendTheme({
 		},
 		Button: {
 			variants: {
-				gradient: () => {
+				medical: () => {
 					return {
 						color: {
 							linearGradient: {

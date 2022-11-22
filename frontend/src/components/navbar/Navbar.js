@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Center, Heading, Box, Flex, Stack } from 'native-base';
+import { Center, Heading, Box, Stack } from 'native-base';
 import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 const navbarRoutes = [
 	{
 		name: 'Quem Somos',
-		icon: <AboutUsIcon style={styles.icon} />,
+		icon: <AboutUsIcon />,
 		route: '/AboutUs',
 	},
 	{
