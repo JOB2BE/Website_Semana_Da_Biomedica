@@ -70,55 +70,54 @@ const navbarRoutes = [
 ];
 
 export const Navbar = () => {
-	return (
-		<>
-			<Center>
-				<Flex direction='row' justifyContent='space-around' alignContent='center'>
-					<Flex
-						direction='row'
-						style={[styles.leftContainer, styles.shadow]}
-						justifyContent='flex-start'
-					>
-						{navbarRoutes.slice(0, 2).map((route, index) => {
-							return (
-								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
-									<Link to={route.route} style={{ textDecoration: 'none' }}>
-										{' '}
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
-									</Link>
-								</Button>
-							);
-						})}
-					</Flex>
+	return null;
+	// <>
+	// 	<Center>
+	// 		<Flex direction='row' justifyContent='space-around' alignContent='center'>
+	// 			<Flex
+	// 				direction='row'
+	// 				style={[styles.leftContainer, styles.shadow]}
+	// 				justifyContent='flex-start'
+	// 			>
+	// 				{navbarRoutes.slice(0, 2).map((route, index) => {
+	// 					return (
+	// 						<Button style={styles.navButton} leftIcon={route.icon} key={index}>
+	// 							<Link to={route.route} style={{ textDecoration: 'none' }}>
+	// 								{' '}
+	// 								<Heading style={{ color: 'white' }}>{route.name}</Heading>
+	// 							</Link>
+	// 						</Button>
+	// 					);
+	// 				})}
+	// 			</Flex>
 
-					<Box
-						style={{
-							alignItems: 'center',
-						}}
-					>
-						<Link to='/' style={{ textDecoration: 'none' }}>
-							<Logo style={[styles.logoContainer, styles.shadow]} />
-						</Link>
-					</Box>
+	// 			<Box
+	// 				style={{
+	// 					alignItems: 'center',
+	// 				}}
+	// 			>
+	// 				<Link to='/' style={{ textDecoration: 'none' }}>
+	// 					<Logo style={[styles.logoContainer, styles.shadow]} />
+	// 				</Link>
+	// 			</Box>
 
-					<Flex
-						direction='row'
-						style={[styles.rightContainer, styles.shadow]}
-						justifyContent='flex-end'
-					>
-						{navbarRoutes.slice(2).map((route, index) => {
-							return (
-								<Button style={styles.navButton} leftIcon={route.icon} key={index}>
-									<Link to={route.route} style={{ textDecoration: 'none' }}>
-										{' '}
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
-									</Link>
-								</Button>
-							);
-						})}
-					</Flex>
-				</Flex>
-			</Center>
-		</>
-	);
+	// 			<Flex
+	// 				direction='row'
+	// 				style={[styles.rightContainer, styles.shadow]}
+	// 				justifyContent='flex-end'
+	// 			>
+	// 				{navbarRoutes.slice(2).map((route, index) => {
+	// 					return (
+	// 						<Button style={styles.navButton} leftIcon={route.icon} key={index}>
+	// 							<Link to={route.route} style={{ textDecoration: 'none' }}>
+	// 								{' '}
+	// 								<Heading style={{ color: 'white' }}>{route.name}</Heading>
+	// 							</Link>
+	// 						</Button>
+	// 					);
+	// 				})}
+	// 			</Flex>
+	// 		</Flex>
+	// 	</Center>
+	// </>
 };

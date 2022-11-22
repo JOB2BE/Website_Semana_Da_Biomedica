@@ -12,6 +12,14 @@ import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
 import theme from './theme';
 import { useFonts } from 'expo-font';
+import { LinearGradient } from 'expo-linear-gradient';
+
+// eslint-disable-next-line no-undef
+const config = {
+	dependencies: {
+		'linear-gradient': LinearGradient,
+	},
+};
 
 export default function App() {
 	// eslint-disable-next-line no-unused-vars
@@ -24,7 +32,7 @@ export default function App() {
 		return null;
 	}
 	return (
-		<NativeBaseProvider theme={theme}>
+		<NativeBaseProvider theme={theme} config={config}>
 			<Router>
 				<Navbar />
 				<Routes>

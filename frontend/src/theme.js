@@ -82,5 +82,21 @@ export default extendTheme({
 				},
 			},
 		},
+		Button: {
+			variants: {
+				gradient: () => {
+					return {
+						color: {
+							linearGradient: {
+								colors: ['lightBlue.300', 'violet.800'],
+								start: [0, 0],
+								end: [1, 0],
+							},
+						},
+						rounded: 'full',
+					};
+				},
+			},
+		},
 	},
 });
