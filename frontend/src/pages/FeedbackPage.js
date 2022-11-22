@@ -10,7 +10,7 @@ export default function LandingPage() {
 	return (
 		<View style={styles.container}>
 			<Text>This is the Feedback Page!</Text>
-			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
+			<Button variant='alternating' onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
 			<Text>You have pressed the button {counter} times</Text>
 			<StatusBar style='auto' />
 		</View>

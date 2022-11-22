@@ -15,6 +15,9 @@ export default extendTheme({
 		medYellow: {
 			0: '#FDBA35',
 		},
+		engGrey: {
+			0: '#C0C0C0',
+		},
 	},
 	config: {
 		// Changing initialColorMode to 'light'
@@ -86,14 +89,71 @@ export default extendTheme({
 			variants: {
 				medical: () => {
 					return {
-						color: {
-							linearGradient: {
-								colors: ['lightBlue.300', 'violet.800'],
-								start: [0, 0],
-								end: [1, 0],
-							},
+						bgColor: '#FDBA35',
+						borderWidth: 1,
+						borderColor: '#2D6793',
+						_hover: {
+							bg: '#fdc85d',
+							shadow: 9,
 						},
-						rounded: 'full',
+						_pressed: {
+							bg: '#fed686',
+						},
+						_text: {
+							color: '#2D6793',
+							fontWeight: 'bold',
+						},
+						rounded: 15,
+						baseStyle: {
+							borderWidth: 5,
+						},
+					};
+				},
+				engineering: () => {
+					return {
+						bgColor: '#A7A5C6',
+						borderWidth: 1,
+						borderColor: '#2D6793',
+						_hover: {
+							bg: '#cac9dd',
+							shadow: 9,
+						},
+						_pressed: {
+							bg: '#dcdbe8',
+						},
+						_text: {
+							color: '#2D6793',
+							fontWeight: 'bold',
+						},
+						rounded: 15,
+						baseStyle: {
+							borderWidth: 5,
+						},
+					};
+				},
+				alternating: () => {
+					return {
+						bgColor: '#2D6793',
+						borderWidth: 1,
+						borderColor: '#FDBA35',
+						_hover: {
+							bg: '#FDBA35',
+							shadow: 9,
+							borderColor: '#2D6793',
+							_text: { color: '#2D6793' },
+						},
+						_pressed: {
+							bg: '#fed686',
+							_text: { color: '#2D6793' },
+						},
+						_text: {
+							color: '#FDBA35',
+							fontWeight: 'bold',
+						},
+						rounded: 15,
+						baseStyle: {
+							borderWidth: 5,
+						},
 					};
 				},
 			},
