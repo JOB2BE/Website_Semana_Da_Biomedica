@@ -2,7 +2,14 @@ import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 const SvgComponent = (props) => (
-	<Svg width={30} height={30} fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
+	<Svg
+		width={32}
+		height={26}
+		fill='none'
+		viewBox='0 0 32 30'
+		xmlns='http://www.w3.org/2000/svg'
+		{...props}
+	>
 		<Path
 			fillRule='evenodd'
 			clipRule='evenodd'

@@ -2,7 +2,14 @@ import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 const SvgComponent = (props) => (
-	<Svg width={40} height={40} fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
+	<Svg
+		width={30}
+		height={30}
+		fill='none'
+		viewBox='0 0 38 38'
+		xmlns='http://www.w3.org/2000/svg'
+		{...props}
+	>
 		<Path
 			d='M33.75 30a3.699 3.699 0 0 0-1.606.375L26.769 25H22.5v2.5h3.233l4.643 4.644c-.244.5-.373 1.05-.376 1.606A3.75 3.75 0 1 0 33.75 30Zm0 5a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm0-18.75a3.744 3.744 0 0 0-3.52 2.5H22.5v2.5h7.73a3.743 3.743 0 1 0 3.52-5Zm0 5a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm0-18.75A3.754 3.754 0 0 0 30 6.25c.004.599.154 1.188.435 1.716l-4.69 4.534H22.5V15h4.255l5.5-5.315A3.748 3.748 0 1 0 33.75 2.5Zm0 5a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z'
 			fill='#fff'

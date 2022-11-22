@@ -1,39 +1,35 @@
 import * as React from 'react';
-import { Button, Center, Heading, Box, Flex } from 'native-base';
+import { Button, Center, Heading, Box, Flex, Stack } from 'native-base';
 import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
 import Logo from '../../assets/images/WhiteBGLogo';
 import { StyleSheet } from 'react-native';
-import { Link } from '../../router';
+import { Link } from '../../router/index';
 
 const styles = StyleSheet.create({
 	leftContainer: {
 		borderBottomLeftRadius: 300,
-		padding: '0.1em',
-		paddingHorizontal: '1.5em',
 		backgroundColor: '#2D6793',
 		height: '40%',
-		marginRight: -2,
+		paddingHorizontal: 10,
 	},
 	rightContainer: {
 		borderBottomRightRadius: 300,
-		padding: '0.1em',
-		paddingHorizontal: '1.5em',
 		backgroundColor: '#2D6793',
 		height: '40%',
-		marginLeft: -2,
+		paddingHorizontal: 10,
 		zIndex: -1,
 	},
 	logoContainer: {
 		borderBottomLeftRadius: 3600,
 		borderBottomRightRadius: 3600,
 		backgroundColor: '#FDBA35',
-		padding: '0.5em',
+		padding: 5,
 	},
-	navButton: {
-		backgroundColor: 'transparent',
+	sideFlexes: {
+		padding: 10,
 	},
 	shadow: {
 		shadowColor: '#000',
@@ -49,7 +45,7 @@ const styles = StyleSheet.create({
 const navbarRoutes = [
 	{
 		name: 'Quem Somos',
-		icon: <AboutUsIcon />,
+		icon: <AboutUsIcon style={styles.icon} />,
 		route: '/AboutUs',
 	},
 	{
@@ -70,54 +66,75 @@ const navbarRoutes = [
 ];
 
 export const Navbar = () => {
-	return null;
-	// <>
-	// 	<Center>
-	// 		<Flex direction='row' justifyContent='space-around' alignContent='center'>
-	// 			<Flex
-	// 				direction='row'
-	// 				style={[styles.leftContainer, styles.shadow]}
-	// 				justifyContent='flex-start'
-	// 			>
-	// 				{navbarRoutes.slice(0, 2).map((route, index) => {
-	// 					return (
-	// 						<Button style={styles.navButton} leftIcon={route.icon} key={index}>
-	// 							<Link to={route.route} style={{ textDecoration: 'none' }}>
-	// 								{' '}
-	// 								<Heading style={{ color: 'white' }}>{route.name}</Heading>
-	// 							</Link>
-	// 						</Button>
-	// 					);
-	// 				})}
-	// 			</Flex>
+	return (
+		<>
+			<Center>
+				<Stack direction='row' justifyContent='space-around' alignContent='center'>
+					<Stack
+						direction='row'
+						style={[styles.leftContainer, styles.shadow]}
+						justifyContent='flex-start'
+					>
+						{navbarRoutes.slice(0, 2).map((route, index) => {
+							return (
+								<Link
+									key={index}
+									to={route.route}
+									style={{ textDecoration: 'none' }}
+								>
+									<Stack
+										direction='row'
+										justifyContent='center'
+										alignItems='center'
+										style={styles.sideFlexes}
+										space={2}
+									>
+										{route.icon}
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+									</Stack>
+								</Link>
+							);
+						})}
+					</Stack>
 
-	// 			<Box
-	// 				style={{
-	// 					alignItems: 'center',
-	// 				}}
-	// 			>
-	// 				<Link to='/' style={{ textDecoration: 'none' }}>
-	// 					<Logo style={[styles.logoContainer, styles.shadow]} />
-	// 				</Link>
-	// 			</Box>
+					<Box
+						style={{
+							alignItems: 'center',
+						}}
+					>
+						<Link to='/' style={{ textDecoration: 'none' }}>
+							<Logo style={[styles.logoContainer, styles.shadow]} />
+						</Link>
+					</Box>
 
-	// 			<Flex
-	// 				direction='row'
-	// 				style={[styles.rightContainer, styles.shadow]}
-	// 				justifyContent='flex-end'
-	// 			>
-	// 				{navbarRoutes.slice(2).map((route, index) => {
-	// 					return (
-	// 						<Button style={styles.navButton} leftIcon={route.icon} key={index}>
-	// 							<Link to={route.route} style={{ textDecoration: 'none' }}>
-	// 								{' '}
-	// 								<Heading style={{ color: 'white' }}>{route.name}</Heading>
-	// 							</Link>
-	// 						</Button>
-	// 					);
-	// 				})}
-	// 			</Flex>
-	// 		</Flex>
-	// 	</Center>
-	// </>
+					<Stack
+						direction='row'
+						style={[styles.rightContainer, styles.shadow]}
+						justifyContent='flex-start'
+					>
+						{navbarRoutes.slice(2).map((route, index) => {
+							return (
+								<Link
+									key={index}
+									to={route.route}
+									style={{ textDecoration: 'none' }}
+								>
+									<Stack
+										direction='row'
+										justifyContent='center'
+										alignItems='center'
+										style={styles.sideFlexes}
+										space={2}
+									>
+										{route.icon}
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+									</Stack>
+								</Link>
+							);
+						})}
+					</Stack>
+				</Stack>
+			</Center>
+		</>
+	);
 };

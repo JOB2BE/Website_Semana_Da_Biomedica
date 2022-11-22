@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Routes } from './router';
+import { Router, Route, Routes } from './router/index';
 import { NativeBaseProvider } from 'native-base';
 import { Navbar } from './components/navbar/Navbar';
 import LandingPage from './pages/LandingPage';
