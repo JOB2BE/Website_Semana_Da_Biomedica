@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Center, Heading, Box, Stack, Image } from 'native-base';
+import { Center, Heading, Box, Stack } from 'native-base';
 import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
