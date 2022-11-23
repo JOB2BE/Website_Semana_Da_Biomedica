@@ -13,8 +13,15 @@ import FeedbackPage from './pages/FeedbackPage';
 import theme from './theme';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Localization from 'expo-localization'; //Internationalisation dependencies
+import { I18n } from 'i18n-js';
+import { en, pt } from './utils/supportedLanguages';
 
-// eslint-disable-next-line no-undef
+var i18n = new I18n();
+i18n.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
+i18n.translations = { en, pt }; // All our languages
+i18n.locale = Localization.locale; // get the device's current language code
+
 const config = {
 	dependencies: {
 		'linear-gradient': LinearGradient,
@@ -36,14 +43,14 @@ export default function App() {
 			<Router>
 				<Navbar />
 				<Routes>
-					<Route exact path='/' element={<LandingPage />} />
-					<Route path='/AboutUs' element={<AboutUsPage />} />
-					<Route path='/Schedule' element={<SchedulePage />} />
-					<Route path='/Activity' element={<ActivityPage />} />
-					<Route path='/Activities' element={<ActivitiesPage />} />
-					<Route path='/Speakers' element={<SpeakersPage />} />
-					<Route path='/Speaker' element={<SpeakerPage />} />
-					<Route path='/Feedback' element={<FeedbackPage />} />
+					<Route exact path='/' element={<LandingPage idiom={i18n} />} />
+					<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
+					<Route path='/Schedule' element={<SchedulePage idiom={i18n} />} />
+					<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
+					<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
+					<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
+					<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
+					<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
 				</Routes>
 			</Router>
 		</NativeBaseProvider>

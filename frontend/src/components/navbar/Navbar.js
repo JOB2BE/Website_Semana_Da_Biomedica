@@ -8,6 +8,15 @@ import Logo from '../../assets/images/WhiteBGLogo';
 import { StyleSheet } from 'react-native';
 import { Link } from '../../router/index';
 
+import * as Localization from 'expo-localization'; //Internationalisation dependencies
+import { I18n } from 'i18n-js';
+import { en, pt } from '../../utils/supportedLanguages';
+
+var idiom = new I18n();
+idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
+idiom.translations = { en, pt }; // All our languages
+idiom.locale = Localization.locale; // get the device's current language code
+
 const styles = StyleSheet.create({
 	leftContainer: {
 		borderBottomLeftRadius: 300,
@@ -42,30 +51,30 @@ const styles = StyleSheet.create({
 		elevation: 10,
 	},
 });
-const navbarRoutes = [
-	{
-		name: 'Quem Somos',
-		icon: <AboutUsIcon />,
-		route: '/AboutUs',
-	},
-	{
-		name: 'Horários',
-		icon: <ScheduleIcon />,
-		route: '/Schedule',
-	},
-	{
-		name: 'Actividades',
-		icon: <ActivitiesIcon />,
-		route: '/Activities',
-	},
-	{
-		name: 'Convidados',
-		icon: <SpeakersIcon />,
-		route: '/Speakers',
-	},
-];
 
 export const Navbar = () => {
+	const navbarRoutes = [
+		{
+			name: idiom.t(['navbar', 'aboutUs']),
+			icon: <AboutUsIcon />,
+			route: '/AboutUs',
+		},
+		{
+			name: idiom.t(['navbar', 'schedule']),
+			icon: <ScheduleIcon />,
+			route: '/Schedule',
+		},
+		{
+			name: idiom.t(['navbar', 'activities']),
+			icon: <ActivitiesIcon />,
+			route: '/Activities',
+		},
+		{
+			name: idiom.t(['navbar', 'speakers']),
+			icon: <SpeakersIcon />,
+			route: '/Speakers',
+		},
+	];
 	return (
 		<>
 			<Center>
