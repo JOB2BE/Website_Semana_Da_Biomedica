@@ -19,23 +19,23 @@ idiom.locale = Localization.locale; // get the device's current language code
 
 const styles = StyleSheet.create({
 	leftContainer: {
-		borderBottomLeftRadius: 300,
+		borderBottomLeftRadius: 20,
 		backgroundColor: '#2D6793',
 		height: '40%',
-		paddingHorizontal: 10,
+		paddingHorizontal: 25,
 	},
 	rightContainer: {
-		borderBottomRightRadius: 300,
+		borderBottomRightRadius: 20,
 		backgroundColor: '#2D6793',
 		height: '40%',
-		paddingHorizontal: 10,
+		paddingHorizontal: 25,
 		zIndex: -1,
 	},
 	logoContainer: {
-		borderBottomLeftRadius: 3600,
-		borderBottomRightRadius: 3600,
+		borderBottomLeftRadius: 100000,
+		borderBottomRightRadius: 100000,
 		backgroundColor: '#FDBA35',
-		padding: 5,
+		padding: 7,
 	},
 	sideFlexes: {
 		padding: 10,
@@ -83,6 +83,7 @@ export const Navbar = () => {
 						direction='row'
 						style={[styles.leftContainer, styles.shadow]}
 						justifyContent='flex-start'
+						space={10}
 					>
 						{navbarRoutes.slice(0, 2).map((route, index) => {
 							return (
@@ -120,6 +121,7 @@ export const Navbar = () => {
 						direction='row'
 						style={[styles.rightContainer, styles.shadow]}
 						justifyContent='flex-start'
+						space={10}
 					>
 						{navbarRoutes.slice(2).map((route, index) => {
 							return (
