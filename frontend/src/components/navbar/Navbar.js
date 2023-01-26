@@ -5,7 +5,7 @@ import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
 import Logo from '../../assets/images/WhiteBGLogo';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ImageBackground } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
 
@@ -51,6 +51,9 @@ const styles = StyleSheet.create({
 		shadowRadius: 6.27,
 		elevation: 10,
 	},
+	image: {
+		flex: 1,
+	},
 });
 
 export const Navbar = () => {
@@ -79,21 +82,16 @@ export const Navbar = () => {
 	if (useLocation().pathname === '/') {
 		// In the case were we are ib the landing page
 		return (
-			<>
-				<Center style={{ backgroundColor: 'transparent' }}>
-					<Stack
-						direction='row'
-						justifyContent='space-around'
-						alignContent='center'
-						style={{ backgroundColor: 'transparent' }}
-					>
-						<Stack
-							direction='row'
-							justifyContent='flex-start'
-							space={10}
-							style={{ backgroundColor: 'transparent' }}
-						>
-							{navbarRoutes.slice(0, 2).map((route, index) => {
+			<ImageBackground
+				// eslint-disable-next-line no-undef
+				source={require('../../assets/images/banner_datas_dark.png')}
+				style={styles.image}
+				resizeMode='cover'
+			>
+				<Center>
+					<Stack direction='row' justifyContent='space-around' alignContent='center'>
+						<Stack direction='row' justifyContent='flex-start' space={100}>
+							{navbarRoutes.map((route, index) => {
 								return (
 									<Link
 										key={index}
@@ -102,37 +100,7 @@ export const Navbar = () => {
 									>
 										<Stack
 											direction='row'
-											justifyContent='center'
-											alignItems='center'
-											style={styles.sideFlexes}
-											space={2}
-										>
-											{route.icon}
-											<Heading style={{ color: 'white' }}>
-												{route.name}
-											</Heading>
-										</Stack>
-									</Link>
-								);
-							})}
-						</Stack>
-
-						<Stack
-							direction='row'
-							justifyContent='flex-start'
-							space={10}
-							style={{ backgroundColor: 'transparent' }}
-						>
-							{navbarRoutes.slice(2).map((route, index) => {
-								return (
-									<Link
-										key={index}
-										to={route.route}
-										style={{ textDecoration: 'none' }}
-									>
-										<Stack
-											direction='row'
-											justifyContent='center'
+											justifyContent='space-between'
 											alignItems='center'
 											style={styles.sideFlexes}
 											space={2}
@@ -148,7 +116,7 @@ export const Navbar = () => {
 						</Stack>
 					</Stack>
 				</Center>
-			</>
+			</ImageBackground>
 		);
 	}
 	return (
