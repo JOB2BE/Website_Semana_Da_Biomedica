@@ -7,6 +7,7 @@ import SpeakersIcon from '../../assets/images/SpeakersIcon';
 import Logo from '../../assets/images/WhiteBGLogo';
 import { StyleSheet } from 'react-native';
 import { Link } from '../../router/index';
+import { useLocation } from 'react-router-dom';
 
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
 import { I18n } from 'i18n-js';
@@ -75,6 +76,81 @@ export const Navbar = () => {
 			route: '/Speakers',
 		},
 	];
+	if (useLocation().pathname === '/') {
+		// In the case were we are ib the landing page
+		return (
+			<>
+				<Center style={{ backgroundColor: 'transparent' }}>
+					<Stack
+						direction='row'
+						justifyContent='space-around'
+						alignContent='center'
+						style={{ backgroundColor: 'transparent' }}
+					>
+						<Stack
+							direction='row'
+							justifyContent='flex-start'
+							space={10}
+							style={{ backgroundColor: 'transparent' }}
+						>
+							{navbarRoutes.slice(0, 2).map((route, index) => {
+								return (
+									<Link
+										key={index}
+										to={route.route}
+										style={{ textDecoration: 'none' }}
+									>
+										<Stack
+											direction='row'
+											justifyContent='center'
+											alignItems='center'
+											style={styles.sideFlexes}
+											space={2}
+										>
+											{route.icon}
+											<Heading style={{ color: 'white' }}>
+												{route.name}
+											</Heading>
+										</Stack>
+									</Link>
+								);
+							})}
+						</Stack>
+
+						<Stack
+							direction='row'
+							justifyContent='flex-start'
+							space={10}
+							style={{ backgroundColor: 'transparent' }}
+						>
+							{navbarRoutes.slice(2).map((route, index) => {
+								return (
+									<Link
+										key={index}
+										to={route.route}
+										style={{ textDecoration: 'none' }}
+									>
+										<Stack
+											direction='row'
+											justifyContent='center'
+											alignItems='center'
+											style={styles.sideFlexes}
+											space={2}
+										>
+											{route.icon}
+											<Heading style={{ color: 'white' }}>
+												{route.name}
+											</Heading>
+										</Stack>
+									</Link>
+								);
+							})}
+						</Stack>
+					</Stack>
+				</Center>
+			</>
+		);
+	}
 	return (
 		<>
 			<Center>

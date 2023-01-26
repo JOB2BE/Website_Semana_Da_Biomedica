@@ -1,6 +1,7 @@
 import React from 'react';
+import { ImageBackground, StyleSheet } from 'react-native';
 import { Router, Route, Routes } from './router/index';
-import { NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider, View } from 'native-base';
 import { Navbar } from './components/navbar/Navbar';
 import LandingPage from './pages/LandingPage';
 import AboutUsPage from './pages/AboutUsPage';
@@ -28,6 +29,13 @@ const config = {
 	},
 };
 
+const styles = StyleSheet.create({
+	image: {
+		justifyContent: 'center',
+		flex: 1,
+	},
+});
+
 export default function App() {
 	// eslint-disable-next-line no-unused-vars
 	const [fontsLoaded] = useFonts({
@@ -38,21 +46,24 @@ export default function App() {
 		//The user won't see the fonts loading
 		return null;
 	}
+	const image = { uri: 'https://reactjs.org/logo-og.png' };
 	return (
-		<NativeBaseProvider theme={theme} config={config}>
-			<Router>
-				<Navbar />
-				<Routes>
-					<Route exact path='/' element={<LandingPage idiom={i18n} />} />
-					<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
-					<Route path='/Schedule' element={<SchedulePage idiom={i18n} />} />
-					<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
-					<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
-					<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
-					<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
-					<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
-				</Routes>
-			</Router>
-		</NativeBaseProvider>
+		<ImageBackground source={image} style={styles.image} resizeMode='cover'>
+			<NativeBaseProvider theme={theme} config={config}>
+				<Router>
+					<Navbar />
+					<Routes>
+						<Route exact path='/' element={<LandingPage idiom={i18n} />} />
+						<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
+						<Route path='/Schedule' element={<SchedulePage idiom={i18n} />} />
+						<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
+						<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
+						<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
+						<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
+						<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
+					</Routes>
+				</Router>
+			</NativeBaseProvider>
+		</ImageBackground>
 	);
 }
