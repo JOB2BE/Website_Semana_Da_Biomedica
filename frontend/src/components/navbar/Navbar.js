@@ -5,7 +5,7 @@ import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
 import Logo from '../../assets/images/WhiteBGLogo';
-import { StyleSheet, ImageBackground } from 'react-native';
+import { StyleSheet, ImageBackground, Platform } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
 
@@ -84,9 +84,13 @@ export const Navbar = () => {
 		return (
 			<ImageBackground
 				// eslint-disable-next-line no-undef
-				source={require('../../assets/images/banner_datas_dark.png')}
+				source={
+					Platform.OS == 'web'
+						? require('../../assets/images/banner_datas_dark.png')
+						: require('../../assets/images/bannerMobile.png')
+				}
 				style={styles.image}
-				resizeMode='cover'
+				resizeMode={Platform.OS == 'web' ? 'cover' : 'cover'}
 			>
 				<Center>
 					<Stack direction='row' justifyContent='space-around' alignContent='center'>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
 import { Router, Route, Routes } from './router/index';
 import { NativeBaseProvider } from 'native-base';
 import { Navbar } from './components/navbar/Navbar';
