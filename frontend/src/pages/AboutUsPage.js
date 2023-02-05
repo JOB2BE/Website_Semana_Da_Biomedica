@@ -1,27 +1,19 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Text, View } from 'native-base';
+import { Stack, Text, View } from 'native-base';
+import * as Localization from 'expo-localization'; //Internationalisation dependencies
+import { I18n } from 'i18n-js';
+import { en, pt } from '../utils/supportedLanguages';
 
-export default function LandingPage() {
-	const [counter, setCounter] = useState(0);
+var idiom = new I18n();
+idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
+idiom.translations = { en, pt }; // All our languages
+idiom.locale = Localization.locale; // get the device's current language code
 
+export default function AboutUsPage() {
 	return (
-		<View style={styles.container}>
-			<Text>This is the About Us Page!</Text>
-			<Button variant='alternating' onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
-			<Text>You have pressed the button {counter} times</Text>
-			<StatusBar style='auto' />
+		<View>
+			<Stack direction='row' alignItems='center'></Stack>
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-});
