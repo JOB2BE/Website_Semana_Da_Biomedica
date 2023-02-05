@@ -5,16 +5,13 @@ export default extendTheme({
 		// Add new colors
 		dryBlue: {
 			0: '#2D6793',
+			bg: '#5788AC',
 		},
-		cream: {
-			0: '#FFEFD3',
-		},
-		medYellow: {
-			0: '#FDBA35',
-		},
-		engGrey: {
-			0: '#C0C0C0',
-		},
+		cream: '#FFEFD3',
+
+		medYellow: '#FDBA35',
+
+		engGrey: '#C0C0C0',
 	},
 	config: {
 		// Changing initialColorMode to 'light'

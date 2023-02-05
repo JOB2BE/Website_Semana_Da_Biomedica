@@ -12,6 +12,7 @@ import { useLocation } from 'react-router-dom';
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
 import { I18n } from 'i18n-js';
 import { en, pt } from '../../utils/supportedLanguages';
+import theme from '../../theme';
 
 var idiom = new I18n();
 idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
@@ -21,13 +22,13 @@ idiom.locale = Localization.locale; // get the device's current language code
 const styles = StyleSheet.create({
 	leftContainer: {
 		borderBottomLeftRadius: 20,
-		backgroundColor: '#2D6793',
+		backgroundColor: theme.colors.dryBlue[0],
 		height: '40%',
 		paddingHorizontal: 25,
 	},
 	rightContainer: {
 		borderBottomRightRadius: 20,
-		backgroundColor: '#2D6793',
+		backgroundColor: theme.colors.dryBlue[0],
 		height: '40%',
 		paddingHorizontal: 25,
 		zIndex: -1,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
 	logoContainer: {
 		borderBottomLeftRadius: 100000,
 		borderBottomRightRadius: 100000,
-		backgroundColor: '#FDBA35',
+		backgroundColor: theme.colors.medYellow,
 		padding: 7,
 	},
 	sideFlexes: {
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
 		shadowColor: '#000',
 		shadowOffset: {
 			width: 0,
-			height: 3,
+			height: 2,
 		},
 		shadowOpacity: 0.34,
 		shadowRadius: 6.27,
