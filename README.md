@@ -74,34 +74,47 @@
 
 
 ``
-**IMPORTS**
+[//]: # (IMPORTS)
 
 import React from 'react';
-import { useState } from 'react'; **Used in all types of React, hence it is the react source**
-import { StyleSheet } from 'react-native'; **Example of react-native component**
-import { Button, Text, View } from 'native-base'; **Example of native-base component**
 
-export default function Feature(props) { **A way to define props**
+[//]: # (Used in all types of React, hence it is the react source)
+import { useState } from 'react'; 
 
-**Styling inside the function**
+[//]: # (Example of react-native component)
+import { StyleSheet } from 'react-native'; 
 
+[//]: # (Example of native-base component)
+import { Button, Text, View } from 'native-base';
+
+[//]: # (COMPONENT)
+export default function Feature(props) {
+
+[//]: # (CSS)
+[//]: # (Styling inside the function)
 	const styles = StyleSheet.create({  
 
 		container: {
 			backgroundColor: '#fff',
 		},
 	});
-**State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int**
+[//]: # (STATE)
+[//]: # (State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int)
 	const [counter, setCounter] = useState(0); 
 
+[//]: # (RETURN)
 	return (
-**Using props but from native-base compoenents**
+
+[//]: # (Using props but from native-base compoenents)
 		<Stack style={styles.container} direction = {'row'} alignItems = {'center'} justifyContent = {'center'}>
-**Using compoenent variables props, which change depending on the implementation of the component**
+
+[//]: # (Using compoenent variables props, which change depending on the implementation of the component)
 			<Text>props.text</Text>
-**State updating by button clicking**
+
+[//]: # (State updating by button clicking)
 			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
-**Using compoenent variables props once more, independently of whether you did the compoenent or native-base's team props are simply variables of the component function which increases its customability**
+            
+[//]: # (Using compoenent variables props once more, independently of whether you did the compoenent or native-base's team props are simply variables of the component function which increases its customability)
 			<Text>{props.bottomText}</Text>
 		</Stack>
 	);
