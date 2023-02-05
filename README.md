@@ -73,18 +73,18 @@
 3. Structure:
 
 
-``
+````
 [//]: # (IMPORTS)
 
 import React from 'react';
 
-[//]: # (Used in all types of React, hence it is the react source)
+[//]: # (Used in all types of React, hence it comes from the react source)
 import { useState } from 'react'; 
 
 [//]: # (Example of react-native component)
 import { StyleSheet } from 'react-native'; 
 
-[//]: # (Example of native-base component)
+[//]: # (Example of native-base components)
 import { Button, Text, View } from 'native-base';
 
 [//]: # (COMPONENT)
@@ -98,6 +98,7 @@ export default function Feature(props) {
 			backgroundColor: '#fff',
 		},
 	});
+
 [//]: # (STATE)
 [//]: # (State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int)
 	const [counter, setCounter] = useState(0); 
@@ -108,15 +109,15 @@ export default function Feature(props) {
 [//]: # (Using props but from native-base compoenents)
 		<Stack style={styles.container} direction = {'row'} alignItems = {'center'} justifyContent = {'center'}>
 
-[//]: # (Using compoenent variables props, which change depending on the implementation of the component)
+[//]: # (Using component variables props, which change depending on the implementation of the component)
 			<Text>props.text</Text>
 
 [//]: # (State updating by button clicking)
 			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
             
-[//]: # (Using compoenent variables props once more, independently of whether you did the compoenent or native-base's team props are simply variables of the component function which increases its customability)
+[//]: # (Using compenent variables props once more. Independently of whether you did the compoenent or native-base's UI team did. Props are simply variables of the component function which increases its customability)
 			<Text>{props.bottomText}</Text>
 		</Stack>
 	);
 }
-``
+````
