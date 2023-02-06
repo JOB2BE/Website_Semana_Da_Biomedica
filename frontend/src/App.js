@@ -41,7 +41,7 @@ export default function App() {
 	}
 	return (
 		<ImageBackground
-			source={require('./assets/images/79banner.svg')}
+			source={require('./assets/images/background.png')}
 			style={{ flex: 1 }}
 			resizeMode={'cover'}
 		>
