@@ -16,6 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
 import { I18n } from 'i18n-js';
 import { en, pt } from './utils/supportedLanguages';
+import { ImageBackground, View } from 'react-native';
 
 var i18n = new I18n();
 i18n.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
@@ -39,20 +40,29 @@ export default function App() {
 		return null;
 	}
 	return (
-		<NativeBaseProvider theme={theme} config={config}>
-			<Router>
-				<Navbar />
-				<Routes>
-					<Route exact path='/' element={<LandingPage idiom={i18n} />} />
-					<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
-					<Route path='/Schedule' element={<SchedulePage idiom={i18n} />} />
-					<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
-					<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
-					<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
-					<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
-					<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
-				</Routes>
-			</Router>
-		</NativeBaseProvider>
+		<ImageBackground
+			source={require('./assets/images/79banner.svg')}
+			style={{ flex: 1 }}
+			resizeMode={'cover'}
+		>
+			<View>
+				{' '}
+				<NativeBaseProvider theme={theme} config={config}>
+					<Router>
+						<Navbar />
+						<Routes>
+							<Route exact path='/' element={<LandingPage idiom={i18n} />} />
+							<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
+							<Route path='/Schedule' element={<SchedulePage idiom={i18n} />} />
+							<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
+							<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
+							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
+							<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
+							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
+						</Routes>
+					</Router>
+				</NativeBaseProvider>
+			</View>
+		</ImageBackground>
 	);
 }
