@@ -73,6 +73,7 @@
 3. Structure:
 
 
+<<<<<<< HEAD
 ````
 [//]: # (IMPORTS)
 
@@ -92,12 +93,27 @@ export default function Feature(props) {
 
 [//]: # (CSS)
 [//]: # (Styling inside the function)
+=======
+``
+**IMPORTS**
+
+import React from 'react';
+import { useState } from 'react'; **Used in all types of React, hence it is the react source**
+import { StyleSheet } from 'react-native'; **Example of react-native component**
+import { Button, Text, View } from 'native-base'; **Example of native-base component**
+
+export default function Feature(props) { **A way to define props**
+
+**Styling inside the function**
+
+>>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
 	const styles = StyleSheet.create({  
 
 		container: {
 			backgroundColor: '#fff',
 		},
 	});
+<<<<<<< HEAD
 
 [//]: # (STATE)
 [//]: # (State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int)
@@ -116,8 +132,25 @@ export default function Feature(props) {
 			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
             
 [//]: # (Using compenent variables props once more. Independently of whether you did the compoenent or native-base's UI team did. Props are simply variables of the component function which increases its customability)
+=======
+**State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int**
+	const [counter, setCounter] = useState(0); 
+
+	return (
+**Using props but from native-base compoenents**
+		<Stack style={styles.container} direction = {'row'} alignItems = {'center'} justifyContent = {'center'}>
+**Using compoenent variables props, which change depending on the implementation of the component**
+			<Text>props.text</Text>
+**State updating by button clicking**
+			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
+**Using compoenent variables props once more, independently of whether you did the compoenent or native-base's team props are simply variables of the component function which increases its customability**
+>>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
 			<Text>{props.bottomText}</Text>
 		</Stack>
 	);
 }
+<<<<<<< HEAD
 ````
+=======
+``
+>>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b

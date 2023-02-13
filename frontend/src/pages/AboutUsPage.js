@@ -1,7 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+<<<<<<< HEAD
 import { Center, Stack, Text, View } from 'native-base';
 import HeadingBox from '../components/information/HeadingBox';
+=======
+import { Stack, Text, View } from 'native-base';
+>>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
 import { I18n } from 'i18n-js';
 import { en, pt } from '../utils/supportedLanguages';
@@ -14,6 +18,7 @@ idiom.locale = Localization.locale; // get the device's current language code
 export default function AboutUsPage() {
 	return (
 		<View>
+<<<<<<< HEAD
 			<Stack direction={'column'} justifyContent={'flex-end'} alignItems={'stretch'}>
 				<HeadingBox headingText={'Sobre:'}>
 					<Text size='xs'>
@@ -25,6 +30,9 @@ export default function AboutUsPage() {
 					</Text>
 				</HeadingBox>
 			</Stack>
+=======
+			<Stack direction='row' alignItems='center'></Stack>
+>>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
 		</View>
 	);
 }
