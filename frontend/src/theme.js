@@ -11,6 +11,7 @@ export default extendTheme({
 		},
 		medYellow: {
 			0: '#FDBA35',
+			pastel: '#FFEFD3',
 		},
 		engGrey: {
 			0: '#C0C0C0',
