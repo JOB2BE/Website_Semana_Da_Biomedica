@@ -1,7 +1,6 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
-import { Button, Text, Image, View, Component } from 'native-base';
+import {StyleSheet } from 'react-native';
+import {  Text, Image, View } from 'native-base';
 import GridImageView from 'react-native-grid-image-viewer';
 import extendTheme from '../theme';
 //import IstLogo from '../assets/images/logo_ist';
@@ -11,7 +10,7 @@ export default function PartnershipsPage() {
 	const styles = StyleSheet.create({
 		baseText: {
 			fontWeight: '1000',
-			color: extendTheme.colors.dryBlue["0"],
+			color: extendTheme.colors.dryBlue['0'],
 			fontSize: 30,
 			backgroundColor: 'transparent',
 		},
@@ -20,14 +19,14 @@ export default function PartnershipsPage() {
 			flex: 1,
 			justifyContent: 'center',
 			alignItems: 'center',
-			margin: 10
+			margin: 10,
 		},
 
 		RectangleShapeViewOut: {
 			width: 660,
 			height: 70,
 			borderRadius: 30,
-			backgroundColor: extendTheme.colors["medYellow"],
+			backgroundColor: extendTheme.colors['medYellow'],
 			marginTop: 20,
 			marginBottom: 80,
 		},
@@ -36,7 +35,7 @@ export default function PartnershipsPage() {
 			width: 650,
 			height: 60,
 			borderRadius: 30,
-			backgroundColor: extendTheme.colors["cream"],
+			backgroundColor: extendTheme.colors['cream'],
 			position: 'absolute',
 			left: (660 - 650) / 2,
 			top: (660 - 650) / 2,
@@ -48,15 +47,15 @@ export default function PartnershipsPage() {
 			width: 195,
 			height: 195,
 			borderRadius: 195 / 2,
-			backgroundColor: extendTheme.colors["medYellow"],
-			marginTop: -20
+			backgroundColor: extendTheme.colors['medYellow'],
+			marginTop: -20,
 		},
 
 		CircleShapeViewIn: {
 			width: 177,
 			height: 177,
 			borderRadius: 177 / 2,
-			backgroundColor: extendTheme.colors["cream"],
+			backgroundColor: extendTheme.colors['cream'],
 			position: 'absolute',
 			left: (195 - 177) / 2,
 			top: (195 - 177) / 2,
@@ -80,43 +79,37 @@ export default function PartnershipsPage() {
 		},
 
 		row: {
-			flexDirection: "row",
+			flexDirection: 'row',
 		},
 
-		"col1": {
+		col1: {
 			width: 175,
-			backgroundColor: "transparent",
-			borderColor: "transparent",
+			backgroundColor: 'transparent',
+			borderColor: 'transparent',
 			borderWidth: 1,
-			flex: 1
+			flex: 1,
 		},
 
-		"col2": {
+		col2: {
 			width: 50,
-			backgroundColor: "transparent",
-			borderColor: "transparent",
+			backgroundColor: 'transparent',
+			borderColor: 'transparent',
 			borderWidth: 1,
-			flex: 1
+			flex: 1,
 		},
-
 	});
 
-	const Row = ({ children }) => (
-		<View style={styles.row}>{children}</View>
-	)
+	const Row = ({ children }) => <View style={styles.row}>{children}</View>;
 
 	const Col = ({ numRows, children }) => {
-		return (
-			<View style={styles[`${numRows}col`]}>{children}</View>
-		)
-	}
+		return <View style={styles[`${numRows}col`]}>{children}</View>;
+	};
 
 	var LogoIst = require('../assets/images/logo_ist.svg');
-	var LogoNEBM = require('../assets/images/Logo_NEBM.svg')
+	var LogoNEBM = require('../assets/images/Logo_NEBM.svg');
 
 	return (
 		<View style={styles.container}>
-
 			<View style={styles.RectangleShapeViewOut}>
 				<View style={styles.RectangleShapeViewIn}>
 					<Text style={styles.baseText}> PARTNERSHIPS </Text>
@@ -133,45 +126,55 @@ export default function PartnershipsPage() {
 				</Col>
 
 				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}>
-					</View>
+					<View style={styles.CircleShapeViewOutTransp}></View>
 				</Col>
 
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={LogoNEBM} style={{ width: '80%', height: '80%' }}></Image>
+							<Image
+								source={LogoNEBM}
+								style={{ width: '80%', height: '80%' }}
+							></Image>
 						</View>
 					</View>
 				</Col>
 
 				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}>
-					</View>
+					<View style={styles.CircleShapeViewOutTransp}></View>
 				</Col>
 
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
 
 				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}>
-					</View>
+					<View style={styles.CircleShapeViewOutTransp}></View>
 				</Col>
 
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
-
-
 			</Row>
 
 			<Row>
@@ -186,7 +189,13 @@ export default function PartnershipsPage() {
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
@@ -198,7 +207,13 @@ export default function PartnershipsPage() {
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
@@ -210,7 +225,13 @@ export default function PartnershipsPage() {
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
@@ -222,14 +243,19 @@ export default function PartnershipsPage() {
 				<Col numRows={2}>
 					<View style={styles.CircleShapeViewOutTransp}></View>
 				</Col>
-
 			</Row>
 
 			<Row>
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
@@ -241,7 +267,13 @@ export default function PartnershipsPage() {
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
@@ -253,7 +285,13 @@ export default function PartnershipsPage() {
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
@@ -265,11 +303,16 @@ export default function PartnershipsPage() {
 				<Col numRows={1}>
 					<View style={styles.CircleShapeViewOut}>
 						<View style={styles.CircleShapeViewIn}>
-							<Image source={{ width: 100, height: 100, uri: "https://picsum.photos/200" }} ></Image>
+							<Image
+								source={{
+									width: 100,
+									height: 100,
+									uri: 'https://picsum.photos/200',
+								}}
+							></Image>
 						</View>
 					</View>
 				</Col>
-
 			</Row>
 		</View>
 	);
