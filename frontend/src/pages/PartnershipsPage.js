@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet } from 'react-native';
-import {  Text, Image, View } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Text, Image, View } from 'native-base';
 import GridImageView from 'react-native-grid-image-viewer';
 import extendTheme from '../theme';
 //import IstLogo from '../assets/images/logo_ist';
