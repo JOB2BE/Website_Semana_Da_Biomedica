@@ -8,11 +8,7 @@ export default function ActivityPage() {
 	const styles = StyleSheet.create({
 		container: {
 			flex: 1,
-<<<<<<< HEAD
-
-=======
 			backgroundColor: '#fff',
->>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
 			alignItems: 'center',
 			justifyContent: 'center',
 		},

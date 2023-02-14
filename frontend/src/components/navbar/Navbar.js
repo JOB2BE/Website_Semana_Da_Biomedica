@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
 	heading: {
 		color: 'white',
 	},
-
 });
 
 export const Navbar = () => {

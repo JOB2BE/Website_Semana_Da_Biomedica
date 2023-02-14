@@ -8,21 +8,12 @@ export default function SpeakerPage() {
 	const styles = StyleSheet.create({
 		container: {
 			flex: 1,
-<<<<<<< HEAD
-
-			alignItems: 'center',
-			justifyContent: 'center',
-		},
-	});
-
-=======
 			backgroundColor: '#fff',
 			alignItems: 'center',
 			justifyContent: 'center',
 		},
 	});
 
->>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
 	const [counter, setCounter] = useState(0);
 	return (
 		<View style={styles.container}>
