@@ -1,10 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, Image, View } from 'native-base';
-import GridImageView from 'react-native-grid-image-viewer';
+import { Text, Column, Row, Image, View } from 'native-base';
 import extendTheme from '../theme';
-//import IstLogo from '../assets/images/logo_ist';
-//import { HexagonView } from 'react-native-hexagon';
 
 export default function PartnershipsPage() {
 	const styles = StyleSheet.create({
@@ -28,7 +25,7 @@ export default function PartnershipsPage() {
 			borderRadius: 30,
 			backgroundColor: extendTheme.colors['medYellow'],
 			marginTop: 20,
-			marginBottom: 80,
+			marginBottom: 20,
 		},
 
 		RectangleShapeViewIn: {
@@ -99,12 +96,6 @@ export default function PartnershipsPage() {
 		},
 	});
 
-	const Row = ({ children }) => <View style={styles.row}>{children}</View>;
-
-	const Col = ({ numRows, children }) => {
-		return <View style={styles[`${numRows}col`]}>{children}</View>;
-	};
-
 	var LogoIst = require('../assets/images/logo_ist.svg');
 	var LogoNEBM = require('../assets/images/Logo_NEBM.svg');
 
@@ -114,12 +105,10 @@ export default function PartnershipsPage() {
 				<View style={styles.RectangleShapeViewOut}>
 					<View style={styles.RectangleShapeViewIn}>
 						<Text style={styles.baseText}> PARTNERSHIPS </Text>
-				</View>
+					</View>
 				</View>
 			</Row>
-		</Column>
 
-		<Column flex={1} space={12}>
 			<Row justifyContent={'center'} style={styles.container}>
 				<View style={styles.CircleShapeViewOut}>
 					<View style={styles.CircleShapeViewIn}>
@@ -151,9 +140,7 @@ export default function PartnershipsPage() {
 					</View>
 				</View>
 			</Row>
-		</Column>
-		
-		<Column flex={1} space={12}>
+
 			<Row justifyContent={'center'} style={styles.container}>
 				<View style={styles.CircleShapeViewOutTransp}></View>
 
@@ -184,12 +171,10 @@ export default function PartnershipsPage() {
 				<View style={styles.CircleShapeViewOutTransp}></View>
 
 				<View style={styles.CircleShapeViewOutTransp}></View>
-					
+			</Row>
 
-
-		<Column flex={1} space={12}>
-			<Row justifyContent={'center'} style={styles.container}></Row>
-			<View style={styles.CircleShapeViewOut}>
+			<Row justifyContent={'center'} style={styles.container}>
+				<View style={styles.CircleShapeViewOut}>
 					<View style={styles.CircleShapeViewIn}>
 						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
@@ -220,11 +205,5 @@ export default function PartnershipsPage() {
 				</View>
 			</Row>
 		</Column>
-
-			
-
-				
-
-			
 	);
 }
