@@ -40,7 +40,8 @@ export default function App() {
 		return null;
 	}
 
-	var background = require('./assets/images/background.png');
+	var background = require('../assets/images/background.svg');
+	
 	return (
 		<ImageBackground
 			source={background}
