@@ -109,211 +109,112 @@ export default function PartnershipsPage() {
 	var LogoNEBM = require('../assets/images/Logo_NEBM.svg');
 
 	return (
+
 		<View style={styles.container}>
+
 			<View style={styles.RectangleShapeViewOut}>
 				<View style={styles.RectangleShapeViewIn}>
 					<Text style={styles.baseText}> PARTNERSHIPS </Text>
 				</View>
 			</View>
 
-			<Row>
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image source={LogoIst} style={{ width: '90%', height: '40%' }}></Image>
-						</View>
+			<Stack direction='row' alignItems='center'>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={LogoIst} style={{ width: '90%', height: '40%' }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={LogoNEBM}
-								style={{ width: '80%', height: '80%' }}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={LogoNEBM} style={{ width: '80%', height: '80%' }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
-			</Row>
+				</View>
+			</Stack>
 
-			<Row>
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+			<Stack direction='row' alignItems='center'>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
-			</Row>
+				<View style={styles.CircleShapeViewOutTransp}></View>
+			</Stack>
 
-			<Row>
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+			<Stack direction='row' alignItems='center'>
+
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
+				</View>
 
-				<Col numRows={2}>
-					<View style={styles.CircleShapeViewOutTransp}></View>
-				</Col>
+				<View style={styles.CircleShapeViewOutTransp}></View>
 
-				<Col numRows={1}>
-					<View style={styles.CircleShapeViewOut}>
-						<View style={styles.CircleShapeViewIn}>
-							<Image
-								source={{
-									width: 100,
-									height: 100,
-									uri: 'https://picsum.photos/200',
-								}}
-							></Image>
-						</View>
+				<View style={styles.CircleShapeViewOut}>
+					<View style={styles.CircleShapeViewIn}>
+						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
-				</Col>
-			</Row>
+				</View>
+
+			</Stack>
 		</View>
 	);
 }
