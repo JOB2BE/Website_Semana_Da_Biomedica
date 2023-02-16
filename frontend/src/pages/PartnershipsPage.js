@@ -109,16 +109,18 @@ export default function PartnershipsPage() {
 	var LogoNEBM = require('../assets/images/Logo_NEBM.svg');
 
 	return (
-
-		<View style={styles.container}>
-
-			<View style={styles.RectangleShapeViewOut}>
-				<View style={styles.RectangleShapeViewIn}>
-					<Text style={styles.baseText}> PARTNERSHIPS </Text>
+		<Column flex={1} space={12}>
+			<Row justifyContent={'center'} style={styles.container}>
+				<View style={styles.RectangleShapeViewOut}>
+					<View style={styles.RectangleShapeViewIn}>
+						<Text style={styles.baseText}> PARTNERSHIPS </Text>
 				</View>
-			</View>
+				</View>
+			</Row>
+		</Column>
 
-			<Stack direction='row' alignItems='center'>
+		<Column flex={1} space={12}>
+			<Row justifyContent={'center'} style={styles.container}>
 				<View style={styles.CircleShapeViewOut}>
 					<View style={styles.CircleShapeViewIn}>
 						<Image source={LogoIst} style={{ width: '90%', height: '40%' }}></Image>
@@ -148,9 +150,11 @@ export default function PartnershipsPage() {
 						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
 				</View>
-			</Stack>
-
-			<Stack direction='row' alignItems='center'>
+			</Row>
+		</Column>
+		
+		<Column flex={1} space={12}>
+			<Row justifyContent={'center'} style={styles.container}>
 				<View style={styles.CircleShapeViewOutTransp}></View>
 
 				<View style={styles.CircleShapeViewOutTransp}></View>
@@ -180,11 +184,12 @@ export default function PartnershipsPage() {
 				<View style={styles.CircleShapeViewOutTransp}></View>
 
 				<View style={styles.CircleShapeViewOutTransp}></View>
-			</Stack>
+					
 
-			<Stack direction='row' alignItems='center'>
 
-				<View style={styles.CircleShapeViewOut}>
+		<Column flex={1} space={12}>
+			<Row justifyContent={'center'} style={styles.container}></Row>
+			<View style={styles.CircleShapeViewOut}>
 					<View style={styles.CircleShapeViewIn}>
 						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
@@ -213,8 +218,13 @@ export default function PartnershipsPage() {
 						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
 					</View>
 				</View>
+			</Row>
+		</Column>
 
-			</Stack>
-		</View>
+			
+
+				
+
+			
 	);
 }
