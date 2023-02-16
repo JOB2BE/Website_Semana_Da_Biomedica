@@ -27,7 +27,7 @@
 3. **THERE IS ONLY ONE FONT**(TextME), no more fonts are allowed
 4. All new components should be placed in the component folder, under a subfolder of that type of component, for example a Card which displays info should be under `*src/components/info*`
 5. If changes are to be done in the `*router folder, App.js, theme.js*`,**it has to be reviewed by the group leader**.
-6. New libraries are installed, with a command such as `*npm install library*` or `*npx install library*`, **only by the permission of the group leader**
+6. New libraries are installed, with a command `*npx expo install library*`, **only by the permission of the group leader**
 7. Changes to the .gitignore should be pettioned to the group leader.
 8. The ammount of libraries **should allways be** the least possible
 9. **No messing with: eslintignore, eslintrc.json, .prettierrc, app.json or package-lock.json file**.
