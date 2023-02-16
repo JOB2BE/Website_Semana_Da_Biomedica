@@ -39,9 +39,11 @@ export default function App() {
 		//The user won't see the fonts loading
 		return null;
 	}
+
+	var background = require('./assets/images/background.png');
 	return (
 		<ImageBackground
-			source={require('./assets/images/background.png')}
+			source={background}
 			style={{ flex: 1 }}
 			resizeMode={'cover'}
 		>
