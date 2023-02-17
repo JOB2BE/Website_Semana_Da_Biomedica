@@ -21,19 +21,41 @@ export default function SpeakerPage() {
 			marginTop: 20,
 			marginBottom: 20,
 		},
+
+		CircleShapeViewOut: {
+			width: 230,
+			height: 230,
+			borderRadius: 230 / 2,
+			backgroundColor: extendTheme.colors['medYellow'],
+			marginTop: 20,
+			marginLeft: (260-230)/2,
+		},
+
+		CircleShapeViewIn: {
+			width: 177,
+			height: 177,
+			borderRadius: 177 / 2,
+			backgroundColor: extendTheme.colors['cream'],
+			position: 'absolute',
+			left: (195 - 177) / 2,
+			top: (195 - 177) / 2,
+			justifyContent: 'center',
+			alignItems: 'center',
+			alignContent: 'center',
+		},
 	});
 
+	var speaker = require('../assets/images/Logo_NEBM.svg')
 	
 	return (
-		<Column flex={1} space={12}>
+		<Column flex={2} space={12}>
 			<Row justifyContent={'center'} style={styles.container}>
 				<View style={styles.RectangleShapeView}>
-
+					<View style={styles.CircleShapeViewOut}>
+						<Image source={speaker} style={styles.CircleShapeViewIn}></Image>
+					</View>
 				</View>
 			</Row>
 		</Column>
-
-		
-		
 	);
 }
