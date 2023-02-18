@@ -1,10 +1,10 @@
 from uuid import UUID
-from typing import Optional, List 
+from typing import List, Optional 
 from pydantic import BaseModel, EmailStr, SecretStr  # Pydantic is a python library for data validation, usefull for steps related to PUT requests, checks if we are storing GOOD data
 from enum import Enum
 from uuid import UUID, uuid4
 
-class Department(Enum):
+class Department(str, Enum):
     """Docstring for MyEnum."""
     tech = 'Tech'
     logistics = 'Logistics'
@@ -14,37 +14,37 @@ class Department(Enum):
     research = 'research'
     presidency = 'presidency'
 
-class TypeOfUser(Enum):
+class TypeOfUser(str, Enum):
     """Docstring for MyEnum."""
     admin = 'admin'
-    superuser = 'superuser'
+    technician = 'technician'
+    colaborator = 'colaborator'
     user = 'user'
 
 
-class Roles(Enum):
+class Roles(str, Enum):
     """Docstring for MyEnum."""
     typeOfUser =  TypeOfUser
-    colaborator = 'colaborator'
     department = Department
     
 
 
 class User(BaseModel):
-    id = uuid4()
-    name = str
+    id : Optional[UUID] = uuid4()
+    name : str
     username: str
     email: EmailStr
     password: SecretStr
     university: Optional[str]
     degree: Optional[str]
-    roles: list[Roles]
+    roles: List[Roles]
     profileImage: Optional[str]
 
 
 class Speaker(BaseModel):
     name: str
     linkedUser:Optional[User]
-    role: str
+    position: str
     profileImage: str
     companyImage: str
     
