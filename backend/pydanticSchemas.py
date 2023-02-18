@@ -28,6 +28,15 @@ class Roles(str, Enum):
     department = Department
     
 
+
+class Activity(BaseModel):
+    id : Optional[UUID] = uuid4()
+    name: str
+    description: str
+    requirements: Optional[str]
+    scheduleAndLocation: str
+    image: Optional[str]
+
 class Speaker(BaseModel):
     id : Optional[UUID] = uuid4()
     name: str
@@ -37,10 +46,14 @@ class Speaker(BaseModel):
     description: str
     contacts: str
     researchInterests: str
+    activities: List[Activity]
     
 
     class Config:
         orm_mode = True
+
+class CreateActivity(Activity):
+    speaker: Speaker
 
 class User(BaseModel):
     id : Optional[UUID] = uuid4()

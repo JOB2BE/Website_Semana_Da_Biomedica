@@ -32,6 +32,7 @@ class User(Base):
 
 
 class Speaker(Base):
+    __tablename__ = "speakers"
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True)
     name = Column(String)
@@ -42,5 +43,20 @@ class Speaker(Base):
     description = Column(String)
     contacts = Column(String)
     researchInterests = Column(String)
+   
+    activity = relationship("Activity", back_populates="speaker")
+
+class Activity(Base):
+    __tablename__ = "activities"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    name = Column(String, unique=True, index=True)
+    description = Column(String)
+    requirements = Column(String)
+    scheduleAndLocation = Column(String)
+    image = Column(String, required=False)
+
+
+    speaker = relationship("Speaker", back_populates="activity")
 
 
