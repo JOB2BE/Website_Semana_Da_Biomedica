@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from models import User, Speaker
+from pydanticSchemas import User, Speaker
 from uuid import UUID
 
 app = FastAPI()

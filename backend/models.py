@@ -1,55 +1,46 @@
-from uuid import UUID
-from typing import List, Optional 
-from pydantic import BaseModel, EmailStr, SecretStr  # Pydantic is a python library for data validation, usefull for steps related to PUT requests, checks if we are storing GOOD data
-from enum import Enum
-from uuid import UUID, uuid4
+from database import Base
 
-class Department(str, Enum):
-    """Docstring for MyEnum."""
-    tech = 'Tech'
-    logistics = 'Logistics'
-    media = 'Media'
-    partnerships = 'Partnerships'
-    design = 'design'
-    research = 'research'
-    presidency = 'presidency'
-
-class TypeOfUser(str, Enum):
-    """Docstring for MyEnum."""
-    admin = 'admin'
-    technician = 'technician'
-    colaborator = 'colaborator'
-    user = 'user'
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, ARRAY
+from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.ext.hybrid import hybrid_property
 
 
-class Roles(str, Enum):
-    """Docstring for MyEnum."""
-    typeOfUser =  TypeOfUser
-    department = Department
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    name = Column(String)
+    email = Column(String, unique=True, index=True)
+    password = Column(String)
+    university = Column(String, required=False)
+    degree = Column(String, required=False)
+    roles = Column(ARRAY)
+    profileImage = Column(String)
+    description = Column(String, required=False)
+    contacts = Column(String, required=False)
+    researchInterests = Column(String, required=False)
+    cv = Column(String, required=False)
+
     
 
+    speaker = relationship("Speaker")
 
-class User(BaseModel):
-    id : Optional[UUID] = uuid4()
-    name : str
-    username: str
-    email: EmailStr
-    password: SecretStr
-    university: Optional[str]
-    degree: Optional[str]
-    roles: List[Roles]
-    profileImage: Optional[str]
+    @hybrid_property
+    def univerityAndDegree(self):
+        return self.university + " " + self.degree
 
 
-class Speaker(BaseModel):
-    name: str
-    linkedUser:Optional[User]
-    position: str
-    profileImage: str
-    companyImage: str
-    
-    
+class Speaker(Base):
 
-        
+    id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    name = Column(String)
+    email = Column(String, unique=True, index=True)
+    position = Column(String)
+    profileImage = Column(String, required=False)
+    companyImage = Column(String)
+    description = Column(String)
+    contacts = Column(String)
+    researchInterests = Column(String)
 
-     
+
