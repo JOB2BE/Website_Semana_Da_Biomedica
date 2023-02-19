@@ -12,15 +12,24 @@ import {
 	WarningOutlineIcon,
 	Input,
 	isEmptyObj,
+	Column,
+	Row,
 } from 'native-base';
 import { useState } from 'react';
+import StyledBox from '../components/information/StyledBox';
 import theme from '../theme';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Link } from '../router/index';
+import { Platform, StyleSheet } from 'react-native';
 
 // TODO: VERIFY ON MOBILE
 
 export default function RegisterPage() {
+	const styles = StyleSheet.create({
+		aboutBox: {
+			paddingTop: '10%',
+		},
+	});
 	const [regData, setData] = useState('');
 	const [errors, setErrors] = React.useState({});
 
@@ -81,20 +90,17 @@ export default function RegisterPage() {
 	};
 
 	return (
-		<VStack className={'PageContainer'}>
-			<Box /*Space from NavBar*/ h='1/6' />
-			<Center>
-				<VStack
+		<Column flex={1} space={120}>
+			<Row justifyContent={'center'} style={styles.aboutBox}>
+				<StyledBox
+					flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
 					className={'RegisterContainer'}
-					bg={theme.colors.medYellow[0]}
-					w='500'
-					p='5'
-					rounded='25'
+					bg={theme.colors.medYellow}
+					borderRadius={25}
+					backgroundColor={theme.colors.medYellow[0]}
+					headingText={'Register'}
+					childrenJustifyContent={'center'}
 				>
-					<Heading alignSelf='center'>REGISTER</Heading>
-
-					<Box /*Margin*/ h='5' />
-
 					<FormControl className={'NameContainer'} isInvalid={'name' in errors}>
 						<FormControl.Label>
 							<Text size='md'> Name</Text>
@@ -115,8 +121,6 @@ export default function RegisterPage() {
 							<FormControl.HelperText>{null}</FormControl.HelperText>
 						)}
 					</FormControl>
-
-					<Box /*Margin*/ h='5' />
 
 					<FormControl className={'UsernameContainer'} isInvalid={'username' in errors}>
 						<FormControl.Label>
@@ -139,8 +143,6 @@ export default function RegisterPage() {
 						)}
 					</FormControl>
 
-					<Box /*Margin*/ h='5' />
-
 					<FormControl className={'EmailContainer'} isInvalid={'email' in errors}>
 						<FormControl.Label>
 							<Text size='md'> Email</Text>
@@ -161,8 +163,6 @@ export default function RegisterPage() {
 							<FormControl.HelperText>{null}</FormControl.HelperText>
 						)}
 					</FormControl>
-
-					<Box /*Margin*/ h='5' />
 
 					<FormControl
 						className={'PasswordContainer'}
@@ -204,8 +204,6 @@ export default function RegisterPage() {
 						)}
 					</FormControl>
 
-					<Box /*Margin*/ h='5' />
-
 					<FormControl
 						className={'ConfirmPasswordContainer'}
 						isRequired
@@ -246,8 +244,6 @@ export default function RegisterPage() {
 						)}
 					</FormControl>
 
-					<Box /*Margin*/ h='5' />
-
 					<FormControl className={'DegreeContainer'} isInvalid={'degree' in errors}>
 						<FormControl.Label>
 							<Text size='md'> Degree</Text>
@@ -268,8 +264,6 @@ export default function RegisterPage() {
 							<FormControl.HelperText>{null}</FormControl.HelperText>
 						)}
 					</FormControl>
-
-					<Box /*Margin*/ h='5' />
 
 					<FormControl
 						className={'UniversityContainer'}
@@ -295,22 +289,19 @@ export default function RegisterPage() {
 							<FormControl.HelperText>{null}</FormControl.HelperText>
 						)}
 					</FormControl>
+					<Column style={styles.aboutBox} space={5}>
+						<Button alignSelf='center' variant='alternating' onPress={validate}>
+							Register
+						</Button>
 
-					<Box /*Margin*/ h='5' />
-
-					<Button alignSelf='center' variant='alternating' onPress={validate}>
-						Register
-					</Button>
-
-					<Box /*Margin*/ h='5' />
-
-					<Center>
-						<Link to={'/'} style={{ textDecoration: 'none' }}>
-							<Text size='md'>Cancel</Text>
-						</Link>
-					</Center>
-				</VStack>
-			</Center>
-		</VStack>
+						<Center>
+							<Link to={'/'} style={{ textDecoration: 'none' }}>
+								<Text size='md'>Cancel</Text>
+							</Link>
+						</Center>
+					</Column>
+				</StyledBox>
+			</Row>
+		</Column>
 	);
 }
