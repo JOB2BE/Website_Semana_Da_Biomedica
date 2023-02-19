@@ -86,7 +86,7 @@ export default function RegisterPage() {
 			<Center>
 				<VStack
 					className={'RegisterContainer'}
-					bg={theme.colors.medYellow}
+					bg={theme.colors.medYellow[0]}
 					w='500'
 					p='5'
 					rounded='25'
