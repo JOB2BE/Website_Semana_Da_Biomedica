@@ -119,3 +119,11 @@ def deleteActivity(db: Session, activityID: str):
     db.commit()
     db.refresh(activity)
     return activity
+
+
+def updateUser(db: Session, user: pydanticSchemas.UserCreate, newParams: dict):
+    
+    user = models.User(newParams, **user.dict())
+    db.add(user)
+    db.commit()
+    db.refresh(user)

@@ -24,7 +24,6 @@ class User(Base):
 
     
 
-    speaker = relationship("Speaker")
 
     @hybrid_property
     def univerityAndDegree(self):
@@ -55,8 +54,7 @@ class Activity(Base):
     requirements = Column(String)
     scheduleAndLocation = Column(String)
     image = Column(String, required=False)
+    slots = Column(Integer)
 
 
     speaker = relationship("Speaker", back_populates="activity")
-
-
