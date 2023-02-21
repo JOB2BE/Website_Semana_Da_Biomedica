@@ -11,7 +11,6 @@ import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
 import PartnershipsPage from './pages/PartnershipsPage';
-import Example from './pages/Example';
 import theme from './theme';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -61,9 +60,10 @@ export default function App() {
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
 							<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
-							<Route path='/Partnerships' element={<PartnershipsPage idiom={i18n} />} />
-							<Route path='/Example' element={<Example idiom={i18n} />} />
-						
+							<Route
+								path='/Partnerships'
+								element={<PartnershipsPage idiom={i18n} />}
+							/>
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
