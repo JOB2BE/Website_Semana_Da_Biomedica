@@ -55,6 +55,7 @@ class Activity(Base):
     scheduleAndLocation = Column(String)
     image = Column(String, required=False)
     slots = Column(Integer)
+    activityType = Column(String)
 
 
     speaker = relationship("Speaker", back_populates="activity")

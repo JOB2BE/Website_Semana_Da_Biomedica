@@ -26,6 +26,12 @@ class Roles(str, Enum):
     """Docstring for MyEnum."""
     typeOfUser =  TypeOfUser
     department = Department
+
+class ActivityType(str, Enum):
+    other = 'Other'
+    lecture = 'Lecture'
+    workshop = 'Workshop'
+    
     
 
 
@@ -36,6 +42,7 @@ class Activity(BaseModel):
     requirements: Optional[str]
     scheduleAndLocation: str
     image: Optional[str]
+    
 
     class Config:
         orm_mode = True
@@ -58,9 +65,11 @@ class Speaker(BaseModel):
 
 class CreateActivity(Activity):
     speaker: Speaker
+    ActivityType: ActivityType
 
 class updateActivity(CreateActivity):
     slots: int
+    
 
 class User(BaseModel):
     id : Optional[UUID] = uuid4()

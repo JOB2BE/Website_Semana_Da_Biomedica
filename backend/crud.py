@@ -21,7 +21,7 @@ def getUsers(db: Session, skip: int = 0, limit: int = 100):
 
 
 def getSpeaker(db: Session, speakerID):
-    return db.query(models.Speaker).filter(models.Speaker.id == speakerID).all()
+    return db.query(models.Speaker).filter(models.Speaker.id == speakerID).first()
 
 def getSpeakersByName(db: Session, name:str):
     return db.query(models.Speaker).filter(models.Speaker.name == name).all()
@@ -34,7 +34,7 @@ def getSpeakers(db: Session):
 
 
 def getActivity(db: Session, activityID):
-    return db.query(models.Speaker).filter(models.Activity.id == activityID).all()
+    return db.query(models.Speaker).filter(models.Activity.id == activityID).first()
 
 def getActivityByName(db: Session, name:str):
     return db.query(models.Speaker).filter(models.Activity.name == name).all()
@@ -123,7 +123,34 @@ def deleteActivity(db: Session, activityID: str):
 
 def updateUser(db: Session, user: pydanticSchemas.UserCreate, newParams: dict):
     
-    user = models.User(newParams, **user.dict())
+    user = models.User(**newParams, **user.dict())
     db.add(user)
     db.commit()
     db.refresh(user)
+
+
+def updateActivity(db: Session, activity: pydanticSchemas.UserCreate, newParams: dict):
+    
+    activity = models.Activity(**newParams, **activity.dict())
+    db.add(activity)
+    db.commit()
+    db.refresh(activity)
+
+def decreaseSlot(db: Session, activityID, newParams: dict):
+    activity = getActivity(db,activityID)
+    slots= activity.slots
+    slots = slots - 1
+    activity = models.Activity(slots=slots, **activity.dict())
+    db.add(activity)
+    db.commit()
+    db.refresh(activity)
+
+def increaseSlot(db: Session, activityID, newParams: dict):
+    activity = getActivity(db,activityID)
+    slots= activity.slots
+    slots = slots + 1
+    activity = models.Activity(slots=slots, **activity.dict())
+    db.add(activity)
+    db.commit()
+    db.refresh(activity)
+

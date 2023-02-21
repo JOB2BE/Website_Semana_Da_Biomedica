@@ -106,7 +106,53 @@ async def deleteSpeaker(speakerID, db: Session = Depends(get_db)):
     
 #DONE
 
-#MISSING: Activity
+# Activity
+
+## Show all activities
+
+@app.get('/api/activities', response_model=pydanticSchemas.CreateActivity)
+async def fetchActivities(db: Session = Depends(get_db)):
+    return crud.getActivities(db) ## Retreive all speakers from db
+
+
+## Add new activity
+
+@app.post('/api/activities', response_model=pydanticSchemas.CreateActivity)
+async def registerSpeaker(activity:pydanticSchemas.CreateActivity, db: Session = Depends(get_db)):
+
+    if crud.getActivityByName(db, activity.name):
+        raise HTTPException(status_code=400, detail="An activity with such name is already present in the database")
+    
+    else:
+
+        return crud.createActivity(db,activity)
+
+## Change slots in activity
+
+## Update activity
+
+@app.put("/api/users/{userID}", response_model=pydanticSchemas.updateActivity)    
+async def updateUser(activity: pydanticSchemas.updateActivity, newParams: dict, db: Session = Depends(get_db)):
+    if not crud.getUser(db, activity.id) :
+        raise HTTPException(
+            status_code= 404,
+            detail=f"Activity with the id:{user.id} does not exist"
+        ) #raise exceptions
+    else:
+        return crud.updateActivity(db, activity, newParams)
+
+## Delete activity
+
+@app.delete("/api/activities/{activityID}", response_model=pydanticSchemas.CreateActivity)
+async def deleteSpeaker(activityID, db: Session = Depends(get_db)):
+
+    if crud.getSpeaker(db,activityID):
+        raise HTTPException(
+            status_code= 404,
+            detail=f"Activity with the id:{activityID} does not exist"
+        ) #raise exceptions
+    else:
+        return crud.deleteActivity(db,activityID)
         
 
 
