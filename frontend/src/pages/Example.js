@@ -1,12 +1,14 @@
-import React, { Component } from "react";
-import { Container, Column, Row, Text, Image, Header, Content, Accordion, View } from "native-base";
+import React from "react";
+import { Column, Row, Text, Image, View } from "native-base";
 import extendTheme from '../theme';
 import { StyleSheet, TouchableOpacity } from "react-native";
+import ActivitiesIcon from '../assets/images/ActivitiesIcon';
+//import ArrowIcon from '../assets/images/seta_azul'
 
 const dataArray = [
-    { bg: extendTheme.colors['cream'], color: extendTheme.colors['dryBlue[0]'], category: "Curriculum Vitae", subCategories: ["Lorem ipsum dolor sit amet",] },
-    { bg: extendTheme.colors['cream'], color: extendTheme.colors['dryBlue[0]'], category: "Participação na JOB2BE", subCategories: ["Lorem ipsum dolor sit amet",] },
-    { bg: extendTheme.colors['cream'], color: extendTheme.colors['dryBlue[0]'], category: "Contactos", subCategories: ["Lorem ipsum dolor sit amet",] }
+    { category: "Curriculum Vitae", subCategories: ["É doutorado em engenharia pela RWTH Aachen University e MBA do The LisbonMBA (NOVA SBE + Católica SBE). Desenvolveu trabalhos na área de imagem molecular quantitativa (MR-PET) do cérebro, em pequenos animais e humanos, utilizando analítica avançada no Forschungszentrum Jülich da Helmholtz Association. Atualmente é diretor adjunto da Learning Health, responsável pela área de investigação, com foco em inteligência artificial e sistemas complexos aplicados à saúde.",] },
+    { category: "Participação na JOB2BE", subCategories: ["Nuno André da Silva fará parte da ...",] },
+    { category: "Contactos", subCategories: ["e-mail: blabla@gmail.com", "local: Hospital da Luz", "contacto telefónico: 967777777"] }
 ];
 
 export default function AccordionExample() {
@@ -17,9 +19,10 @@ export default function AccordionExample() {
         container: {
             flexGrow: 1,
             justifyContent: 'center',
+            alignContent: 'center',
         },
 
-        RectangleShapeViewLeft: {
+        RectangleShapeViewSpeaker: {
             width: 260,
             height: 449.42,
             borderRadius: 30,
@@ -66,112 +69,98 @@ export default function AccordionExample() {
             margimBottom: 50,
         },
 
-        TextTitle: {
-            fontWeight: '1000',
-            color: extendTheme.colors.dryBlue['0'],
-            fontSize: 30,
-            backgroundColor: 'transparent',
-            alignItems: 'center',
-            alignContent: 'center',
-            justifyContent: 'center',
-            margimBottom: 50,
-        },
-
-        RectangleShapeViewRight1: {
+        RectangleShapeViewAccordion: {
             flexGrow: 1,
             width: 836,
             height: 91,
             borderTopRightRadius: 30,
             borderTopLeftRadius: 30,
-            //backgroundColor: extendTheme.colors['cream'],
+            backgroundColor: extendTheme.colors['cream'],
             marginBottom: 44,
             marginTop: 22,
             marginLeft: 20,
-            //marginLeft: 20,
             alignItems: 'left',
             padding: 20,
-            //alignContent: 'left',
             justifyContent: 'center',
             alignSelf: 'center',
-            //display: 'flex',
         },
 
-        subCategoriesList: {
+        RectangleShapeViewInformation: {
             flexGrow: 1,
             backgroundColor: 'white',
             marginTop: -44,
             marginBottom: 22,
             marginLeft: 20,
             width: 836,
-            height: 361,
+            padding: 20,
             borderBottomRightRadius: 30,
             borderBottomLeftRadius: 30,
             alignSelf: 'center',
+            justifyContent: 'center',
+            alignItems: 'left',
         },
 
         cardContainer: {
             flexGrow: 1,
         },
 
-        heading: {
+        textTitle: {
             fontWeight: '1000',
             color: extendTheme.colors.dryBlue['0'],
             fontSize: 30,
-            backgroundColor: 'transparent',
             alignItems: 'center',
             alignContent: 'center',
             justifyContent: 'center',
             margimBottom: 50,
         },
 
-        body: {
+        textBody: {
             fontSize: 20,
             lineHeight: 20 * 1.5,
             textAlign: 'center',
-        }
+            color: extendTheme.colors['dryBlue[0]'],
+        },
     });
 
     const [currentIndex, setCurrentIndex] = React.useState(null);
     return (
         <Column flex={2} space={10}>
             <Row justifyContent={'center'} style={styles.container}>
-                <View style={styles.RectangleShapeViewLeft}>
+                <View style={styles.RectangleShapeViewSpeaker}>
                     <View style={styles.CircleShapeViewOut}>
                         <Image source={speaker} style={styles.CircleShapeViewIn}></Image>
                     </View>
                     <Text style={styles.TextName}> Nuno André da Silva </Text>
                 </View>
-                <View >
-                    {dataArray.map(({ bg, color, category, subCategories }, index) => {
+
+                <View>
+                    {dataArray.map(({ category, subCategories }, index) => {
                         return <TouchableOpacity
                             key={category}
                             onPress={() => {
                                 setCurrentIndex(index === currentIndex ? null : index);
                             }}
                             style={StyleSheet.cardContainer}
-                            activeOpacity={0.9}
+                            activeOpacity={1}
                         >
-                            <View style={[styles.RectangleShapeViewRight1, { backgroundColor: bg }]}>
-                                <Text style={[styles.heading, { color }]}>{category}</Text>
+                            <View style={styles.RectangleShapeViewAccordion}>
+                                <Text style={styles.textTitle}>{category}</Text>
+                                {ActivitiesIcon}
                             </View>
-                            {index === currentIndex && (
 
-                                <View style={styles.subCategoriesList}>
+                            {index === currentIndex && (
+                                <View style={styles.RectangleShapeViewInformation}>
                                     {subCategories.map((subCategory) => (
-                                        <Text key={subCategory} style={[styles.body, { color }]}>
+                                        <Text key={subCategory} style={styles.textBody}>
                                             {subCategory}
                                         </Text>
                                     ))}
                                 </View>
                             )}
-
                         </TouchableOpacity>
                     })}
                 </View>
-
             </Row>
         </Column>
     );
-
-
 }
