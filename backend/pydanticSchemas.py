@@ -73,9 +73,6 @@ class Speaker(BaseModel):
 class CreateActivity(Activity):
     speaker: Speaker
     activityType: ActivityType
-
-class updateActivity(CreateActivity):
-    slots: int
     
 
 class User(BaseModel):
@@ -119,7 +116,10 @@ class UserCreate(User):
 class UserUpdate(UserCreate):
     enrolledActivities: Optional[List[Activity]]
 
-
+class updateActivity(CreateActivity):
+    slots: int
+    enrolledUsers: Optional[List[User]]
+    usersInQueue: Optional[List[User]]
 
 
 

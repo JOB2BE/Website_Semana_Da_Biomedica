@@ -142,21 +142,57 @@ def updateActivity(db: Session, activity: pydanticSchemas.UserCreate, newParams:
     db.commit()
     db.refresh(activity)
 
-def decreaseSlot(db: Session, activityID, newParams: dict):
-    activity = getActivity(db,activityID)
-    slots= activity.slots
-    slots = slots - 1
-    activity = models.Activity(slots=slots, **activity.dict())
-    db.add(activity)
-    db.commit()
-    db.refresh(activity)
 
-def increaseSlot(db: Session, activityID, newParams: dict):
-    activity = getActivity(db,activityID)
-    slots= activity.slots
-    slots = slots + 1
-    activity = models.Activity(slots=slots, **activity.dict())
-    db.add(activity)
-    db.commit()
-    db.refresh(activity)
+## Bad way to update DB
+
+# def decreaseSlot(db: Session, activityID):
+#     activity = getActivity(db,activityID)
+#     slots= activity.slots
+#     slots = slots - 1
+#     activity = models.Activity(slots=slots, **activity.dict())
+#     db.add(activity)
+#     db.commit()
+#     db.refresh(activity)
+
+# def increaseSlot(db: Session, activityID):
+#     activity = getActivity(db,activityID)
+#     slots= activity.slots
+#     slots = slots + 1
+#     activity = models.Activity(slots=slots, **activity.dict())
+#     db.add(activity)
+#     db.commit()
+#     db.refresh(activity)
+
+def changeInActivityEnrollment(db: Session, activityID, user: pydanticSchemas.UserUpdate):
+    activity = getActivity(db, activityID)
+    if activity in user.enrolledActivities:
+
+        activities = user.enrolledActivities.remove(activity) ## new class atributes
+        enrolledUsers = activity.enrolledUsers.remove(user)
+        setattr(user, 'enrolledActivities', activities) #Update User
+        setattr(activity, 'enrolledUsers', enrolledUsers) #Update activity
+        setattr(activity, 'slots', models.Activity.slots - 1)
+        
+        db.commit() # Updating the changes in the database
+
+
+
+    else:
+        if activity.slots > 0:
+
+            activities = user.enrolledActivities.append(activity) ## new class atributes
+            enrolledUsers = activity.enrolledUsers.append(user)
+            setattr(user, 'enrolledActivities', activities) #Update User
+            setattr(activity, 'enrolledUsers', enrolledUsers) #Update activity
+            setattr(activity, 'slots', models.Activity.slots + 1)
+            
+            db.commit() # Updating the changes in the database
+        
+        else:
+
+            # Add to on queue list
+            queue = activity.usersInQueue.append(user)
+            setattr(activity, 'usersInQueue', queue) #Update activity
+
+            db.commit()
 
