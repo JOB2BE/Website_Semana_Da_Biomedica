@@ -80,7 +80,7 @@ class User(Base):
 
 
 
-    enrolledActivities: Mapped[List[Activity]] = relationship(secondary=association_table, back_populates ='enrolledUsers')
+    enrolledActivities: Mapped[List[Activity]] = relationship(secondary=enrolled_table, back_populates ='enrolledUsers')
 
     
 
