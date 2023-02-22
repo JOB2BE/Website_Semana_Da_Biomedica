@@ -68,7 +68,7 @@ def createUser(db: Session, object: pydanticSchemas.UserCreate):
 
 def createSpeaker(db: Session, object: pydanticSchemas.Speaker):
     
-    dbSpeaker = models.User(
+    dbSpeaker = models.Speaker(
         name =  object.name,
         email =  object.email,
         position =  object.position,
@@ -77,6 +77,8 @@ def createSpeaker(db: Session, object: pydanticSchemas.Speaker):
         description =  object.description,
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
+        activities = object.activities,
+        typeOfSpeaker = object.typeOfSpeaker
         )
     db.add(dbSpeaker)
     db.commit()
@@ -84,14 +86,18 @@ def createSpeaker(db: Session, object: pydanticSchemas.Speaker):
     return dbSpeaker
 
 
-def createActivity(db: Session, object: pydanticSchemas.CreateActivity):
+def createActivity(db: Session, object: pydanticSchemas.updateActivity):
     
-    dbActivity = models.Activity(
+    dbActivity = models.Activity(##**object.dict???
         name = object.name,
         description = object.description,
         requirements = object.requirements,
         scheduleAndLocation = object.scheduleAndLocation,
-        image = object.image)
+        image = object.image,
+        speaker = object.speaker,
+        slots=object.slots,
+        activityType = object.activityType,
+        )
     
     db.add(dbActivity)
     db.commit()

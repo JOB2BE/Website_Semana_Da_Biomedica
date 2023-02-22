@@ -34,14 +34,15 @@ class Speaker(Base):
     __tablename__ = "speakers"
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True)
-    name = Column(String)
-    email = Column(String, unique=True, index=True)
-    position = Column(String)
+    name = Column(String, unique=True, index=True)
+    email = Column(String, unique=True, index=True, required=False)
+    position = Column(String,  required=False)
     profileImage = Column(String, required=False)
-    companyImage = Column(String)
-    description = Column(String)
-    contacts = Column(String)
-    researchInterests = Column(String)
+    companyImage = Column(String,  required=False)
+    description = Column(String,  required=False)
+    contacts = Column(String,  required=False)
+    researchInterests = Column(String,  required=False)
+    typeOfSpeaker = Column(String)
    
     activity = relationship("Activity", back_populates="speaker")
 

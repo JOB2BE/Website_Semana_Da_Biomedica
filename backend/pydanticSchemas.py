@@ -21,6 +21,15 @@ class TypeOfUser(str, Enum):
     colaborator = 'colaborator'
     user = 'user'
 
+class TypeOfSpeaker(str, Enum):
+    speaker = 'Speaker'
+    moderator = 'Moderator'
+    workshop = 'Workshop Giver'
+    alumni = 'Alumni'
+    institutional = 'Intitutional partner Company'
+    gold = 'Gold partner Company'
+    basic = 'Basic Partner Company'
+    cattering = 'Cattering Partner Company'
 
 class Roles(str, Enum):
     """Docstring for MyEnum."""
@@ -31,9 +40,6 @@ class ActivityType(str, Enum):
     other = 'Other'
     lecture = 'Lecture'
     workshop = 'Workshop'
-    
-    
-
 
 class Activity(BaseModel):
     id : Optional[UUID] = uuid4()
@@ -50,14 +56,15 @@ class Activity(BaseModel):
 class Speaker(BaseModel):
     id : Optional[UUID] = uuid4()
     name: str
-    email: EmailStr
-    position: str
-    profileImage: str
-    companyImage: str
-    description: str
-    contacts: str
-    researchInterests: str
+    email: Optional[EmailStr]
+    position: Optional[str]
+    profileImage: Optional[str]
+    companyImage: Optional[str]
+    description: Optional[str]
+    contacts: Optional[str]
+    researchInterests: Optional[str]
     activities: List[Activity]
+    typeOfSpeaker: TypeOfSpeaker
     
 
     class Config:
@@ -65,7 +72,7 @@ class Speaker(BaseModel):
 
 class CreateActivity(Activity):
     speaker: Speaker
-    ActivityType: ActivityType
+    activityType: ActivityType
 
 class updateActivity(CreateActivity):
     slots: int
@@ -108,6 +115,8 @@ class User(BaseModel):
 
 class UserCreate(User):
     password: SecretStr
+
+
 
 
 
