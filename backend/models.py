@@ -1,9 +1,34 @@
 from database import Base
-
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, ARRAY
-from sqlalchemy.orm import relationship
+from typing import List
+from sqlalchemy import Table, Column, ForeignKey, Integer, String, ARRAY
+from sqlalchemy.orm import relationship, Mapped
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.hybrid import hybrid_property
+
+
+
+association_table = Table(
+    "association_table",
+    Base.metadata,
+    Column("users", ForeignKey("users.id")),
+    Column("activities", ForeignKey("activities.id")),
+)
+
+class Activity(Base):
+    __tablename__ = "activities"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    name = Column(String, unique=True, index=True)
+    description = Column(String)
+    requirements = Column(String)
+    scheduleAndLocation = Column(String)
+    image = Column(String, required=False)
+    slots = Column(Integer)
+    activityType = Column(String)
+
+
+    speaker = relationship("speakers", back_populates="activity")
+
 
 
 class User(Base):
@@ -21,6 +46,10 @@ class User(Base):
     contacts = Column(String, required=False)
     researchInterests = Column(String, required=False)
     cv = Column(String, required=False)
+
+
+
+    enrolledActivities: Mapped[List[Activity]] = relationship(secondary=association_table)
 
     
 
@@ -44,19 +73,5 @@ class Speaker(Base):
     researchInterests = Column(String,  required=False)
     typeOfSpeaker = Column(String)
    
-    activity = relationship("Activity", back_populates="speaker")
+    activity = relationship("activities", back_populates="speaker")
 
-class Activity(Base):
-    __tablename__ = "activities"
-
-    id = Column(UUID(as_uuid=True), primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
-    description = Column(String)
-    requirements = Column(String)
-    scheduleAndLocation = Column(String)
-    image = Column(String, required=False)
-    slots = Column(Integer)
-    activityType = Column(String)
-
-
-    speaker = relationship("Speaker", back_populates="activity")

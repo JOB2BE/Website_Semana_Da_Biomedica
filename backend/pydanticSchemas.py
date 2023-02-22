@@ -116,6 +116,9 @@ class User(BaseModel):
 class UserCreate(User):
     password: SecretStr
 
+class UserUpdate(UserCreate):
+    enrolledActivities: Optional[List[Activity]]
+
 
 
 
