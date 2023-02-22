@@ -92,6 +92,8 @@ class User(BaseModel):
     class Config:
         orm_mode = True
 
+class UserCreate(User):
+    password: SecretStr
 
     @validator('name')
     def name_must_contain_space(cls, v):
@@ -110,14 +112,33 @@ class User(BaseModel):
         assert v.isalnum(), 'must be alphanumeric'
         return v
 
-class UserCreate(User):
-    password: SecretStr
-
 class UserUpdate(UserCreate):
+
+    id : Optional[UUID] = uuid4()
+    name : Optional[str]
+    email: Optional[EmailStr]
+    password: Optional[SecretStr]
+    university: Optional[str]
+    degree: Optional[str]
+    roles: Optional[List[Roles]]
+    profileImage: Optional[str]
+    description: Optional[str]
+    contacts:  Optional[str]
+    researchInterests:  Optional[str]
+    cv: Optional[str]
     enrolledActivities: Optional[List[Activity]]
 
 class updateActivity(CreateActivity):
-    slots: int
+
+    id : Optional[UUID] = uuid4()
+    name: Optional[str]
+    description: Optional[str]
+    requirements: Optional[str]
+    scheduleAndLocation: Optional[str]
+    image: Optional[str]
+    speaker: Optional[Speaker]
+    activityType: Optional[ActivityType]
+    slots: Optional[int]
     enrolledUsers: Optional[List[User]]
     usersInQueue: Optional[List[User]]
 

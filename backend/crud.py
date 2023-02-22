@@ -127,17 +127,19 @@ def deleteActivity(db: Session, activityID: str):
     return activity
 
 
-def updateUser(db: Session, user: pydanticSchemas.UserCreate, newParams: dict):
+def updateUser(db: Session, user: pydanticSchemas.UserUpdate, newParams: dict):
     
-    user = models.User(**newParams, **user.dict())
+    for key, value in newParams:
+        setattr(user, key, value)
     db.add(user)
     db.commit()
     db.refresh(user)
 
 
-def updateActivity(db: Session, activity: pydanticSchemas.UserCreate, newParams: dict):
+def updateActivity(db: Session, activity: pydanticSchemas.updateActivity, newParams: dict):
     
-    activity = models.Activity(**newParams, **activity.dict())
+    for key, value in newParams:
+        setattr(activity, key, value)
     db.add(activity)
     db.commit()
     db.refresh(activity)
