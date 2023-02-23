@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-
-from . import models, pydanticSchemas
+import models
+import pydanticSchemas
 
 
 def getUser(db: Session, userID):
@@ -34,10 +34,10 @@ def getSpeakers(db: Session):
 
 
 def getActivity(db: Session, activityID):
-    return db.query(models.Speaker).filter(models.Activity.id == activityID).first()
+    return db.query(models.Activity).filter(models.Activity.id == activityID).first()
 
 def getActivityByName(db: Session, name:str):
-    return db.query(models.Speaker).filter(models.Activity.name == name).all()
+    return db.query(models.Activity).filter(models.Activity.name == name).all()
 
 def getActivities(db: Session):
     return db.query(models.Activity).all()
@@ -45,16 +45,17 @@ def getActivities(db: Session):
 
 
 def createUser(db: Session, object: pydanticSchemas.UserCreate):
-    fake_hashed_password =  object.password + "notreallyhashed" ## Fix this, lack of security must be hashed
+     ## Fix this, lack of security must be hashed
     dbUser = models.User(
+        id=object.id,
         name =  object.name,
         email =  object.email,
-        password =fake_hashed_password,
+        password = object.password,
         university =  object.email,
         degree =  object.degree,
-        roles =  object.roles,
+        department = object.department,
+        typeOfUser = object.typeOfUser,
         profileImage =  object.profileImage,
-        speaker =  object.speaker,
         description =  object.description,
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
@@ -69,16 +70,17 @@ def createUser(db: Session, object: pydanticSchemas.UserCreate):
 def createSpeaker(db: Session, object: pydanticSchemas.Speaker):
     
     dbSpeaker = models.Speaker(
+        id=object.id,
         name =  object.name,
         email =  object.email,
         position =  object.position,
         profileImage =  object.profileImage,
-        comapanyImage =  object.companyImage,
+        companyImage =  object.companyImage,
         description =  object.description,
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
         activities = object.activities,
-        typeOfSpeaker = object.typeOfSpeaker
+        typeOfSpeaker = object.typeOfSpeaker,
         )
     db.add(dbSpeaker)
     db.commit()
@@ -86,15 +88,16 @@ def createSpeaker(db: Session, object: pydanticSchemas.Speaker):
     return dbSpeaker
 
 
-def createActivity(db: Session, object: pydanticSchemas.updateActivity):
+def createActivity(db: Session, object: pydanticSchemas.CreateActivity):
     
-    dbActivity = models.Activity(##**object.dict???
+    dbActivity = models.Activity(
+        id=object.id,
         name = object.name,
         description = object.description,
         requirements = object.requirements,
         scheduleAndLocation = object.scheduleAndLocation,
         image = object.image,
-        speaker = object.speaker,
+        speakers=object.speakers,
         slots=object.slots,
         activityType = object.activityType,
         )
@@ -106,24 +109,21 @@ def createActivity(db: Session, object: pydanticSchemas.updateActivity):
 
 
 def deleteUser(db: Session, userID: str):
-    user = db.query(models.User).filter(models.User.id == userID)
+    user = db.query(models.User).filter(models.User.id == userID).first()
     db.delete(user)
     db.commit()
-    db.refresh(user)
     return user
 
 def deleteSpeaker(db: Session, speakerID: str):
     speaker = db.query(models.Speaker).filter(models.Speaker.id == speakerID).first()
     db.delete(speaker)
     db.commit()
-    db.refresh(speaker)
     return speaker
 
 def deleteActivity(db: Session, activityID: str):
     activity = db.query(models.Activity).filter(models.Activity.id == activityID).first()
     db.delete(activity)
     db.commit()
-    db.refresh(activity)
     return activity
 
 
@@ -131,18 +131,18 @@ def updateUser(db: Session, user: pydanticSchemas.UserUpdate, newParams: dict):
     
     for key, value in newParams:
         setattr(user, key, value)
-    db.add(user)
+
     db.commit()
-    db.refresh(user)
+
 
 
 def updateActivity(db: Session, activity: pydanticSchemas.updateActivity, newParams: dict):
     
     for key, value in newParams:
         setattr(activity, key, value)
-    db.add(activity)
+
     db.commit()
-    db.refresh(activity)
+
 
 
 ## Bad way to update DB
@@ -165,8 +165,9 @@ def updateActivity(db: Session, activity: pydanticSchemas.updateActivity, newPar
 #     db.commit()
 #     db.refresh(activity)
 
-def changeInActivityEnrollment(db: Session, activityID, user: pydanticSchemas.UserUpdate):
-    activity = getActivity(db, activityID)
+def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActivity, user: pydanticSchemas.UserUpdate):
+    
+
     if activity in user.enrolledActivities:
 
         activities = user.enrolledActivities.remove(activity) ## new class atributes
