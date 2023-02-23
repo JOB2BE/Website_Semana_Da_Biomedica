@@ -74,7 +74,7 @@ async def fetchUser(userID, db: Session = Depends(get_db)):
 
 ## Delete user
 @app.delete("/api/users/{userID}", response_model=pydanticSchemas.UserCreate)
-async def deleteUser(userID: UUID, db: Session = Depends(get_db)):
+async def deleteUser(userID, db: Session = Depends(get_db)):
     if not crud.getUser(db, userID) :
         raise HTTPException(
             status_code= 404,
@@ -237,7 +237,7 @@ async def deleteActivity(activityID, db: Session = Depends(get_db)):
 
 ## Enrollment
 
-@app.patch("/api/activities/{activityID}/{userID}", response_model=pydanticSchemas.updateActivity)
+@app.patch("/api/activities/{activityID}/{userID}")
 async def changeInEnrollment(activityID, userID, db: Session = Depends(get_db)):
     user = crud.getUser(db, userID)
     activity = crud.getActivity(db, activityID)
@@ -247,7 +247,10 @@ async def changeInEnrollment(activityID, userID, db: Session = Depends(get_db)):
             detail=f"Activity or user do not exist"
         ) #raise exceptions
     else:
-        return crud.changeInActivityEnrollment(db, activity, user)
+        crud.changeInActivityEnrollment(db, activity, user)
+        db.refresh(user)
+        db.refresh(activity)
+        return activity, user
     
 #DONE
 
@@ -258,10 +261,13 @@ async def linker(activityID, speakerID, db: Session = Depends(get_db)):
 
     activity = crud.getActivity(db, activityID)
     speaker = crud.getSpeaker(db, speakerID)
-
-    setattr(activity, 'speakers', activity.speakers.append(speaker.id))
-    setattr(speaker, 'activities', speaker.activities.append(activity.id))
+    setattr(activity, 'speakers',  activity.speakers + [speaker.id])
+    setattr(speaker, 'activities', speaker.activities + [activity.id])
     db.commit()
+    db.refresh(speaker)
+    db.refresh(activity)
+
+    return activity,speaker
 
 
 

@@ -10,7 +10,7 @@ def getUserByEmail(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
 def getUserByRole(db: Session, role: str): # Get all Users by a role, in the role list
-    return db.query(models.User).filter(any(element in role for element in models.User.roles)).first()
+    return db.query(models.User).filter(any(element in role for element in models.User.roles)).all()
 
 
 def getUsers(db: Session, skip: int = 0, limit: int = 100):
@@ -24,7 +24,7 @@ def getSpeaker(db: Session, speakerID):
     return db.query(models.Speaker).filter(models.Speaker.id == speakerID).first()
 
 def getSpeakersByName(db: Session, name:str):
-    return db.query(models.Speaker).filter(models.Speaker.name == name).all()
+    return db.query(models.Speaker).filter(models.Speaker.name == name).first()
 
 def getSpeakers(db: Session):
     return db.query(models.Speaker).all()
@@ -37,7 +37,7 @@ def getActivity(db: Session, activityID):
     return db.query(models.Activity).filter(models.Activity.id == activityID).first()
 
 def getActivityByName(db: Session, name:str):
-    return db.query(models.Activity).filter(models.Activity.name == name).all()
+    return db.query(models.Activity).filter(models.Activity.name == name).first()
 
 def getActivities(db: Session):
     return db.query(models.Activity).all()
@@ -51,7 +51,7 @@ def createUser(db: Session, object: pydanticSchemas.UserCreate):
         name =  object.name,
         email =  object.email,
         password = object.password,
-        university =  object.email,
+        university =  object.university,
         degree =  object.degree,
         department = object.department,
         typeOfUser = object.typeOfUser,
@@ -60,6 +60,7 @@ def createUser(db: Session, object: pydanticSchemas.UserCreate):
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
         cv= object.cv,
+        enrolledActivities = object.enrolledActivities
         )
     db.add(dbUser)
     db.commit()
@@ -100,6 +101,8 @@ def createActivity(db: Session, object: pydanticSchemas.CreateActivity):
         speakers=object.speakers,
         slots=object.slots,
         activityType = object.activityType,
+        enrolledUsers=object.enrolledUsers,
+        usersInQueue=object.usersInQueue,
         )
     
     db.add(dbActivity)
@@ -167,14 +170,21 @@ def updateActivity(db: Session, activity: pydanticSchemas.updateActivity, newPar
 
 def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActivity, user: pydanticSchemas.UserUpdate):
     
+    if activity.usersInQueue == None:
+        queue = []
+    if activity.enrolledUsers == None:
+        enrolledUsers = []
+    if user.enrolledActivities == None:
+        activities = []
 
     if activity in user.enrolledActivities:
-
-        activities = user.enrolledActivities.remove(activity) ## new class atributes
-        enrolledUsers = activity.enrolledUsers.remove(user)
+        activities = user.enrolledActivities
+        activities.remove(activity) ## new class atributes
+        enrolledUsers = activity.enrolledUsers
+        enrolledUsers.remove(user)
         setattr(user, 'enrolledActivities', activities) #Update User
         setattr(activity, 'enrolledUsers', enrolledUsers) #Update activity
-        setattr(activity, 'slots', models.Activity.slots - 1)
+        setattr(activity, 'slots', models.Activity.slots + 1)
         
         db.commit() # Updating the changes in the database
 
@@ -183,19 +193,22 @@ def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActi
     else:
         if activity.slots > 0:
 
-            activities = user.enrolledActivities.append(activity) ## new class atributes
-            enrolledUsers = activity.enrolledUsers.append(user)
+            activities = user.enrolledActivities
+            activities = activities + [activity.id]  # new class atributes
+            enrolledUsers = activity.enrolledUsers
+            enrolledUsers = enrolledUsers + [user.id]
             setattr(user, 'enrolledActivities', activities) #Update User
             setattr(activity, 'enrolledUsers', enrolledUsers) #Update activity
-            setattr(activity, 'slots', models.Activity.slots + 1)
+            setattr(activity, 'slots', models.Activity.slots - 1)
             
             db.commit() # Updating the changes in the database
         
         else:
-
+            queue = activity.usersInQueue
             # Add to on queue list
-            queue = activity.usersInQueue.append(user)
-            setattr(activity, 'usersInQueue', queue) #Update activity
+            setattr(activity, 'usersInQueue',
+                    queue + [user.id])  # Update activity
 
             db.commit()
+
 

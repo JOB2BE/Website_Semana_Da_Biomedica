@@ -70,20 +70,21 @@ class ActivityType(enum.Enum):
 class Activity(Base):
     __tablename__ = "activities"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
     description = Column(String)
     requirements = Column(String)
     scheduleAndLocation = Column(String)
-    image = Column(String, nullable=True)
+    image = Column(String)
     slots = Column(Integer)
     activityType = Column(String)
 
-    speakers = Column(ARRAY(UUID(as_uuid=True)))  # Bidirectional Many to Many
     # Bidirectional Many to Many
-    enrolledUser = Column(ARRAY(UUID(as_uuid=True)))
+    speakers = Column(ARRAY(Integer))
+    # Bidirectional Many to Many
+    enrolledUsers = Column(ARRAY(Integer))
     # Unidirectional Many to Many
-    usersInQueue = Column(ARRAY(UUID(as_uuid=True)))
+    usersInQueue = Column(ARRAY(Integer))
 
     # Will check the queue if some slots become available by quitting of another user
     def __setattr__(self, name, value, db: Session = None):
@@ -122,21 +123,21 @@ class Activity(Base):
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     email = Column(String, unique=True, index=True)
     password = Column(String)
     university = Column(String, nullable=True)
     degree = Column(String, nullable=True)
-    typeOfUser = Column(String, nullable=True)
+    typeOfUser = Column(String)
     department = Column(String, nullable=True)
-    profileImage = Column(String, nullable=True)
-    description = Column(String, nullable=True)
-    contacts = Column(String, nullable=True)
-    researchInterests = Column(String, nullable=True)
+    profileImage = Column(String)
+    description = Column(String)
+    contacts = Column(String, )
+    researchInterests = Column(String )
     cv = Column(String, nullable=True)
 
-    enrolledActivities = Column(ARRAY(UUID(as_uuid=True)))
+    enrolledActivities = Column(ARRAY(Integer))
 
     @hybrid_property
     def univerityAndDegree(self):
@@ -146,16 +147,16 @@ class User(Base):
 class Speaker(Base):
     __tablename__ = "speakers"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True, nullable=True)
-    position = Column(String,  nullable=True)
+    position = Column(String,  )
     profileImage = Column(String, nullable=True)
     companyImage = Column(String,  nullable=True)
-    description = Column(String,  nullable=True)
+    description = Column(String,  )
     contacts = Column(String,  nullable=True)
     researchInterests = Column(String,  nullable=True)
     typeOfSpeaker = Column(String)
 
     # Bidirectional Many to Many
-    activities = Column(ARRAY(UUID(as_uuid=True)), nullable=True)
+    activities = Column(ARRAY(Integer))

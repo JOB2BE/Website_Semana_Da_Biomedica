@@ -1,8 +1,6 @@
-from uuid import UUID
 from typing import List, Optional 
 from pydantic import BaseModel, EmailStr, validator  # Pydantic is a python library for data validation, usefull for steps related to PUT requests, checks if we are storing GOOD data
 from enum import Enum
-from uuid import UUID, uuid4
 
 class Department(str, Enum):
     """Docstring for MyEnum."""
@@ -37,22 +35,22 @@ class ActivityType(str, Enum):
     workshop = 'Workshop'
 
 class Activity(BaseModel):
-    id : UUID = uuid4()
+    id : int
     name: str
     description: str
     requirements: Optional[str]
     scheduleAndLocation: str
     image: Optional[str]
-    enrolledUsers: Optional[List[UUID]] = []
-    usersInQueue: Optional[List[UUID]] = []
-    speakers: Optional[List[UUID]] = []
+    enrolledUsers: Optional[List[int]] = []
+    usersInQueue: Optional[List[int]] = []
+    speakers: Optional[List[int]] = []
     
 
     class Config:
         orm_mode = True
 
 class Speaker(BaseModel):
-    id : UUID = uuid4()
+    id : int
     name: str
     email: Optional[EmailStr]
     position: Optional[str]
@@ -62,7 +60,7 @@ class Speaker(BaseModel):
     contacts: Optional[str]
     researchInterests: Optional[str]
     typeOfSpeaker: str
-    activities: Optional[List[UUID]] = []
+    activities: Optional[List[int]] = []
     
 
     class Config:
@@ -74,7 +72,7 @@ class CreateActivity(Activity):
     
 
 class User(BaseModel):
-    id : Optional[UUID] = uuid4()
+    id : int
     name : str
     email: EmailStr
     university: Optional[str]
@@ -86,7 +84,7 @@ class User(BaseModel):
     contacts:  Optional[str]
     researchInterests:  Optional[str]
     cv: Optional[str]
-    enrolledActivities: Optional[List[UUID]] = []
+    enrolledActivities: Optional[List[int]] = []
 
 
 
@@ -99,7 +97,7 @@ class UserCreate(User):
 
 class UserUpdate(UserCreate):
 
-    id : Optional[UUID] = uuid4()
+    id : Optional[int]
     name : Optional[str]
     email: Optional[EmailStr]
     password: Optional[str]
@@ -112,21 +110,21 @@ class UserUpdate(UserCreate):
     contacts:  Optional[str]
     researchInterests:  Optional[str]
     cv: Optional[str]
-    enrolledActivities: Optional[List[UUID]] =[] ## Only required after user creation
+    enrolledActivities: Optional[List[int]] =[] ## Only required after user creation
 
 class updateActivity(CreateActivity):
 
-    id : UUID = uuid4()
+    id : Optional[int]
     name: Optional[str]
     description: Optional[str]
     requirements: Optional[str]
     scheduleAndLocation: Optional[str]
     image: Optional[str]
-    speakers: Optional[List[UUID]]=[]
+    speakers: Optional[List[int]]=[]
     activityType: Optional[str]
     slots: Optional[int]
-    enrolledUsers: Optional[List[UUID]] = []
-    usersInQueue: Optional[List[UUID]] = []
+    enrolledUsers: Optional[List[int]] = []
+    usersInQueue: Optional[List[int]] = []
 
 
 
