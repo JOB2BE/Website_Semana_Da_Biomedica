@@ -15,7 +15,7 @@ enrolled_table = Table(
 )
 
 queue_table = Table(
-    "enrolled_table",
+    "queue_table",
     Base.metadata,
     Column("users", ForeignKey("users.id")),
     Column("activities", ForeignKey("activities.id")),
@@ -24,19 +24,20 @@ queue_table = Table(
 class Activity(Base):
     __tablename__ = "activities"
 
+
     id = Column(UUID(as_uuid=True), primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
     description = Column(String)
     requirements = Column(String)
     scheduleAndLocation = Column(String)
-    image = Column(String, required=False)
+    image = Column(String, nullable=True)
     slots = Column(Integer)
     activityType = Column(String)
 
 
     speaker = relationship("speakers", back_populates="activity")
-    enrolledUser : Mapped[List[User]] = relationship(secondary=enrolled_table, back_populates='enrolledActivities') #Bidirectional Many to Many
-    usersInQueue : Mapped[List[User]] = relationship(secondary=queue_table) #Unidirectional Many to Many
+    enrolledUser : Mapped[ARRAY] = relationship(secondary=enrolled_table, back_populates='enrolledActivities') #Bidirectional Many to Many
+    usersInQueue : Mapped[ARRAY] = relationship(secondary=queue_table) #Unidirectional Many to Many
 
 
     
@@ -69,14 +70,14 @@ class User(Base):
     name = Column(String)
     email = Column(String, unique=True, index=True)
     password = Column(String)
-    university = Column(String, required=False)
-    degree = Column(String, required=False)
-    roles = Column(ARRAY)
-    profileImage = Column(String)
-    description = Column(String, required=False)
-    contacts = Column(String, required=False)
-    researchInterests = Column(String, required=False)
-    cv = Column(String, required=False)
+    university = Column(String, nullable = True)
+    degree = Column(String, nullable = True)
+    roles = Column(ARRAY(String), nullable=True)
+    profileImage = Column(String, nullable = True)
+    description = Column(String, nullable = True)
+    contacts = Column(String, nullable = True)
+    researchInterests = Column(String, nullable = True)
+    cv = Column(String, nullable = True)
 
 
 
@@ -95,13 +96,13 @@ class Speaker(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
-    email = Column(String, unique=True, index=True, required=False)
-    position = Column(String,  required=False)
-    profileImage = Column(String, required=False)
-    companyImage = Column(String,  required=False)
-    description = Column(String,  required=False)
-    contacts = Column(String,  required=False)
-    researchInterests = Column(String,  required=False)
+    email = Column(String, unique=True, index=True, nullable = True)
+    position = Column(String,  nullable = True)
+    profileImage = Column(String, nullable = True)
+    companyImage = Column(String,  nullable = True)
+    description = Column(String,  nullable = True)
+    contacts = Column(String,  nullable = True)
+    researchInterests = Column(String,  nullable = True)
     typeOfSpeaker = Column(String)
    
     activity = relationship("activities", back_populates="speaker")

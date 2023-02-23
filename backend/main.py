@@ -6,13 +6,11 @@ from fastapi_login import LoginManager
 from uuid import UUID
 from . import crud, models, pydanticSchemas
 from .database import SessionLocal, engine
-from core.config import settings
+from config import settings
 
 
 
 # way create the database tables
-
-models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
