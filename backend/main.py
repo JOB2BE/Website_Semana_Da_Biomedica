@@ -112,10 +112,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 
 
 
-@app.get("/")  # Path of the get method, used in browser or by our UI frontend lib
-def root():
-    return {'Hello':'World'}
-
 
 #### Get data for validation, it comes from pydantic data extraction in crud.py
 ## Show 'get' all users
@@ -350,8 +346,13 @@ async def linker(activityID, speakerID, db: Session = Depends(get_db)):
 
     activity = crud.getActivity(db, activityID)
     speaker = crud.getSpeaker(db, speakerID)
-    setattr(activity, 'speakers',  activity.speakers + [speaker])
-    setattr(speaker, 'activities', speaker.activities + [activity])
+    if speaker not in activity.speakers:
+        setattr(activity, 'speakers',  activity.speakers + [speaker])
+    else:
+        speakers = activity.speakers
+        speakers.remove(speaker)
+        setattr(activity, 'speakers',  speakers)
+    
     db.commit()
     db.refresh(speaker)
     db.refresh(activity)
