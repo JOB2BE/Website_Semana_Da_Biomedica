@@ -8,10 +8,10 @@ export default extendTheme({
 			bg: '#5788AC',
 		},
 		cream: {
-			0:'#FFEFD3',
+			0: '#FFEFD3',
 		},
 		medYellow: {
-			0:'#FDBA35',
+			0: '#FDBA35',
 			pastel: '#FFEFD3',
 		},
 

@@ -9,11 +9,11 @@ import {
 	Divider,
 	Pressable,
 	HStack,
-	Column, 
+	Column,
 	Row,
 	FormControl,
 	Icon,
-	View
+	View,
 } from 'native-base';
 import { useState } from 'react';
 import StyledBox from '../components/information/StyledBox';
@@ -34,7 +34,6 @@ export default function LoginPage() {
 
 	const [show, setShow] = useState(false);
 
-
 	return (
 		<Column flex={1} space={120}>
 			<Row justifyContent={'center'} style={styles.aboutBox}>
@@ -52,11 +51,7 @@ export default function LoginPage() {
 							<Text size='md'> Email</Text>
 						</FormControl.Label>
 
-						<Input
-							variant='filled'
-							rounded='10'
-							_focus={{ bg: '#ffffff' }} />
-
+						<Input variant='filled' rounded='10' _focus={{ bg: '#ffffff' }} />
 					</FormControl>
 
 					<FormControl>
@@ -69,35 +64,41 @@ export default function LoginPage() {
 							rounded='10'
 							_focus={{ bg: '#ffffff' }}
 							type={show ? 'text' : 'password'}
-							InputRightElement={<Pressable onPress={() => setShow(!show)}>
-								<Icon
-									as={<MaterialIcons
-										name={show ? 'visibility' : 'visibility-off'} />}
-									size={5}
-									mr='2'
-									color='muted.400' />
-							</Pressable>} />
+							InputRightElement={
+								<Pressable onPress={() => setShow(!show)}>
+									<Icon
+										as={
+											<MaterialIcons
+												name={show ? 'visibility' : 'visibility-off'}
+											/>
+										}
+										size={5}
+										mr='2'
+										color='muted.400'
+									/>
+								</Pressable>
+							}
+						/>
 					</FormControl>
-					
-				<Pressable ml='3' mt='1' variant='ghost'>
-					<Text size='md' color='#2D6793' fontWeight='medium'>
-						Forgot your password?
-					</Text>
-				</Pressable>
-				<Button ml='80%' size='sm' color='#2D6793' mb='3' >
-					<Text size='md' ml='3' mr='3' fontWeight='medium' color='#FDBA35'>
-						Enter
-					</Text>
-				</Button>
-				<Divider color='#2D6793'/>
-				<Pressable mt='3' ml='3' mr='3' variant='ghost'>
-				<Center>
-					<Text size='md' color='#2D6793' fontWeight='medium'>
-						Don't have an account? Sign up here!
-					</Text>
-				</Center>
-			</Pressable>
-			</StyledBox>
+					<View mt='1.5' ml='3'>
+						<Link to={'/PasswordRecovery'} style={{ textDecoration: 'none' }}>
+							<Text size='md' color='#2D6793' fontWeight='medium'>
+								Forgot your password?
+							</Text>
+						</Link>
+					</View>
+					<Button ml='80%' size='sm' color='#2D6793' mb='3'>
+						<Text size='md' ml='3' mr='3' fontWeight='medium' color='#FDBA35'>
+							Enter
+						</Text>
+					</Button>
+					<Divider color='#2D6793' />
+					<View mt='3' ml='3' mr='3'>
+						<Link to={'/Register'} style={{ textDecoration: 'none' }}>
+							<Text size='md' color='#2D6793' fontWeight='medium'>Don't have an account? Sign up here!</Text>
+						</Link>
+					</View>
+				</StyledBox>
 			</Row>
 		</Column>
 	);
@@ -155,3 +156,19 @@ export default function LoginPage() {
 			</Pressable>
 
 			*/
+
+	
+/*<Pressable mt='3' ml='3' mr='3' variant='ghost'>
+						<Center>
+							<Text size='md' color='#2D6793' fontWeight='medium'>
+								Don't have an account? Sign up here!
+							</Text>
+						</Center>
+					</Pressable>
+
+<Pressable ml='3' mt='1' variant='ghost'>
+						<Text size='md' color='#2D6793' fontWeight='medium'>
+							Forgot your password?
+						</Text>
+					</Pressable>
+					*/

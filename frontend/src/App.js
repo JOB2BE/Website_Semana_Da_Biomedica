@@ -12,6 +12,11 @@ import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
+import LecturesPage from './pages/LecturesPage.js';
+import AlumniSessionsPage from './pages/AlumniSessionsPage';
+import NetworkingPage from './pages/NetworkingPage';
+import WorkshopsPage from './pages/WorkshopsPage';
 import theme from './theme';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -63,6 +68,17 @@ export default function App() {
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
 							<Route path='/LoginPage' element={<LoginPage idiom={i18n} />} />
 							<Route path='/Register' element={<RegisterPage idiom={i18n} />} />
+							<Route
+								path='/PasswordRecovery'
+								element={<PasswordRecoveryPage idiom={i18n} />}
+							/>
+							<Route path='/Lectures' element={<LecturesPage idiom={i18n} />} />
+							<Route
+								path='/AlumniSessions'
+								element={<AlumniSessionsPage idiom={i18n} />}
+							/>
+							<Route path='/Networking' element={<NetworkingPage idiom={i18n} />} />
+							<Route path='/Workshops' element={<WorkshopsPage idiom={i18n} />} />
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
