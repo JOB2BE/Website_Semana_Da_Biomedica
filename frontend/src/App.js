@@ -44,9 +44,9 @@ export default function App() {
 			source={require('./assets/images/79banner.svg')}
 			style={{ flex: 1 }}
 			resizeMode={'cover'}
+			alt={"Job2Be's Background"}
 		>
 			<View>
-				{' '}
 				<NativeBaseProvider theme={theme} config={config}>
 					<Router>
 						<Navbar />
