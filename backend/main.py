@@ -9,6 +9,7 @@ import crud
 import pydanticSchemas
 from database import SessionLocal, engine
 from config import settings
+from typing import List
 
 
 
@@ -36,7 +37,7 @@ def root():
 #### Get data for validation, it comes from pydantic data extraction in crud.py
 ## Show 'get' all users
 
-@app.get('/api/users')
+@app.get('/api/users', response_model=List[pydanticSchemas.UserGet])
 async def fetchUsers(db: Session = Depends(get_db), skip: int = 0, limit: int = 100,):
 
     users=crud.getUsers(db,skip,limit)
@@ -57,7 +58,7 @@ async def registerUser(user:pydanticSchemas.UserCreate, db: Session = Depends(ge
 # Get user by id
 
 
-@app.get('/api/users/{userID}')
+@app.get('/api/users/{userID}', response_model=pydanticSchemas.UserGet)
 async def fetchUser(userID, db: Session = Depends(get_db)):
     user = crud.getUser(db, userID)  # Retreive all speakers from db~
 
@@ -73,7 +74,7 @@ async def fetchUser(userID, db: Session = Depends(get_db)):
 
 
 ## Delete user
-@app.delete("/api/users/{userID}", response_model=pydanticSchemas.UserCreate)
+@app.delete("/api/users/{userID}", response_model=pydanticSchemas.User)
 async def deleteUser(userID, db: Session = Depends(get_db)):
     if not crud.getUser(db, userID) :
         raise HTTPException(
@@ -81,6 +82,7 @@ async def deleteUser(userID, db: Session = Depends(get_db)):
             detail=f"User with the id:{userID} does not exist"
         ) #raise exceptions
     else:
+        
         return crud.deleteUser(db, userID)
     
 #DONE
@@ -126,14 +128,15 @@ def protected_route(user=Depends(manager)): ## Boolean stating if an user is aut
 
 ## Show all speakers
 
-@app.get('/api/speakers')
+
+@app.get('/api/speakers', response_model=List[pydanticSchemas.SpeakerGet])
 async def fetchSpeakers(db: Session = Depends(get_db)):
     return crud.getSpeakers(db) ## Retreive all speakers from db
 
 # Get speaker by id
 
 
-@app.get('/api/speakers/{speakerID}')
+@app.get('/api/speakers/{speakerID}', response_model=pydanticSchemas.SpeakerGet)
 async def fetchSpeaker(speakerID, db: Session = Depends(get_db)):
     speaker = crud.getSpeaker(db, speakerID)  # Retreive all speakers from db~
 
@@ -146,8 +149,8 @@ async def fetchSpeaker(speakerID, db: Session = Depends(get_db)):
         return speaker
 
 ## Add new speakers
-@app.post('/api/speakers', response_model=pydanticSchemas.Speaker)
-async def registerSpeaker(speaker:pydanticSchemas.Speaker, db: Session = Depends(get_db)):
+@app.post('/api/speakers', response_model=pydanticSchemas.CreateSpeaker)
+async def registerSpeaker(speaker: pydanticSchemas.CreateSpeaker, db: Session = Depends(get_db)):
 
     if crud.getSpeakersByName(db, speaker.name):
         raise HTTPException(status_code=400, detail="The Speaker with such name is already present in the database")
@@ -157,6 +160,20 @@ async def registerSpeaker(speaker:pydanticSchemas.Speaker, db: Session = Depends
         return crud.createSpeaker(db,speaker)
     
 #DONE
+
+## Update Speaker
+
+
+@app.patch("/api/speakers/{speakerID}", response_model= pydanticSchemas.SpeakerUpdate)
+async def updateSpeaker(speakerID, newParams:dict, db: Session = Depends(get_db)):
+    speaker = crud.getSpeaker(db, speakerID)
+    if not speaker:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Speaker with the id:{speakerID} does not exist"
+        )  # raise exceptions
+    else:
+        return crud.updateSpeaker(db,speaker, newParams)
 
 ## Delete speaker
 @app.delete("/api/speakers/{speakerID}", response_model=pydanticSchemas.Speaker)
@@ -176,7 +193,8 @@ async def deleteSpeaker(speakerID, db: Session = Depends(get_db)):
 
 ## Show all activities
 
-@app.get('/api/activities')
+
+@app.get('/api/activities', response_model=List[pydanticSchemas.ActivityGet])
 async def fetchActivities(db: Session = Depends(get_db)):
     return crud.getActivities(db) ## Retreive all speakers from db
 
@@ -185,7 +203,7 @@ async def fetchActivities(db: Session = Depends(get_db)):
 # Get activity by id
 
 
-@app.get('/api/activities/{activityID}')
+@app.get('/api/activities/{activityID}', response_model=pydanticSchemas.ActivityGet)
 async def fetchActivity(activityID,db: Session = Depends(get_db)):
     return crud.getActivity(db,activityID) 
 
@@ -261,8 +279,8 @@ async def linker(activityID, speakerID, db: Session = Depends(get_db)):
 
     activity = crud.getActivity(db, activityID)
     speaker = crud.getSpeaker(db, speakerID)
-    setattr(activity, 'speakers',  activity.speakers + [speaker.id])
-    setattr(speaker, 'activities', speaker.activities + [activity.id])
+    setattr(activity, 'speakers',  activity.speakers + [speaker])
+    setattr(speaker, 'activities', speaker.activities + [activity])
     db.commit()
     db.refresh(speaker)
     db.refresh(activity)

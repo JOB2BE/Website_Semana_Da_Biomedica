@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 import models
 import pydanticSchemas
+import main
 
 
 def getUser(db: Session, userID):
@@ -47,7 +48,6 @@ def getActivities(db: Session):
 def createUser(db: Session, object: pydanticSchemas.UserCreate):
      ## Fix this, lack of security must be hashed
     dbUser = models.User(
-        id=object.id,
         name =  object.name,
         email =  object.email,
         password = object.password,
@@ -60,7 +60,8 @@ def createUser(db: Session, object: pydanticSchemas.UserCreate):
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
         cv= object.cv,
-        enrolledActivities = object.enrolledActivities
+        enrolledActivities=object.enrolledActivities,
+        inQueueActivities=object.inQueueActivities,
         )
     db.add(dbUser)
     db.commit()
@@ -68,10 +69,10 @@ def createUser(db: Session, object: pydanticSchemas.UserCreate):
     return dbUser
 
 
-def createSpeaker(db: Session, object: pydanticSchemas.Speaker):
+def createSpeaker(db: Session, object:pydanticSchemas.CreateSpeaker):
     
     dbSpeaker = models.Speaker(
-        id=object.id,
+
         name =  object.name,
         email =  object.email,
         position =  object.position,
@@ -80,7 +81,7 @@ def createSpeaker(db: Session, object: pydanticSchemas.Speaker):
         description =  object.description,
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
-        activities = object.activities,
+        activities=object.activities,
         typeOfSpeaker = object.typeOfSpeaker,
         )
     db.add(dbSpeaker)
@@ -92,7 +93,6 @@ def createSpeaker(db: Session, object: pydanticSchemas.Speaker):
 def createActivity(db: Session, object: pydanticSchemas.CreateActivity):
     
     dbActivity = models.Activity(
-        id=object.id,
         name = object.name,
         description = object.description,
         requirements = object.requirements,
@@ -102,7 +102,7 @@ def createActivity(db: Session, object: pydanticSchemas.CreateActivity):
         slots=object.slots,
         activityType = object.activityType,
         enrolledUsers=object.enrolledUsers,
-        usersInQueue=object.usersInQueue,
+        usersInQueue=object.usersInQueue
         )
     
     db.add(dbActivity)
@@ -111,19 +111,76 @@ def createActivity(db: Session, object: pydanticSchemas.CreateActivity):
     return dbActivity
 
 
-def deleteUser(db: Session, userID: str):
+def deleteUser(db: Session, userID: int):   
+    
+    if (db.query(models.Activity).all()):
+        activitiesOfInterestEnrolled = db.query(models.Activity).filter(models.Activity.enrolledUsers.count(userID) > 0).all()
+        activitiesOfInterestQueue = db.query(models.Activity).filter(models.Activity.usersInQueue.count(userID) > 0).all()
+    
+        for (activityEnrolled, activityQueue) in zip(activitiesOfInterestEnrolled, activitiesOfInterestQueue):
+            users = activityEnrolled.enrolledUsers
+            queue = activityQueue.usersInQueue
+            users.remove(userID)
+            queue.remove(userID)
+
+            setattr(activityEnrolled, 'enrolledUsers', users)
+            setattr(activityQueue, 'usersInQueue', queue)
+            db.flush()
+
     user = db.query(models.User).filter(models.User.id == userID).first()
     db.delete(user)
     db.commit()
     return user
 
-def deleteSpeaker(db: Session, speakerID: str):
+def deleteSpeaker(db: Session, speakerID: int):
+        
+    if (db.query(models.Activity).all()):
+        activitiesOfInterest = db.query(models.Activity).filter(models.Activity.speakers.any(speakerID)).all()
+        
+        
+        for activity in activitiesOfInterest:
+
+            newSpeakers = activity.speakers
+            newSpeakers.remove(int(speakerID))
+            print(newSpeakers)
+            print("\n \n")
+
+            setattr(activity, 'speakers', newSpeakers)
+            db.flush()
+        
+        db.commit()
+
+        
     speaker = db.query(models.Speaker).filter(models.Speaker.id == speakerID).first()
-    db.delete(speaker)
-    db.commit()
+    # db.delete(speaker)
+    # db.commit()
     return speaker
 
-def deleteActivity(db: Session, activityID: str):
+def deleteActivity(db: Session, activityID: int):
+
+    if (db.query(models.User).all()):
+        usersOfInterest = db.query(models.User).filter(
+            models.User.enrolledActivities.count(activityID) > 0).all()
+        
+        for user in usersOfInterest:
+            activities = user.enrolledActivities
+            activities.remove(activityID)
+            setattr(user, 'enrolledActivities', activities)
+            db.flush()
+    
+    if (db.query(models.Speaker).all()):
+        speakersOfInterest = db.query(models.Speaker).filter(
+            models.Speaker.activities.count(activityID) > 0).all()
+        
+        for  speaker in speakersOfInterest:
+
+            speakerActivities = speaker.activities
+            speakerActivities.remove(activityID)
+            setattr(speaker, 'activities',
+                    speakerActivities)
+            db.flush()
+
+
     activity = db.query(models.Activity).filter(models.Activity.id == activityID).first()
     db.delete(activity)
     db.commit()
@@ -132,19 +189,111 @@ def deleteActivity(db: Session, activityID: str):
 
 def updateUser(db: Session, user: pydanticSchemas.UserUpdate, newParams: dict):
     
-    for key, value in newParams:
+    for key, value in newParams.items():
         setattr(user, key, value)
 
     db.commit()
+    return user
+
+
+def updateSpeaker(db: Session, speaker: pydanticSchemas.Speaker, newParams: dict):
+
+    for key, value in newParams.items():
+        setattr(speaker, key, value)
+
+    db.commit()
+    return speaker
 
 
 
 def updateActivity(db: Session, activity: pydanticSchemas.updateActivity, newParams: dict):
     
-    for key, value in newParams:
+    for key, value in newParams.items():
         setattr(activity, key, value)
 
     db.commit()
+    return activity
+
+
+def deleteUser(db: Session, userID: int):
+
+    # if (db.query(models.Activity).all()):
+    #     activitiesOfInterestEnrolled = db.query(models.Activity).filter(
+    #         models.Activity.enrolledUsers.count(userID) > 0).all()
+    #     activitiesOfInterestQueue = db.query(models.Activity).filter(
+    #         models.Activity.usersInQueue.count(userID) > 0).all()
+
+    #     for (activityEnrolled, activityQueue) in zip(activitiesOfInterestEnrolled, activitiesOfInterestQueue):
+    #         users = activityEnrolled.enrolledUsers
+    #         queue = activityQueue.usersInQueue
+    #         users.remove(userID)
+    #         queue.remove(userID)
+
+    #         setattr(activityEnrolled, 'enrolledUsers', users)
+    #         setattr(activityQueue, 'usersInQueue', queue)
+    #         db.flush()
+
+    user = db.query(models.User).filter(models.User.id == userID).first()
+    db.delete(user)
+    db.commit()
+    return user
+
+
+def deleteSpeaker(db: Session, speakerID: int):
+
+    # if (db.query(models.Activity).all()):
+    #     activitiesOfInterest = db.query(models.Activity).filter(
+    #         models.Activity.speakers.any(speakerID)).all()
+
+    #     for activity in activitiesOfInterest:
+
+    #         newSpeakers = activity.speakers
+    #         newSpeakers.remove(int(speakerID))
+            
+    #         print(newSpeakers[0:1])
+
+    #         setattr(activity, "speakers", list(newSpeakers))
+    #     db.commit()
+
+            
+            
+
+    speaker = db.query(models.Speaker).filter(
+        models.Speaker.id == speakerID).first()
+    db.delete(speaker)
+    db.commit()
+    return speaker
+
+
+def deleteActivity(db: Session, activityID: int):
+
+    # if (db.query(models.User).all()):
+    #     usersOfInterest = db.query(models.User).filter(
+    #         models.User.enrolledActivities.count(activityID) > 0).all()
+
+    #     for user in usersOfInterest:
+    #         activities = user.enrolledActivities
+    #         activities.remove(activityID)
+    #         setattr(user, 'enrolledActivities', activities)
+    #         db.flush()
+
+    # if (db.query(models.Speaker).all()):
+    #     speakersOfInterest = db.query(models.Speaker).filter(
+    #         models.Speaker.activities.count(activityID) > 0).all()
+
+    #     for speaker in speakersOfInterest:
+
+    #         speakerActivities = speaker.activities
+    #         speakerActivities.remove(activityID)
+    #         setattr(speaker, 'activities',
+    #                 speakerActivities)
+    #         db.flush()
+
+    activity = db.query(models.Activity).filter(
+        models.Activity.id == activityID).first()
+    db.delete(activity)
+    db.commit()
+    return activity
 
 
 
@@ -169,46 +318,77 @@ def updateActivity(db: Session, activity: pydanticSchemas.updateActivity, newPar
 #     db.refresh(activity)
 
 def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActivity, user: pydanticSchemas.UserUpdate):
-    
-    if activity.usersInQueue == None:
-        queue = []
-    if activity.enrolledUsers == None:
-        enrolledUsers = []
-    if user.enrolledActivities == None:
-        activities = []
+
+
+
+    if activity in user.inQueueActivities:
+        
+        queue = activity.usersInQueue
+        queue.remove(user)
+        # Add to on queue list
+        setattr(activity, 'usersInQueue', queue)  # Update activity
+        db.flush()
+        db.refresh(activity)
+        db.refresh(user)
 
     if activity in user.enrolledActivities:
         activities = user.enrolledActivities
         activities.remove(activity) ## new class atributes
-        enrolledUsers = activity.enrolledUsers
-        enrolledUsers.remove(user)
-        setattr(user, 'enrolledActivities', activities) #Update User
-        setattr(activity, 'enrolledUsers', enrolledUsers) #Update activity
+        # enrolledUsers = activity.enrolledUsers
+        # enrolledUsers.remove(user)
+
+        setattr(user, 'enrolledActivities', activities) 
+        #Update User This also deletes the info in the activity table, in the atribute related to enrolledActivities, enrolledUsers
+
         setattr(activity, 'slots', models.Activity.slots + 1)
         
-        db.commit() # Updating the changes in the database
+        db.flush() # Updating the changes in the database
+        db.refresh(activity)
+        db.refresh(user)
 
 
 
-    else:
-        if activity.slots > 0:
+        # add those in queue first
+    if activity.slots > 0 and len(activity.usersInQueue) > 0:
 
-            activities = user.enrolledActivities
-            activities = activities + [activity.id]  # new class atributes
-            enrolledUsers = activity.enrolledUsers
-            enrolledUsers = enrolledUsers + [user.id]
-            setattr(user, 'enrolledActivities', activities) #Update User
-            setattr(activity, 'enrolledUsers', enrolledUsers) #Update activity
-            setattr(activity, 'slots', models.Activity.slots - 1)
-            
-            db.commit() # Updating the changes in the database
+
+        userToAdd = activity.usersInQueue[0]
+        enrolledUsers = activity.enrolledUsers
+        enrolledUsers = enrolledUsers + [userToAdd]
+        userQueue = activity.usersInQueue
+        userQueue.remove(userToAdd)
+        # for userRemove in queueToAdd:
+        #     userQueue.remove(userRemove)
+
+
+
+        setattr(activity, 'enrolledUsers', enrolledUsers)
+        setattr(activity, 'usersInQueue', userQueue)
+        setattr(activity, 'slots', activity.slots - 1)
+
+        db.flush()
+        db.refresh(activity)
+        db.refresh(user)
+
+    elif (activity.slots > 0):
+        activities = user.enrolledActivities
+        activities = activities + [activity]  # new class atributes
+        setattr(user, 'enrolledActivities', activities) #Update User This also changes the corresponding atribute in Activity
+        setattr(activity, 'slots', models.Activity.slots - 1)
+        db.flush()
+        db.refresh(activity)
+        db.refresh(user)
         
-        else:
-            queue = activity.usersInQueue
-            # Add to on queue list
-            setattr(activity, 'usersInQueue',
-                    queue + [user.id])  # Update activity
 
-            db.commit()
+    
+    else:
+
+        queue = activity.usersInQueue
+        # Add to on queue list
+        setattr(activity, 'usersInQueue',
+                queue + [user])  # Update activity
+    
+        db.flush()
 
 
+    db.commit()

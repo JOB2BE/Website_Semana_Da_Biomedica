@@ -1,6 +1,7 @@
 from typing import List, Optional 
 from pydantic import BaseModel, EmailStr, validator  # Pydantic is a python library for data validation, usefull for steps related to PUT requests, checks if we are storing GOOD data
 from enum import Enum
+from sqlmodel import Field
 
 class Department(str, Enum):
     """Docstring for MyEnum."""
@@ -35,22 +36,19 @@ class ActivityType(str, Enum):
     workshop = 'Workshop'
 
 class Activity(BaseModel):
-    id : int
+
     name: str
     description: str
     requirements: Optional[str]
     scheduleAndLocation: str
     image: Optional[str]
-    enrolledUsers: Optional[List[int]] = []
-    usersInQueue: Optional[List[int]] = []
-    speakers: Optional[List[int]] = []
-    
+
 
     class Config:
         orm_mode = True
 
 class Speaker(BaseModel):
-    id : int
+
     name: str
     email: Optional[EmailStr]
     position: Optional[str]
@@ -60,19 +58,16 @@ class Speaker(BaseModel):
     contacts: Optional[str]
     researchInterests: Optional[str]
     typeOfSpeaker: str
-    activities: Optional[List[int]] = []
+  
     
 
     class Config:
         orm_mode = True
 
-class CreateActivity(Activity):
-    activityType: str
-    slots: int
-    
+
+
 
 class User(BaseModel):
-    id : int
     name : str
     email: EmailStr
     university: Optional[str]
@@ -84,20 +79,41 @@ class User(BaseModel):
     contacts:  Optional[str]
     researchInterests:  Optional[str]
     cv: Optional[str]
-    enrolledActivities: Optional[List[int]] = []
 
 
 
     class Config:
         orm_mode = True
 
+
 class UserCreate(User):
     password: str
+    enrolledActivities: Optional[List["Activity"]] = []
+    inQueueActivities: Optional[List["Activity"]] = []
 
+    class Config:
+        orm_mode = True
+
+class CreateActivity(Activity):
+    activityType: str
+    slots: int
+    enrolledUsers: Optional[List["User"]] = []
+    usersInQueue: Optional[List["User"]] = []
+    speakers: Optional[List["Speaker"]] = []
+
+    class Config:
+        orm_mode = True
+
+
+class CreateSpeaker(Speaker):
+
+    activities: Optional[List["Activity"]] = []
+
+    class Config:
+        orm_mode = True
+    
 
 class UserUpdate(UserCreate):
-
-    id : Optional[int]
     name : Optional[str]
     email: Optional[EmailStr]
     password: Optional[str]
@@ -110,21 +126,110 @@ class UserUpdate(UserCreate):
     contacts:  Optional[str]
     researchInterests:  Optional[str]
     cv: Optional[str]
-    enrolledActivities: Optional[List[int]] =[] ## Only required after user creation
+    enrolledActivities: Optional[List["Activity"]] = []
+    inQueueActivities: Optional[List["Activity"]] = []
 
+    class Config:
+        orm_mode = True
+
+class UserOptionalView(User):
+    id: Optional[int]
+    name : Optional[str]
+    email: Optional[EmailStr]
+    university: Optional[str]
+    typeOfUser: Optional[str]
+    department: Optional[str]
+    degree: Optional[str]
+    description: Optional[str]
+    contacts:  Optional[str]
+    researchInterests:  Optional[str]
+    cv: Optional[str]
+
+    class Config:
+        orm_mode = True
+    
 class updateActivity(CreateActivity):
 
-    id : Optional[int]
     name: Optional[str]
     description: Optional[str]
     requirements: Optional[str]
     scheduleAndLocation: Optional[str]
     image: Optional[str]
-    speakers: Optional[List[int]]=[]
     activityType: Optional[str]
     slots: Optional[int]
-    enrolledUsers: Optional[List[int]] = []
-    usersInQueue: Optional[List[int]] = []
+    enrolledUsers: Optional[List["User"]] = []
+    usersInQueue: Optional[List["User"]] = []
+    speakers: Optional[List["Speaker"]] = []
+
+    class Config:
+        orm_mode = True
+
+class ActivityOptionalView(Activity):
+    
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: Optional[str]
+    description: Optional[str]
+    requirements: Optional[str]
+    scheduleAndLocation: Optional[str]
+    image: Optional[str]
+    activityType: Optional[str]
+    slots: Optional[int]
+
+    class Config:
+        orm_mode = True
+
+class SpeakerUpdate(Speaker):
+    name: Optional[int] = Field(default=None, primary_key=True)
+    email: Optional[EmailStr]
+    position: Optional[str]
+    profileImage: Optional[str]
+    companyImage: Optional[str]
+    description: Optional[str]
+    contacts: Optional[str]
+    researchInterests: Optional[str]
+    typeOfSpeaker: Optional[str]
+    activities:Optional[List["Activity"]]
+    class Config:
+        orm_mode = True
+
+class SpeakerOptionalView(Speaker):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: Optional[str]
+    email: Optional[EmailStr]
+    position: Optional[str]
+    profileImage: Optional[str]
+    companyImage: Optional[str]
+    description: Optional[str]
+    contacts: Optional[str]
+    researchInterests: Optional[str]
+    typeOfSpeaker: Optional[str]
+
+    class Config:
+        orm_mode = True
+
+
+class SpeakerGet(SpeakerOptionalView):
+    activities: Optional[List[ActivityOptionalView]] = []
+
+    class Config:
+        orm_mode = True
+
+
+class ActivityGet(ActivityOptionalView):
+    enrolledUsers: Optional[List[UserOptionalView]]
+    usersInQueue: Optional[List[UserOptionalView]]
+    speakers: Optional[List[SpeakerOptionalView]]
+
+
+class UserGet(UserOptionalView):
+
+    enrolledActivities: Optional[List[ActivityOptionalView]] = []
+    inQueueActivities: Optional[List[ActivityOptionalView]] = []
+
+    class Config:
+        orm_mode = True
+
+
 
 
 
