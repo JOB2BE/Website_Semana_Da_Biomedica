@@ -45,12 +45,12 @@ def getActivities(db: Session):
 
 
 
-def createUser(db: Session, object: pydanticSchemas.UserCreate):
+def createUser(db: Session, object: pydanticSchemas.CreateUser, hasher):
      ## Fix this, lack of security must be hashed
     dbUser = models.User(
         name =  object.name,
         email =  object.email,
-        password = object.password,
+        password = hasher,
         university =  object.university,
         degree =  object.degree,
         department = object.department,
@@ -60,8 +60,6 @@ def createUser(db: Session, object: pydanticSchemas.UserCreate):
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
         cv= object.cv,
-        enrolledActivities=object.enrolledActivities,
-        inQueueActivities=object.inQueueActivities,
         )
     db.add(dbUser)
     db.commit()

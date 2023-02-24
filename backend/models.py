@@ -67,6 +67,8 @@ class ActivityType(enum.Enum):
     workshop = 'Workshop'
 
 
+
+
 class Activity(Base):
     __tablename__ = "activity"
 

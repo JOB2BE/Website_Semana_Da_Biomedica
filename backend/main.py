@@ -1,8 +1,7 @@
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
 from sqlalchemy.orm import Session
-from fastapi_login import LoginManager
 from uuid import UUID
 import models
 import crud
@@ -10,6 +9,11 @@ import pydanticSchemas
 from database import SessionLocal, engine
 from config import settings
 from typing import List
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+from datetime import datetime, timedelta
+from typing import Union
 
 
 
@@ -17,7 +21,13 @@ from typing import List
 
 app = FastAPI()
 
-manager = LoginManager(settings.SECRETKEY, '/login')
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+SECRET_KEY = "d95d955aeebc52ea6ba7c4026b906d3784105139a551d15abf39cf91b9e6d2d2"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 # Our dependency will create a new SQLAlchemy SessionLocal that will be used in a single request, and then close it once the request is finished.
 def get_db():
@@ -28,30 +38,116 @@ def get_db():
         db.close()
 
 
-@app.get("/") ## Path of the get method, used in browser or by our UI frontend lib
 
+
+
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
+
+
+def get_password_hash(password):
+    return pwd_context.hash(password)
+
+
+def authenticate_user(username: str, password: str, db):
+    print("\n \n")
+    print(db)
+    user = crud.getUserByEmail(db=db, email = username)
+    if not user:
+        return False
+    if not verify_password(password, user.password):
+        return False
+    return user
+
+
+def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=15)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+
+async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+        token_data = pydanticSchemas.TokenData(username=username)
+    except JWTError:
+        raise credentials_exception
+    user = crud.getUserByEmail(db, email=token_data.username)
+    if user is None:
+        raise credentials_exception
+    return user
+
+
+@app.post("/token", response_model=pydanticSchemas.Token)
+async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    user = authenticate_user(username=form_data.username, password=form_data.password, db=db)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.email}, expires_delta=access_token_expires
+    )
+    return {"access_token": access_token, "token_type": "bearer"}
+
+
+
+
+
+
+
+@app.get("/")  # Path of the get method, used in browser or by our UI frontend lib
 def root():
     return {'Hello':'World'}
 
 
 #### Get data for validation, it comes from pydantic data extraction in crud.py
 ## Show 'get' all users
+@app.get("/api/users/me", response_model=pydanticSchemas.UserGet)
+async def getUser(current_user: pydanticSchemas.UserGet = Depends(get_current_user)):
+    return current_user
+
+
+@app.get("/api/users/me/enrolledActivities")
+async def getUserEnrolledActivities(current_user: pydanticSchemas.UserGet = Depends(get_current_user), db: Session = Depends(get_db)):
+    return current_user.enrolledActivities
+
+
+@app.get("/api/users/me/inQueueActivities")
+async def getUserInQueueActivities(current_user: pydanticSchemas.UserGet = Depends(get_current_user), db: Session = Depends(get_db)):
+    return current_user.inQueueActivities
 
 @app.get('/api/users', response_model=List[pydanticSchemas.UserGet])
-async def fetchUsers(db: Session = Depends(get_db), skip: int = 0, limit: int = 100,):
+async def fetchUsers(db: Session = Depends(get_db), skip: int = 0, limit: int = 100, token: str = Depends(oauth2_scheme)):
 
     users=crud.getUsers(db,skip,limit)
     return users
 #DONE
 
 ## Add new users
-@app.post('/api/users', response_model=pydanticSchemas.UserCreate)
-async def registerUser(user:pydanticSchemas.UserCreate, db: Session = Depends(get_db)):
+@app.post('/api/users', response_model=pydanticSchemas.User)
+async def registerUser(user:pydanticSchemas.User, db: Session = Depends(get_db), hasher = Depends(get_password_hash)):
 
     if crud.getUserByEmail(db, user.email):
         raise HTTPException(status_code=400, detail="Email already in use")
     else:
-        return crud.createUser(db, user)
+        return crud.createUser(db, user, hasher)
 #DONE
 
 
@@ -87,7 +183,7 @@ async def deleteUser(userID, db: Session = Depends(get_db)):
     
 #DONE
 
-@app.patch("/api/users/{userID}", response_model=pydanticSchemas.UserCreate)    
+@app.patch("/api/users/{userID}", response_model=pydanticSchemas.UserUpdate)    
 async def updateUser(userID, newParams: dict, db: Session = Depends(get_db)):
     user = crud.getUser(db, userID)
     if not user:
@@ -100,31 +196,6 @@ async def updateUser(userID, newParams: dict, db: Session = Depends(get_db)):
 
 #DONE
 
-#Login 
-
-
-
-
-@app.post('/login')
-def login(data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    email = data.username
-    password = data.password
-
-    user = crud.getUserByEmail(db, email)
-    if not user:
-        # you can return any response or error of your choice
-        raise InvalidCredentialsException
-    elif password != user.password:
-        raise InvalidCredentialsException
-
-    access_token = manager.create_access_token(
-    data={'sub': email}
-    )
-    return {'access_token': access_token}
-
-@app.get('/protected')
-def protected_route(user=Depends(manager)): ## Boolean stating if an user is authenticated
-    return {'user': user}
 
 ## Show all speakers
 

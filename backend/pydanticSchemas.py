@@ -1,7 +1,15 @@
-from typing import List, Optional 
+from typing import List, Optional, Union 
 from pydantic import BaseModel, EmailStr, validator  # Pydantic is a python library for data validation, usefull for steps related to PUT requests, checks if we are storing GOOD data
 from enum import Enum
 from sqlmodel import Field
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Union[str, None] = None
 
 class Department(str, Enum):
     """Docstring for MyEnum."""
@@ -86,11 +94,8 @@ class User(BaseModel):
         orm_mode = True
 
 
-class UserCreate(User):
-    password: str
-    enrolledActivities: Optional[List["Activity"]] = []
-    inQueueActivities: Optional[List["Activity"]] = []
-
+class CreateUser(User):
+    password:str
     class Config:
         orm_mode = True
 
@@ -113,7 +118,7 @@ class CreateSpeaker(Speaker):
         orm_mode = True
     
 
-class UserUpdate(UserCreate):
+class UserUpdate(User):
     name : Optional[str]
     email: Optional[EmailStr]
     password: Optional[str]
