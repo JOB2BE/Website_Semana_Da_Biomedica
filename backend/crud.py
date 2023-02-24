@@ -318,7 +318,7 @@ def deleteActivity(db: Session, activityID: int):
 #     db.refresh(activity)
 
 def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActivity, user: pydanticSchemas.UserUpdate):
-
+    token = True
 
 
     if activity in user.inQueueActivities:
@@ -330,6 +330,7 @@ def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActi
         db.flush()
         db.refresh(activity)
         db.refresh(user)
+        token = False
 
     if activity in user.enrolledActivities:
         activities = user.enrolledActivities
@@ -345,6 +346,7 @@ def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActi
         db.flush() # Updating the changes in the database
         db.refresh(activity)
         db.refresh(user)
+        token = False
 
 
 
@@ -370,7 +372,7 @@ def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActi
         db.refresh(activity)
         db.refresh(user)
 
-    elif (activity.slots > 0):
+    elif (token and activity.slots > 0):
         activities = user.enrolledActivities
         activities = activities + [activity]  # new class atributes
         setattr(user, 'enrolledActivities', activities) #Update User This also changes the corresponding atribute in Activity
@@ -381,7 +383,7 @@ def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActi
         
 
     
-    else:
+    elif(token):
 
         queue = activity.usersInQueue
         # Add to on queue list
