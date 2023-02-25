@@ -1,12 +1,7 @@
-import useWindowDimensions from './useWindowDimensions';
+import useWindowDimensions from 'react-native';
 
-export default function responsiveHeight(
-	windowArray = useWindowDimensions(),
-	min = null,
-	max = null,
-	coef = 1
-) {
-	let size = coef * windowArray.height;
+export default function responsiveHeight(window, min = null, max = null, coef = 1) {
+	let size = coef * window.height;
 
 	if ((min !== null) & (size < min)) {
 		size = min;

@@ -47,7 +47,6 @@ export default function App() {
 			resizeMode={'cover'}
 		>
 			<View>
-				{' '}
 				<NativeBaseProvider theme={theme} config={config}>
 					<Router>
 						<Navbar />
@@ -58,9 +57,12 @@ export default function App() {
 							<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
 							<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
-							<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
+							<Route path='/Speaker/:id' element={<SpeakerPage idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
-							<Route path='/Partnerships' element={<PartnershipsPage idiom={i18n} />} />
+							<Route
+								path='/Partnerships'
+								element={<PartnershipsPage idiom={i18n} />}
+							/>
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
