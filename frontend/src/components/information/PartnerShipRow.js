@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Column } from 'native-base';
+import { Row, Column, View } from 'native-base';
 import PropTypes from 'prop-types';
 import RoundBorderedImage from './RoundBorderedImage';
 
@@ -8,7 +8,15 @@ export default function PartnerShipRow(props) {
 
 	return (
 		<Column {...props}>
-			<Row justifyContent={'center'} alignItems={'center'} flexWrap={'wrap'} space={7}>
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'center',
+					alignItems: 'center',
+					flexWrap: 'wrap',
+					gap: 25,
+				}}
+			>
 				{objects.map((object, index) => {
 					return (
 						<RoundBorderedImage
@@ -20,7 +28,7 @@ export default function PartnerShipRow(props) {
 						></RoundBorderedImage>
 					);
 				})}
-			</Row>
+			</View>
 		</Column>
 	);
 }
