@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Heading, Column } from 'native-base';
+import { Row, Column } from 'native-base';
 import PropTypes from 'prop-types';
 import RoundBorderedImage from './RoundBorderedImage';
 
