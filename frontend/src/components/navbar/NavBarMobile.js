@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Center, Heading, Box, Stack, Pressable, Button } from 'native-base';
+import { View, Text, TouchableOpacity } from 'react-native'
 import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
-import AntDesign from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Logo from '../../assets/images/WhiteBGLogo';
 import { StyleSheet } from 'react-native';
@@ -22,9 +22,38 @@ idiom.translations = { en, pt }; // All our languages
 idiom.locale = Localization.locale; // get the device's current language code
 
 const styles = StyleSheet.create({
+    container: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+    },
+
+    rectangleCorner: {
+        width: 80,
+        height: 80,
+        borderBottomRightRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        display: 'flex',
+        backgroundColor: '#FDBA35',
+    },
+
+    rectangleOpen: {
+        width: 328,
+        height: 652,
+        borderBottomRightRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        display: 'flex',
+        backgroundColor: '#FDBA35',
+    }
 });
 
-export const Navbar = () => {
+const [currentIndex, setCurrentIndex] = React.useState(null);
+
+export const NavBarMobile = () => {
 
     const navbarRoutes = [
         {
@@ -53,5 +82,39 @@ export const Navbar = () => {
             route: '/Login',
         },
     ];
+
+    return (
+
+        <View>
+            {navbarRoutes.map(({name, icon, route}, index) => {
+                return <TouchableOpacity 
+                key={name}
+                activeOpacity={.95}
+                onPress={() => {
+                    setCurrentIndex(index === currentIndex ? null : index);
+                }}
+                >
+                <View style={styles.rectangleCorner}>
+                    <Icon name="menufold" size={60} color='white'></Icon>
+                </View>
+
+                {index === currentIndex && (
+                    <View style={styles.rectangleOpen}>
+                        {name.map((eachName) => )
+                        <Text key={name} style={}></Text>
+
+                        }
+                    </View>
+                )}
+            </TouchableOpacity>
+            }
+            )}
+        </View>
+        
+            
+        
+
+
+    )
 
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, Routes } from './router/index';
 import { NativeBaseProvider } from 'native-base';
 import { Navbar } from './components/navbar/Navbar';
+import { NavBarMobile } from './components/navbar/NavBarMobile';
 import LandingPage from './pages/LandingPage';
 import AboutUsPage from './pages/AboutUsPage';
 import SchedulePage from './pages/SchedulePage';
@@ -49,7 +50,7 @@ export default function App() {
 			<View>
 				<NativeBaseProvider theme={theme} config={config}>
 					<Router>
-						<Navbar />
+						<NavBarMobile />
 						<Routes>
 							<Route exact path='/' element={<LandingPage idiom={i18n} />} />
 							<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
