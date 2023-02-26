@@ -13,7 +13,7 @@ import theme from '../../theme';
 
 export default function ThemeCard(props) {
 	return (
-		<VStack h='100%' w='100%' space='5'>
+		<VStack space='5' flex='1'>
 			<VStack flex='1'>
 				<Box
 					bg={theme.colors.dryBlue.bg}
@@ -45,11 +45,13 @@ export default function ThemeCard(props) {
 				</VStack>
 			</VStack>
 
-			{/*TODO: BUTTON WITH SMALLER WIDTH*/}
-
-			<Link to={props.buttonRef} style={{ textDecoration: 'none' }}>
-				<Button variant='alternating'>{props.buttonText}</Button>
-			</Link>
+			<Box alignSelf='center'>
+				<Link to={props.buttonRef} style={{ textDecoration: 'none' }}>
+					<Button variant='alternating' alignSelf='center'>
+						{props.buttonText}
+					</Button>
+				</Link>
+			</Box>
 		</VStack>
 	);
 }

@@ -16,7 +16,7 @@ const white = '#ffffff';
 
 export default function ActivityCard(props) {
 	return (
-		<VStack w='100%' h='100%'>
+		<VStack flex='1'>
 			<HStack
 				bg={theme.colors.medYellow}
 				p='3'
