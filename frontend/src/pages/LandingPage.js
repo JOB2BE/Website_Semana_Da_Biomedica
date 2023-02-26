@@ -22,6 +22,7 @@ export default function LandingPage() {
 			style={styles.image}
 			source={dateLogoImage}
 			size={imageWidth}
+			alt={"Job2Be's Logo"}
 		/>
 	);
 }
