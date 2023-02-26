@@ -1,17 +1,22 @@
 import * as React from 'react';
-import { Center, Heading, Box, Stack } from 'native-base';
+import { Center, Heading, Box, Stack, Pressable, Button } from 'native-base';
 import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
+import AboutUsIconDark from '../../assets/images/AboutUsIconDark';
+import ScheduleIconDark from '../../assets/images/ScheduleIconDark';
+import ActivitiesIconDark from '../../assets/images/ActivitiesIconDark';
+import SpeakersIconDark from '../../assets/images/SpeakersIconDark';
 import Logo from '../../assets/images/WhiteBGLogo';
-import { StyleSheet, ImageBackground, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
 
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
 import { I18n } from 'i18n-js';
 import { en, pt } from '../../utils/supportedLanguages';
+import theme from '../../theme';
 
 var idiom = new I18n();
 idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
@@ -21,13 +26,13 @@ idiom.locale = Localization.locale; // get the device's current language code
 const styles = StyleSheet.create({
 	leftContainer: {
 		borderBottomLeftRadius: 20,
-		backgroundColor: '#2D6793',
+		backgroundColor: theme.colors.dryBlue[0],
 		height: '40%',
 		paddingHorizontal: 25,
 	},
 	rightContainer: {
 		borderBottomRightRadius: 20,
-		backgroundColor: '#2D6793',
+		backgroundColor: theme.colors.dryBlue[0],
 		height: '40%',
 		paddingHorizontal: 25,
 		zIndex: -1,
@@ -35,7 +40,7 @@ const styles = StyleSheet.create({
 	logoContainer: {
 		borderBottomLeftRadius: 100000,
 		borderBottomRightRadius: 100000,
-		backgroundColor: '#FDBA35',
+		backgroundColor: theme.colors.medYellow,
 		padding: 7,
 	},
 	sideFlexes: {
@@ -45,7 +50,7 @@ const styles = StyleSheet.create({
 		shadowColor: '#000',
 		shadowOffset: {
 			width: 0,
-			height: 3,
+			height: 2,
 		},
 		shadowOpacity: 0.34,
 		shadowRadius: 6.27,
@@ -54,73 +59,112 @@ const styles = StyleSheet.create({
 	image: {
 		flex: 1,
 	},
+	heading: {
+		color: 'white',
+	},
+
 });
 
 export const Navbar = () => {
 	const navbarRoutes = [
 		{
 			name: idiom.t(['navbar', 'aboutUs']),
-			icon: <AboutUsIcon />,
+			icon: [<AboutUsIcon />, <AboutUsIconDark />],
 			route: '/AboutUs',
 		},
 		{
 			name: idiom.t(['navbar', 'schedule']),
-			icon: <ScheduleIcon />,
+			icon: [<ScheduleIcon />, <ScheduleIconDark />],
 			route: '/Schedule',
 		},
 		{
 			name: idiom.t(['navbar', 'activities']),
-			icon: <ActivitiesIcon />,
+			icon: [<ActivitiesIcon />, <ActivitiesIconDark />],
 			route: '/Activities',
 		},
 		{
 			name: idiom.t(['navbar', 'speakers']),
-			icon: <SpeakersIcon />,
+			icon: [<SpeakersIcon />, <SpeakersIconDark />],
 			route: '/Speakers',
 		},
 	];
 	if (useLocation().pathname === '/') {
 		// In the case were we are ib the landing page
+
+		const styles = StyleSheet.create({
+			leftContainer: {
+				borderBottomLeftRadius: 20,
+				backgroundColor: theme.colors.dryBlue[0],
+				height: '40%',
+				paddingHorizontal: 25,
+			},
+			rightContainer: {
+				borderBottomRightRadius: 20,
+				backgroundColor: theme.colors.dryBlue[0],
+				height: '40%',
+				paddingHorizontal: 25,
+				zIndex: -1,
+			},
+			logoContainer: {
+				borderBottomLeftRadius: 100000,
+				borderBottomRightRadius: 100000,
+				backgroundColor: theme.colors.medYellow,
+				padding: 7,
+			},
+			sideFlexes: {
+				padding: 10,
+			},
+			shadow: {
+				shadowColor: '#000',
+				shadowOffset: {
+					width: 0,
+					height: 2,
+				},
+				shadowOpacity: 0.34,
+				shadowRadius: 6.27,
+				elevation: 10,
+			},
+			image: {
+				flex: 1,
+			},
+			heading: {
+				color: 'black',
+				textShadowColor: theme.colors.dryBlue[0],
+				textShadowOffset: {
+					width: 1,
+					height: 2,
+				},
+				textShadowOpacity: 0.2,
+				textShadowRadius: 0.5,
+			},
+		});
 		return (
-			<ImageBackground
-				// eslint-disable-next-line no-undef
-				source={
-					Platform.OS == 'web'
-						? require('../../assets/images/banner_datas_dark.png')
-						: require('../../assets/images/bannerMobile.png')
-				}
-				style={styles.image}
-				resizeMode={Platform.OS == 'web' ? 'cover' : 'cover'}
-			>
-				<Center>
-					<Stack direction='row' justifyContent='space-around' alignContent='center'>
-						<Stack direction='row' justifyContent='flex-start' space={100}>
-							{navbarRoutes.map((route, index) => {
-								return (
-									<Link
-										key={index}
-										to={route.route}
-										style={{ textDecoration: 'none' }}
+			<Center>
+				<Stack direction='row' justifyContent='space-around' alignContent='center'>
+					<Stack direction='row' justifyContent='flex-start' space={100}>
+						{navbarRoutes.map((route, index) => {
+							return (
+								<Link
+									key={index}
+									to={route.route}
+									style={{ textDecoration: 'none' }}
+								>
+									<Stack
+										direction='row'
+										justifyContent='space-between'
+										alignItems='center'
+										style={styles.sideFlexes}
+										space={2}
 									>
-										<Stack
-											direction='row'
-											justifyContent='space-between'
-											alignItems='center'
-											style={styles.sideFlexes}
-											space={2}
-										>
-											{route.icon}
-											<Heading style={{ color: 'white' }}>
-												{route.name}
-											</Heading>
-										</Stack>
-									</Link>
-								);
-							})}
-						</Stack>
+										{route.icon[1]}
+										<Heading style={styles.heading}>{route.name}</Heading>
+									</Stack>
+								</Link>
+							);
+						})}
 					</Stack>
-				</Center>
-			</ImageBackground>
+				</Stack>
+			</Center>
 		);
 	}
 	return (
@@ -147,8 +191,8 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-										{route.icon}
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+										{route.icon[0]}
+										<Heading style={styles.heading}>{route.name}</Heading>
 									</Stack>
 								</Link>
 							);
@@ -185,8 +229,8 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-										{route.icon}
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+										{route.icon[0]}
+										<Heading style={styles.heading}>{route.name}</Heading>
 									</Stack>
 								</Link>
 							);

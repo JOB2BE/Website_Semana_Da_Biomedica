@@ -4,7 +4,16 @@ import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Text, View } from 'native-base';
 
-export default function LandingPage() {
+export default function ActivityPage() {
+	const styles = StyleSheet.create({
+		container: {
+			flex: 1,
+
+			alignItems: 'center',
+			justifyContent: 'center',
+		},
+	});
+
 	const [counter, setCounter] = useState(0);
 
 	return (
@@ -16,12 +25,3 @@ export default function LandingPage() {
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-});
