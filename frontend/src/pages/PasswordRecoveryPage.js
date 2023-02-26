@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
 	Button,
-	Center,
 	Text,
 	FormControl,
 	Input,
@@ -9,6 +8,7 @@ import {
 	Column,
 	Row,
 	HStack,
+	VStack,
 	Box,
 } from 'native-base';
 import { useState } from 'react';
@@ -20,39 +20,36 @@ import { Platform } from 'react-native';
 
 // TODO: VERIFY ON MOBILE
 
-export default function PasswordRecoveryPage() {
+export default function ActivitiesPage() {
 	const [email, setEmail] = useState('');
-	const [error, setError] = useState('');
+	const [error, setError] = useState(0);
 	const [validated, setValidated] = useState(false);
 
-	const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 	// valid email (https://www.w3resource.com/javascript/form/email-validation.php)
+	const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 	//Warning colours
 	const white = '#ffffff';
 	const red = '#dc2626';
 
+	// Possible errors
+	const errorList = {
+		0: null,
+		1: 'Forgot your email?',
+		2: 'Please provide us with a valid email',
+	};
+
 	const validate = () => {
-		let newError = {};
+		let newError;
 
-		console.log(validated);
-
-		if (email) {
-			if (!regexEmail.test(email)) {
-				newError = 'Please provide us with a valid email';
-			}
-		} else {
-			newError = 'Forgot your email?';
+		if (!email) newError = 1;
+		else if (!regexEmail.test(email)) newError = 2;
+		else {
+			setValidated(true);
+			// TODO: CODE OF RECOVERY
 		}
 
 		setError(newError);
-
-		if (isEmptyObj(newError)) {
-			setValidated(true);
-			console.log('Success!');
-			// TODO: CODE OF RECOVERY
-			// handleRecovery()
-		}
 	};
 
 	return (
@@ -67,53 +64,49 @@ export default function PasswordRecoveryPage() {
 					childrenJustifyContent='center'
 				>
 					{!validated ? (
-						<Box className={'NotValidated'}>
-							<Text size='md'>Enter your email in order to reset password:</Text>
+						<VStack space='5' alignItems='center' flex='1'>
+							<Text size='md'>Enter your email to reset your password</Text>
 
 							<FormControl isInvalid={!isEmptyObj(error)}>
 								<Input
 									variant='filled'
 									rounded='10'
 									_focus={{ bg: white }}
+									flex='1'
 									onChangeText={(value) => setEmail(value)}
 								/>
 
-								{!isEmptyObj(error) ? (
-									<HStack marginTop='2'>
+								{error !== 0 && (
+									<HStack mt='2' alignItems='center'>
 										<AntDesign
 											name='exclamationcircleo'
 											size='xs'
 											color={red}
 										/>
-										<Text color={red}> {error}</Text>
+										<Text color={red}> {errorList[error]}</Text>
 									</HStack>
-								) : null}
+								)}
 							</FormControl>
 
-							<Column pt='10%' space={5}>
-								<Button alignSelf='center' variant='alternating' onPress={validate}>
-									Register
-								</Button>
+							<Button variant='alternating' onPress={validate}>
+								Register
+							</Button>
 
-								<Center>
-									<Link to={'/'} style={{ textDecoration: 'none' }}>
-										<Text size='md'>Cancel</Text>
-									</Link>
-								</Center>
-							</Column>
-						</Box>
+							<Link to={'/'} style={{ textDecoration: 'none' }}>
+								<Text size='md'>Cancel</Text>
+							</Link>
+						</VStack>
 					) : (
-						<Box className={'Validated'} alignItems='center'>
-							<Text size='md'>An email has been sent to the address:</Text>
+						<VStack space='5' alignItems='center' flex='1'>
+							<Box alignItems='center'>
+								<Text size='md'>An email has been sent to the address</Text>
+								<Text size='md'>{email}</Text>
+							</Box>
 
-							<Text size='md'>{email}</Text>
-
-							<Column pt='10%' space={5}>
-								<Link to={'/'} style={{ textDecoration: 'none' }}>
-									<Text size='md'>Return to Home Page</Text>
-								</Link>
-							</Column>
-						</Box>
+							<Link to={'/'} style={{ textDecoration: 'none' }}>
+								<Text size='md'>Return to Home Page</Text>
+							</Link>
+						</VStack>
 					)}
 				</StyledBox>
 			</Row>

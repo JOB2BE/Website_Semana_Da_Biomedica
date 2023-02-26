@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
 	Button,
-	Center,
 	Text,
 	VStack,
 	FormControl,
@@ -23,7 +22,7 @@ import { Platform } from 'react-native';
 
 // TODO: VERIFY ON MOBILE
 
-export default function RegisterPage() {
+export default function PasswordResetPage() {
 	const [pw1, setPw1] = useState('');
 	const [pw2, setPw2] = useState('');
 	const [validated, setValidated] = useState(false);
@@ -32,9 +31,8 @@ export default function RegisterPage() {
 	const [show1, setShow1] = useState(false);
 	const [show2, setShow2] = useState(false);
 
-	//   Regex represent parameters we *want*.
-	const regexPassword = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/; // Only numbers or letters. No spaces
-	// valid email (https://www.w3resource.com/javascript/form/email-validation.php)
+	// Only numbers or letters. No spaces
+	const regexPassword = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
 
 	//Warning colours
 	const white = '#ffffff';
@@ -51,9 +49,7 @@ export default function RegisterPage() {
 			pw2 === pw1
 		) {
 			setValidated(true);
-			console.log('Success!');
 			// TODO: UPDATE PASSWORD
-			// handleRegister()
 		}
 	};
 
@@ -69,11 +65,13 @@ export default function RegisterPage() {
 					childrenJustifyContent='center'
 				>
 					{!validated ? (
-						<VStack className={'NotValidated'} space={'5'}>
-							<FormControl className={'NewPasswordContainer'} isRequired>
-								<FormControl.Label>
-									<Text size='md'> New password</Text>
-								</FormControl.Label>
+						<VStack space='5' alignItems='center' flex='1'>
+							<FormControl
+								isInvalid={
+									pw1.length < 6 || pw1.length > 15 || !regexPassword.test(pw1)
+								}
+							>
+								<Text size='md'> New password</Text>
 
 								<Input
 									variant='filled'
@@ -90,7 +88,7 @@ export default function RegisterPage() {
 														}
 													/>
 												}
-												size={5}
+												size='5'
 												mr='2'
 												color='muted.400'
 											/>
@@ -99,38 +97,35 @@ export default function RegisterPage() {
 									onChangeText={(value) => setPw1(value)}
 								/>
 
-								<VStack className={'ErrorContainerWrong'}>
-									<Text> Password must contain</Text>
-									{pw1.length < 6 || pw1.length > 15 ? (
-										<HStack>
-											<AntDesign name='closecircle' size='xs' color={red} />
-											<Text color={red}> 6 to 16 characters</Text>
-										</HStack>
-									) : (
-										<HStack>
-											<AntDesign name='checkcircle' size='xs' color={green} />
-											<Text color={green}> 6 to 16 characters</Text>
-										</HStack>
-									)}
+								<Text mt='2'> Password must contain</Text>
 
-									{!regexPassword.test(pw1) ? (
-										<HStack>
-											<AntDesign name='closecircle' size='xs' color={red} />
-											<Text color={red}> Only numbers and letters</Text>
-										</HStack>
-									) : (
-										<HStack>
-											<AntDesign name='checkcircle' size='xs' color={green} />
-											<Text color={green}> Only numbers and letters</Text>
-										</HStack>
-									)}
-								</VStack>
+								{pw1.length < 6 || pw1.length > 15 ? (
+									<HStack alignItems='center'>
+										<AntDesign name='closecircle' size='xs' color={red} />
+										<Text color={red}> 6 to 16 characters</Text>
+									</HStack>
+								) : (
+									<HStack alignItems='center'>
+										<AntDesign name='checkcircle' size='xs' color={green} />
+										<Text color={green}> 6 to 16 characters</Text>
+									</HStack>
+								)}
+
+								{!regexPassword.test(pw1) ? (
+									<HStack alignItems='center'>
+										<AntDesign name='closecircle' size='xs' color={red} />
+										<Text color={red}> Only numbers and letters</Text>
+									</HStack>
+								) : (
+									<HStack alignItems='center'>
+										<AntDesign name='checkcircle' size='xs' color={green} />
+										<Text color={green}> Only numbers and letters</Text>
+									</HStack>
+								)}
 							</FormControl>
 
-							<FormControl className={'ConfirmNewPasswordContainer'} isRequired>
-								<FormControl.Label>
-									<Text size='md'> Confirm new password</Text>
-								</FormControl.Label>
+							<FormControl isInvalid={pw2 !== pw1}>
+								<Text size='md'> Confirm new password</Text>
 
 								<Input
 									variant='filled'
@@ -147,7 +142,7 @@ export default function RegisterPage() {
 														}
 													/>
 												}
-												size={5}
+												size='5'
 												mr='2'
 												color='muted.400'
 											/>
@@ -156,53 +151,40 @@ export default function RegisterPage() {
 									onChangeText={(value) => setPw2(value)}
 								/>
 
-								<VStack className={'ErrorContainerUnmatched'} marginTop='2'>
-									{pw2 ? (
-										pw2 !== pw1 ? (
-											<HStack>
-												<AntDesign
-													name='closecircle'
-													size='xs'
-													color={red}
-												/>
-												<Text color={red}> Passwords do not match</Text>
-											</HStack>
-										) : (
-											<HStack>
-												<Fontisto name='smiley' size='xs' color={green} />
-												{/* eslint-disable-next-line react/no-unescaped-entities */}
-												<Text color={green}> It's a match!</Text>
-											</HStack>
-										)
-									) : null}
-								</VStack>
+								{pw2 &&
+									(pw2 !== pw1 ? (
+										<HStack mt='2' alignItems='center'>
+											<AntDesign name='closecircle' size='xs' color={red} />
+											<Text color={red}> Passwords do not match</Text>
+										</HStack>
+									) : (
+										<HStack mt='2' alignItems='center'>
+											<Fontisto name='smiley' size='xs' color={green} />
+											{/* eslint-disable-next-line react/no-unescaped-entities */}
+											<Text color={green}> It's a match!</Text>
+										</HStack>
+									))}
 							</FormControl>
 
-							<Button alignSelf='center' variant='alternating' onPress={validate}>
+							<Button variant='alternating' onPress={validate}>
 								Reset
 							</Button>
 						</VStack>
 					) : (
-						<VStack className={'Validated'} space={'5'}>
-							<Box>
+						<VStack space='5' alignItems='center' flex='1'>
+							<Box alignItems='center'>
 								<Heading>Password changed!</Heading>
 								{/* eslint-disable-next-line react/no-unescaped-entities */}
-								<Text>Now don't go and forget about it again ;p</Text>
+								<Text size='md'>Now don't go and forget about it again ;p</Text>
 							</Box>
 
 							<Link to={'/Login'} style={{ textDecoration: 'none' }}>
-								<Button alignSelf='center' variant='alternating'>
-									Login
-								</Button>
+								<Button variant='alternating'>Login</Button>
 							</Link>
 
-							{/*// TODO: SMALLER BUTTON*/}
-
-							<Center>
-								<Link to={'/'} style={{ textDecoration: 'none' }}>
-									<Text size='md'>Back to Home Page</Text>
-								</Link>
-							</Center>
+							<Link to={'/'} style={{ textDecoration: 'none' }}>
+								<Text size='md'>Return to Home Page</Text>
+							</Link>
 						</VStack>
 					)}
 				</StyledBox>
