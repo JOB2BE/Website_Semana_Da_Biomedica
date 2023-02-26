@@ -13,50 +13,42 @@ import theme from '../../theme';
 
 export default function ThemeCard(props) {
 	return (
-		<VStack
-			className={'MainContainer'}
-			h='100%'
-			w='100%'
-			justifyContent='space-between'
-			space='5'
-		>
-			<VStack className={'UpperContainer'} flex='1'>
+		<VStack h='100%' w='100%' space='5'>
+			<VStack flex='1'>
 				<Box
-					clasName={'TitleContainer'}
-					bg={theme.colors.dryBlue['0']}
+					bg={theme.colors.dryBlue.bg}
 					roundedTop='15'
 					alignItems='center'
 					p='3'
+					borderColor={theme.colors.dryBlue['0']}
+					borderWidth='2'
+					borderBottomWidth='0'
 				>
-					<Text _web={{ fontSize: 'md' }} size='lg' color={theme.colors.medYellow['0']}>
+					<Text _web={{ fontSize: 'md' }} size='lg' color={theme.colors.medYellow}>
 						{props.title}
 					</Text>
 				</Box>
 				<VStack
-					className={'BodyContainer'}
-					bg={theme.colors.engGrey['0']}
+					bg={theme.colors.engGrey}
 					roundedBottom='15'
 					borderColor={theme.colors.dryBlue['0']}
 					borderWidth='2'
 					p='3'
 					flex='1'
 				>
-					<Box className={'DescriptionContainer'} flex='1'>
+					<Box flex='1'>
 						<Text _web={{ fontSize: 'md' }} size='md'>
 							{props.description}
 						</Text>
 					</Box>
-					<Box className={'IconContainer'} alignSelf='center'>
-						{props.icon}
-					</Box>
+					<Box alignSelf='center'>{props.icon}</Box>
 				</VStack>
 			</VStack>
 
-			{/*// TODO: LINK WELL DONE*/}
+			{/*TODO: BUTTON WITH SMALLER WIDTH*/}
+
 			<Link to={props.buttonRef} style={{ textDecoration: 'none' }}>
-				<Button className={'ButtonContainer'} variant='alternating' alignSelf='center'>
-					{props.buttonText}
-				</Button>
+				<Button variant='alternating'>{props.buttonText}</Button>
 			</Link>
 		</VStack>
 	);

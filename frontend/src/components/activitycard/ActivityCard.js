@@ -1,6 +1,6 @@
 import React from 'react';
 import theme from '../../theme';
-import { Box, Container, HStack, VStack, Text, Heading } from 'native-base';
+import { Box, HStack, VStack, Text, Heading } from 'native-base';
 import { Platform } from 'react-native';
 
 const white = '#ffffff';
@@ -16,39 +16,31 @@ const white = '#ffffff';
 
 export default function ActivityCard(props) {
 	return (
-		<VStack className={'MainContainer'} w='100%' h='100%'>
+		<VStack w='100%' h='100%'>
 			<HStack
-				className={'HeaderContainer'}
-				bg={theme.colors.medYellow['0']}
-				borderTopRadius='15'
+				bg={theme.colors.medYellow}
 				p='3'
+				roundedTop='20'
 				justifyContent='space-between'
 				alignItems='center'
 				flexWrap='wrap'
 			>
 				<Heading>{props.title}</Heading>
 
-				<Container
-					className={'TypePill'}
-					bg={theme.colors.engGrey['0']}
-					rounded='999999999'
-					px='5'
-					py='2'
-				>
+				<Box bg={theme.colors.engGrey} rounded='full' px='5' py='2'>
 					<Text _web={{ fontSize: 'lg' }} size='md'>
 						{props.type}
 					</Text>
-				</Container>
+				</Box>
 			</HStack>
 			<VStack
-				className={'Body'}
 				bg={white}
-				borderBottomRadius='15'
-				borderColor={theme.colors.medYellow['0']}
-				borderWidth='2'
 				flex='1'
 				p='3'
 				justifyContent='space-between'
+				roundedBottom='20'
+				borderColor={theme.colors.medYellow}
+				borderWidth='2'
 			>
 				<HStack flexWrap='wrap'>
 					<Text _web={{ fontSize: 'md' }} size='lg'>
