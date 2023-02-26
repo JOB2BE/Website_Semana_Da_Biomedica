@@ -4,7 +4,7 @@ import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
-//import Loginicon from 
+//import Icon from 
 import Logo from '../../assets/images/WhiteBGLogo';
 import { StyleSheet } from 'react-native';
 import { Link } from '../../router/index';
@@ -48,7 +48,7 @@ export const Navbar = () => {
         },
         {
             name: idiom.t(['navbarmobile', 'login']),
-            icon: <LoginIcon />,
+            icon: <Icon name="ios-person-circle-outline" size={30} color='white' style={{ position: 'absolute', right: 20 }} />,
             route: '/Login',
         },
     ];
