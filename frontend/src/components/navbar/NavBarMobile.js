@@ -4,7 +4,8 @@ import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
-//import Icon from 
+import AntDesign from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/AntDesign';
 import Logo from '../../assets/images/WhiteBGLogo';
 import { StyleSheet } from 'react-native';
 import { Link } from '../../router/index';
