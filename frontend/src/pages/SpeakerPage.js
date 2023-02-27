@@ -23,6 +23,7 @@ export default function AccordionExample() {
 	var window = useWindowDimensions();
 	var pageWidth = responsiveWidth(window, null, null, 0.85);
 	var imageRadius = responsiveWidth(window, 100, 450, 0.15);
+	var isScreenSmall = window.width < 850;
 
 	const styles = StyleSheet.create({
 		container: {
@@ -64,24 +65,31 @@ export default function AccordionExample() {
 	const [currentIndex, setCurrentIndex] = React.useState(null);
 	return (
 		<Column flex={1} alignItems={'center'} py={'2.5%'}>
-			<Stack justifyContent={'center'} direction={'row'} space={25} style={styles.page}>
+			<Stack
+				justifyContent={'center'}
+				direction={isScreenSmall ? 'column' : 'row'}
+				space={25}
+				style={styles.page}
+			>
 				<Column>
-					<StyledBox>
-						<Column alignItems='center' space={10}>
-							<RoundBorderedImage
-								source={speaker}
-								containerRadius={imageRadius}
-								size={'inherit'}
-							></RoundBorderedImage>
-							<Column alignItems='center' space={3}>
-								<Heading> Nuno André da Silva </Heading>
-								<Text fontWeight={1000} size='md'>
-									Orador
-								</Text>
-								<Text fontWeight={1000} size='md'>
-									Assitant to Regional Manager
-								</Text>
-							</Column>
+					<StyledBox
+						stackSpace={10}
+						childrenInRow={isScreenSmall}
+						centerChildren={isScreenSmall}
+					>
+						<RoundBorderedImage
+							source={speaker}
+							containerRadius={imageRadius}
+							size={'inherit'}
+						></RoundBorderedImage>
+						<Column alignItems='center' space={3}>
+							<Heading> Nuno André da Silva </Heading>
+							<Text fontWeight={1000} size='md'>
+								Orador
+							</Text>
+							<Text fontWeight={1000} size='md'>
+								Assitant to Regional Manager
+							</Text>
 						</Column>
 					</StyledBox>
 				</Column>
