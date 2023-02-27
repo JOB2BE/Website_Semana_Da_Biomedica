@@ -1,166 +1,265 @@
-import React from "react";
-import { Column, Row, Text, Image, View } from "native-base";
-import extendTheme from '../theme';
-import { StyleSheet, TouchableOpacity } from "react-native";
-import ActivitiesIcon from '../assets/images/ActivitiesIcon';
-//import ArrowIcon from '../assets/images/seta_azul'
+import React from 'react';
+import {
+	Column,
+	Text,
+	Center,
+	Stack,
+	Heading,
+	Pressable,
+	Row,
+	ChevronDownIcon,
+	ChevronUpIcon,
+} from 'native-base';
+import theme from '../theme';
+import { StyleSheet } from 'react-native';
 
-const dataArray = [
-    { category: "Curriculum Vitae", subCategories: ["É doutorado em engenharia pela RWTH Aachen University e MBA do The LisbonMBA (NOVA SBE + Católica SBE). Desenvolveu trabalhos na área de imagem molecular quantitativa (MR-PET) do cérebro, em pequenos animais e humanos, utilizando analítica avançada no Forschungszentrum Jülich da Helmholtz Association. Atualmente é diretor adjunto da Learning Health, responsável pela área de investigação, com foco em inteligência artificial e sistemas complexos aplicados à saúde.",] },
-    { category: "Participação na JOB2BE", subCategories: ["Nuno André da Silva fará parte da ...",] },
-    { category: "Contactos", subCategories: ["e-mail: blabla@gmail.com", "local: Hospital da Luz", "contacto telefónico: 967777777"] }
-];
+import { useWindowDimensions } from 'react-native';
+import responsiveWidth from '../utils/responsiveWidth';
+import RoundBorderedImage from '../components/information/RoundBorderedImage';
+import StyledBox from '../components/information/StyledBox';
 
 export default function AccordionExample() {
+	var speaker = require('../assets/images/speaker_NunoSilva.svg');
+	var window = useWindowDimensions();
+	var pageWidth = responsiveWidth(window, null, null, 0.85);
+	var imageRadius = responsiveWidth(window, 100, 450, 0.15);
 
-    var speaker = require('../assets/images/speaker_NunoSilva.svg')
+	const styles = StyleSheet.create({
+		container: {
+			flexGrow: 1,
+			justifyContent: 'center',
+			alignContent: 'center',
+		},
 
-    const styles = StyleSheet.create({
-        container: {
-            flexGrow: 1,
-            justifyContent: 'center',
-            alignContent: 'center',
-        },
+		TextName: {
+			fontWeight: '1000',
+			color: theme.colors.dryBlue['0'],
+			fontSize: 30,
+		},
 
-        RectangleShapeViewSpeaker: {
-            width: 260,
-            height: 449.42,
-            borderRadius: 30,
-            backgroundColor: extendTheme.colors['cream'],
-            marginTop: 20,
-            marginBottom: 20,
-            marginLeft: 20,
-            alignItems: 'center',
-            alignContent: 'center',
-            display: 'flex',
-        },
+		RectangleShapeViewAccordion: {
+			borderTopRightRadius: 30,
+			borderTopLeftRadius: 30,
+			backgroundColor: theme.colors.cream[0],
+			paddingHorizontal: 15,
+			paddingVertical: 7,
+		},
 
-        CircleShapeViewOut: {
-            width: 230,
-            height: 230,
-            borderRadius: 230 / 2,
-            backgroundColor: extendTheme.colors['medYellow'],
-            marginBottom: 50,
-            marginTop: 50,
-        },
+		RectangleShapeViewInformation: {
+			backgroundColor: 'white',
+			borderBottomRightRadius: 30,
+			borderBottomLeftRadius: 30,
+			padding: 20,
+		},
 
-        CircleShapeViewIn: {
-            width: 210,
-            height: 210,
-            borderRadius: 210 / 2,
-            backgroundColor: extendTheme.colors['cream'],
-            position: 'absolute',
-            left: (230 - 210) / 2,
-            top: (230 - 210) / 2,
-            justifyContent: 'center',
-            alignItems: 'center',
-            alignContent: 'center',
-        },
+		textTitle: {
+			fontWeight: '1000',
+		},
 
-        TextName: {
-            fontWeight: '1000',
-            color: extendTheme.colors.dryBlue['0'],
-            fontSize: 30,
-            backgroundColor: 'transparent',
-            alignItems: 'center',
-            textAlign: 'center',
-            alignContent: 'center',
-            justifyContent: 'center',
-            margimBottom: 50,
-        },
+		page: {
+			width: pageWidth,
+		},
+	});
 
-        RectangleShapeViewAccordion: {
-            flexGrow: 1,
-            width: 836,
-            height: 91,
-            borderTopRightRadius: 30,
-            borderTopLeftRadius: 30,
-            backgroundColor: extendTheme.colors['cream'],
-            marginBottom: 44,
-            marginTop: 22,
-            marginLeft: 20,
-            alignItems: 'left',
-            padding: 20,
-            justifyContent: 'center',
-            alignSelf: 'center',
-        },
+	const [currentIndex, setCurrentIndex] = React.useState(null);
+	return (
+		<Column flex={1} alignItems={'center'} py={'2.5%'}>
+			<Stack justifyContent={'center'} direction={'row'} space={25} style={styles.page}>
+				<Column>
+					<StyledBox>
+						<Column alignItems='center' space={10}>
+							<RoundBorderedImage
+								source={speaker}
+								containerRadius={imageRadius}
+								size={'inherit'}
+							></RoundBorderedImage>
+							<Column alignItems='center' space={3}>
+								<Heading> Nuno André da Silva </Heading>
+								<Text fontWeight={1000} size='md'>
+									Orador
+								</Text>
+								<Text fontWeight={1000} size='md'>
+									Assitant to Regional Manager
+								</Text>
+							</Column>
+						</Column>
+					</StyledBox>
+				</Column>
+				<Column flex={0.7} space={currentIndex !== null ? 2 : 8}>
+					<Column>
+						<Pressable
+							onPress={() => {
+								if (currentIndex === 0) {
+									setCurrentIndex(null);
+								} else {
+									setCurrentIndex(0);
+								}
+							}}
+						>
+							<Row
+								justifyContent={'space-between'}
+								alignItems={'center'}
+								style={styles.RectangleShapeViewAccordion}
+								borderBottomRadius={currentIndex === 0 ? 0 : 30}
+							>
+								<Heading style={styles.textTitle}>Bio</Heading>
 
-        RectangleShapeViewInformation: {
-            flexGrow: 1,
-            backgroundColor: 'white',
-            marginTop: -44,
-            marginBottom: 22,
-            marginLeft: 20,
-            width: 836,
-            padding: 20,
-            borderBottomRightRadius: 30,
-            borderBottomLeftRadius: 30,
-            alignSelf: 'center',
-            justifyContent: 'center',
-            alignItems: 'left',
-        },
+								{currentIndex === 0 ? (
+									<ChevronUpIcon
+										size={5}
+										style={{ color: theme.colors.dryBlue[0] }}
+									/>
+								) : (
+									<ChevronDownIcon
+										size={5}
+										style={{ color: theme.colors.dryBlue[0] }}
+									/>
+								)}
+							</Row>
+						</Pressable>
+						{currentIndex === 0 ? (
+							<Center style={styles.RectangleShapeViewInformation}>
+								<Text style={styles.textBody} size='md'>
+									É doutorado em engenharia pela RWTH Aachen University e MBA do
+									The LisbonMBA (NOVA SBE + Católica SBE). Desenvolveu trabalhos
+									na área de imagem molecular quantitativa (MR-PET) do cérebro, em
+									pequenos animais e humanos, utilizando analítica avançada no
+									Forschungszentrum Jülich da Helmholtz Association. Atualmente é
+									diretor adjunto da Learning Health, responsável pela área de
+									investigação, com foco em inteligência artificial e sistemas
+									complexos aplicados à saúde.
+								</Text>
+							</Center>
+						) : (
+							<></>
+						)}
+					</Column>
+					<Column>
+						<Pressable
+							onPress={() => {
+								if (currentIndex === 1) {
+									setCurrentIndex(null);
+								} else {
+									setCurrentIndex(1);
+								}
+							}}
+						>
+							<Row
+								justifyContent={'space-between'}
+								alignItems={'center'}
+								style={styles.RectangleShapeViewAccordion}
+								borderBottomRadius={currentIndex === 1 ? 0 : 30}
+							>
+								<Heading style={styles.textTitle}>Actividades</Heading>
 
-        cardContainer: {
-            flexGrow: 1,
-        },
+								{currentIndex === 1 ? (
+									<ChevronUpIcon
+										size={5}
+										style={{ color: theme.colors.dryBlue[0] }}
+									/>
+								) : (
+									<ChevronDownIcon
+										size={5}
+										style={{ color: theme.colors.dryBlue[0] }}
+									/>
+								)}
+							</Row>
+						</Pressable>
+						{currentIndex === 1 ? (
+							<Center style={styles.RectangleShapeViewInformation}>
+								<Text style={styles.textBody} size='md'>
+									Nuno André da Silva fará parte da ...
+								</Text>
+							</Center>
+						) : (
+							<></>
+						)}
+					</Column>
+					<Column>
+						<Pressable
+							onPress={() => {
+								if (currentIndex === 2) {
+									setCurrentIndex(null);
+								} else {
+									setCurrentIndex(2);
+								}
+							}}
+						>
+							<Row
+								justifyContent={'space-between'}
+								alignItems={'center'}
+								style={styles.RectangleShapeViewAccordion}
+								borderBottomRadius={currentIndex === 2 ? 0 : 30}
+							>
+								<Heading style={styles.textTitle}>Contactos</Heading>
 
-        textTitle: {
-            fontWeight: '1000',
-            color: extendTheme.colors.dryBlue['0'],
-            fontSize: 30,
-            alignItems: 'center',
-            alignContent: 'center',
-            justifyContent: 'center',
-            margimBottom: 50,
-        },
+								{currentIndex === 2 ? (
+									<ChevronUpIcon
+										size={5}
+										style={{ color: theme.colors.dryBlue[0] }}
+									/>
+								) : (
+									<ChevronDownIcon
+										size={5}
+										style={{ color: theme.colors.dryBlue[0] }}
+									/>
+								)}
+							</Row>
+						</Pressable>
+						{currentIndex === 2 ? (
+							<Center style={styles.RectangleShapeViewInformation}>
+								<Text style={styles.textBody} size='md'>
+									e-mail: blabla@gmail.com, local: Hospital da Luz, contacto
+									telefónico: 967777777,
+								</Text>
+							</Center>
+						) : (
+							<></>
+						)}
+					</Column>
+					<Column>
+						<Pressable
+							onPress={() => {
+								if (currentIndex === 3) {
+									setCurrentIndex(null);
+								} else {
+									setCurrentIndex(3);
+								}
+							}}
+						>
+							<Row
+								justifyContent={'space-between'}
+								alignItems={'center'}
+								style={styles.RectangleShapeViewAccordion}
+								borderBottomRadius={currentIndex === 3 ? 0 : 30}
+							>
+								<Heading style={styles.textTitle}>Palavras-Chave</Heading>
 
-        textBody: {
-            fontSize: 20,
-            lineHeight: 20 * 1.5,
-            textAlign: 'center',
-            color: extendTheme.colors['dryBlue[0]'],
-        },
-    });
-
-    const [currentIndex, setCurrentIndex] = React.useState(null);
-    return (
-        <Column flex={2} space={10}>
-            <Row justifyContent={'center'} style={styles.container}>
-                <View style={styles.RectangleShapeViewSpeaker}>
-                    <View style={styles.CircleShapeViewOut}>
-                        <Image source={speaker} style={styles.CircleShapeViewIn}></Image>
-                    </View>
-                    <Text style={styles.TextName}> Nuno André da Silva </Text>
-                </View>
-
-                <View>
-                    {dataArray.map(({ category, subCategories }, index) => {
-                        return <TouchableOpacity
-                            key={category}
-                            onPress={() => {
-                                setCurrentIndex(index === currentIndex ? null : index);
-                            }}
-                            style={StyleSheet.cardContainer}
-                            activeOpacity={1}
-                        >
-                            <View style={styles.RectangleShapeViewAccordion}>
-                                <Text style={styles.textTitle}>{category}</Text>
-                                {ActivitiesIcon}
-                            </View>
-
-                            {index === currentIndex && (
-                                <View style={styles.RectangleShapeViewInformation}>
-                                    {subCategories.map((subCategory) => (
-                                        <Text key={subCategory} style={styles.textBody}>
-                                            {subCategory}
-                                        </Text>
-                                    ))}
-                                </View>
-                            )}
-                        </TouchableOpacity>
-                    })}
-                </View>
-            </Row>
-        </Column>
-    );
+								{currentIndex === 3 ? (
+									<ChevronUpIcon
+										size={5}
+										style={{ color: theme.colors.dryBlue[0] }}
+									/>
+								) : (
+									<ChevronDownIcon
+										size={5}
+										style={{ color: theme.colors.dryBlue[0] }}
+									/>
+								)}
+							</Row>
+						</Pressable>
+						{currentIndex === 3 ? (
+							<Center style={styles.RectangleShapeViewInformation}>
+								<Text style={styles.textBody} size='md'>
+									Inteligência Artificial, Ressonância Magnética
+								</Text>
+							</Center>
+						) : (
+							<></>
+						)}
+					</Column>
+				</Column>
+			</Stack>
+		</Column>
+	);
 }
