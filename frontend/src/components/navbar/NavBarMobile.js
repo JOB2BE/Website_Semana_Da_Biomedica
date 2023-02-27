@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from "react";
 import { Center, Heading, Box, Stack, Pressable, Button } from 'native-base';
 import { View, TouchableOpacity, Row } from 'react-native'
@@ -7,9 +8,11 @@ import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Logo from '../../assets/images/WhiteBGLogo';
+import { Menu } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
+import { NavigationContainer } from "@react-navigation/native";
 
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
 import { I18n } from 'i18n-js';
@@ -20,6 +23,41 @@ var idiom = new I18n();
 idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
 idiom.translations = { en, pt }; // All our languages
 idiom.locale = Localization.locale; // get the device's current language code
+
+const Drawer = createDrawerNavigator({
+    Home: {
+      screen: HomePage,
+      navigationOptions: {
+        title: 'Homepage'
+      }
+    },
+    ProfilePage: {
+      screen: ProfilePage,
+      navigationOptions: {
+        title: 'ProfilePage'
+      }
+    },
+    Notifications: {
+      screen: NotificationsPage,
+      navigationOptions: {
+        title: 'Notifications'
+      }
+    },
+    SettingsPage: {
+      screen: SettingsPage,
+      navigationOptions: {
+        title: 'SettingsPage'
+      }
+    }
+  },
+    {
+      drawerPosition: 'left',
+      contentComponent: CustomDrawerNavigation,
+      drawerOpenRoute: 'DrawerOpen',
+      drawerCloseRoute: 'DrawerClose',
+      drawerToggleRoute: 'DrawerToggle',
+      drawerWidth: (width / 3) * 2
+    });
 
 const styles = StyleSheet.create({
     container: {
@@ -94,9 +132,6 @@ export const NavBarMobile = () => {
     ];
 
     return (
-        <Button style={styles.rectangleCorner}>
-            <Icon name="menufold" size={60} color="white"></Icon>
-        </Button>
+        <View></View>     
     )
-
 }
