@@ -12,13 +12,14 @@ import {
 } from 'native-base';
 import theme from '../theme';
 import { StyleSheet } from 'react-native';
+
 import { useWindowDimensions } from 'react-native';
 import responsiveWidth from '../utils/responsiveWidth';
 import RoundBorderedImage from '../components/information/RoundBorderedImage';
 import StyledBox from '../components/information/StyledBox';
 
-export default function SpeakerPage(props) {
-	const { id } = useParams();
+export default function SpeakerPageDummy() {
+	var speaker = require('../assets/images/speaker_NunoSilva.svg');
 	var window = useWindowDimensions();
 	var pageWidth = responsiveWidth(window, null, null, 0.85);
 	var imageRadius = responsiveWidth(window, 100, 450, 0.15);
@@ -50,15 +51,6 @@ export default function SpeakerPage(props) {
 
 		page: {
 			width: pageWidth,
-		},
-
-		RectangleShapeView: {
-			width: 260,
-			height: 449.42,
-			borderRadius: 30,
-			backgroundColor: extendTheme.colors['cream'],
-			marginTop: 20,
-			marginBottom: 20,
 		},
 	});
 
