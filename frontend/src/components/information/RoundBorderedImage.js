@@ -19,6 +19,15 @@ export default function RoundBorderedImage(props) {
 			height: props.containerRadius,
 		},
 	});
+	
+	if (!props.link) {
+		return (
+			<Center style={styles.container}>
+				<Image {...props} resizeMode={props.resizeMode}></Image>
+			</Center>
+		);
+	}
+
 	return (
 		<Link to={props.link}>
 			<Center style={styles.container}>
