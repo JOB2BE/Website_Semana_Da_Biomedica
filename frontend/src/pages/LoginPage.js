@@ -23,11 +23,13 @@ import responsiveHeight from '../utils/responsiveHeight';
 
 export default function LoginPage() {
 	const window = useWindowDimensions();
-	var paddingBox = responsiveHeight(window, 70, 300, 0.1);
-	var parternshipBoxWidth = responsiveWidth(window, null, null, 0.6);
+	var paddingBox = responsiveHeight(window, null, null, 0.1);
+	var boxWidthMobile = responsiveWidth(window, 150, null, 0.8);
+	var boxWidth = responsiveWidth(window, null, 1000, 0.4);
+	var isSmallScreen = window.width < 850;
 	const styles = StyleSheet.create({
 		aboutBox: {
-			paddingTop: paddingBox,
+			paddingVertical: paddingBox,
 			borderRadius: 25,
 		},
 		textLeftPadding: {
@@ -48,10 +50,10 @@ export default function LoginPage() {
 	const [show, setShow] = useState(false);
 
 	return (
-		<Column flex={1} space={120}>
-			<Row justifyContent={'center'} style={styles.aboutBox}>
+		<Column flex={1} space={120} style={styles.aboutBox}>
+			<Row justifyContent={'center'}>
 				<StyledBox
-					flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
+					width={isSmallScreen ? boxWidthMobile : boxWidth}
 					bg={theme.colors.medYellow}
 					borderRadius={25}
 					headingText={'LOGIN'} // can't get it in the center, the way it is on figma
