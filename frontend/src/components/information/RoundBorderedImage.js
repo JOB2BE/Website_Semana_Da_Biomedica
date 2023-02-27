@@ -1,44 +1,34 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Row, Heading, Column } from 'native-base';
+import { Row, Heading, Column, Center, Image } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
+import { Link } from '../../router/index';
 
-export default function StyledBox(props) {
+export default function RoundBorderedImage(props) {
 	const styles = StyleSheet.create({
-		heading: {
-			color: props.headingColor,
-		},
 		container: {
 			borderRadius: props.borderRadius,
-			backgroundColor: props.backgroundColor,
 			shadowColor: props.shadowColor,
 			shadowOffset: props.shadowOffset,
 			shadowRadius: props.shadowRadius,
 			shadowOpacity: props.shadowOpacity,
 			elevation: props.elevation,
+			padding: props.padding,
+			width: props.containerRadius,
+			height: props.containerRadius,
 		},
 	});
-
 	return (
-		<Column space={props.stackSpace} style={styles.container} flexWrap={'wrap'} {...props}>
-			{props.headingText !== '' && (
-				<Heading style={styles.heading} size={props.headingSize}>
-					{props.headingText}
-				</Heading>
-			)}
-			<Row alignSelf={'stretch'} flexWrap={'wrap'}>
-				{props.children}
-			</Row>
-		</Column>
+		<Link to={props.link}>
+			<Center style={styles.container}>
+				<Image {...props} resizeMode={props.resizeMode}></Image>
+			</Center>
+		</Link>
 	);
 }
 
-StyledBox.propTypes = {
-	headingColor: PropTypes.string,
-	stackSpace: PropTypes.number,
-	headingSize: PropTypes.string,
-	headingText: PropTypes.string,
+RoundBorderedImage.propTypes = {
 	borderRadius: PropTypes.number,
 	backgroundColor: PropTypes.string,
 	shadowColor: PropTypes.string,
@@ -47,13 +37,14 @@ StyledBox.propTypes = {
 	shadowOpacity: PropTypes.number,
 	elevation: PropTypes.number,
 	padding: PropTypes.number,
+	containerRadius: PropTypes.number,
+	resizeMode: PropTypes.string,
+	borderColor: PropTypes.string,
+	borderWidth: PropTypes.number,
+	link: PropTypes.string,
 };
-StyledBox.defaultProps = {
-	headingColor: theme.colors.dryBlue[0],
-	headingSize: 'md',
-	stackSpace: 10,
-	headingText: '',
-	borderRadius: 15,
+RoundBorderedImage.defaultProps = {
+	borderRadius: 1500,
 	backgroundColor: theme.colors.medYellow.pastel,
 	shadowColor: theme.colors.dryBlue[0],
 	shadowOffset: {
@@ -63,5 +54,7 @@ StyledBox.defaultProps = {
 	shadowRadius: 0.5,
 	shadowOpacity: 0.7,
 	elevation: 10,
-	padding: 5,
+	resizeMode: 'contain',
+	borderColor: theme.colors.medYellow[0],
+	borderWidth: 5,
 };
