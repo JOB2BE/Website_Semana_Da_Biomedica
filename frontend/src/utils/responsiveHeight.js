@@ -1,5 +1,3 @@
-
-
 export default function responsiveHeight(window, min = null, max = null, coef = 1) {
 	let size = coef * window.height;
 
