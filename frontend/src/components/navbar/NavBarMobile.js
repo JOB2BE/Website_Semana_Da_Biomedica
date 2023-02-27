@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from "react";
 import { Center, Heading, Box, Stack, Pressable, Button } from 'native-base';
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, Row } from 'react-native'
 import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
@@ -48,12 +48,22 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         display: 'flex',
         backgroundColor: '#FDBA35',
+    },
+
+    rectangleSimple: {
+        width: 328,
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        display: 'flex',
+        backgroundColor: '#FDBA35',
     }
 });
 
-const [currentIndex, setCurrentIndex] = React.useState(null);
-
 export const NavBarMobile = () => {
+
+    const [currentIndex, setCurrentIndex] = React.useState(null);
 
     const navbarRoutes = [
         {
@@ -84,37 +94,9 @@ export const NavBarMobile = () => {
     ];
 
     return (
-
-        <View>
-            {navbarRoutes.map(({name, icon, route}, index) => {
-                return <TouchableOpacity 
-                key={name}
-                activeOpacity={.95}
-                onPress={() => {
-                    setCurrentIndex(index === currentIndex ? null : index);
-                }}
-                >
-                <View style={styles.rectangleCorner}>
-                    <Icon name="menufold" size={60} color='white'></Icon>
-                </View>
-
-                {index === currentIndex && (
-                    <View style={styles.rectangleOpen}>
-                        {name.map((eachName) => )
-                        <Text key={name} style={}></Text>
-
-                        }
-                    </View>
-                )}
-            </TouchableOpacity>
-            }
-            )}
-        </View>
-        
-            
-        
-
-
+        <Button style={styles.rectangleCorner}>
+            <Icon name="menufold" size={60} color="white"></Icon>
+        </Button>
     )
 
 }
