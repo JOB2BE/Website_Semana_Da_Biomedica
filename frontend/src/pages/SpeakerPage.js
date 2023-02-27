@@ -26,16 +26,8 @@ export default function AccordionExample() {
 	var isScreenSmall = window.width < 850;
 
 	const styles = StyleSheet.create({
-		container: {
-			flexGrow: 1,
-			justifyContent: 'center',
-			alignContent: 'center',
-		},
-
 		TextName: {
 			fontWeight: '1000',
-			color: theme.colors.dryBlue['0'],
-			fontSize: 30,
 		},
 
 		RectangleShapeViewAccordion: {
@@ -72,11 +64,7 @@ export default function AccordionExample() {
 				style={styles.page}
 			>
 				<Column>
-					<StyledBox
-						stackSpace={10}
-						childrenInRow={isScreenSmall}
-						centerChildren={isScreenSmall}
-					>
+					<StyledBox stackSpace={10} childrenInRow={isScreenSmall} centerChildren={true}>
 						<RoundBorderedImage
 							source={speaker}
 							containerRadius={imageRadius}
