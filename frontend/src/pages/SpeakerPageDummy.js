@@ -12,7 +12,6 @@ import {
 } from 'native-base';
 import theme from '../theme';
 import { StyleSheet } from 'react-native';
-
 import { useWindowDimensions } from 'react-native';
 import responsiveWidth from '../utils/responsiveWidth';
 import RoundBorderedImage from '../components/information/RoundBorderedImage';
