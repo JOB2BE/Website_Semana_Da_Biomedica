@@ -18,11 +18,28 @@ import StyledBox from '../components/information/StyledBox';
 import theme from '../theme';
 import { MaterialIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { Link } from '../router/index';
-import { Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { useWindowDimensions } from 'react-native';
+import responsiveWidth from '../utils/responsiveWidth';
+import responsiveHeight from '../utils/responsiveHeight';
 
 // TODO: VERIFY ON MOBILE
 
 export default function RegisterPage() {
+	var window = useWindowDimensions();
+	var paddingBox = responsiveHeight(window, null, null, 0.1);
+	var boxWidthMobile = responsiveWidth(window, 150, null, 0.8);
+	var boxWidth = responsiveWidth(window, null, 1000, 0.4);
+	var isSmallScreen = window.width < 850;
+
+	const styles = StyleSheet.create({
+		aboutBox: {
+			paddingVertical: paddingBox,
+			borderRadius: 25,
+		},
+		text: { fontWeight: 'bold' },
+	});
+
 	const [regData, setData] = useState('');
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
@@ -115,10 +132,10 @@ export default function RegisterPage() {
 	};
 
 	return (
-		<Column flex={1} space={120}>
-			<Row justifyContent={'center'} pt='10%'>
+		<Column flex={1} space={120} style={styles.aboutBox}>
+			<Row justifyContent={'center'}>
 				<StyledBox
-					flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
+					width={isSmallScreen ? boxWidthMobile : boxWidth}
 					backgroundColor={theme.colors.medYellow['0']}
 					rounded='25'
 					headingText='Register'
@@ -128,7 +145,7 @@ export default function RegisterPage() {
 						<VStack space='5' flex='1'>
 							{/*Name*/}
 							<FormControl isInvalid={'name' in errors}>
-								<Text size='md'> Name*</Text>
+								<Text style={styles.text} size='md'> Name*</Text>
 								<Input
 									variant='filled'
 									rounded='10'
@@ -140,7 +157,7 @@ export default function RegisterPage() {
 
 							{/*Email*/}
 							<FormControl isInvalid={'email' in errors}>
-								<Text size='md'> Email*</Text>
+								<Text style={styles.text} size='md'> Email*</Text>
 								<Input
 									variant='filled'
 									rounded='10'
@@ -152,7 +169,7 @@ export default function RegisterPage() {
 
 							{/*Password*/}
 							<FormControl>
-								<Text size='md'> Password*</Text>
+								<Text style={styles.text} size='md'> Password*</Text>
 
 								<Input
 									variant='filled'
@@ -160,7 +177,7 @@ export default function RegisterPage() {
 									_focus={{ bg: white }}
 									type={show1 ? 'text' : 'password'}
 									InputRightElement={
-										<Pressable onPress={() => setShow1(!show1)}>
+										<Pressable onPress={() => setShow1(!show1)} px={'1%'}>
 											<Icon
 												as={
 													<MaterialIcons
@@ -170,7 +187,6 @@ export default function RegisterPage() {
 													/>
 												}
 												size='5'
-												mr='2'
 												color='muted.400'
 											/>
 										</Pressable>
@@ -203,7 +219,7 @@ export default function RegisterPage() {
 
 							{/*Confirm password*/}
 							<FormControl>
-								<Text size='md'> Confirm password*</Text>
+								<Text style={styles.text} size='md'> Confirm password*</Text>
 
 								<Input
 									variant='filled'
@@ -211,7 +227,7 @@ export default function RegisterPage() {
 									_focus={{ bg: white }}
 									type={show2 ? 'text' : 'password'}
 									InputRightElement={
-										<Pressable onPress={() => setShow2(!show2)}>
+										<Pressable onPress={() => setShow2(!show2)} px={'1%'}>
 											<Icon
 												as={
 													<MaterialIcons
@@ -221,7 +237,6 @@ export default function RegisterPage() {
 													/>
 												}
 												size='5'
-												mr='2'
 												color='muted.400'
 											/>
 										</Pressable>
@@ -252,7 +267,7 @@ export default function RegisterPage() {
 
 							{/*Degree*/}
 							<FormControl isInvalid={'degree' in errors}>
-								<Text size='md'> Degree</Text>
+								<Text style={styles.text} size='md'> Degree</Text>
 								<Input
 									variant='filled'
 									rounded='10'
@@ -264,7 +279,7 @@ export default function RegisterPage() {
 
 							{/*University*/}
 							<FormControl isInvalid={'university' in errors}>
-								<Text size='md'> University</Text>
+								<Text style={styles.text} size='md'> University</Text>
 								<Input
 									variant='filled'
 									rounded='10'
