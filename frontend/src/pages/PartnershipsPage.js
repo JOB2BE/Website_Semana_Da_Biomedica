@@ -11,6 +11,7 @@ export default function PartnershipsPage() {
 	var imageRadius = responsiveWidth(window, 70, 300, 0.1);
 	var parternshipBoxWidth = responsiveWidth(window, null, null, 0.6);
 
+
 	const styles = StyleSheet.create({
 		text: {
 			borderColor: theme.colors.medYellow[0],
@@ -108,7 +109,9 @@ export default function PartnershipsPage() {
 				space={10}
 				containerRadius={imageRadius}
 				objects={dummyObjects}
+
 				style={styles.partnerRows}
+
 			></PartnerShipRow>
 
 			<StyledBox style={styles.text}>
@@ -122,6 +125,7 @@ export default function PartnershipsPage() {
 				containerRadius={imageRadius}
 				objects={dummyObjects}
 				style={styles.partnerRows}
+
 			></PartnerShipRow>
 
 			<StyledBox style={styles.text}>

@@ -77,7 +77,7 @@ export default extendTheme({
 					fontSize: '66px',
 				},
 				md: {
-					fontSize: '34px',
+					fontSize: '45px',
 				},
 				sm: {
 					fontSize: '26px',
