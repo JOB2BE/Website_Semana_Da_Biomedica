@@ -46,8 +46,7 @@ const styles = StyleSheet.create({
         height: 80,
         //justifyContent: 'space-between',
         //alignItems: 'left',
-        alignContent: 'center',
-
+        //alignContent: 'center',
         backgroundColor: '#FDBA35',
         padding: 30,
     },
@@ -81,8 +80,6 @@ const styles = StyleSheet.create({
 
 export const NavBarMobile = () => {
 
-
-
     const [currentIndex, setCurrentIndex] = React.useState(null);
 
     return (
@@ -105,7 +102,6 @@ export const NavBarMobile = () => {
                     ) : (
                         <></>
                     )}
-
                 </Row>
             </Pressable>
 
@@ -150,7 +146,7 @@ export const NavBarMobile = () => {
                     <Pressable >
                         <Row justifyContent={'space-between'} alignItems={'center'}>
                             <Link to={'/Login'} style={{ textDecoration: 'none' }}>
-                                <Icon name="person-outline" size={24} color={'white'}></Icon>
+                                <Icon name="person-outline" size={24} color={'white'} style={{ position: 'absolute' }} />
                                 <Heading style={styles.textTitle}>Login</Heading>
                             </Link>
                         </Row>
