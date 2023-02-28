@@ -10,6 +10,7 @@ import ActivitiesPage from './pages/ActivitiesPage';
 import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
+import UserPage from './pages/UserPage';
 import theme from './theme';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -58,7 +59,7 @@ export default function App() {
 							<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
 							<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
-							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
+							<Route path='/User' element={<UserPage idiom={i18n} />} />
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
