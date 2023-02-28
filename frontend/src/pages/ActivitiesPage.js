@@ -33,6 +33,7 @@ export default function ActivitiesPage() {
 			backgroundColor: theme.colors.medYellow[0],
 			paddingHorizontal: 15,
 			paddingVertical: 7,
+
 		},
 
 		RectangleShapeViewInformation: {

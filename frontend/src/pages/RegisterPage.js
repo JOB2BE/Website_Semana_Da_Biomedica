@@ -1,305 +1,346 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
 	Button,
-	Center,
-	Heading,
 	Text,
 	VStack,
-	Box,
 	FormControl,
 	Pressable,
 	Icon,
-	WarningOutlineIcon,
 	Input,
 	isEmptyObj,
 	Column,
 	Row,
+	HStack,
+	Box,
+	Heading,
 } from 'native-base';
-import { useState } from 'react';
 import StyledBox from '../components/information/StyledBox';
 import theme from '../theme';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { Link } from '../router/index';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { useWindowDimensions } from 'react-native';
+import responsiveWidth from '../utils/responsiveWidth';
+import responsiveHeight from '../utils/responsiveHeight';
+
 
 // TODO: VERIFY ON MOBILE
 
 export default function RegisterPage() {
+	var window = useWindowDimensions();
+	var paddingBox = responsiveHeight(window, null, null, 0.1);
+	var boxWidthMobile = responsiveWidth(window, 150, null, 0.8);
+	var boxWidth = responsiveWidth(window, null, 1000, 0.4);
+	var isSmallScreen = window.width < 850;
+
 	const styles = StyleSheet.create({
 		aboutBox: {
-			paddingTop: '10%',
+			paddingVertical: paddingBox,
+			borderRadius: 25,
+		},
+		text: { fontWeight: 'bold' },
+		textLeftPadding: {
+			paddingLeft: '1%',
 		},
 	});
-	const [regData, setData] = useState('');
-	const [errors, setErrors] = React.useState({});
 
-	const [show1, setShow1] = React.useState(false);
-	const [show2, setShow2] = React.useState(false);
+	const [regData, setData] = useState('');
+	const [errors, setErrors] = useState({});
+	const [validated, setValidated] = useState(false);
+
+	// For showing and hiding password text
+	const [show1, setShow1] = useState(false);
+	const [show2, setShow2] = useState(false);
+
+	// Regex represent parameters we *want*.
+
+	const regexPassword = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/; // Only numbers or letters. No spaces
+	const regexDegree = /^([^0-9]*)$/; // Anything but numbers
+	const regexUniversity = /^([^0-9]*)$/; // Anything but numbers
+	const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+	// valid email (https://www.w3resource.com/javascript/form/email-validation.php)
+
+	//Warning colours
+	const white = '#ffffff';
+	const red = '#dc2626';
+	const green = '#008000';
 
 	const validate = () => {
 		let newErrors = {};
 
-		// TODO: EACH FIELD'S REQUIREMENTS
+		if (!regData.name) newErrors = { ...newErrors, name: 'Please provide us your name' };
+		// else if (profanity) TODO: PROFANITY CHECK
 
-		// if (regData.FIELDNAME !== undefined) {
-		// 	if (condition) {
-		// 		newErrors = { ...newErrors, name: 'FIELDNAME doesn't respect condition' };
-		// 	}
-		// 	...
-		// } else { (If FIELDNAME is required)
-		// 	newErrors = { ...newErrors, FIELDNAME: 'FIELDNAME is mandatory' };
-		// }
-
-		// Name
-		// ..
-
-		// Username
-		// ...
-
-		// Email
-		// ...
-
-		// Password
-		if (regData.password !== undefined) {
-			// Password validation parameters, if any
-		} else {
-			newErrors = { ...newErrors, password: 'Password is mandatory' };
+		if (!regData.email) newErrors = { ...newErrors, email: 'You need your email to login!' };
+		else if (!regexEmail.test(regData.email)) {
+			newErrors = { ...newErrors, email: 'Please provide us with a valid email' };
 		}
 
-		// Confirm password
-		if (regData.password2 !== undefined) {
-			if (regData.password2 !== regData.password) {
-				newErrors = { ...newErrors, password2: 'Passwords do not match!' };
-			}
-		} else {
-			newErrors = { ...newErrors, password2: 'Please confirm your password' };
+		// Passwords
+		if (
+			!regData.password ||
+			regData.password.length < 6 ||
+			regData.password.length > 16 ||
+			!regexPassword.test(regData.password)
+		) {
+			newErrors = { ...newErrors, password: 'error' };
+		}
+
+		if (!regData.password2 || regData.password2 !== regData.password) {
+			newErrors = { ...newErrors, password2: 'error' };
 		}
 
 		// Degree
-		// ...
+		if (!regData.degree && !regexDegree.test(regData.degree)) {
+			newErrors = { ...newErrors, degree: 'Remove any number' };
+		}
 
 		// University
-		// ...
+		if (!regData.university && !regexUniversity.test(regData.university)) {
+			newErrors = { ...newErrors, university: 'Remove any number' };
+
+		}
 
 		setErrors(newErrors);
 
 		if (isEmptyObj(newErrors)) {
+
+			setValidated(true);
+
 			// TODO: CODE OF REGISTRATION
 			// handleRegister()
 		}
 	};
 
+	const Errors = ({ e }) => {
+		return (
+			<HStack marginTop='2'>
+				<AntDesign name='exclamationcircleo' size='xs' color={red} />
+				<Text color={red}> {e}</Text>
+			</HStack>
+		);
+	};
+
+	const BadWarning = ({ text }) => {
+		return (
+			<HStack>
+				<AntDesign name='closecircle' size='xs' color={red} />
+				<Text color={red} style={styles.textLeftPadding}>{text}</Text>
+			</HStack>
+		);
+	};
+
+	const GoodWarning = ({ text }) => {
+		return (
+			<HStack>
+				<AntDesign name='checkcircle' size='xs' color={green} />
+				<Text color={green} style={styles.textLeftPadding}>
+					{text}
+				</Text>
+			</HStack>
+		);
+	};
+
 	return (
-		<Column flex={1} space={120}>
-			<Row justifyContent={'center'} style={styles.aboutBox}>
+		<Column flex={1} space={120} style={styles.aboutBox}>
+			<Row justifyContent={'center'}>
 				<StyledBox
-					flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
-					className={'RegisterContainer'}
-					bg={theme.colors.medYellow}
-					borderRadius={25}
-					backgroundColor={theme.colors.medYellow[0]}
-					headingText={'Register'}
-					childrenJustifyContent={'center'}
+					width={isSmallScreen ? boxWidthMobile : boxWidth}
+					backgroundColor={theme.colors.medYellow['0']}
+					rounded='25'
+					headingText='Register'
+					childrenJustifyContent='center'
 				>
-					<FormControl className={'NameContainer'} isInvalid={'name' in errors}>
-						<FormControl.Label>
-							<Text size='md'> Name</Text>
-						</FormControl.Label>
+					{!validated ? (
+						<VStack space='5' flex='1'>
+							{/*Name*/}
+							<FormControl isInvalid={'name' in errors}>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Nome*
+								</Text>
+								<Input
+									variant='filled'
+									rounded='10'
+									_focus={{ bg: white }}
+									onChangeText={(value) => setData({ ...regData, name: value })}
+								/>
+								{'name' in errors && <Errors e={errors.name} />}
+							</FormControl>
 
-						<Input
-							variant='filled'
-							rounded='10'
-							_focus={{ bg: '#ffffff' }}
-							onChangeText={(value) => setData({ ...regData, name: value })}
-						/>
+							{/*Email*/}
+							<FormControl isInvalid={'email' in errors}>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Email*
+								</Text>
+								<Input
+									variant='filled'
+									rounded='10'
+									_focus={{ bg: white }}
+									onChangeText={(value) => setData({ ...regData, email: value })}
+								/>
+								{'email' in errors && <Errors e={errors.email} />}
+							</FormControl>
 
-						{'name' in errors ? (
-							<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size='xs' />}>
-								{errors.name}
-							</FormControl.ErrorMessage>
-						) : (
-							<FormControl.HelperText>{null}</FormControl.HelperText>
-						)}
-					</FormControl>
+							{/*Password*/}
+							<FormControl>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Password*
+								</Text>
 
-					<FormControl className={'UsernameContainer'} isInvalid={'username' in errors}>
-						<FormControl.Label>
-							<Text size='md'> Username</Text>
-						</FormControl.Label>
-
-						<Input
-							variant='filled'
-							rounded='10'
-							_focus={{ bg: '#ffffff' }}
-							onChangeText={(value) => setData({ ...regData, username: value })}
-						/>
-
-						{'username' in errors ? (
-							<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size='xs' />}>
-								{errors.username}
-							</FormControl.ErrorMessage>
-						) : (
-							<FormControl.HelperText>{null}</FormControl.HelperText>
-						)}
-					</FormControl>
-
-					<FormControl className={'EmailContainer'} isInvalid={'email' in errors}>
-						<FormControl.Label>
-							<Text size='md'> Email</Text>
-						</FormControl.Label>
-
-						<Input
-							variant='filled'
-							rounded='10'
-							_focus={{ bg: '#ffffff' }}
-							onChangeText={(value) => setData({ ...regData, email: value })}
-						/>
-
-						{'email' in errors ? (
-							<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size='xs' />}>
-								{errors.email}
-							</FormControl.ErrorMessage>
-						) : (
-							<FormControl.HelperText>{null}</FormControl.HelperText>
-						)}
-					</FormControl>
-
-					<FormControl
-						className={'PasswordContainer'}
-						isRequired
-						isInvalid={'password' in errors}
-					>
-						<FormControl.Label>
-							<Text size='md'> Password</Text>
-						</FormControl.Label>
-
-						<Input
-							variant='filled'
-							rounded='10'
-							_focus={{ bg: '#ffffff' }}
-							type={show1 ? 'text' : 'password'}
-							InputRightElement={
-								<Pressable onPress={() => setShow1(!show1)}>
-									<Icon
-										as={
-											<MaterialIcons
-												name={show1 ? 'visibility' : 'visibility-off'}
+								<Input
+									variant='filled'
+									rounded='10'
+									_focus={{ bg: white }}
+									type={show1 ? 'text' : 'password'}
+									InputRightElement={
+										<Pressable onPress={() => setShow1(!show1)} px={'1%'}>
+											<Icon
+												as={
+													<MaterialIcons
+														name={
+															show1 ? 'visibility' : 'visibility-off'
+														}
+													/>
+												}
+												size='5'
+												color='muted.400'
 											/>
-										}
-										size={5}
-										mr='2'
-										color='muted.400'
-									/>
-								</Pressable>
-							}
-							onChangeText={(value) => setData({ ...regData, password: value })}
-						/>
+										</Pressable>
+									}
+									onChangeText={(value) =>
+										setData({ ...regData, password: value })
+									}
+								/>
 
-						{'password' in errors ? (
-							<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size='xs' />}>
-								{errors.password}
-							</FormControl.ErrorMessage>
-						) : (
-							<FormControl.HelperText>{null}</FormControl.HelperText>
-						)}
-					</FormControl>
+								{regData.password ? (
+									<VStack marginTop='2'>
+										<Text style={styles.text}>Password deve conter</Text>
+										{regData.password.length < 6 ||
+										regData.password.length > 15 ? (
+											<BadWarning text='6 a 16 caracteres' />
+										) : (
+											<GoodWarning text='6 a 16 caracteres' />
+										)}
 
-					<FormControl
-						className={'ConfirmPasswordContainer'}
-						isRequired
-						isInvalid={'password2' in errors}
-					>
-						<FormControl.Label>
-							<Text size='md'> Confirm password</Text>
-						</FormControl.Label>
+										{!regexPassword.test(regData.password) ? (
+											<BadWarning text='Pelo menos um número e uma letra' />
+										) : (
+											<GoodWarning text='Pelo menos um número e uma letra' />
+										)}
+									</VStack>
+								) : (
+									'password' in errors && <Errors e={'Password é obrigatória!'} />
+								)}
+							</FormControl>
 
-						<Input
-							variant='filled'
-							rounded='10'
-							_focus={{ bg: '#ffffff' }}
-							type={show2 ? 'text' : 'password'}
-							InputRightElement={
-								<Pressable onPress={() => setShow2(!show2)}>
-									<Icon
-										as={
-											<MaterialIcons
-												name={show2 ? 'visibility' : 'visibility-off'}
+							{/*Confirm password*/}
+							<FormControl>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Repetir Password*
+								</Text>
+
+								<Input
+									variant='filled'
+									rounded='10'
+									_focus={{ bg: white }}
+									type={show2 ? 'text' : 'password'}
+									InputRightElement={
+										<Pressable onPress={() => setShow2(!show2)} px={'1%'}>
+											<Icon
+												as={
+													<MaterialIcons
+														name={
+															show2 ? 'visibility' : 'visibility-off'
+														}
+													/>
+												}
+												size='5'
+												color='muted.400'
 											/>
-										}
-										size={5}
-										mr='2'
-										color='muted.400'
-									/>
-								</Pressable>
-							}
-							onChangeText={(value) => setData({ ...regData, password2: value })}
-						/>
+										</Pressable>
+									}
+									onChangeText={(value) =>
+										setData({ ...regData, password2: value })
+									}
+								/>
 
-						{'password2' in errors ? (
-							<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size='xs' />}>
-								{errors.password2}
-							</FormControl.ErrorMessage>
-						) : (
-							<FormControl.HelperText>{null}</FormControl.HelperText>
-						)}
-					</FormControl>
+								{regData.password2 ? (
+									<VStack marginTop='2'>
+										{regData.password2 !== regData.password ? (
+											<BadWarning text='As passwords diferem' />
+										) : (
+											<HStack>
+												<Fontisto name='smiley' size='xs' color={green} />
+												<Text color={green} style={styles.textLeftPadding}>
+													São idênticas!
+												</Text>
+											</HStack>
+										)}
+									</VStack>
+								) : (
+									'password2' in errors && (
+										<Errors e={'Por favor confirma a tua password'} />
+									)
+								)}
+							</FormControl>
 
-					<FormControl className={'DegreeContainer'} isInvalid={'degree' in errors}>
-						<FormControl.Label>
-							<Text size='md'> Degree</Text>
-						</FormControl.Label>
+							{/*Degree*/}
+							<FormControl isInvalid={'degree' in errors}>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Curso
+								</Text>
+								<Input
+									variant='filled'
+									rounded='10'
+									_focus={{ bg: white }}
+									onChangeText={(value) => setData({ ...regData, degree: value })}
+								/>
+								{'degree' in errors && <Errors e={errors.degree} />}
+							</FormControl>
 
-						<Input
-							variant='filled'
-							rounded='10'
-							_focus={{ bg: '#ffffff' }}
-							onChangeText={(value) => setData({ ...regData, degree: value })}
-						/>
+							{/*University*/}
+							<FormControl isInvalid={'university' in errors}>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Universidade
+								</Text>
+								<Input
+									variant='filled'
+									rounded='10'
+									_focus={{ bg: white }}
+									onChangeText={(value) =>
+										setData({ ...regData, university: value })
+									}
+								/>
+								{'university' in errors && <Errors e={errors.university} />}
+							</FormControl>
 
-						{'degree' in errors ? (
-							<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size='xs' />}>
-								{errors.degree}
-							</FormControl.ErrorMessage>
-						) : (
-							<FormControl.HelperText>{null}</FormControl.HelperText>
-						)}
-					</FormControl>
+							<Button variant='alternating' onPress={validate} alignSelf='center'>
+								Registar
+							</Button>
 
-					<FormControl
-						className={'UniversityContainer'}
-						isInvalid={'university' in errors}
-					>
-						<FormControl.Label>
-							<Text size='md'> University</Text>
-						</FormControl.Label>
+							<Box alignSelf='center'>
+								<Link to={'/'} style={{ textDecoration: 'none' }}>
+									<Text size='md'>Cancelar</Text>
+								</Link>
+							</Box>
+						</VStack>
+					) : (
+						<VStack alignItems='center' space='5'>
+							{/* eslint-disable-next-line react/no-unescaped-entities */}
+							<Heading>Parabéns, foi um sucesso!</Heading>
 
-						<Input
-							variant='filled'
-							rounded='10'
-							_focus={{ bg: '#ffffff' }}
-							onChangeText={(value) => setData({ ...regData, university: value })}
-						/>
-
-						{'university' in errors ? (
-							<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size='xs' />}>
-								{' '}
-								{errors.university}
-							</FormControl.ErrorMessage>
-						) : (
-							<FormControl.HelperText>{null}</FormControl.HelperText>
-						)}
-					</FormControl>
-					<Column style={styles.aboutBox} space={5}>
-						<Button alignSelf='center' variant='alternating' onPress={validate}>
-							Register
-						</Button>
-
-						<Center>
-							<Link to={'/'} style={{ textDecoration: 'none' }}>
-								<Text size='md'>Cancel</Text>
+							<Link to={'/Login'} style={{ textDecoration: 'none' }}>
+								<Button alignSelf='center' variant='alternating'>
+									Fazer Login
+								</Button>
 							</Link>
-						</Center>
-					</Column>
+
+							<Link to={'/'} style={{ textDecoration: 'none' }}>
+								<Text size='md'>Voltar à página inicial</Text>
+							</Link>
+						</VStack>
+					)}
+
 				</StyledBox>
 			</Row>
 		</Column>

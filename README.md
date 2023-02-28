@@ -27,7 +27,7 @@
 3. **THERE IS ONLY ONE FONT**(TextME), no more fonts are allowed
 4. All new components should be placed in the component folder, under a subfolder of that type of component, for example a Card which displays info should be under `*src/components/info*`
 5. If changes are to be done in the `*router folder, App.js, theme.js*`,**it has to be reviewed by the group leader**.
-6. New libraries are installed, with a command such as `*npm install library*` or `*npx install library*`, **only by the permission of the group leader**
+6. New libraries are installed, with a command `*npx expo install library*`, **only by the permission of the group leader**
 7. Changes to the .gitignore should be pettioned to the group leader.
 8. The ammount of libraries **should allways be** the least possible
 9. **No messing with: eslintignore, eslintrc.json, .prettierrc, app.json or package-lock.json file**.
@@ -92,12 +92,27 @@ export default function Feature(props) {
 
 [//]: # (CSS)
 [//]: # (Styling inside the function)
+
+``
+**IMPORTS**
+
+import React from 'react';
+import { useState } from 'react'; **Used in all types of React, hence it is the react source**
+import { StyleSheet } from 'react-native'; **Example of react-native component**
+import { Button, Text, View } from 'native-base'; **Example of native-base component**
+
+export default function Feature(props) { **A way to define props**
+
+**Styling inside the function**
+
 	const styles = StyleSheet.create({  
 
 		container: {
 			backgroundColor: '#fff',
 		},
 	});
+
+
 
 [//]: # (STATE)
 [//]: # (State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int)
@@ -116,8 +131,15 @@ export default function Feature(props) {
 			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
             
 [//]: # (Using compenent variables props once more. Independently of whether you did the compoenent or native-base's UI team did. Props are simply variables of the component function which increases its customability)
+
+
+
 			<Text>{props.bottomText}</Text>
 		</Stack>
 	);
 }
+
 ````
+
+
+

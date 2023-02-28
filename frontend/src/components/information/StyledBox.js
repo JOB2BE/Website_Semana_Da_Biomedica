@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Row, Heading, Column } from 'native-base';
+import { Stack, Heading, Column } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
 
@@ -27,9 +27,17 @@ export default function StyledBox(props) {
 					{props.headingText}
 				</Heading>
 			)}
-			<Row alignSelf={'stretch'} flexWrap={'wrap'}>
+
+			<Stack
+				direction={props.childrenInRow ? 'row' : 'column'}
+				alignSelf={'stretch'}
+				flexWrap={'wrap'}
+				space={props.headingText === '' && props.stackSpace}
+				alignItems={props.centerChildren ? 'center' : 'flexStart'}
+        justifyContent={props.childrenJustifyContent}
+			>
 				{props.children}
-			</Row>
+			</Stack>
 		</Column>
 	);
 }
@@ -47,7 +55,13 @@ StyledBox.propTypes = {
 	shadowOpacity: PropTypes.number,
 	elevation: PropTypes.number,
 	padding: PropTypes.number,
+	childrenInRow: PropTypes.bool,
+	centerChildren: PropTypes.bool,
+	childrenJustifyContent: PropTypes.number,
 };
+
+
+
 StyledBox.defaultProps = {
 	headingColor: theme.colors.dryBlue[0],
 	headingSize: 'md',
@@ -64,4 +78,8 @@ StyledBox.defaultProps = {
 	shadowOpacity: 0.7,
 	elevation: 10,
 	padding: 5,
+	childrenInRow: true,
+	centerChildren: false,
+	childrenJustifyContent: 'flex-start',
 };
+
