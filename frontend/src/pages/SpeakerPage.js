@@ -11,7 +11,6 @@ import {
 	ChevronUpIcon,
 } from 'native-base';
 import theme from '../theme';
-
 import { StyleSheet } from 'react-native';
 import { useWindowDimensions } from 'react-native';
 import responsiveWidth from '../utils/responsiveWidth';
@@ -30,7 +29,6 @@ export default function SpeakerPage(props) {
 
 export default function SpeakerPage() {
 	const { id } = useParams();
-
 	const styles = StyleSheet.create({
 
 		TextName: {

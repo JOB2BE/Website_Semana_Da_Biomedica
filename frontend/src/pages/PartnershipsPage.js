@@ -9,6 +9,8 @@ import theme from '../theme';
 export default function PartnershipsPage() {
 	var window = useWindowDimensions();
 	var imageRadius = responsiveWidth(window, 70, 300, 0.1);
+	var parternshipBoxWidth = responsiveWidth(window, null, null, 0.6);
+
 
 	const styles = StyleSheet.create({
 		text: {
@@ -22,6 +24,7 @@ export default function PartnershipsPage() {
 			shadowRadius: 0.5,
 			shadowOpacity: 0.7,
 		},
+		partnerRows: { width: parternshipBoxWidth },
 	});
 
 	// Dummy objects that will be retrieved from the database
@@ -93,6 +96,7 @@ export default function PartnershipsPage() {
 				space={10}
 				containerRadius={imageRadius}
 				objects={dummyObjects}
+				style={styles.partnerRows}
 			></PartnerShipRow>
 
 			<StyledBox style={styles.text}>
@@ -105,6 +109,9 @@ export default function PartnershipsPage() {
 				space={10}
 				containerRadius={imageRadius}
 				objects={dummyObjects}
+
+				style={styles.partnerRows}
+
 			></PartnerShipRow>
 
 			<StyledBox style={styles.text}>
@@ -117,6 +124,8 @@ export default function PartnershipsPage() {
 				space={10}
 				containerRadius={imageRadius}
 				objects={dummyObjects}
+				style={styles.partnerRows}
+
 			></PartnerShipRow>
 
 			<StyledBox style={styles.text}>
@@ -129,8 +138,8 @@ export default function PartnershipsPage() {
 				space={10}
 				containerRadius={imageRadius}
 				objects={dummyObjects}
+				style={styles.partnerRows}
 			></PartnerShipRow>
-
 		</Column>
 	);
 }

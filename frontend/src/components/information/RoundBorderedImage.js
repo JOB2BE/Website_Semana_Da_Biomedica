@@ -21,7 +21,6 @@ export default function RoundBorderedImage(props) {
 	});
 
 
-	
 	if (!props.link) {
 		return (
 			<Center style={styles.container}>
@@ -29,6 +28,7 @@ export default function RoundBorderedImage(props) {
 			</Center>
 		);
 	}
+
 
 	return (
 		<Link to={props.link}>
