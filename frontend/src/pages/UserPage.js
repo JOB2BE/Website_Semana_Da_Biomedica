@@ -71,10 +71,10 @@ export default function SpeakerPageDummy() {
 						<Column alignItems='center' space={3}>
 							<Heading> Nuno André da Silva </Heading>
 							<Text fontWeight={1000} size='md'>
-								Orador
+								Universidade Do Bronze
 							</Text>
 							<Text fontWeight={1000} size='md'>
-								Assitant to Regional Manager
+                                Curso com maior pujança
 							</Text>
 						</Column>
 					</StyledBox>
