@@ -23,8 +23,17 @@ export const NavBarMobile = ({ navbarRoutes }) => {
 	const styles = StyleSheet.create({
 		menu: {
 			borderBottomRightRadius: 15,
+			borderBottomLeftRadius: 15,
 			backgroundColor: theme.colors.medYellow[0],
 			padding: 10,
+			shadowColor: '#000',
+			shadowOffset: {
+				width: 0,
+				height: 2,
+			},
+			shadowOpacity: 0.34,
+			shadowRadius: 6.27,
+			elevation: 10,
 		},
 		textTitle: {
 			color: 'white',
