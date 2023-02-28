@@ -10,6 +10,10 @@ import ActivitiesPage from './pages/ActivitiesPage';
 import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
+import PartnershipsPage from './pages/PartnershipsPage';
+import RegisterPage from './pages/RegisterPage';
+import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
+import PasswordResetPage from './pages/PasswordResetPage';
 import theme from './theme';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -59,6 +63,21 @@ export default function App() {
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
 							<Route path='/Speaker/:id' element={<SpeakerPage idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
+							<Route
+								path='/Partnerships'
+								element={<PartnershipsPage idiom={i18n} />}
+							/>
+							<Route path='/Register' element={<RegisterPage idiom={i18n} />} />
+
+							<Route
+								path='/ResetPassword'
+								element={<PasswordResetPage idiom={i18n} />}
+							/>
+							<Route
+								path='/RecoverPassword'
+								element={<PasswordRecoveryPage idiom={i18n} />}
+							/>
+
 						</Routes>
 					</Router>
 				</NativeBaseProvider>

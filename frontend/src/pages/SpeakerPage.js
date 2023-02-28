@@ -27,6 +27,7 @@ export default function SpeakerPage(props) {
 	var isScreenSmall = window.width < 850;
 
 	const styles = StyleSheet.create({
+
 		TextName: {
 			fontWeight: '1000',
 		},
@@ -52,6 +53,7 @@ export default function SpeakerPage(props) {
 
 		page: {
 			width: pageWidth,
+
 		},
 	});
 
