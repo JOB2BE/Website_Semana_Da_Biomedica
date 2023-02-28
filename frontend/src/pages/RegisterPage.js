@@ -38,6 +38,9 @@ export default function RegisterPage() {
 			borderRadius: 25,
 		},
 		text: { fontWeight: 'bold' },
+		textLeftPadding: {
+			paddingLeft: '1%',
+		},
 	});
 
 	const [regData, setData] = useState('');
@@ -117,7 +120,7 @@ export default function RegisterPage() {
 		return (
 			<HStack>
 				<AntDesign name='closecircle' size='xs' color={red} />
-				<Text color={red}> {text}</Text>
+				<Text color={red} style={styles.textLeftPadding}>{text}</Text>
 			</HStack>
 		);
 	};
@@ -126,7 +129,9 @@ export default function RegisterPage() {
 		return (
 			<HStack>
 				<AntDesign name='checkcircle' size='xs' color={green} />
-				<Text color={green}> {text}</Text>
+				<Text color={green} style={styles.textLeftPadding}>
+					{text}
+				</Text>
 			</HStack>
 		);
 	};
@@ -145,7 +150,9 @@ export default function RegisterPage() {
 						<VStack space='5' flex='1'>
 							{/*Name*/}
 							<FormControl isInvalid={'name' in errors}>
-								<Text style={styles.text} size='md'> Name*</Text>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Nome*
+								</Text>
 								<Input
 									variant='filled'
 									rounded='10'
@@ -157,7 +164,9 @@ export default function RegisterPage() {
 
 							{/*Email*/}
 							<FormControl isInvalid={'email' in errors}>
-								<Text style={styles.text} size='md'> Email*</Text>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Email*
+								</Text>
 								<Input
 									variant='filled'
 									rounded='10'
@@ -169,7 +178,9 @@ export default function RegisterPage() {
 
 							{/*Password*/}
 							<FormControl>
-								<Text style={styles.text} size='md'> Password*</Text>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Password*
+								</Text>
 
 								<Input
 									variant='filled'
@@ -198,28 +209,30 @@ export default function RegisterPage() {
 
 								{regData.password ? (
 									<VStack marginTop='2'>
-										<Text> Password must contain</Text>
+										<Text style={styles.text}>Password deve conter</Text>
 										{regData.password.length < 6 ||
 										regData.password.length > 15 ? (
-											<BadWarning text='6 to 16 characters' />
+											<BadWarning text='6 a 16 caracteres' />
 										) : (
-											<GoodWarning text='6 to 16 characters' />
+											<GoodWarning text='6 a 16 caracteres' />
 										)}
 
 										{!regexPassword.test(regData.password) ? (
-											<BadWarning text='Only numbers and letters' />
+											<BadWarning text='Pelo menos um número e uma letra' />
 										) : (
-											<GoodWarning text='Only numbers and letters' />
+											<GoodWarning text='Pelo menos um número e uma letra' />
 										)}
 									</VStack>
 								) : (
-									'password' in errors && <Errors e={'Password is mandatory!'} />
+									'password' in errors && <Errors e={'Password é obrigatória!'} />
 								)}
 							</FormControl>
 
 							{/*Confirm password*/}
 							<FormControl>
-								<Text style={styles.text} size='md'> Confirm password*</Text>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Repetir Password*
+								</Text>
 
 								<Input
 									variant='filled'
@@ -249,25 +262,28 @@ export default function RegisterPage() {
 								{regData.password2 ? (
 									<VStack marginTop='2'>
 										{regData.password2 !== regData.password ? (
-											<BadWarning text='Passwords do not match' />
+											<BadWarning text='As passwords diferem' />
 										) : (
 											<HStack>
 												<Fontisto name='smiley' size='xs' color={green} />
-												{/* eslint-disable-next-line react/no-unescaped-entities */}
-												<Text color={green}> It's a match!</Text>
+												<Text color={green} style={styles.textLeftPadding}>
+													São idênticas!
+												</Text>
 											</HStack>
 										)}
 									</VStack>
 								) : (
 									'password2' in errors && (
-										<Errors e={'Please confirm your password'} />
+										<Errors e={'Por favor confirma a tua password'} />
 									)
 								)}
 							</FormControl>
 
 							{/*Degree*/}
 							<FormControl isInvalid={'degree' in errors}>
-								<Text style={styles.text} size='md'> Degree</Text>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Curso
+								</Text>
 								<Input
 									variant='filled'
 									rounded='10'
@@ -279,7 +295,9 @@ export default function RegisterPage() {
 
 							{/*University*/}
 							<FormControl isInvalid={'university' in errors}>
-								<Text style={styles.text} size='md'> University</Text>
+								<Text style={[styles.text, styles.textLeftPadding]} size='md'>
+									Universidade
+								</Text>
 								<Input
 									variant='filled'
 									rounded='10'
@@ -292,28 +310,28 @@ export default function RegisterPage() {
 							</FormControl>
 
 							<Button variant='alternating' onPress={validate} alignSelf='center'>
-								Register
+								Registar
 							</Button>
 
 							<Box alignSelf='center'>
 								<Link to={'/'} style={{ textDecoration: 'none' }}>
-									<Text size='md'>Cancel</Text>
+									<Text size='md'>Cancelar</Text>
 								</Link>
 							</Box>
 						</VStack>
 					) : (
 						<VStack alignItems='center' space='5'>
 							{/* eslint-disable-next-line react/no-unescaped-entities */}
-							<Heading>Congrats, you're in!</Heading>
+							<Heading>Parabéns, foi um sucesso!</Heading>
 
 							<Link to={'/Login'} style={{ textDecoration: 'none' }}>
 								<Button alignSelf='center' variant='alternating'>
-									Login
+									Fazer Login
 								</Button>
 							</Link>
 
 							<Link to={'/'} style={{ textDecoration: 'none' }}>
-								<Text size='md'>Back to Home Page</Text>
+								<Text size='md'>Voltar à página inicial</Text>
 							</Link>
 						</VStack>
 					)}
