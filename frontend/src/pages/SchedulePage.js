@@ -3,7 +3,9 @@ import { Divider, Heading, HStack, Pressable, Text, View, VStack } from 'native-
 import theme from '../theme';
 import { AntDesign } from '@expo/vector-icons';
 
+
 // TODO: CHECK ON MOBILE
+
 
 export default function SchedulePage() {
 	const [selectedDay, setSelectedDay] = useState(new Date().getDate());

@@ -1,9 +1,6 @@
-import useWindowDimensions from './useWindowDimensions';
 
-export default function responsiveHeight(min = null, max = null, coef = 1) {
-	var windowArray = useWindowDimensions();
-
-	let size = coef * windowArray.height;
+export default function responsiveHeight(window, min = null, max = null, coef = 1) {
+	let size = coef * window.height;
 
 	if ((min !== null) & (size < min)) {
 		size = min;
