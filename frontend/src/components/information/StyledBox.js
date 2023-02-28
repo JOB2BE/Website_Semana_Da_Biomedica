@@ -27,7 +27,13 @@ export default function StyledBox(props) {
 					{props.headingText}
 				</Heading>
 			)}
-			<Row alignSelf={'stretch'} flexWrap={'wrap'}>
+
+			<Row
+				alignSelf={'stretch'}
+				flexWrap={'wrap'}
+				justifyContent={props.childrenJustifyContent}
+			>
+
 				{props.children}
 			</Row>
 		</Column>
@@ -47,6 +53,8 @@ StyledBox.propTypes = {
 	shadowOpacity: PropTypes.number,
 	elevation: PropTypes.number,
 	padding: PropTypes.number,
+	childrenJustifyContent: PropTypes.number,
+
 };
 StyledBox.defaultProps = {
 	headingColor: theme.colors.dryBlue[0],
@@ -64,4 +72,6 @@ StyledBox.defaultProps = {
 	shadowOpacity: 0.7,
 	elevation: 10,
 	padding: 5,
+	childrenJustifyContent: 'flex-start',
 };
+

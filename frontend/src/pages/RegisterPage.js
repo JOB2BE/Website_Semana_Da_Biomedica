@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import {
 	Button,
+
 	Text,
 	VStack,
 	FormControl,
@@ -22,6 +24,7 @@ import { StyleSheet } from 'react-native';
 import { useWindowDimensions } from 'react-native';
 import responsiveWidth from '../utils/responsiveWidth';
 import responsiveHeight from '../utils/responsiveHeight';
+
 
 // TODO: VERIFY ON MOBILE
 
@@ -52,6 +55,7 @@ export default function RegisterPage() {
 	const [show2, setShow2] = useState(false);
 
 	// Regex represent parameters we *want*.
+
 	const regexPassword = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/; // Only numbers or letters. No spaces
 	const regexDegree = /^([^0-9]*)$/; // Anything but numbers
 	const regexUniversity = /^([^0-9]*)$/; // Anything but numbers
@@ -96,16 +100,21 @@ export default function RegisterPage() {
 		// University
 		if (!regData.university && !regexUniversity.test(regData.university)) {
 			newErrors = { ...newErrors, university: 'Remove any number' };
+
 		}
 
 		setErrors(newErrors);
 
 		if (isEmptyObj(newErrors)) {
+
 			setValidated(true);
+
+
 			// TODO: CODE OF REGISTRATION
 			// handleRegister()
 		}
 	};
+
 
 	const Errors = ({ e }) => {
 		return (
@@ -335,6 +344,7 @@ export default function RegisterPage() {
 							</Link>
 						</VStack>
 					)}
+
 				</StyledBox>
 			</Row>
 		</Column>
