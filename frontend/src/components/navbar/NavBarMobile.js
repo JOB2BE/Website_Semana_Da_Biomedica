@@ -1,6 +1,6 @@
 import React from "react";
-import { Center, Heading, Box, Stack, Pressable, HamburgerIcon, Button } from 'native-base';
-import { View, TouchableOpacity, Row } from 'react-native'
+import { Center, Heading, Box, Row, Pressable, Stack, HamburgerIcon, Button, Column } from 'native-base';
+import { View } from 'react-native'
 import AboutUsIcon from '../../assets/images/AboutUsIcon';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
 
-    rectangleCorner: {
+    rectangleCornerClose: {
         width: 80,
         height: 80,
         borderBottomRightRadius: 30,
@@ -41,63 +41,124 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDBA35',
     },
 
+    rectangleCornerOpen: {
+        width: 328,
+        height: 80,
+        //justifyContent: 'space-between',
+        //alignItems: 'left',
+        alignContent: 'center',
+
+        backgroundColor: '#FDBA35',
+        padding: 30,
+    },
+
     rectangleOpen: {
+        flex: '0.9',
         width: 328,
         height: 652,
         borderBottomRightRadius: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center',
+        justifyContent: 'flex-end',
+        alignItems: 'left',
+        alignContent: 'left',
+        textAlign: 'left',
         display: 'flex',
         backgroundColor: '#FDBA35',
+        padding: 40,
     },
 
-    rectangleSimple: {
-        width: 328,
-        height: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center',
-        display: 'flex',
-        backgroundColor: '#FDBA35',
+    textTitle: {
+        size: 24,
+        color: 'white',
+        padding: 40,
+    },
+
+    textTitleBigger: {
+        size: 60,
+        color: 'white',
+        padding: 40,
     }
 });
 
 export const NavBarMobile = () => {
 
+
+
     const [currentIndex, setCurrentIndex] = React.useState(null);
 
-    const navbarRoutes = [
-        {
-            name: idiom.t(['navbarmobile', 'aboutUs']),
-            icon: <AboutUsIcon />,
-            route: '/AboutUs',
-        },
-        {
-            name: idiom.t(['navbarmobile', 'schedule']),
-            icon: <ScheduleIcon />,
-            route: '/Schedule',
-        },
-        {
-            name: idiom.t(['navbarmobile', 'activities']),
-            icon: <ActivitiesIcon />,
-            route: '/Activities',
-        },
-        {
-            name: idiom.t(['navbarmobile', 'speakers']),
-            icon: <SpeakersIcon />,
-            route: '/Speakers',
-        },
-        {
-            name: idiom.t(['navbarmobile', 'login']),
-            icon: <Icon name="ios-person-circle-outline" size={30} color='white' style={{ position: 'absolute', right: 20 }} />,
-            route: '/Login',
-        },
-    ];
-
     return (
-        <Pressable style={styles.rectangleCorner}>
-            <HamburgerIcon size={60} color="white"></HamburgerIcon>
-        </Pressable>
-    )
+        <Column>
+            <Pressable onPress={() => {
+                if (currentIndex === 0) {
+                    setCurrentIndex(null);
+                } else {
+                    setCurrentIndex(0);
+                }
+            }}>
+                <Row
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    style={currentIndex === 0 ? styles.rectangleCornerOpen : styles.rectangleCornerClose}
+                >
+                    <HamburgerIcon size={60} color="white"></HamburgerIcon>
+                    {currentIndex === 0 ? (
+                        <Heading style={styles.textTitleBigger}>Menu</Heading>
+                    ) : (
+                        <></>
+                    )}
+
+                </Row>
+            </Pressable>
+
+            {currentIndex === 0 ? (
+                <Center style={styles.rectangleOpen} >
+                    <Pressable>
+                        <Row justifyContent={'space-between'} alignItems={'center'}>
+                            <Link to={'/AboutUs'} style={{ textDecoration: 'none' }}>
+                                <AboutUsIcon size={24}></AboutUsIcon>
+                                <Heading style={styles.textTitle}>Sobre Nós</Heading>
+                            </Link>
+                        </Row>
+                    </Pressable>
+
+                    <Pressable>
+                        <Row justifyContent={'space-between'} alignItems={'center'}>
+                            <Link to={'/Schedule'} style={{ textDecoration: 'none' }}>
+                                <ScheduleIcon size={24}></ScheduleIcon>
+                                <Heading style={styles.textTitle}>Horário</Heading>
+                            </Link>
+                        </Row>
+                    </Pressable>
+
+                    <Pressable>
+                        <Row justifyContent={'space-between'} alignItems={'center'}>
+                            <Link to={'/Activities'} style={{ textDecoration: 'none' }}>
+                                <ActivitiesIcon size={24}></ActivitiesIcon>
+                                <Heading style={styles.textTitle}>Atividades</Heading>
+                            </Link>
+                        </Row>
+                    </Pressable>
+
+                    <Pressable>
+                        <Row justifyContent={'space-between'} alignItems={'center'}>
+                            <Link to={'/Speakers'} style={{ textDecoration: 'none' }}>
+                                <SpeakersIcon size={24}></SpeakersIcon>
+                                <Heading style={styles.textTitle}>Oradores</Heading>
+                            </Link>
+                        </Row>
+                    </Pressable>
+
+                    <Pressable >
+                        <Row justifyContent={'space-between'} alignItems={'center'}>
+                            <Link to={'/Login'} style={{ textDecoration: 'none' }}>
+                                <Icon name="person-outline" size={24} color={'white'}></Icon>
+                                <Heading style={styles.textTitle}>Login</Heading>
+                            </Link>
+                        </Row>
+                    </Pressable>
+                </Center>
+            ) : (
+                <></>
+            )}
+        </Column>
+    );
 }
