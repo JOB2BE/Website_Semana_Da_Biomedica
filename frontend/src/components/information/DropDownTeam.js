@@ -7,12 +7,12 @@ import UserRow from './UserRow';
 import RoundBorderedImage from './RoundBorderedImage';
 import { useWindowDimensions } from 'react-native';
 import responsiveWidth from '../../utils/responsiveWidth';
-
 export default function DropDownTeam(props) {
 	var currentIndex = props.index;
 	var window = useWindowDimensions();
 	var imageRadius = responsiveWidth(window, 100, 300, 0.1);
 	var parternshipBoxWidth = responsiveWidth(window, null, null, 0.6);
+
 	const styles = StyleSheet.create({
 		heading: {
 			color: theme.colors.dryBlue[0],
@@ -137,6 +137,7 @@ export default function DropDownTeam(props) {
 					<></>
 				)}
 			</Column>
+
 		</Row>
 	);
 }

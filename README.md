@@ -27,7 +27,7 @@
 3. **THERE IS ONLY ONE FONT**(TextME), no more fonts are allowed
 4. All new components should be placed in the component folder, under a subfolder of that type of component, for example a Card which displays info should be under `*src/components/info*`
 5. If changes are to be done in the `*router folder, App.js, theme.js*`,**it has to be reviewed by the group leader**.
-6. New libraries are installed, with a command such as `*npm install library*` or `*npx install library*`, **only by the permission of the group leader**
+6. New libraries are installed, with a command `*npx expo install library*`, **only by the permission of the group leader**
 7. Changes to the .gitignore should be pettioned to the group leader.
 8. The ammount of libraries **should allways be** the least possible
 9. **No messing with: eslintignore, eslintrc.json, .prettierrc, app.json or package-lock.json file**.
@@ -73,7 +73,6 @@
 3. Structure:
 
 
-<<<<<<< HEAD
 ````
 [//]: # (IMPORTS)
 
@@ -93,7 +92,7 @@ export default function Feature(props) {
 
 [//]: # (CSS)
 [//]: # (Styling inside the function)
-=======
+
 ``
 **IMPORTS**
 
@@ -106,14 +105,14 @@ export default function Feature(props) { **A way to define props**
 
 **Styling inside the function**
 
->>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
 	const styles = StyleSheet.create({  
 
 		container: {
 			backgroundColor: '#fff',
 		},
 	});
-<<<<<<< HEAD
+
+
 
 [//]: # (STATE)
 [//]: # (State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int)
@@ -132,25 +131,15 @@ export default function Feature(props) { **A way to define props**
 			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
             
 [//]: # (Using compenent variables props once more. Independently of whether you did the compoenent or native-base's UI team did. Props are simply variables of the component function which increases its customability)
-=======
-**State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int**
-	const [counter, setCounter] = useState(0); 
 
-	return (
-**Using props but from native-base compoenents**
-		<Stack style={styles.container} direction = {'row'} alignItems = {'center'} justifyContent = {'center'}>
-**Using compoenent variables props, which change depending on the implementation of the component**
-			<Text>props.text</Text>
-**State updating by button clicking**
-			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
-**Using compoenent variables props once more, independently of whether you did the compoenent or native-base's team props are simply variables of the component function which increases its customability**
->>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
+
+
 			<Text>{props.bottomText}</Text>
 		</Stack>
 	);
 }
-<<<<<<< HEAD
+
 ````
-=======
-``
->>>>>>> 175c868c649dfe3dc1fe25baf2a88e261216858b
+
+
+
