@@ -92,12 +92,27 @@ export default function Feature(props) {
 
 [//]: # (CSS)
 [//]: # (Styling inside the function)
+
+``
+**IMPORTS**
+
+import React from 'react';
+import { useState } from 'react'; **Used in all types of React, hence it is the react source**
+import { StyleSheet } from 'react-native'; **Example of react-native component**
+import { Button, Text, View } from 'native-base'; **Example of native-base component**
+
+export default function Feature(props) { **A way to define props**
+
+**Styling inside the function**
+
 	const styles = StyleSheet.create({  
 
 		container: {
 			backgroundColor: '#fff',
 		},
 	});
+
+
 
 [//]: # (STATE)
 [//]: # (State: [stateName, stateUpdateFunction] = initialStateValue, in this case a 0 so an int)
@@ -116,8 +131,15 @@ export default function Feature(props) {
 			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
             
 [//]: # (Using compenent variables props once more. Independently of whether you did the compoenent or native-base's UI team did. Props are simply variables of the component function which increases its customability)
+
+
+
 			<Text>{props.bottomText}</Text>
 		</Stack>
 	);
 }
+
 ````
+
+
+

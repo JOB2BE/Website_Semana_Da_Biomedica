@@ -1,22 +1,15 @@
-import * as React from 'react';
-import { Center, Heading, Box, Stack, Pressable, Button } from 'native-base';
-import AboutUsIcon from '../../assets/images/AboutUsIcon';
-import ScheduleIcon from '../../assets/images/ScheduleIcon';
-import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
-import SpeakersIcon from '../../assets/images/SpeakersIcon';
-import AboutUsIconDark from '../../assets/images/AboutUsIconDark';
-import ScheduleIconDark from '../../assets/images/ScheduleIconDark';
-import ActivitiesIconDark from '../../assets/images/ActivitiesIconDark';
-import SpeakersIconDark from '../../assets/images/SpeakersIconDark';
+import { React, useState } from 'react';
+import { Center, Heading, Box, Stack } from 'native-base';
 import Logo from '../../assets/images/WhiteBGLogo';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useWindowDimensions } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
-
+import { FontAwesome5 } from '@expo/vector-icons';
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
 import { I18n } from 'i18n-js';
 import { en, pt } from '../../utils/supportedLanguages';
 import theme from '../../theme';
+import { NavBarMobile } from './NavBarMobile';
 
 var idiom = new I18n();
 idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
@@ -62,32 +55,64 @@ const styles = StyleSheet.create({
 	heading: {
 		color: 'white',
 	},
-
 });
 
 export const Navbar = () => {
-	const navbarRoutes = [
+	var window = useWindowDimensions();
+	var isScreenSmall = window.width < 850;
+	const [loggedIn, setLoggedIn] = useState(false);
+	var navbarRoutes = [
 		{
-			name: idiom.t(['navbar', 'aboutUs']),
-			icon: [<AboutUsIcon />, <AboutUsIconDark />],
-			route: '/AboutUs',
+			name: 'Atividades',
+			icon: 'brain',
+			route: '/Activities',
 		},
+
 		{
-			name: idiom.t(['navbar', 'schedule']),
-			icon: [<ScheduleIcon />, <ScheduleIconDark />],
+			name: 'Horário',
+			icon: 'calendar-alt',
 			route: '/Schedule',
 		},
 		{
-			name: idiom.t(['navbar', 'activities']),
-			icon: [<ActivitiesIcon />, <ActivitiesIconDark />],
-			route: '/Activities',
+			name: 'Quem Somos',
+			icon: 'people-carry',
+			route: '/AboutUs',
 		},
 		{
-			name: idiom.t(['navbar', 'speakers']),
-			icon: [<SpeakersIcon />, <SpeakersIconDark />],
-			route: '/Speakers',
+			name: 'Login',
+			icon: 'door-closed',
+			route: '/Login',
 		},
 	];
+	if (loggedIn) {
+		navbarRoutes = [
+			{
+				name: 'Atividades',
+				icon: 'brain',
+				route: '/Activities',
+			},
+
+			{
+				name: 'Horário',
+				icon: 'calendar-alt',
+				route: '/Schedule',
+			},
+			{
+				name: 'Quem Somos',
+				icon: 'people-carry',
+				route: '/AboutUs',
+			},
+			{
+				name: 'Perfil',
+				icon: 'door-open',
+				route: '/User',
+			},
+		];
+	}
+	if (isScreenSmall) {
+		return <NavBarMobile navbarRoutes={navbarRoutes} />;
+	}
+
 	if (useLocation().pathname === '/') {
 		// In the case were we are ib the landing page
 
@@ -156,8 +181,8 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-										{route.icon[1]}
-										<Heading style={styles.heading}>{route.name}</Heading>
+										<FontAwesome5 name={route.icon} size={24} color={'white'} />
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
 									</Stack>
 								</Link>
 							);
@@ -191,8 +216,8 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-										{route.icon[0]}
-										<Heading style={styles.heading}>{route.name}</Heading>
+										<FontAwesome5 name={route.icon} size={24} color={'white'} />
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
 									</Stack>
 								</Link>
 							);
@@ -229,8 +254,8 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-										{route.icon[0]}
-										<Heading style={styles.heading}>{route.name}</Heading>
+										<FontAwesome5 name={route.icon} size={24} color={'white'} />
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
 									</Stack>
 								</Link>
 							);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Center, Image } from 'native-base';
+import { Row, Heading, Column, Center, Image } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
 import { Link } from '../../router/index';
@@ -18,12 +18,35 @@ export default function RoundBorderedImage(props) {
 			width: props.containerRadius,
 			height: props.containerRadius,
 		},
+		hoverBackground: {
+			backgroundColor: theme.colors.engGrey[0],
+			shadowOffset: {
+				width: 10,
+				height: 14,
+			},
+		},
 	});
+  
+  if (!props.link) {return(				
+        <Center {...props} style={[styles.container, styles.hoverBackground]}>
+					<Text>{props.hoverText}</Text>
+				</Center>
+			) : (
+				<Center style={styles.container}>
+					<Image {...props} resizeMode={props.resizeMode}></Image>
+				</Center>
+			)})}
 	return (
-		<Link to={props.link}>
-			<Center style={styles.container}>
-				<Image {...props} resizeMode={props.resizeMode}></Image>
-			</Center>
+		<Link to={props.link} style={{ textDecoration: 'none' }}>
+			{props.hoverText ? (
+				<Center {...props} style={[styles.container, styles.hoverBackground]}>
+					<Text>{props.hoverText}</Text>
+				</Center>
+			) : (
+				<Center style={styles.container}>
+					<Image {...props} resizeMode={props.resizeMode}></Image>
+				</Center>
+			)}
 		</Link>
 	);
 }
@@ -42,6 +65,8 @@ RoundBorderedImage.propTypes = {
 	borderColor: PropTypes.string,
 	borderWidth: PropTypes.number,
 	link: PropTypes.string,
+	hoverText: PropTypes.string,
+
 };
 RoundBorderedImage.defaultProps = {
 	borderRadius: 1500,

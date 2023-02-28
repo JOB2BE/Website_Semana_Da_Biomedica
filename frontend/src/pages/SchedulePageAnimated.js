@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
-import { Divider, Heading, HStack, Pressable, Text, View, VStack } from 'native-base';
+import { VStack, HStack, Pressable, Text, Heading, Divider, Collapse, View } from 'native-base';
 import theme from '../theme';
 import { AntDesign } from '@expo/vector-icons';
 
-
 // TODO: CHECK ON MOBILE
 
-
-export default function SchedulePage() {
+export default function SchedulePageAnimated() {
 	const [selectedDay, setSelectedDay] = useState(new Date().getDate());
 
 	return (
 		<VStack flex={1} space={120}>
 			<HStack justifyContent={'center'} pt='10%'>
-				<VStack space='10' w='500'>
+				<VStack space='10'>
 					{[6, 7, 8].map((componentDay) => (
-						<VStack key={componentDay}>
+						<VStack key={componentDay} rounded='20' overflow='hidden'>
 							<Pressable
 								onPress={() =>
-									setSelectedDay(componentDay === selectedDay ? 0 : componentDay)
+									setSelectedDay(selectedDay === componentDay ? 0 : componentDay)
 								}
 							>
 								<HStack
@@ -26,8 +24,6 @@ export default function SchedulePage() {
 									justifyContent='space-between'
 									alignItems='center'
 									p='3'
-									roundedTop='20'
-									roundedBottom={selectedDay === componentDay ? '0' : '20'}
 								>
 									<AntDesign
 										name='down'
@@ -43,8 +39,8 @@ export default function SchedulePage() {
 								</HStack>
 							</Pressable>
 
-							{selectedDay === componentDay && (
-								<VStack bg={theme.colors.cream} p='5' borderBottomRadius='20'>
+							<Collapse duration='200' isOpen={selectedDay === componentDay}>
+								<VStack bg={theme.colors.cream} p='5'>
 									<View alignSelf='center'>
 										{schedule[componentDay].map((activity, index) => (
 											<HStack key={index} alignItems='center'>
@@ -67,7 +63,7 @@ export default function SchedulePage() {
 										))}
 									</View>
 								</VStack>
-							)}
+							</Collapse>
 						</VStack>
 					))}
 				</VStack>
