@@ -7,11 +7,16 @@ export default extendTheme({
 			0: '#2D6793',
 			bg: '#5788AC',
 		},
-		cream: '#FFEFD3',
-
-		medYellow: '#FDBA35',
-
-		engGrey: '#C0C0C0',
+		cream: {
+			0: '#FFEFD3',
+		},
+		medYellow: {
+			0: '#FDBA35',
+			pastel: '#FFEFD3',
+		},
+		engGrey: {
+			0: '#C0C0C0',
+		},
 	},
 	config: {
 		// Changing initialColorMode to 'light'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Row, Heading, Column, Center, Image } from 'native-base';
+import { Center, Image } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
 import { Link } from '../../router/index';

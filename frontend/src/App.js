@@ -59,7 +59,7 @@ export default function App() {
 							<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
 							<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
-							<Route path='/User' element={<UserPage idiom={i18n} />} />
+							<Route path='/User/:id' element={<UserPage idiom={i18n} />} />
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
