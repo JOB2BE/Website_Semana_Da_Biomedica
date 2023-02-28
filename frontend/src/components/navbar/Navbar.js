@@ -58,50 +58,50 @@ export const Navbar = () => {
 	var window = useWindowDimensions();
 	var isScreenSmall = window.width < 850;
 	const [loggedIn, setLoggedIn] = useState(false);
-	var navbarRoutes = (color) => [
+	var navbarRoutes = [
 		{
 			name: 'Atividades',
-			icon: <FontAwesome5 name='brain' size={24} color={color} />,
+			icon: 'brain',
 			route: '/Activities',
 		},
 
 		{
 			name: 'Horário',
-			icon: <FontAwesome5 name='calendar-alt' size={24} color={color} />,
+			icon: 'calendar-alt',
 			route: '/Schedule',
 		},
 		{
 			name: 'Quem Somos',
-			icon: <FontAwesome5 name='people-carry' size={24} color={color} />,
+			icon: 'people-carry',
 			route: '/AboutUs',
 		},
 		{
 			name: 'Login',
-			icon: <FontAwesome5 name='door-closed' size={24} color={color} />,
+			icon: 'door-closed',
 			route: '/Login',
 		},
 	];
 	if (loggedIn) {
-		navbarRoutes = (color) => [
+		navbarRoutes = [
 			{
 				name: 'Atividades',
-				icon: <FontAwesome5 name='brain' size={24} color={color} />,
+				icon: 'brain',
 				route: '/Activities',
 			},
 
 			{
 				name: 'Horário',
-				icon: <FontAwesome5 name='calendar-alt' size={24} color={color} />,
+				icon: 'calendar-alt',
 				route: '/Schedule',
 			},
 			{
 				name: 'Quem Somos',
-				icon: <FontAwesome5 name='people-carry' size={24} color={color} />,
+				icon: 'people-carry',
 				route: '/AboutUs',
 			},
 			{
 				name: 'Perfil',
-				icon: <FontAwesome5 name='door-open' size={24} color={color} />,
+				icon: 'door-open',
 				route: '/User',
 			},
 		];
@@ -115,7 +115,7 @@ export const Navbar = () => {
 			<Center>
 				<Stack direction='row' justifyContent='space-around' alignContent='center'>
 					<Stack direction='row' justifyContent='flex-start' space={100}>
-						{navbarRoutes('white').map((route, index) => {
+						{navbarRoutes.map((route, index) => {
 							return (
 								<Link
 									key={index}
@@ -129,7 +129,7 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-										{route.icon}
+										<FontAwesome5 name={route.icon} size={24} color={'white'} />
 										<Heading style={{ color: 'white' }}>{route.name}</Heading>
 									</Stack>
 								</Link>
@@ -150,30 +150,26 @@ export const Navbar = () => {
 						justifyContent='flex-start'
 						space={10}
 					>
-						{navbarRoutes('white')
-							.slice(0, 2)
-							.map((route, index) => {
-								return (
-									<Link
-										key={index}
-										to={route.route}
-										style={{ textDecoration: 'none' }}
+						{navbarRoutes.slice(0, 2).map((route, index) => {
+							return (
+								<Link
+									key={index}
+									to={route.route}
+									style={{ textDecoration: 'none' }}
+								>
+									<Stack
+										direction='row'
+										justifyContent='center'
+										alignItems='center'
+										style={styles.sideFlexes}
+										space={2}
 									>
-										<Stack
-											direction='row'
-											justifyContent='center'
-											alignItems='center'
-											style={styles.sideFlexes}
-											space={2}
-										>
-											{route.icon}
-											<Heading style={{ color: 'white' }}>
-												{route.name}
-											</Heading>
-										</Stack>
-									</Link>
-								);
-							})}
+										<FontAwesome5 name={route.icon} size={24} color={'white'} />
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+									</Stack>
+								</Link>
+							);
+						})}
 					</Stack>
 
 					<Box
@@ -192,30 +188,26 @@ export const Navbar = () => {
 						justifyContent='flex-start'
 						space={10}
 					>
-						{navbarRoutes('white')
-							.slice(2)
-							.map((route, index) => {
-								return (
-									<Link
-										key={index}
-										to={route.route}
-										style={{ textDecoration: 'none' }}
+						{navbarRoutes.slice(2).map((route, index) => {
+							return (
+								<Link
+									key={index}
+									to={route.route}
+									style={{ textDecoration: 'none' }}
+								>
+									<Stack
+										direction='row'
+										justifyContent='center'
+										alignItems='center'
+										style={styles.sideFlexes}
+										space={2}
 									>
-										<Stack
-											direction='row'
-											justifyContent='center'
-											alignItems='center'
-											style={styles.sideFlexes}
-											space={2}
-										>
-											{route.icon}
-											<Heading style={{ color: 'white' }}>
-												{route.name}
-											</Heading>
-										</Stack>
-									</Link>
-								);
-							})}
+										<FontAwesome5 name={route.icon} size={24} color={'white'} />
+										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+									</Stack>
+								</Link>
+							);
+						})}
 					</Stack>
 				</Stack>
 			</Center>

@@ -18,6 +18,7 @@ import * as Localization from 'expo-localization'; //Internationalisation depend
 import { I18n } from 'i18n-js';
 import { en, pt } from './utils/supportedLanguages';
 import { ImageBackground, View } from 'react-native';
+import { MobileDrawer } from './pages/MobileDrawer';
 
 var i18n = new I18n();
 i18n.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
@@ -63,6 +64,7 @@ export default function App() {
 								path='/Partnerships'
 								element={<PartnershipsPage idiom={i18n} />}
 							/>
+							<Route path='/MobileDrawer' element={<MobileDrawer idiom={i18n} />} />
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
