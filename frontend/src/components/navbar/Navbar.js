@@ -181,8 +181,12 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-										<FontAwesome5 name={route.icon} size={24} color={'white'} />
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+										<FontAwesome5
+											name={route.icon}
+											size={24}
+											style={styles.heading}
+										/>
+										<Heading style={styles.heading}>{route.name}</Heading>
 									</Stack>
 								</Link>
 							);

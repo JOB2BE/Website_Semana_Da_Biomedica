@@ -54,7 +54,7 @@ export default function LoginPage() {
 			<Row justifyContent={'center'}>
 				<StyledBox
 					width={isSmallScreen ? boxWidthMobile : boxWidth}
-					bg={theme.colors.medYellow}
+					backgroundColor={theme.colors.medYellow[0]}
 					borderRadius={25}
 					headingText={'LOGIN'} // can't get it in the center, the way it is on figma
 					childrenJustifyContent={'center'}
@@ -69,7 +69,7 @@ export default function LoginPage() {
 								</FormControl.Label>
 
 								<Input
-									bg={'white'}
+									backgroundColor={'white'}
 									rounded='10'
 									onChangeText={(string) => setEmail(string)}
 								/>
@@ -83,7 +83,7 @@ export default function LoginPage() {
 
 								<Input
 									rounded='10'
-									bg={'white'}
+									backgroundColor={'white'}
 									type={show ? 'text' : 'password'}
 									onChangeText={(string) => setPassword(string)}
 									InputRightElement={
@@ -106,13 +106,13 @@ export default function LoginPage() {
 						</Column>
 
 						<Column alignItems={'center'} justifyContent={'center'} space={6}>
-							<Link style={styles.link}>
+							<Link to={'../RecoverPassword'} style={styles.link}>
 								<Text style={styles.text} size='md'>
 									Esqueceu-se da sua password?
 								</Text>
 							</Link>
 							<Divider style={styles.divider} thickness='2' />
-							<Link style={styles.link}>
+							<Link style={styles.link} to={'../Register'}>
 								<Center>
 									<Text style={styles.text} size='md'>
 										Não tem uma conta? Registe-se aqui!
@@ -136,4 +136,3 @@ export default function LoginPage() {
 		</Column>
 	);
 }
-

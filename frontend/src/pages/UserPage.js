@@ -96,6 +96,11 @@ export default function UserPage() {
 							<Button variant={'alternating'} fontWeight={1000} size='md'>
 								{user.cv}
 							</Button>
+							<Link to={'../ResetPassword'} style={{ textDecoration: 'none' }}>
+								<Button variant={'alternating'} fontWeight={1000} size='md'>
+									Mudar Password
+								</Button>
+							</Link>
 						</Column>
 					</StyledBox>
 				</Column>

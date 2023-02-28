@@ -68,7 +68,7 @@ export default function App() {
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
 
 							<Route path='/User/:id' element={<UserPage idiom={i18n} />} />
-
+							<Route path='/Profile' element={<UserPage idiom={i18n} />} />
 							<Route path='/Speaker/:id' element={<SpeakerPage idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
 							<Route path='/Login' element={<LoginPage idiom={i18n} />} />
