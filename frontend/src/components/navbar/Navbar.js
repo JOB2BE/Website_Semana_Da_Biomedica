@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { Center, Heading, Box, Stack } from 'native-base';
-import Logo from '../../assets/images/WhiteBGLogo';
+import Logo from '../../assets/images/DarkBGLogo';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
@@ -19,13 +19,13 @@ idiom.locale = Localization.locale; // get the device's current language code
 const styles = StyleSheet.create({
 	leftContainer: {
 		borderBottomLeftRadius: 20,
-		backgroundColor: theme.colors.dryBlue[0],
+		backgroundColor: theme.colors.medYellow['0'],
 		height: '40%',
 		paddingHorizontal: 25,
 	},
 	rightContainer: {
 		borderBottomRightRadius: 20,
-		backgroundColor: theme.colors.dryBlue[0],
+		backgroundColor: theme.colors.medYellow['0'],
 		height: '40%',
 		paddingHorizontal: 25,
 		zIndex: -1,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 	logoContainer: {
 		borderBottomLeftRadius: 100000,
 		borderBottomRightRadius: 100000,
-		backgroundColor: theme.colors.medYellow,
+		backgroundColor: theme.colors.dryBlue['0'],
 		padding: 7,
 	},
 	sideFlexes: {
@@ -221,7 +221,9 @@ export const Navbar = () => {
 										space={2}
 									>
 										<FontAwesome5 name={route.icon} size={24} color={'white'} />
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+										<Heading style={{ color: theme.colors.dryBlue['0'] }}>
+											{route.name}
+										</Heading>
 									</Stack>
 								</Link>
 							);
@@ -234,6 +236,7 @@ export const Navbar = () => {
 						}}
 					>
 						<Link to='/' style={{ textDecoration: 'none' }}>
+							{/*TODO: CHANGE LOGO TO SMALLER SIZE*/}
 							<Logo style={[styles.logoContainer, styles.shadow]} />
 						</Link>
 					</Box>
@@ -259,7 +262,9 @@ export const Navbar = () => {
 										space={2}
 									>
 										<FontAwesome5 name={route.icon} size={24} color={'white'} />
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+										<Heading style={{ color: theme.colors.dryBlue['0'] }}>
+											{route.name}
+										</Heading>
 									</Stack>
 								</Link>
 							);
