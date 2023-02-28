@@ -60,12 +60,14 @@ export default function ActivitiesPage() {
 					flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
 					backgroundColor={theme.colors.medYellow['0']}
 					rounded='25'
-					headingText='Password Recovery'
+					headingText='Recuperação de Password'
 					childrenJustifyContent='center'
 				>
 					{!validated ? (
 						<VStack space='5' alignItems='center' flex='1'>
-							<Text size='md'>Enter your email to reset your password</Text>
+							<Text size='md'>
+								Introduz o teu email para receberes uma password nova
+							</Text>
 
 							<FormControl isInvalid={!isEmptyObj(error)}>
 								<Input
@@ -89,22 +91,22 @@ export default function ActivitiesPage() {
 							</FormControl>
 
 							<Button variant='alternating' onPress={validate}>
-								Register
+								Submeter
 							</Button>
 
 							<Link to={'/'} style={{ textDecoration: 'none' }}>
-								<Text size='md'>Cancel</Text>
+								<Text size='md'>Cancelar</Text>
 							</Link>
 						</VStack>
 					) : (
 						<VStack space='5' alignItems='center' flex='1'>
 							<Box alignItems='center'>
-								<Text size='md'>An email has been sent to the address</Text>
+								<Text size='md'>Um email foi eniado para:</Text>
 								<Text size='md'>{email}</Text>
 							</Box>
 
 							<Link to={'/'} style={{ textDecoration: 'none' }}>
-								<Text size='md'>Return to Home Page</Text>
+								<Text size='md'>Página inicial</Text>
 							</Link>
 						</VStack>
 					)}
