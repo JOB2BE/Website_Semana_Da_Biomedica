@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, Routes } from './router/index';
 import { NativeBaseProvider } from 'native-base';
-import { Navbar } from './components/navbar/Navbar'; 
+import { Navbar } from './components/navbar/Navbar';
 import LandingPage from './pages/LandingPage';
 import AboutUsPage from './pages/AboutUsPage';
 import SchedulePage from './pages/SchedulePage';
@@ -12,14 +12,6 @@ import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
-import LecturesPage from './pages/LecturesPage.js';
-import AlumniSessionsPage from './pages/AlumniSessionsPage';
-import NetworkingPage from './pages/NetworkingPage';
-import WorkshopsPage from './pages/WorkshopsPage';
-import TestPage from './pages/SpeakerPageDummy';
-import ActivitiesPage2 from './pages/ActivitiesPage2';
-import LecturesPage2 from './pages/LecturesPage2.js';
 import theme from './theme';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -71,20 +63,6 @@ export default function App() {
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
 							<Route path='/LoginPage' element={<LoginPage idiom={i18n} />} />
 							<Route path='/Register' element={<RegisterPage idiom={i18n} />} />
-							<Route
-								path='/PasswordRecovery'
-								element={<PasswordRecoveryPage idiom={i18n} />}
-							/>
-							<Route path='/Lectures' element={<LecturesPage idiom={i18n} />} />
-							<Route
-								path='/AlumniSessions'
-								element={<AlumniSessionsPage idiom={i18n} />}
-							/>
-							<Route path='/Networking' element={<NetworkingPage idiom={i18n} />} />
-							<Route path='/Workshops' element={<WorkshopsPage idiom={i18n} />} />
-							<Route path='/Test' element={<TestPage idiom={i18n} />} />
-							<Route path='/Activities2' element={<ActivitiesPage2 idiom={i18n} />} />
-							<Route path='/Lectures2' element={<LecturesPage2 idiom={i18n} />} />
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
