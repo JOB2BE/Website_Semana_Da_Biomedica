@@ -15,6 +15,7 @@ import RegisterPage from './pages/RegisterPage';
 import PartnershipsPage from './pages/PartnershipsPage';
 import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
 import PasswordResetPage from './pages/PasswordResetPage';
+import NotFound from './pages/NotFound';
 import UserPage from './pages/UserPage';
 import theme from './theme';
 import { useFonts } from 'expo-font';
@@ -58,6 +59,7 @@ export default function App() {
 					<Router>
 						<Navbar />
 						<Routes>
+							<Route path='*' element={<NotFound />} />
 							<Route exact path='/' element={<LandingPage idiom={i18n} />} />
 							<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
 							<Route path='/Schedule' element={<SchedulePage idiom={i18n} />} />
@@ -69,7 +71,7 @@ export default function App() {
 
 							<Route path='/Speaker/:id' element={<SpeakerPage idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
-							<Route path='/LoginPage' element={<LoginPage idiom={i18n} />} />
+							<Route path='/Login' element={<LoginPage idiom={i18n} />} />
 							<Route
 								path='/Partnerships'
 								element={<PartnershipsPage idiom={i18n} />}
@@ -84,7 +86,6 @@ export default function App() {
 								path='/RecoverPassword'
 								element={<PasswordRecoveryPage idiom={i18n} />}
 							/>
-
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
