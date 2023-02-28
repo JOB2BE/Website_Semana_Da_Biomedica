@@ -26,16 +26,7 @@ export default function RoundBorderedImage(props) {
 			},
 		},
 	});
-  
-  if (!props.link) {return(				
-        <Center {...props} style={[styles.container, styles.hoverBackground]}>
-					<Text>{props.hoverText}</Text>
-				</Center>
-			) : (
-				<Center style={styles.container}>
-					<Image {...props} resizeMode={props.resizeMode}></Image>
-				</Center>
-			)})}
+
 	return (
 		<Link to={props.link} style={{ textDecoration: 'none' }}>
 			{props.hoverText ? (
@@ -66,7 +57,6 @@ RoundBorderedImage.propTypes = {
 	borderWidth: PropTypes.number,
 	link: PropTypes.string,
 	hoverText: PropTypes.string,
-
 };
 RoundBorderedImage.defaultProps = {
 	borderRadius: 1500,

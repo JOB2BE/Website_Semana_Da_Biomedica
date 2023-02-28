@@ -36,8 +36,6 @@
     "react-router-dom": "^6.4.2",
     "react-router-native": "^6.4.2",
     "expo-document-picker": "~10.3.0"
-    "undefined": "react-native-vector-icons/AntDesign"
-
   },
   "devDependencies": {
     "eslint": "^8.26.0",

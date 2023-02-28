@@ -34,8 +34,7 @@ export default function StyledBox(props) {
 				flexWrap={'wrap'}
 				space={props.headingText === '' && props.stackSpace}
 				alignItems={props.centerChildren ? 'center' : 'flexStart'}
-        justifyContent={props.childrenJustifyContent}
-
+				justifyContent={props.childrenJustifyContent}
 			>
 				{props.children}
 			</Stack>
@@ -58,9 +57,8 @@ StyledBox.propTypes = {
 	padding: PropTypes.number,
 	childrenInRow: PropTypes.bool,
 	centerChildren: PropTypes.bool,
-	childrenJustifyContent: PropTypes.number,
+	childrenJustifyContent: PropTypes.string,
 };
-
 
 StyledBox.defaultProps = {
 	headingColor: theme.colors.dryBlue[0],
@@ -82,4 +80,3 @@ StyledBox.defaultProps = {
 	centerChildren: false,
 	childrenJustifyContent: 'flex-start',
 };
-

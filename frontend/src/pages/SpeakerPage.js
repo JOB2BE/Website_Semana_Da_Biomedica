@@ -25,10 +25,6 @@ export default function SpeakerPage(props) {
 	var pageWidth = responsiveWidth(window, null, null, 0.85);
 	var imageRadius = responsiveWidth(window, 100, 450, 0.15);
 	var isScreenSmall = window.width < 850;
-
-
-export default function SpeakerPage() {
-	const { id } = useParams();
 	const styles = StyleSheet.create({
 
 		TextName: {

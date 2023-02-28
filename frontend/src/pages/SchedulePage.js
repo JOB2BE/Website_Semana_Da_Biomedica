@@ -22,7 +22,7 @@ export default function SchedulePage() {
 								}
 							>
 								<HStack
-									bg={theme.colors.medYellow}
+									bg={theme.colors.medYellow[0]}
 									justifyContent='space-between'
 									alignItems='center'
 									p='3'
@@ -32,9 +32,9 @@ export default function SchedulePage() {
 									<AntDesign
 										name='down'
 										size={24}
-										color={theme.colors.medYellow}
+										color={theme.colors.medYellow[0]}
 									/>
-									<Heading>Day {componentDay}</Heading>
+									<Heading>Dia {componentDay}</Heading>
 									<AntDesign
 										name={selectedDay === componentDay ? 'up' : 'down'}
 										size={24}
@@ -44,7 +44,7 @@ export default function SchedulePage() {
 							</Pressable>
 
 							{selectedDay === componentDay && (
-								<VStack bg={theme.colors.cream} p='5' borderBottomRadius='20'>
+								<VStack bg={theme.colors.cream[0]} p='5' borderBottomRadius='20'>
 									<View alignSelf='center'>
 										{schedule[componentDay].map((activity, index) => (
 											<HStack key={index} alignItems='center'>

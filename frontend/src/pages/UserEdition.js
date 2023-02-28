@@ -65,14 +65,7 @@ export default function UserEdition(props) {
 		},
 	});
 	const handleError = (err) => {
-		if (DocumentPicker.isCancel(err)) {
-			toast.show({
-				title: 'Selecção cancelada',
-			});
-			// User cancelled the picker, exit any dialogs or menus and move on
-		} else {
-			throw err;
-		}
+		throw err;
 	};
 
 	function save() {

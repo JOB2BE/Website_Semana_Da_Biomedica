@@ -111,7 +111,7 @@ export default function ActivitiesPage() {
 												return (
 													<Link
 														key={activity.id}
-														to={'Activity/' + String(activity.id)}
+														to={'../Activity/' + String(activity.id)}
 													>
 														<Text
 															fontWeight={'bold'}
