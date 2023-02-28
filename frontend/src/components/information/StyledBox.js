@@ -84,4 +84,3 @@ StyledBox.defaultProps = {
 	childrenJustifyContent: 'flex-start',
 };
 
-

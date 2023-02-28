@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Column, Row, Text } from 'native-base';
+import { Column, Row, Text, Pressable } from 'native-base';
 import StyledBox from '../components/information/StyledBox';
 import DropDownTeam from '../components/information/DropDownTeam';
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
@@ -13,12 +13,12 @@ idiom.translations = { en, pt }; // All our languages
 idiom.locale = Localization.locale; // get the device's current language code
 
 export default function AboutUsPage() {
+	const [currentIndex, setCurrentIndex] = React.useState(null);
 	const styles = StyleSheet.create({
 		aboutBox: {
 			paddingTop: '2.5%',
 		},
 	});
-
 	return (
 		<Column flex={1} space={12}>
 			<Row justifyContent={'center'} style={styles.aboutBox}>
@@ -44,7 +44,18 @@ export default function AboutUsPage() {
 			</Row>
 			<Row justifyContent={'center'}>
 				<StyledBox headingText={'A Equipa:'} flex={0.9}>
-					<DropDownTeam year={'2022/2023'} team={{}} />
+					<Pressable
+						onPress={() => {
+							if (currentIndex === 0) {
+								setCurrentIndex(null);
+							} else {
+								setCurrentIndex(0);
+							}
+						}}
+						flex={1}
+					>
+						<DropDownTeam year={'2022/2023'} team={{}} index={currentIndex} />
+					</Pressable>
 				</StyledBox>
 			</Row>
 		</Column>
