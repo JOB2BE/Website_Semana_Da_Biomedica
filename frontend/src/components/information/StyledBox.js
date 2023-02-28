@@ -40,6 +40,7 @@ export default function StyledBox(props) {
 				{props.children}
 			</Stack>
 
+
 		</Column>
 	);
 }
@@ -63,6 +64,7 @@ StyledBox.propTypes = {
 };
 
 
+
 StyledBox.defaultProps = {
 	headingColor: theme.colors.dryBlue[0],
 	headingSize: 'md',
@@ -84,4 +86,5 @@ StyledBox.defaultProps = {
 	centerChildren: false,
 	childrenJustifyContent: 'flex-start',
 };
+
 

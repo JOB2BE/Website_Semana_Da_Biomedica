@@ -1,209 +1,136 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Text, Column, Row, Image, View } from 'native-base';
-import extendTheme from '../theme';
+import { StyleSheet, useWindowDimensions } from 'react-native';
+import { Column, Row, Heading, View } from 'native-base';
+import PartnerShipRow from '../components/information/PartnerShipRow';
+import responsiveWidth from '../utils/responsiveWidth';
+import StyledBox from '../components/information/StyledBox';
+import theme from '../theme';
 
 export default function PartnershipsPage() {
+	var window = useWindowDimensions();
+	var imageRadius = responsiveWidth(window, 70, 300, 0.1);
+
 	const styles = StyleSheet.create({
-		baseText: {
-			fontWeight: '1000',
-			color: extendTheme.colors.dryBlue['0'],
-			fontSize: 30,
-			backgroundColor: 'transparent',
-		},
-
-		container: {
-			flex: 1,
-			justifyContent: 'center',
-			alignItems: 'center',
-			margin: 10,
-		},
-
-		RectangleShapeViewOut: {
-			width: 660,
-			height: 70,
-			borderRadius: 30,
-			backgroundColor: extendTheme.colors['medYellow'],
-			marginTop: 20,
-			marginBottom: 20,
-		},
-
-		RectangleShapeViewIn: {
-			width: 650,
-			height: 60,
-			borderRadius: 30,
-			backgroundColor: extendTheme.colors['cream'],
-			position: 'absolute',
-			left: (660 - 650) / 2,
-			top: (660 - 650) / 2,
-			justifyContent: 'center',
-			alignItems: 'center',
-		},
-
-		CircleShapeViewOut: {
-			width: 195,
-			height: 195,
-			borderRadius: 195 / 2,
-			backgroundColor: extendTheme.colors['medYellow'],
-			marginTop: -20,
-		},
-
-		CircleShapeViewIn: {
-			width: 177,
-			height: 177,
-			borderRadius: 177 / 2,
-			backgroundColor: extendTheme.colors['cream'],
-			position: 'absolute',
-			left: (195 - 177) / 2,
-			top: (195 - 177) / 2,
-			justifyContent: 'center',
-			alignItems: 'center',
-			alignContent: 'center',
-		},
-
-		CircleShapeViewOutTransp: {
-			width: 50,
-			height: 50,
-			borderRadius: 25,
-			backgroundColor: 'transparent',
-		},
-
-		ImageView: {
-			width: 100,
-			height: 100,
-			left: (195 - 177) / 2,
-			top: (195 - 177) / 2,
-		},
-
-		row: {
-			flexDirection: 'row',
-		},
-
-		col1: {
-			width: 175,
-			backgroundColor: 'transparent',
-			borderColor: 'transparent',
-			borderWidth: 1,
-			flex: 1,
-		},
-
-		col2: {
-			width: 50,
-			backgroundColor: 'transparent',
-			borderColor: 'transparent',
-			borderWidth: 1,
-			flex: 1,
+		text: {
+			borderColor: theme.colors.medYellow[0],
+			borderWidth: 5,
+			shadowColor: theme.colors.dryBlue[0],
+			shadowOffset: {
+				width: 7,
+				height: 7,
+			},
+			shadowRadius: 0.5,
+			shadowOpacity: 0.7,
 		},
 	});
 
-	var LogoIst = require('../assets/images/logo_ist.svg');
-	var LogoNEBM = require('../assets/images/Logo_NEBM.svg');
+	// Dummy objects that will be retrieved from the database
+	const dummyObjects = [
+		{
+			id: 0,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 1,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 2,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 3,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 4,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 5,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 6,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 7,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 8,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 9,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+		{
+			id: 10,
+			companyImage: require('../assets/images/logo_ist.svg'),
+		},
+	];
+	// const LogoIst = require('../assets/images/logo_ist.svg');
+	// const LogoNEBM = require('../assets/images/Logo_NEBM.svg');
 
 	return (
-		<Column flex={1} space={12}>
-			<Row justifyContent={'center'} style={styles.container}>
-				<View style={styles.RectangleShapeViewOut}>
-					<View style={styles.RectangleShapeViewIn}>
-						<Text style={styles.baseText}> PARTNERSHIPS </Text>
-					</View>
-				</View>
-			</Row>
+		<Column
+			flex={1}
+			space={20}
+			justifyContent={'center'}
+			alignItems={'center'}
+			alignContent={'center'}
+			py={20}
+		>
+			<StyledBox style={styles.text}>
+				<Heading>Institutional Partners</Heading>
+			</StyledBox>
 
-			<Row justifyContent={'center'} style={styles.container}>
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={LogoIst} style={{ width: '90%', height: '40%' }}></Image>
-					</View>
-				</View>
+			<PartnerShipRow
+				justifyContent={'center'}
+				alignItems={'center'}
+				space={10}
+				containerRadius={imageRadius}
+				objects={dummyObjects}
+			></PartnerShipRow>
 
-				<View style={styles.CircleShapeViewOutTransp}></View>
+			<StyledBox style={styles.text}>
+				<Heading>Gold Partners</Heading>
+			</StyledBox>
 
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={LogoNEBM} style={{ width: '80%', height: '80%' }}></Image>
-					</View>
-				</View>
+			<PartnerShipRow
+				justifyContent={'center'}
+				alignItems={'center'}
+				space={10}
+				containerRadius={imageRadius}
+				objects={dummyObjects}
+			></PartnerShipRow>
 
-				<View style={styles.CircleShapeViewOutTransp}></View>
+			<StyledBox style={styles.text}>
+				<Heading>Base and Giveway Partners</Heading>
+			</StyledBox>
 
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
+			<PartnerShipRow
+				justifyContent={'center'}
+				alignItems={'center'}
+				space={10}
+				containerRadius={imageRadius}
+				objects={dummyObjects}
+			></PartnerShipRow>
 
-				<View style={styles.CircleShapeViewOutTransp}></View>
+			<StyledBox style={styles.text}>
+				<Heading>Cattering and Activities</Heading>
+			</StyledBox>
 
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
-			</Row>
+			<PartnerShipRow
+				justifyContent={'center'}
+				alignItems={'center'}
+				space={10}
+				containerRadius={imageRadius}
+				objects={dummyObjects}
+			></PartnerShipRow>
 
-			<Row justifyContent={'center'} style={styles.container}>
-				<View style={styles.CircleShapeViewOutTransp}></View>
-
-				<View style={styles.CircleShapeViewOutTransp}></View>
-
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
-
-				<View style={styles.CircleShapeViewOutTransp}></View>
-
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
-
-				<View style={styles.CircleShapeViewOutTransp}></View>
-
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
-
-				<View style={styles.CircleShapeViewOutTransp}></View>
-
-				<View style={styles.CircleShapeViewOutTransp}></View>
-			</Row>
-
-			<Row justifyContent={'center'} style={styles.container}>
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
-
-				<View style={styles.CircleShapeViewOutTransp}></View>
-
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
-
-				<View style={styles.CircleShapeViewOutTransp}></View>
-
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
-
-				<View style={styles.CircleShapeViewOutTransp}></View>
-
-				<View style={styles.CircleShapeViewOut}>
-					<View style={styles.CircleShapeViewIn}>
-						<Image source={{ width: 100, height: 100, uri: 'https://picsum.photos/200', }}></Image>
-					</View>
-				</View>
-			</Row>
 		</Column>
 	);
 }
