@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+
 import { Row, Heading, Column, ChevronDownIcon, ChevronUpIcon, Text, Center } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
@@ -13,10 +14,12 @@ export default function DropDownTeam(props) {
 	var imageRadius = responsiveWidth(window, 100, 300, 0.1);
 	var parternshipBoxWidth = responsiveWidth(window, null, null, 0.6);
 
+
 	const styles = StyleSheet.create({
 		heading: {
 			color: theme.colors.dryBlue[0],
 		},
+
 		userRow: { width: parternshipBoxWidth },
 	});
 	//fill in with team data after queries
@@ -137,7 +140,6 @@ export default function DropDownTeam(props) {
 					<></>
 				)}
 			</Column>
-
 		</Row>
 	);
 }

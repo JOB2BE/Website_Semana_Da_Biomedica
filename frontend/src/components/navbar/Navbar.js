@@ -1,4 +1,3 @@
-
 import { React, useState } from 'react';
 import { Center, Heading, Box, Stack } from 'native-base';
 import Logo from '../../assets/images/WhiteBGLogo';
@@ -64,7 +63,6 @@ export const Navbar = () => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	var navbarRoutes = [
 		{
-
 			name: 'Atividades',
 			icon: 'brain',
 			route: '/Activities',
@@ -218,10 +216,8 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-
 										<FontAwesome5 name={route.icon} size={24} color={'white'} />
 										<Heading style={{ color: 'white' }}>{route.name}</Heading>
-
 									</Stack>
 								</Link>
 							);
@@ -258,10 +254,8 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
-
 										<FontAwesome5 name={route.icon} size={24} color={'white'} />
 										<Heading style={{ color: 'white' }}>{route.name}</Heading>
-
 									</Stack>
 								</Link>
 							);

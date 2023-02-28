@@ -62,7 +62,6 @@ StyledBox.propTypes = {
 
 
 
-
 StyledBox.defaultProps = {
 	headingColor: theme.colors.dryBlue[0],
 	headingSize: 'md',

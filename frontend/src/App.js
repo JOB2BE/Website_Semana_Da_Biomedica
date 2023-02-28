@@ -81,7 +81,6 @@ export default function App() {
 								path='/RecoverPassword'
 								element={<PasswordRecoveryPage idiom={i18n} />}
 							/>
-
 						</Routes>
 					</Router>
 				</NativeBaseProvider>

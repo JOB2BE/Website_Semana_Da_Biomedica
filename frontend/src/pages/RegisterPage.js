@@ -101,14 +101,11 @@ export default function RegisterPage() {
 
 		}
 
-
 		setErrors(newErrors);
 
 		if (isEmptyObj(newErrors)) {
 
-
 			setValidated(true);
-
 
 			// TODO: CODE OF REGISTRATION
 			// handleRegister()
@@ -343,6 +340,7 @@ export default function RegisterPage() {
 							</Link>
 						</VStack>
 					)}
+
 				</StyledBox>
 			</Row>
 		</Column>
