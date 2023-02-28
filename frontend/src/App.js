@@ -17,6 +17,9 @@ import LecturesPage from './pages/LecturesPage.js';
 import AlumniSessionsPage from './pages/AlumniSessionsPage';
 import NetworkingPage from './pages/NetworkingPage';
 import WorkshopsPage from './pages/WorkshopsPage';
+import TestPage from './pages/SpeakerPageDummy';
+import ActivitiesPage2 from './pages/ActivitiesPage2';
+import LecturesPage2 from './pages/LecturesPage2.js';
 import theme from './theme';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -79,6 +82,9 @@ export default function App() {
 							/>
 							<Route path='/Networking' element={<NetworkingPage idiom={i18n} />} />
 							<Route path='/Workshops' element={<WorkshopsPage idiom={i18n} />} />
+							<Route path='/Test' element={<TestPage idiom={i18n} />} />
+							<Route path='/Activities2' element={<ActivitiesPage2 idiom={i18n} />} />
+							<Route path='/Lectures2' element={<LecturesPage2 idiom={i18n} />} />
 						</Routes>
 					</Router>
 				</NativeBaseProvider>

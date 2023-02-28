@@ -18,7 +18,7 @@ export default function ActivitiesPage() {
 				<Link to={'/Lectures'} style={{ textDecoration: 'none' }}>
 					<StyledBox
 						flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
-						stackSpace={'30'}
+						stackSpace={'0'}
 						className={'LecturesContainer'}
 						bg={theme.colors.medYellow}
 						borderRadius={25}
@@ -30,7 +30,7 @@ export default function ActivitiesPage() {
 				<Link to={'/Workshops'} style={{ textDecoration: 'none' }}>
 					<StyledBox
 						flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
-						stackSpace={'30'}
+						stackSpace={'0'}
 						className={'WorkshopsContainer'}
 						bg={theme.colors.medYellow}
 						borderRadius={25}
@@ -42,7 +42,7 @@ export default function ActivitiesPage() {
 				<Link to={'/Networking'} style={{ textDecoration: 'none' }}>
 					<StyledBox
 						flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
-						stackSpace={'30'}
+						stackSpace={'0'}
 						className={'NetworkingContainer'}
 						bg={theme.colors.medYellow}
 						borderRadius={25}
@@ -54,7 +54,7 @@ export default function ActivitiesPage() {
 				<Link to={'/AlumniSessions'} style={{ textDecoration: 'none' }}>
 					<StyledBox
 						flex={Platform.OS === ('ios' || 'android') ? 0.6 : 0.4}
-						stackSpace={'30'}
+						stackSpace={'0'}
 						className={'AlumniSessionsContainer'}
 						bg={theme.colors.medYellow}
 						borderRadius={25}
