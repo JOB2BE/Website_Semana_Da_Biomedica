@@ -1,3 +1,4 @@
+
 import { React, useState } from 'react';
 import { Center, Heading, Box, Stack } from 'native-base';
 import Logo from '../../assets/images/WhiteBGLogo';
@@ -52,6 +53,9 @@ const styles = StyleSheet.create({
 	image: {
 		flex: 1,
 	},
+	heading: {
+		color: 'white',
+	},
 });
 
 export const Navbar = () => {
@@ -60,6 +64,7 @@ export const Navbar = () => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	var navbarRoutes = [
 		{
+
 			name: 'Atividades',
 			icon: 'brain',
 			route: '/Activities',
@@ -109,8 +114,57 @@ export const Navbar = () => {
 	if (isScreenSmall) {
 		return <NavBarMobile navbarRoutes={navbarRoutes} />;
 	}
+
 	if (useLocation().pathname === '/') {
 		// In the case were we are ib the landing page
+
+		const styles = StyleSheet.create({
+			leftContainer: {
+				borderBottomLeftRadius: 20,
+				backgroundColor: theme.colors.dryBlue[0],
+				height: '40%',
+				paddingHorizontal: 25,
+			},
+			rightContainer: {
+				borderBottomRightRadius: 20,
+				backgroundColor: theme.colors.dryBlue[0],
+				height: '40%',
+				paddingHorizontal: 25,
+				zIndex: -1,
+			},
+			logoContainer: {
+				borderBottomLeftRadius: 100000,
+				borderBottomRightRadius: 100000,
+				backgroundColor: theme.colors.medYellow,
+				padding: 7,
+			},
+			sideFlexes: {
+				padding: 10,
+			},
+			shadow: {
+				shadowColor: '#000',
+				shadowOffset: {
+					width: 0,
+					height: 2,
+				},
+				shadowOpacity: 0.34,
+				shadowRadius: 6.27,
+				elevation: 10,
+			},
+			image: {
+				flex: 1,
+			},
+			heading: {
+				color: 'black',
+				textShadowColor: theme.colors.dryBlue[0],
+				textShadowOffset: {
+					width: 1,
+					height: 2,
+				},
+				textShadowOpacity: 0.2,
+				textShadowRadius: 0.5,
+			},
+		});
 		return (
 			<Center>
 				<Stack direction='row' justifyContent='space-around' alignContent='center'>
@@ -164,8 +218,10 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
+
 										<FontAwesome5 name={route.icon} size={24} color={'white'} />
 										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+
 									</Stack>
 								</Link>
 							);
@@ -202,8 +258,10 @@ export const Navbar = () => {
 										style={styles.sideFlexes}
 										space={2}
 									>
+
 										<FontAwesome5 name={route.icon} size={24} color={'white'} />
 										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+
 									</Stack>
 								</Link>
 							);
