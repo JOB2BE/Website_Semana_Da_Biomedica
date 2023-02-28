@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, Routes } from './router/index';
 import { NativeBaseProvider } from 'native-base';
-import { Navbar } from './components/navbar/Navbar';
+import { Navbar } from './components/navbar/Navbar'; 
 import LandingPage from './pages/LandingPage';
 import AboutUsPage from './pages/AboutUsPage';
 import SchedulePage from './pages/SchedulePage';
@@ -10,6 +10,8 @@ import ActivitiesPage from './pages/ActivitiesPage';
 import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import PartnershipsPage from './pages/PartnershipsPage';
 import RegisterPage from './pages/RegisterPage';
 import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
@@ -63,6 +65,10 @@ export default function App() {
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
 							<Route path='/Speaker/:id' element={<SpeakerPage idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
+
+							<Route path='/LoginPage' element={<LoginPage idiom={i18n} />} />
+							<Route path='/Register' element={<RegisterPage idiom={i18n} />} />
+
 							<Route
 								path='/Partnerships'
 								element={<PartnershipsPage idiom={i18n} />}

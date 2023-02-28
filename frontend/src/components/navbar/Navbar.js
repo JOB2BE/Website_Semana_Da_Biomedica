@@ -87,6 +87,7 @@ export const Navbar = () => {
 			route: '/Speakers',
 		},
 	];
+
 	if (useLocation().pathname === '/') {
 		// In the case were we are ib the landing page
 

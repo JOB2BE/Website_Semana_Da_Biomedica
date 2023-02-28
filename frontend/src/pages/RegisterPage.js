@@ -1,8 +1,6 @@
-
 import React, { useState } from 'react';
 import {
 	Button,
-
 	Text,
 	VStack,
 	FormControl,
@@ -103,9 +101,11 @@ export default function RegisterPage() {
 
 		}
 
+
 		setErrors(newErrors);
 
 		if (isEmptyObj(newErrors)) {
+
 
 			setValidated(true);
 
@@ -114,7 +114,6 @@ export default function RegisterPage() {
 			// handleRegister()
 		}
 	};
-
 
 	const Errors = ({ e }) => {
 		return (
@@ -344,7 +343,6 @@ export default function RegisterPage() {
 							</Link>
 						</VStack>
 					)}
-
 				</StyledBox>
 			</Row>
 		</Column>

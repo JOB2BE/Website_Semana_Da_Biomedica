@@ -28,6 +28,7 @@ export default function StyledBox(props) {
 				</Heading>
 			)}
 
+
 			<Stack
 				direction={props.childrenInRow ? 'row' : 'column'}
 				alignSelf={'stretch'}
@@ -61,6 +62,7 @@ StyledBox.propTypes = {
 	childrenJustifyContent: PropTypes.number,
 };
 
+
 StyledBox.defaultProps = {
 	headingColor: theme.colors.dryBlue[0],
 	headingSize: 'md',
@@ -77,6 +79,7 @@ StyledBox.defaultProps = {
 	shadowOpacity: 0.7,
 	elevation: 10,
 	padding: 5,
+
 	childrenInRow: true,
 	centerChildren: false,
 	childrenJustifyContent: 'flex-start',

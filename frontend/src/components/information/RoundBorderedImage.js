@@ -19,6 +19,7 @@ export default function RoundBorderedImage(props) {
 			height: props.containerRadius,
 		},
 	});
+
 	
 	if (!props.link) {
 		return (
