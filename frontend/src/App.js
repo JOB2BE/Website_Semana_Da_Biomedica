@@ -64,6 +64,9 @@ export default function App() {
 							<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
 							<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
+
+							<Route path='/User/:id' element={<UserPage idiom={i18n} />} />
+
 							<Route path='/Speaker/:id' element={<SpeakerPage idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
 							<Route path='/LoginPage' element={<LoginPage idiom={i18n} />} />
@@ -81,6 +84,7 @@ export default function App() {
 								path='/RecoverPassword'
 								element={<PasswordRecoveryPage idiom={i18n} />}
 							/>
+
 						</Routes>
 					</Router>
 				</NativeBaseProvider>

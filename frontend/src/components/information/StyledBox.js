@@ -35,6 +35,7 @@ export default function StyledBox(props) {
 				space={props.headingText === '' && props.stackSpace}
 				alignItems={props.centerChildren ? 'center' : 'flexStart'}
         justifyContent={props.childrenJustifyContent}
+
 			>
 				{props.children}
 			</Stack>
@@ -59,7 +60,6 @@ StyledBox.propTypes = {
 	centerChildren: PropTypes.bool,
 	childrenJustifyContent: PropTypes.number,
 };
-
 
 
 StyledBox.defaultProps = {

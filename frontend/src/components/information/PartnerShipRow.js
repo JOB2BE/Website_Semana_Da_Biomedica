@@ -8,8 +8,6 @@ export default function PartnerShipRow(props) {
 
 	return (
 		<Column {...props}>
-
-
 			<View
 				style={{
 					flexDirection: 'row',
