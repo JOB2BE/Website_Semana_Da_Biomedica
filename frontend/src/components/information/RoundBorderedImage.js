@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Center, Image } from 'native-base';
+import { Row, Heading, Column, Center, Image } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
 import { Link } from '../../router/index';
@@ -19,6 +19,17 @@ export default function RoundBorderedImage(props) {
 			height: props.containerRadius,
 		},
 	});
+
+	
+	if (!props.link) {
+		return (
+			<Center style={styles.container}>
+				<Image {...props} resizeMode={props.resizeMode}></Image>
+			</Center>
+		);
+	}
+
+
 	return (
 		<Link to={props.link}>
 			<Center style={styles.container}>

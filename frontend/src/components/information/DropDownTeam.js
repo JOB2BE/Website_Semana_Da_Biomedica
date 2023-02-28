@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Row, Heading } from 'native-base';
+import { Row, Heading, Column } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
 
