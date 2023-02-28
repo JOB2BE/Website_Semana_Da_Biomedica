@@ -1,160 +1,139 @@
-import React from "react";
-import { Center, Heading, Box, Row, Pressable, Stack, HamburgerIcon, Button, Column } from 'native-base';
-import { View } from 'react-native'
-import AboutUsIcon from '../../assets/images/AboutUsIcon';
+import React from 'react';
+import { Heading, Row, Pressable, HamburgerIcon, Column } from 'native-base';
 import ScheduleIcon from '../../assets/images/ScheduleIcon';
 import ActivitiesIcon from '../../assets/images/ActivitiesIcon';
 import SpeakersIcon from '../../assets/images/SpeakersIcon';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Logo from '../../assets/images/WhiteBGLogo';
-import { Menu } from 'native-base';
-import { StyleSheet } from 'react-native';
+import theme from '../../theme';
+import { StyleSheet, useWindowDimensions } from 'react-native';
 import { Link } from '../../router/index';
-import { useLocation } from 'react-router-dom';
-
-
 import * as Localization from 'expo-localization'; //Internationalisation dependencies
 import { I18n } from 'i18n-js';
 import { en, pt } from '../../utils/supportedLanguages';
-import theme from '../../theme';
+
+import responsiveHeight from '../../utils/responsiveHeight';
+import responsiveWidth from '../../utils/responsiveWidth';
 
 var idiom = new I18n();
 idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
 idiom.translations = { en, pt }; // All our languages
 idiom.locale = Localization.locale; // get the device's current language code
 
-const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
-    },
+export const NavBarMobile = ({navbarRoutes}) => {
+	var window = useWindowDimensions();
+	var paddingBox = responsiveHeight(window, null, null, 0.1);
+	const [open, setOpen] = React.useState(false);
 
-    rectangleCornerClose: {
-        width: 80,
-        height: 80,
-        borderBottomRightRadius: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center',
-        display: 'flex',
-        backgroundColor: '#FDBA35',
-    },
+	const styles = StyleSheet.create({
+		menu: {
+			borderBottomRightRadius: 15,
+			backgroundColor: theme.colors.medYellow[0],
+			padding: 10,
+		},
+		textTitle: {
+			color: 'white',
+		},
+		root: {
+			position: 'fixed',
+			top: 0,
+			left: 0,
+			right: 0,
+			bottom: 0,
+			zIndex: 2,
+		},
+	});
+	return (
+		<Column flex={1} style={styles.root}>
+			<Row flex={open && 1}>
+				<Column flex={true} style={styles.menu} space={30}>
+					<Pressable
+						onPress={() => {
+							setOpen(!open);
+						}}
+					>
+						<Row>
+							<HamburgerIcon size={30} color='white'></HamburgerIcon>
+						</Row>
+					</Pressable>
 
-    rectangleCornerOpen: {
-        width: 328,
-        height: 80,
-        //justifyContent: 'space-between',
-        //alignItems: 'left',
-        //alignContent: 'center',
-        backgroundColor: '#FDBA35',
-        padding: 30,
-    },
+					{open && (
+						<Row flex={1}>
+							<Column alignItems='center' flex={1} justifyContent='space-evenly'>
+								<Column justifyContent='space-evenly' flex={0.8}>
+									<Pressable>
+										<Link to={'/AboutUs'} style={{ textDecoration: 'none' }}>
+											<Row space={4}>
+												<FontAwesome5
+													name='people-carry'
+													size={24}
+													color='black'
+												/>
+												<Heading style={styles.textTitle}>
+													Sobre Nós
+												</Heading>
+											</Row>
+										</Link>
+									</Pressable>
 
-    rectangleOpen: {
-        flex: '0.9',
-        width: 328,
-        height: 652,
-        borderBottomRightRadius: 30,
-        justifyContent: 'flex-end',
-        alignItems: 'left',
-        alignContent: 'left',
-        textAlign: 'left',
-        display: 'flex',
-        backgroundColor: '#FDBA35',
-        padding: 40,
-    },
+									<Pressable>
+										<Row>
+											<Link
+												to={'/Schedule'}
+												style={{ textDecoration: 'none' }}
+											>
+												<ScheduleIcon size={24}></ScheduleIcon>
+												<Heading style={styles.textTitle}>Horário</Heading>
+											</Link>
+										</Row>
+									</Pressable>
 
-    textTitle: {
-        size: 24,
-        color: 'white',
-        padding: 40,
-    },
+									<Pressable>
+										<Row>
+											<Link
+												to={'/Activities'}
+												style={{ textDecoration: 'none' }}
+											>
+												<ActivitiesIcon size={24}></ActivitiesIcon>
+												<Heading style={styles.textTitle}>
+													Atividades
+												</Heading>
+											</Link>
+										</Row>
+									</Pressable>
 
-    textTitleBigger: {
-        size: 60,
-        color: 'white',
-        padding: 40,
-    }
-});
+									<Pressable>
+										<Row>
+											<Link
+												to={'/Speakers'}
+												style={{ textDecoration: 'none' }}
+											>
+												<SpeakersIcon size={24}></SpeakersIcon>
+												<Heading style={styles.textTitle}>Oradores</Heading>
+											</Link>
+										</Row>
+									</Pressable>
 
-export const NavBarMobile = () => {
-
-    const [currentIndex, setCurrentIndex] = React.useState(null);
-
-    return (
-        <Column>
-            <Pressable onPress={() => {
-                if (currentIndex === 0) {
-                    setCurrentIndex(null);
-                } else {
-                    setCurrentIndex(0);
-                }
-            }}>
-                <Row
-                    justifyContent={'space-between'}
-                    alignItems={'center'}
-                    style={currentIndex === 0 ? styles.rectangleCornerOpen : styles.rectangleCornerClose}
-                >
-                    <HamburgerIcon size={60} color="white"></HamburgerIcon>
-                    {currentIndex === 0 ? (
-                        <Heading style={styles.textTitleBigger}>Menu</Heading>
-                    ) : (
-                        <></>
-                    )}
-                </Row>
-            </Pressable>
-
-            {currentIndex === 0 ? (
-                <Center style={styles.rectangleOpen} >
-                    <Pressable>
-                        <Row justifyContent={'space-between'} alignItems={'center'}>
-                            <Link to={'/AboutUs'} style={{ textDecoration: 'none' }}>
-                                <AboutUsIcon size={24}></AboutUsIcon>
-                                <Heading style={styles.textTitle}>Sobre Nós</Heading>
-                            </Link>
-                        </Row>
-                    </Pressable>
-
-                    <Pressable>
-                        <Row justifyContent={'space-between'} alignItems={'center'}>
-                            <Link to={'/Schedule'} style={{ textDecoration: 'none' }}>
-                                <ScheduleIcon size={24}></ScheduleIcon>
-                                <Heading style={styles.textTitle}>Horário</Heading>
-                            </Link>
-                        </Row>
-                    </Pressable>
-
-                    <Pressable>
-                        <Row justifyContent={'space-between'} alignItems={'center'}>
-                            <Link to={'/Activities'} style={{ textDecoration: 'none' }}>
-                                <ActivitiesIcon size={24}></ActivitiesIcon>
-                                <Heading style={styles.textTitle}>Atividades</Heading>
-                            </Link>
-                        </Row>
-                    </Pressable>
-
-                    <Pressable>
-                        <Row justifyContent={'space-between'} alignItems={'center'}>
-                            <Link to={'/Speakers'} style={{ textDecoration: 'none' }}>
-                                <SpeakersIcon size={24}></SpeakersIcon>
-                                <Heading style={styles.textTitle}>Oradores</Heading>
-                            </Link>
-                        </Row>
-                    </Pressable>
-
-                    <Pressable >
-                        <Row justifyContent={'space-between'} alignItems={'center'}>
-                            <Link to={'/Login'} style={{ textDecoration: 'none' }}>
-                                <Icon name="person-outline" size={24} color={'white'} style={{ position: 'absolute' }} />
-                                <Heading style={styles.textTitle}>Login</Heading>
-                            </Link>
-                        </Row>
-                    </Pressable>
-                </Center>
-            ) : (
-                <></>
-            )}
-        </Column>
-    );
-}
+									<Pressable>
+										<Row justifyContent={'space-between'} alignItems={'center'}>
+											<Link to={'/Login'} style={{ textDecoration: 'none' }}>
+												<Icon
+													name='person-outline'
+													size={24}
+													color={'white'}
+													style={{ position: 'absolute' }}
+												/>
+												<Heading style={styles.textTitle}>Login</Heading>
+											</Link>
+										</Row>
+									</Pressable>
+								</Column>
+								<Logo />
+							</Column>
+						</Row>
+					)}
+				</Column>
+			</Row>
+		</Column>
+	);
+};
