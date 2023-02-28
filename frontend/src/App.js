@@ -68,6 +68,7 @@ export default function App() {
 								element={<PartnershipsPage idiom={i18n} />}
 							/>
 							<Route path='/Register' element={<RegisterPage idiom={i18n} />} />
+
 							<Route
 								path='/ResetPassword'
 								element={<PasswordResetPage idiom={i18n} />}
@@ -76,6 +77,7 @@ export default function App() {
 								path='/RecoverPassword'
 								element={<PasswordRecoveryPage idiom={i18n} />}
 							/>
+
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
