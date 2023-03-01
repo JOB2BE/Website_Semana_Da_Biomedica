@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 from pathlib import Path
-env_path = Path('.') / '.env'
+env_path = Path('..') / '.env'
 load_dotenv(dotenv_path=env_path)
 
 class Settings:
@@ -15,4 +15,10 @@ class Settings:
     POSTGRES_DB : str = os.getenv("POSTGRES_DB","Job2Be")
     DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
     SECRETKEY = os.getenv("SECRETKEY")
+    EMAIL_HOST = os.getenv("EMAIL_HOST")
+    EMAIL_PORT = os.getenv("EMAIL_PORT")
+    EMAIL_USERNAME = os.getenv("EMAIL_USERNAME")
+    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+    EMAIL_FROM = os.getenv("EMAIL_FROM")
+
 settings = Settings()

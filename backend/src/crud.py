@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 import models
 import pydanticSchemas
-import main
 
 
 def getUser(db: Session, userID):
@@ -83,7 +82,6 @@ def createUser(db: Session, object: pydanticSchemas.CreateUser, hasher):
         degree =  object.degree,
         department = object.department,
         typeOfUser = object.typeOfUser,
-        profileImage =  object.profileImage,
         description =  object.description,
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
@@ -100,7 +98,6 @@ def createSpeaker(db: Session, object:pydanticSchemas.CreateSpeaker):
     dbSpeaker = models.Speaker(
         name =  object.name,
         position =  object.position,
-        profileImage =  object.profileImage,
         description =  object.description,
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,

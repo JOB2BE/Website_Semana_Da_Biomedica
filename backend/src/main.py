@@ -16,6 +16,8 @@ from datetime import datetime, timedelta
 from typing import Union
 from PIL import Image
 from fastapi.staticfiles import StaticFiles
+from emailClass import Email
+from pydantic import EmailStr
 
 
 # way create the database tables
@@ -24,7 +26,7 @@ app = FastAPI()
 
 
 # Place of storage of our static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="../static"), name="static")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -127,7 +129,6 @@ async def uploadProfileImage(file: UploadFile = File(...), user=Depends(get_curr
     newFileName = FILEPATH + "profileImage" + \
         str(user.id) + str(user.name) + "." + extension
 
-
     fileContent = await file.read()
 
     with open(newFileName, "wb") as file:
@@ -159,7 +160,6 @@ async def uploadCV(file: UploadFile = File(...), user=Depends(get_current_user))
 
     with open(newFileName, "wb") as file:
         file.write(fileContent)
-
 
     return {"status": "success", "detail": "File Uploaded Sucessfully"}
 
@@ -219,6 +219,11 @@ async def fetchUser(userID, db: Session = Depends(get_db)):
             detail=f"User with the id:{userID} does not exist"
         )  # raise exceptions
     else:
+
+        try:
+            await Email(user, [EmailStr(user.email.lower())]).sendDummyEmail()
+        except Exception as error:
+            raise error
         return user
 
 # DONE
