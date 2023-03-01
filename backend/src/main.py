@@ -448,9 +448,16 @@ async def changeInEnrollment(activityID, userID, db: Session = Depends(get_db)):
             detail=f"Activity or user do not exist"
         )  # raise exceptions
     else:
-        crud.changeInActivityEnrollment(db, activity, user)
+        notInQueueUser = crud.changeInActivityEnrollment(db, activity, user)
         db.refresh(user)
         db.refresh(activity)
+
+        if notInQueueUser: #if we changed the queue letting the first in line to the activity we must notify them via email
+            try:
+                await Email(user=notInQueueUser, email=[EmailStr(notInQueueUser.email.lower())], activityName=activity.name).sendExitedQueueEmail()
+            except Exception as error:
+                raise error
+
         return activity, user
 
 # DONE

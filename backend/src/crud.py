@@ -390,6 +390,8 @@ def changeInActivityEnrollment(db: Session, activity: pydanticSchemas.updateActi
         db.flush()
         db.refresh(activity)
         db.refresh(user)
+        
+        return userToAdd
 
     elif (token and activity.slots > 0):
         activities = user.enrolledActivities
