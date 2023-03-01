@@ -1,3 +1,4 @@
+import random
 from fastapi import Depends, FastAPI, HTTPException, status, File, UploadFile
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
@@ -56,8 +57,6 @@ def get_password_hash(password):
 
 
 def authenticate_user(username: str, password: str, db):
-    print("\n \n")
-    print(db)
     user = crud.getUserByEmail(db=db, email=username)
     if not user:
         return False
@@ -172,17 +171,17 @@ async def getUser(current_user: pydanticSchemas.UserGet = Depends(get_current_us
 
 
 @app.get("/api/users/me/enrolledActivities")
-async def getUserEnrolledActivities(current_user: pydanticSchemas.UserGet = Depends(get_current_user), db: Session = Depends(get_db)):
+async def getUserEnrolledActivities(current_user: pydanticSchemas.UserGet = Depends(get_current_user)):
     return current_user.enrolledActivities
 
 
 @app.get("/api/users/me/inQueueActivities")
-async def getUserInQueueActivities(current_user: pydanticSchemas.UserGet = Depends(get_current_user), db: Session = Depends(get_db)):
+async def getUserInQueueActivities(current_user: pydanticSchemas.UserGet = Depends(get_current_user)):
     return current_user.inQueueActivities
 
 
 @app.get('/api/users', response_model=List[pydanticSchemas.UserGet])
-async def fetchUsers(db: Session = Depends(get_db), skip: int = 0, limit: int = 100, token: str = Depends(oauth2_scheme)):
+async def fetchUsers(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
 
     users = crud.getUsers(db, skip, limit)
     return users
@@ -219,14 +218,21 @@ async def fetchUser(userID, db: Session = Depends(get_db)):
             detail=f"User with the id:{userID} does not exist"
         )  # raise exceptions
     else:
-
-        try:
-            await Email(user, [EmailStr(user.email.lower())]).sendDummyEmail()
-        except Exception as error:
-            raise error
         return user
 
 # DONE
+
+
+@app.get('/api/users/email', response_model=pydanticSchemas.UserGet)
+async def fetchUserByEmail(email: str, db: Session = Depends(get_db),):
+    user = crud.getUserByEmail(db, email)  # Retreive all speakers from db~
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail=f"User with the email:{email} does not exist"
+        )  # raise exceptions
+    else:
+        return user
 
 
 # Delete user
@@ -256,6 +262,30 @@ async def updateUser(userID, newParams: dict, db: Session = Depends(get_db)):
         return crud.updateUser(db, user, newParams)
 
 # DONE
+
+# reset password
+
+
+@app.patch("/api/users/me/resetPassword")
+async def resetPassword(email, db: Session = Depends(get_db)):
+    user = crud.getUserByEmail(db, email)  # Retreive all speakers from db~
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail=f"User with the email:{email} does not exist"
+        )  # raise exceptions
+
+    # generate new token
+    token = str(random.randbytes(5))
+    hashedToken = get_password_hash(token)
+    crud.updateUser(db, user, {"password": hashedToken})
+
+    try:
+        await Email(user=user, email=[EmailStr(user.email.lower())], newPassword=token).sendPasswordRecoveryEmail()
+    except Exception as error:
+        raise error
+
+    return {"status": "success", "detail": "Password was changed"}
 
 
 # Show all speakers

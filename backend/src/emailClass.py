@@ -18,13 +18,16 @@ class EmailSchema(BaseModel):
 
 
 class Email:
-    def __init__(self, user: models.User, email: List[EmailStr]):
+    def __init__(self, user: models.User, email: List[EmailStr], newPassword=None, activityName: str = None):
         self.name = user.name
         self.sender = 'JOB2BE <admin@admin.com>'
         self.email = email
+        self.activityName =  activityName
+        self.newPassword = newPassword 
+        
         pass
 
-    async def sendMail(self, subject, template, activityName: str = None):
+    async def sendMail(self, subject, template):
         # Define the config
         conf = ConnectionConfig(
             MAIL_USERNAME=settings.EMAIL_USERNAME,
@@ -43,7 +46,8 @@ class Email:
         html = template.render(
             name=self.name,
             subject=subject,
-            activityName=activityName,
+            activityName=self.activityName,
+            newPassword=self.newPassword,
 
         )
 
@@ -66,5 +70,5 @@ class Email:
     async def sendPasswordRecoveryEmail(self):
         await self.sendMail('JOB2BE - Recuperação de Password', 'resetPassword')
 
-    async def sendExitedQueueEmail(self, activityName: str):
-        await self.sendMail('JOB2BE - Saíste da Fila de espera de uma actividade!', 'exitedQueue', activityName=activityName)
+    async def sendExitedQueueEmail(self):
+        await self.sendMail('JOB2BE - Saíste da Fila de espera de uma actividade!', 'exitedQueue')
