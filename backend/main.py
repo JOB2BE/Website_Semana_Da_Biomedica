@@ -3,11 +3,10 @@ from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
 from sqlalchemy.orm import Session
 from uuid import UUID
-import models
-import crud
-import pydanticSchemas
-from database import SessionLocal, engine
-from config import settings
+from .crud import *
+from .pydanticSchemas import *
+from .database import SessionLocal, engine
+from .config import settings
 from typing import List
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
