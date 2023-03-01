@@ -53,6 +53,16 @@ def getActivityByName(db: Session, name:str):
 def getActivities(db: Session):
     return db.query(models.Activity).all()
 
+def getActivitiesByType(db: Session, activityType):
+    query = db.query(models.Activity)
+
+    if activityType != '':
+        query = query.filter(models.Activity.activityType == activityType)
+
+
+    return query.all()
+
+
 
 
 def createUser(db: Session, object: pydanticSchemas.CreateUser, hasher):

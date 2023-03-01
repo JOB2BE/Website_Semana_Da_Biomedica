@@ -132,7 +132,7 @@ async def fetchUsers(db: Session = Depends(get_db), skip: int = 0, limit: int = 
 
 
 @app.get('/api/users/roles', response_model=List[pydanticSchemas.UserGet])
-async def fetchUsersByRole(typeOfUser:str = '', department:str = '', db: Session = Depends(get_db)):
+async def fetchUsersByRole(typeOfUser: str = '', department: str = '', db: Session = Depends(get_db)):
     return crud.getUserByRole(db, typeOfUser, department)
 
 # Add new users
@@ -274,6 +274,11 @@ async def fetchActivities(db: Session = Depends(get_db)):
 
 # DONE
 
+
+@app.get('/api/activities/activityType', response_model=List[pydanticSchemas.ActivityGet])
+async def getActivitiesByType(activityType: str = '', db: Session = Depends(get_db)):
+    # Retreive all speakers from db
+    return crud.getActivitiesByType(db, activityType)
 # Get activity by id
 
 
