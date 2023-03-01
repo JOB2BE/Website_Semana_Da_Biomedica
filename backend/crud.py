@@ -10,8 +10,18 @@ def getUser(db: Session, userID):
 def getUserByEmail(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
-def getUserByRole(db: Session, role: str): # Get all Users by a role, in the role list
-    return db.query(models.User).filter(any(element in role for element in models.User.roles)).all()
+def getUserByRole(db: Session, typeOfUser: str, department: str ): # Get all Users by a role, in the role list
+
+    query = db.query(models.User)
+
+    if typeOfUser != '':
+        query = query.filter(models.User.typeOfUser == typeOfUser)
+
+    if department != '':
+        query = query.filter(models.User.department == department)
+        
+
+    return query.all()
 
 
 def getUsers(db: Session, skip: int = 0, limit: int = 100):
