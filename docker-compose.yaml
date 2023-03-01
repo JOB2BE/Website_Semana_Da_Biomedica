@@ -14,6 +14,15 @@ services:
       - semana-bio
     env_file:
       - ./backend/.env
+    environment:
+      - POSTGRES_SERVER=sb-db
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=Job2Be
+      - POSTGRES_USER=postgres
+      - POSTGRES_PORT=5432
+    volumes:
+      - ./backend/:/code/app
+    # command: "/code/app/entrypoint.sh && uvicorn app.main:app --host 0.0.0.0 --port 80 --reload"
 
   frontend:
     container_name: sb-frontend
@@ -26,15 +35,20 @@ services:
       - 8001:19006
     networks:
       - semana-bio
-    env_file:
-      - ./frontend/.env
+    environment:
+      - BACKEND_URL=sb-backend:80
+    volumes:
+      - ./frontend/:/react_native_app/
 
   db:
     container_name: sb-db
     image: postgres
     environment:
-      POSTGRES_DB: semana-bio
-      POSTGRES_PASSWORD: password
+      - POSTGRES_DB=Job2Be
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+    networks:
+      - semana-bio
 
 networks:
   semana-bio:

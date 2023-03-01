@@ -21,6 +21,7 @@ app = FastAPI()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 SECRET_KEY = "d95d955aeebc52ea6ba7c4026b906d3784105139a551d15abf39cf91b9e6d2d2"

@@ -4,48 +4,50 @@ from .pydanticSchemas import *
 
 
 def getUser(db: Session, userID):
-    return db.query(User).filter(User.id == userID).first()
+    return db.query(UserModel).filter(UserModel.id == userID).first()
 
 
 def getUserByEmail(db: Session, email: str):
-    return db.query(User).filter(User.email == email).first()
+    return db.query(UserModel).filter(UserModel.email == email).first()
 
 
 def getUserByRole(db: Session, role: str):  # Get all Users by a role, in the role list
-    return db.query(User).filter(any(element in role for element in User.roles)).all()
+    return (
+        db.query(UserModel).filter(any(element in role for element in User.roles)).all()
+    )
 
 
 def getUsers(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(User).offset(skip).limit(limit).all()
+    return db.query(UserModel).offset(skip).limit(limit).all()
 
 
 def getSpeaker(db: Session, speakerID):
-    return db.query(Speaker).filter(Speaker.id == speakerID).first()
+    return db.query(SpeakerModel).filter(SpeakerModel.id == speakerID).first()
 
 
 def getSpeakersByName(db: Session, name: str):
-    return db.query(Speaker).filter(Speaker.name == name).first()
+    return db.query(SpeakerModel).filter(SpeakerModel.name == name).first()
 
 
 def getSpeakers(db: Session):
-    return db.query(Speaker).all()
+    return db.query(SpeakerModel).all()
 
 
 def getActivity(db: Session, activityID):
-    return db.query(Activity).filter(Activity.id == activityID).first()
+    return db.query(ActivityModel).filter(ActivityModel.id == activityID).first()
 
 
 def getActivityByName(db: Session, name: str):
-    return db.query(Activity).filter(Activity.name == name).first()
+    return db.query(ActivityModel).filter(ActivityModel.name == name).first()
 
 
 def getActivities(db: Session):
-    return db.query(Activity).all()
+    return db.query(ActivityModel).all()
 
 
 def createUser(db: Session, object: CreateUser, hasher):
     ## Fix this, lack of security must be hashed
-    dbUser = User(
+    dbUser = UserModel(
         name=object.name,
         email=object.email,
         password=hasher,
@@ -66,7 +68,7 @@ def createUser(db: Session, object: CreateUser, hasher):
 
 
 def createSpeaker(db: Session, object: CreateSpeaker):
-    dbSpeaker = Speaker(
+    dbSpeaker = SpeakerModel(
         name=object.name,
         email=object.email,
         position=object.position,
@@ -85,7 +87,7 @@ def createSpeaker(db: Session, object: CreateSpeaker):
 
 
 def createActivity(db: Session, object: CreateActivity):
-    dbActivity = Activity(
+    dbActivity = ActivityModel(
         name=object.name,
         description=object.description,
         requirements=object.requirements,
@@ -105,12 +107,16 @@ def createActivity(db: Session, object: CreateActivity):
 
 
 def deleteUser(db: Session, userID: int):
-    if db.query(Activity).all():
+    if db.query(ActivityModel).all():
         activitiesOfInterestEnrolled = (
-            db.query(Activity).filter(Activity.enrolledUsers.count(userID) > 0).all()
+            db.query(ActivityModel)
+            .filter(ActivityModel.enrolledUsers.count(userID) > 0)
+            .all()
         )
         activitiesOfInterestQueue = (
-            db.query(Activity).filter(Activity.usersInQueue.count(userID) > 0).all()
+            db.query(ActivityModel)
+            .filter(ActivityModel.usersInQueue.count(userID) > 0)
+            .all()
         )
 
         for activityEnrolled, activityQueue in zip(
@@ -125,16 +131,16 @@ def deleteUser(db: Session, userID: int):
             setattr(activityQueue, "usersInQueue", queue)
             db.flush()
 
-    user = db.query(User).filter(User.id == userID).first()
+    user = db.query(UserModel).filter(UserModel.id == userID).first()
     db.delete(user)
     db.commit()
     return user
 
 
 def deleteSpeaker(db: Session, speakerID: int):
-    if db.query(Activity).all():
+    if db.query(ActivityModel).all():
         activitiesOfInterest = (
-            db.query(Activity).filter(Activity.speakers.any(speakerID)).all()
+            db.query(ActivityModel).filter(ActivityModel.speakers.any(speakerID)).all()
         )
 
         for activity in activitiesOfInterest:
@@ -148,16 +154,18 @@ def deleteSpeaker(db: Session, speakerID: int):
 
         db.commit()
 
-    speaker = db.query(Speaker).filter(Speaker.id == speakerID).first()
+    speaker = db.query(SpeakerModel).filter(SpeakerModel.id == speakerID).first()
     # db.delete(speaker)
     # db.commit()
     return speaker
 
 
 def deleteActivity(db: Session, activityID: int):
-    if db.query(User).all():
+    if db.query(UserModel).all():
         usersOfInterest = (
-            db.query(User).filter(User.enrolledActivities.count(activityID) > 0).all()
+            db.query(UserModel)
+            .filter(UserModel.enrolledActivities.count(activityID) > 0)
+            .all()
         )
 
         for user in usersOfInterest:
@@ -166,9 +174,11 @@ def deleteActivity(db: Session, activityID: int):
             setattr(user, "enrolledActivities", activities)
             db.flush()
 
-    if db.query(Speaker).all():
+    if db.query(SpeakerModel).all():
         speakersOfInterest = (
-            db.query(Speaker).filter(Speaker.activities.count(activityID) > 0).all()
+            db.query(SpeakerModel)
+            .filter(SpeakerModel.activities.count(activityID) > 0)
+            .all()
         )
 
         for speaker in speakersOfInterest:
@@ -177,7 +187,7 @@ def deleteActivity(db: Session, activityID: int):
             setattr(speaker, "activities", speakerActivities)
             db.flush()
 
-    activity = db.query(Activity).filter(Activity.id == activityID).first()
+    activity = db.query(ActivityModel).filter(ActivityModel.id == activityID).first()
     db.delete(activity)
     db.commit()
     return activity
@@ -208,10 +218,10 @@ def updateActivity(db: Session, activity: updateActivity, newParams: dict):
 
 
 def deleteUser(db: Session, userID: int):
-    # if (db.query(Activity).all()):
-    #     activitiesOfInterestEnrolled = db.query(Activity).filter(
+    # if (db.query(ActivityModel).all()):
+    #     activitiesOfInterestEnrolled = db.query(ActivityModel).filter(
     #         Activity.enrolledUsers.count(userID) > 0).all()
-    #     activitiesOfInterestQueue = db.query(Activity).filter(
+    #     activitiesOfInterestQueue = db.query(ActivityModel).filter(
     #         Activity.usersInQueue.count(userID) > 0).all()
 
     #     for (activityEnrolled, activityQueue) in zip(activitiesOfInterestEnrolled, activitiesOfInterestQueue):
@@ -224,15 +234,15 @@ def deleteUser(db: Session, userID: int):
     #         setattr(activityQueue, 'usersInQueue', queue)
     #         db.flush()
 
-    user = db.query(User).filter(User.id == userID).first()
+    user = db.query(UserModel).filter(UserModel.id == userID).first()
     db.delete(user)
     db.commit()
     return user
 
 
 def deleteSpeaker(db: Session, speakerID: int):
-    # if (db.query(Activity).all()):
-    #     activitiesOfInterest = db.query(Activity).filter(
+    # if (db.query(ActivityModel).all()):
+    #     activitiesOfInterest = db.query(ActivityModel).filter(
     #         Activity.speakers.any(speakerID)).all()
 
     #     for activity in activitiesOfInterest:
@@ -245,15 +255,15 @@ def deleteSpeaker(db: Session, speakerID: int):
     #         setattr(activity, "speakers", list(newSpeakers))
     #     db.commit()
 
-    speaker = db.query(Speaker).filter(Speaker.id == speakerID).first()
+    speaker = db.query(SpeakerModel).filter(SpeakerModel.id == speakerID).first()
     db.delete(speaker)
     db.commit()
     return speaker
 
 
 def deleteActivity(db: Session, activityID: int):
-    # if (db.query(User).all()):
-    #     usersOfInterest = db.query(User).filter(
+    # if (db.query(UserModel).all()):
+    #     usersOfInterest = db.query(UserModel).filter(
     #         User.enrolledActivities.count(activityID) > 0).all()
 
     #     for user in usersOfInterest:
@@ -262,8 +272,8 @@ def deleteActivity(db: Session, activityID: int):
     #         setattr(user, 'enrolledActivities', activities)
     #         db.flush()
 
-    # if (db.query(Speaker).all()):
-    #     speakersOfInterest = db.query(Speaker).filter(
+    # if (db.query(SpeakerModel).all()):
+    #     speakersOfInterest = db.query(SpeakerModel).filter(
     #         Speaker.activities.count(activityID) > 0).all()
 
     #     for speaker in speakersOfInterest:
@@ -274,7 +284,7 @@ def deleteActivity(db: Session, activityID: int):
     #                 speakerActivities)
     #         db.flush()
 
-    activity = db.query(Activity).filter(Activity.id == activityID).first()
+    activity = db.query(ActivityModel).filter(ActivityModel.id == activityID).first()
     db.delete(activity)
     db.commit()
     return activity
