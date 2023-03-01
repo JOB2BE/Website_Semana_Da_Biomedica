@@ -2,6 +2,7 @@ from typing import List, Optional, Union
 from pydantic import BaseModel, EmailStr, validator  # Pydantic is a python library for data validation, usefull for steps related to PUT requests, checks if we are storing GOOD data
 from enum import Enum
 from sqlmodel import Field
+from fastapi import File
 
 
 class Token(BaseModel):
@@ -58,7 +59,7 @@ class Speaker(BaseModel):
 
     name: str
     position: Optional[str]
-    profileImage: Optional[str]
+ 
     description: Optional[str]
     contacts: Optional[str]
     researchInterests: Optional[str]
@@ -79,7 +80,7 @@ class User(BaseModel):
     degree: Optional[str]
     typeOfUser: Optional[str] = TypeOfUser.user
     department: Optional[str]
-    profileImage: Optional[str]
+ 
     description: Optional[str]
     contacts:  Optional[str]
     researchInterests:  Optional[str]
@@ -123,7 +124,7 @@ class UserUpdate(User):
     typeOfUser: Optional[str]
     department: Optional[str]
     degree: Optional[str]
-    profileImage: Optional[str]
+ 
     description: Optional[str]
     contacts:  Optional[str]
     researchInterests:  Optional[str]
@@ -181,7 +182,6 @@ class ActivityOptionalView(Activity):
 class SpeakerUpdate(Speaker):
     name: Optional[int] = Field(default=None, primary_key=True)
     position: Optional[str]
-    profileImage: Optional[str]
     description: Optional[str]
     contacts: Optional[str]
     researchInterests: Optional[str]
@@ -194,7 +194,6 @@ class SpeakerOptionalView(Speaker):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: Optional[str]
     position: Optional[str]
-    profileImage: Optional[str]
     description: Optional[str]
     contacts: Optional[str]
     researchInterests: Optional[str]

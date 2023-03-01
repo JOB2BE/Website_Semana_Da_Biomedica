@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi import Depends, FastAPI, HTTPException, status, File, UploadFile
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
 from sqlalchemy.orm import Session
@@ -14,11 +14,17 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from typing import Union
+from PIL import Image
+from fastapi.staticfiles import StaticFiles
 
 
 # way create the database tables
 
 app = FastAPI()
+
+
+# Place of storage of our static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -104,6 +110,58 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+# Handle Files
+
+@app.post("/api/Profile/image")
+async def uploadProfileImage(file: UploadFile = File(...), user=Depends(get_current_user)):
+
+    FILEPATH = './static/image/'
+    fileName = file.filename
+    extension = fileName.split('.').pop()
+
+    if extension not in "png":
+        return {"status": "error", "detail": "File extension not allowed, use only png"}
+
+    newFileName = FILEPATH + "profileImage" + \
+        str(user.id) + str(user.name) + "." + extension
+
+
+    fileContent = await file.read()
+
+    with open(newFileName, "wb") as file:
+        file.write(fileContent)
+
+    # Shrinking with Pillow
+
+    img = Image.open(newFileName)
+    img = img.resize(size=(200, 200))
+    file.close()
+
+    return {"status": "success", "detail": "File Uploaded Sucessfully"}
+
+
+@app.post("/api/Profile/cv")
+async def uploadCV(file: UploadFile = File(...), user=Depends(get_current_user)):
+
+    FILEPATH = './static/cv/'
+    fileName = file.filename
+    extension = fileName.split('.').pop()
+
+    if extension not in "pdf":
+        return {"status": "error", "detail": "File extension not allowed, use only pdf"}
+
+    newFileName = FILEPATH + "cv" + \
+        str(user.id) + str(user.name) + "." + extension
+
+    fileContent = await file.read()
+
+    with open(newFileName, "wb") as file:
+        file.write(fileContent)
+
+
+    return {"status": "success", "detail": "File Uploaded Sucessfully"}
 
 
 # Get data for validation, it comes from pydantic data extraction in crud.py
@@ -205,7 +263,8 @@ async def fetchSpeakers(db: Session = Depends(get_db)):
 
 @app.get('/api/speakers/typeOfSpeaker', response_model=List[pydanticSchemas.SpeakerGet])
 async def fetchSpeakersByType(typeOfSpeaker: str = '', db: Session = Depends(get_db)):
-    return crud.getSpeakerByType(db, typeOfSpeaker)  # Retreive all speakers from db
+    # Retreive all speakers from db
+    return crud.getSpeakerByType(db, typeOfSpeaker)
 
 # Get speaker by id
 

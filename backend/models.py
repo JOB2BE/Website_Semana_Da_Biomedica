@@ -1,6 +1,6 @@
 from database import Base
 from typing import List, Optional
-from sqlalchemy import Table, Column, ForeignKey, Integer, String, Enum
+from sqlalchemy import Table, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship, Session
 # from sqlalchemy.dialects.postgresql import UUID, ARRAY
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -79,7 +79,6 @@ class Activity(Base):
     scheduleAndLocation = Column(String)
     slots = Column(Integer)
     activityType = Column(String)
-
     # Bidirectional Many to Many
     speakers = relationship("Speaker", secondary=speaker_activity_table, back_populates = "activities")
     # Bidirectional Many to Many
@@ -104,7 +103,6 @@ class User(Base):
     degree = Column(String, nullable=True)
     typeOfUser = Column(String)
     department = Column(String, nullable=True)
-    profileImage = Column(String)
     description = Column(String)
     contacts = Column(String, )
     researchInterests = Column(String )
@@ -126,7 +124,6 @@ class Speaker(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, primary_key=True, index=True)
     position = Column(String)
-    profileImage = Column(String, nullable=True)
     description = Column(String)
     contacts = Column(String,  nullable=True)
     researchInterests = Column(String,  nullable=True)
