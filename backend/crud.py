@@ -40,6 +40,14 @@ def getSpeakersByName(db: Session, name:str):
 def getSpeakers(db: Session):
     return db.query(models.Speaker).all()
 
+def getSpeakerByType(db: Session, typeOfSpeaker):
+    query = db.query(models.Speaker)
+
+    if typeOfSpeaker != '':
+        query = query.filter(models.Speaker.typeOfSpeaker == typeOfSpeaker)
+
+    return query.all()
+
 
 
 
@@ -90,7 +98,6 @@ def createUser(db: Session, object: pydanticSchemas.CreateUser, hasher):
 def createSpeaker(db: Session, object:pydanticSchemas.CreateSpeaker):
     
     dbSpeaker = models.Speaker(
-
         name =  object.name,
         position =  object.position,
         profileImage =  object.profileImage,

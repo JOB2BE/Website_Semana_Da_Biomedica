@@ -202,6 +202,11 @@ async def updateUser(userID, newParams: dict, db: Session = Depends(get_db)):
 async def fetchSpeakers(db: Session = Depends(get_db)):
     return crud.getSpeakers(db)  # Retreive all speakers from db
 
+
+@app.get('/api/speakers/typeOfSpeaker', response_model=List[pydanticSchemas.SpeakerGet])
+async def fetchSpeakersByType(typeOfSpeaker: str = '', db: Session = Depends(get_db)):
+    return crud.getSpeakerByType(db, typeOfSpeaker)  # Retreive all speakers from db
+
 # Get speaker by id
 
 
@@ -276,7 +281,7 @@ async def fetchActivities(db: Session = Depends(get_db)):
 
 
 @app.get('/api/activities/activityType', response_model=List[pydanticSchemas.ActivityGet])
-async def getActivitiesByType(activityType: str = '', db: Session = Depends(get_db)):
+async def fetchActivitiesByType(activityType: str = '', db: Session = Depends(get_db)):
     # Retreive all speakers from db
     return crud.getActivitiesByType(db, activityType)
 # Get activity by id
