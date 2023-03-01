@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  backend:
+    container_name: sb-backend
+    build:
+      dockerfile: ./Dockerfile
+      context: ./backend
+    depends_on:
+      - db
+    ports:
+      - 8000:80
+    networks:
+      - semana-bio
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    container_name: sb-frontend
+    build:
+      dockerfile: ./Dockerfile
+      context: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - 8001:19006
+    networks:
+      - semana-bio
+    env_file:
+      - ./frontend/.env
+
+  db:
+    container_name: sb-db
+    image: postgres
+    environment:
+      POSTGRES_DB: semana-bio
+      POSTGRES_PASSWORD: password
+
+networks:
+  semana-bio:
+    name: semana-bio
+    driver: bridge
+    ipam:
+      driver: default

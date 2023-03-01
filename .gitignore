@@ -13,4 +13,4 @@ env
 
 # macOS
 .DS_Store
-backend/.env
+.env

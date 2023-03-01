@@ -20,9 +20,11 @@ ENV PATH /react_native_app/.bin:$PATH
 
 COPY ./package.json ./package-lock.json ./
 RUN npm install
-RUN npm install -g expo-cli --force
+
 
 WORKDIR /react_native_app/
 COPY . .
 
-ENTRYPOINT ["npx", "expo", "start", "--web"]
+RUN npx expo export:web
+
+ENTRYPOINT ["npx", "serve", "web-build"]
