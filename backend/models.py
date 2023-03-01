@@ -77,7 +77,6 @@ class Activity(Base):
     description = Column(String)
     requirements = Column(String)
     scheduleAndLocation = Column(String)
-    image = Column(String)
     slots = Column(Integer)
     activityType = Column(String)
 
@@ -125,11 +124,9 @@ class Speaker(Base):
     __tablename__ = "speaker"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
-    email = Column(String, unique=True, index=True, nullable=True)
+    name = Column(String, primary_key=True, index=True)
     position = Column(String)
     profileImage = Column(String, nullable=True)
-    companyImage = Column(String,  nullable=True)
     description = Column(String)
     contacts = Column(String,  nullable=True)
     researchInterests = Column(String,  nullable=True)

@@ -49,7 +49,6 @@ class Activity(BaseModel):
     description: str
     requirements: Optional[str]
     scheduleAndLocation: str
-    image: Optional[str]
 
 
     class Config:
@@ -58,10 +57,8 @@ class Activity(BaseModel):
 class Speaker(BaseModel):
 
     name: str
-    email: Optional[EmailStr]
     position: Optional[str]
     profileImage: Optional[str]
-    companyImage: Optional[str]
     description: Optional[str]
     contacts: Optional[str]
     researchInterests: Optional[str]
@@ -159,7 +156,6 @@ class updateActivity(CreateActivity):
     description: Optional[str]
     requirements: Optional[str]
     scheduleAndLocation: Optional[str]
-    image: Optional[str]
     activityType: Optional[str]
     slots: Optional[int]
     enrolledUsers: Optional[List["User"]] = []
@@ -176,7 +172,6 @@ class ActivityOptionalView(Activity):
     description: Optional[str]
     requirements: Optional[str]
     scheduleAndLocation: Optional[str]
-    image: Optional[str]
     activityType: Optional[str]
     slots: Optional[int]
 
@@ -185,10 +180,8 @@ class ActivityOptionalView(Activity):
 
 class SpeakerUpdate(Speaker):
     name: Optional[int] = Field(default=None, primary_key=True)
-    email: Optional[EmailStr]
     position: Optional[str]
     profileImage: Optional[str]
-    companyImage: Optional[str]
     description: Optional[str]
     contacts: Optional[str]
     researchInterests: Optional[str]
@@ -200,10 +193,8 @@ class SpeakerUpdate(Speaker):
 class SpeakerOptionalView(Speaker):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: Optional[str]
-    email: Optional[EmailStr]
     position: Optional[str]
     profileImage: Optional[str]
-    companyImage: Optional[str]
     description: Optional[str]
     contacts: Optional[str]
     researchInterests: Optional[str]

@@ -92,10 +92,8 @@ def createSpeaker(db: Session, object:pydanticSchemas.CreateSpeaker):
     dbSpeaker = models.Speaker(
 
         name =  object.name,
-        email =  object.email,
         position =  object.position,
         profileImage =  object.profileImage,
-        companyImage =  object.companyImage,
         description =  object.description,
         contacts =  object.contacts,
         researchInterests =  object.researchInterests,
@@ -115,7 +113,6 @@ def createActivity(db: Session, object: pydanticSchemas.CreateActivity):
         description = object.description,
         requirements = object.requirements,
         scheduleAndLocation = object.scheduleAndLocation,
-        image = object.image,
         speakers=object.speakers,
         slots=object.slots,
         activityType = object.activityType,
