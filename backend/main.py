@@ -15,7 +15,6 @@ from datetime import datetime, timedelta
 from typing import Union
 
 
-
 # way create the database tables
 
 app = FastAPI()
@@ -28,6 +27,7 @@ SECRET_KEY = "d95d955aeebc52ea6ba7c4026b906d3784105139a551d15abf39cf91b9e6d2d2"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
+
 # Our dependency will create a new SQLAlchemy SessionLocal that will be used in a single request, and then close it once the request is finished.
 def get_db():
     db = SessionLocal()
@@ -35,9 +35,6 @@ def get_db():
         yield db
     finally:
         db.close()
-
-
-
 
 
 def verify_password(plain_password, hashed_password):
@@ -51,7 +48,7 @@ def get_password_hash(password):
 def authenticate_user(username: str, password: str, db):
     print("\n \n")
     print(db)
-    user = crud.getUserByEmail(db=db, email = username)
+    user = getUserByEmail(db=db, email=username)
     if not user:
         return False
     if not verify_password(password, user.password):
@@ -70,7 +67,9 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     return encoded_jwt
 
 
-async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+async def get_current_user(
+    token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -81,18 +80,22 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
-        token_data = pydanticSchemas.TokenData(username=username)
+        token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
-    user = crud.getUserByEmail(db, email=token_data.username)
+    user = getUserByEmail(db, email=token_data.username)
     if user is None:
         raise credentials_exception
     return user
 
 
-@app.post("/token", response_model=pydanticSchemas.Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = authenticate_user(username=form_data.username, password=form_data.password, db=db)
+@app.post("/token", response_model=Token)
+async def login_for_access_token(
+    form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)
+):
+    user = authenticate_user(
+        username=form_data.username, password=form_data.password, db=db
+    )
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -106,264 +109,277 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-
-
-
-
-
-
-#### Get data for validation, it comes from pydantic data extraction in crud.py
+#### Get data for validation, it comes from pydantic data extraction in py
 ## Show 'get' all users
-@app.get("/api/users/me", response_model=pydanticSchemas.UserGet)
-async def getUser(current_user: pydanticSchemas.UserGet = Depends(get_current_user)):
+@app.get("/api/users/me", response_model=UserGet)
+async def getUser(current_user: UserGet = Depends(get_current_user)):
     return current_user
 
 
 @app.get("/api/users/me/enrolledActivities")
-async def getUserEnrolledActivities(current_user: pydanticSchemas.UserGet = Depends(get_current_user), db: Session = Depends(get_db)):
+async def getUserEnrolledActivities(
+    current_user: UserGet = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     return current_user.enrolledActivities
 
 
 @app.get("/api/users/me/inQueueActivities")
-async def getUserInQueueActivities(current_user: pydanticSchemas.UserGet = Depends(get_current_user), db: Session = Depends(get_db)):
+async def getUserInQueueActivities(
+    current_user: UserGet = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     return current_user.inQueueActivities
 
-@app.get('/api/users', response_model=List[pydanticSchemas.UserGet])
-async def fetchUsers(db: Session = Depends(get_db), skip: int = 0, limit: int = 100, token: str = Depends(oauth2_scheme)):
 
-    users=crud.getUsers(db,skip,limit)
+@app.get("/api/users", response_model=List[UserGet])
+async def fetchUsers(
+    db: Session = Depends(get_db),
+    skip: int = 0,
+    limit: int = 100,
+    token: str = Depends(oauth2_scheme),
+):
+    users = getUsers(db, skip, limit)
     return users
-#DONE
+
+
+# DONE
+
 
 ## Add new users
-@app.post('/api/users', response_model=pydanticSchemas.User)
-async def registerUser(user:pydanticSchemas.User, db: Session = Depends(get_db), hasher = Depends(get_password_hash)):
-
-    if crud.getUserByEmail(db, user.email):
+@app.post("/api/users", response_model=User)
+async def registerUser(
+    user: User,
+    db: Session = Depends(get_db),
+    hasher=Depends(get_password_hash),
+):
+    if getUserByEmail(db, user.email):
         raise HTTPException(status_code=400, detail="Email already in use")
     else:
-        return crud.createUser(db, user, hasher)
-#DONE
+        return createUser(db, user, hasher)
+
+
+# DONE
 
 
 # Get user by id
 
 
-@app.get('/api/users/{userID}', response_model=pydanticSchemas.UserGet)
+@app.get("/api/users/{userID}", response_model=UserGet)
 async def fetchUser(userID, db: Session = Depends(get_db)):
-    user = crud.getUser(db, userID)  # Retreive all speakers from db~
+    user = getUser(db, userID)  # Retreive all speakers from db~
 
     if not user:
         raise HTTPException(
-            status_code=404,
-            detail=f"User with the id:{userID} does not exist"
+            status_code=404, detail=f"User with the id:{userID} does not exist"
         )  # raise exceptions
     else:
         return user
+
 
 # DONE
 
 
 ## Delete user
-@app.delete("/api/users/{userID}", response_model=pydanticSchemas.User)
+@app.delete("/api/users/{userID}", response_model=User)
 async def deleteUser(userID, db: Session = Depends(get_db)):
-    if not crud.getUser(db, userID) :
+    if not getUser(db, userID):
         raise HTTPException(
-            status_code= 404,
-            detail=f"User with the id:{userID} does not exist"
-        ) #raise exceptions
+            status_code=404, detail=f"User with the id:{userID} does not exist"
+        )  # raise exceptions
     else:
-        
-        return crud.deleteUser(db, userID)
-    
-#DONE
+        return deleteUser(db, userID)
 
-@app.patch("/api/users/{userID}", response_model=pydanticSchemas.UserUpdate)    
+
+# DONE
+
+
+@app.patch("/api/users/{userID}", response_model=UserUpdate)
 async def updateUser(userID, newParams: dict, db: Session = Depends(get_db)):
-    user = crud.getUser(db, userID)
+    user = getUser(db, userID)
     if not user:
         raise HTTPException(
-            status_code= 404,
-            detail=f"User with the id:{user.id} does not exist"
-        ) #raise exceptions
+            status_code=404, detail=f"User with the id:{user.id} does not exist"
+        )  # raise exceptions
     else:
-        return crud.updateUser(db, user, newParams)
+        return updateUser(db, user, newParams)
 
-#DONE
+
+# DONE
 
 
 ## Show all speakers
 
 
-@app.get('/api/speakers', response_model=List[pydanticSchemas.SpeakerGet])
+@app.get("/api/speakers", response_model=List[SpeakerGet])
 async def fetchSpeakers(db: Session = Depends(get_db)):
-    return crud.getSpeakers(db) ## Retreive all speakers from db
+    return getSpeakers(db)  ## Retreive all speakers from db
+
 
 # Get speaker by id
 
 
-@app.get('/api/speakers/{speakerID}', response_model=pydanticSchemas.SpeakerGet)
+@app.get("/api/speakers/{speakerID}", response_model=SpeakerGet)
 async def fetchSpeaker(speakerID, db: Session = Depends(get_db)):
-    speaker = crud.getSpeaker(db, speakerID)  # Retreive all speakers from db~
+    speaker = getSpeaker(db, speakerID)  # Retreive all speakers from db~
 
     if not speaker:
         raise HTTPException(
-            status_code=404,
-            detail=f"Speaker with the id:{speakerID} does not exist"
+            status_code=404, detail=f"Speaker with the id:{speakerID} does not exist"
         )  # raise exceptions
     else:
         return speaker
 
+
 ## Add new speakers
-@app.post('/api/speakers', response_model=pydanticSchemas.CreateSpeaker)
-async def registerSpeaker(speaker: pydanticSchemas.CreateSpeaker, db: Session = Depends(get_db)):
+@app.post("/api/speakers", response_model=CreateSpeaker)
+async def registerSpeaker(speaker: CreateSpeaker, db: Session = Depends(get_db)):
+    if getSpeakersByName(db, speaker.name):
+        raise HTTPException(
+            status_code=400,
+            detail="The Speaker with such name is already present in the database",
+        )
 
-    if crud.getSpeakersByName(db, speaker.name):
-        raise HTTPException(status_code=400, detail="The Speaker with such name is already present in the database")
-    
     else:
+        return createSpeaker(db, speaker)
 
-        return crud.createSpeaker(db,speaker)
-    
-#DONE
+
+# DONE
 
 ## Update Speaker
 
 
-@app.patch("/api/speakers/{speakerID}", response_model= pydanticSchemas.SpeakerUpdate)
-async def updateSpeaker(speakerID, newParams:dict, db: Session = Depends(get_db)):
-    speaker = crud.getSpeaker(db, speakerID)
+@app.patch("/api/speakers/{speakerID}", response_model=SpeakerUpdate)
+async def updateSpeaker(speakerID, newParams: dict, db: Session = Depends(get_db)):
+    speaker = getSpeaker(db, speakerID)
     if not speaker:
         raise HTTPException(
-            status_code=404,
-            detail=f"Speaker with the id:{speakerID} does not exist"
+            status_code=404, detail=f"Speaker with the id:{speakerID} does not exist"
         )  # raise exceptions
     else:
-        return crud.updateSpeaker(db,speaker, newParams)
+        return updateSpeaker(db, speaker, newParams)
+
 
 ## Delete speaker
-@app.delete("/api/speakers/{speakerID}", response_model=pydanticSchemas.Speaker)
+@app.delete("/api/speakers/{speakerID}", response_model=Speaker)
 async def deleteSpeaker(speakerID, db: Session = Depends(get_db)):
-
-    if not crud.getSpeaker(db,speakerID):
+    if not getSpeaker(db, speakerID):
         raise HTTPException(
-            status_code= 404,
-            detail=f"Speaker with the id:{speakerID} does not exist"
-        ) #raise exceptions
+            status_code=404, detail=f"Speaker with the id:{speakerID} does not exist"
+        )  # raise exceptions
     else:
-        return crud.deleteSpeaker(db,speakerID)
-    
-#DONE
+        return deleteSpeaker(db, speakerID)
+
+
+# DONE
 
 # Activity
 
 ## Show all activities
 
 
-@app.get('/api/activities', response_model=List[pydanticSchemas.ActivityGet])
+@app.get("/api/activities", response_model=List[ActivityGet])
 async def fetchActivities(db: Session = Depends(get_db)):
-    return crud.getActivities(db) ## Retreive all speakers from db
+    return getActivities(db)  ## Retreive all speakers from db
 
-#DONE
+
+# DONE
 
 # Get activity by id
 
 
-@app.get('/api/activities/{activityID}', response_model=pydanticSchemas.ActivityGet)
-async def fetchActivity(activityID,db: Session = Depends(get_db)):
-    return crud.getActivity(db,activityID) 
+@app.get("/api/activities/{activityID}", response_model=ActivityGet)
+async def fetchActivity(activityID, db: Session = Depends(get_db)):
+    return getActivity(db, activityID)
+
 
 # DONE
 
 ## Add new activity
 
-@app.post('/api/activities', response_model=pydanticSchemas.CreateActivity)
-async def registerActivity(activity:pydanticSchemas.CreateActivity, db: Session = Depends(get_db)):
 
-    if crud.getActivityByName(db, activity.name):
-        raise HTTPException(status_code=400, detail="An activity with such name is already present in the database")
-    
+@app.post("/api/activities", response_model=CreateActivity)
+async def registerActivity(activity: CreateActivity, db: Session = Depends(get_db)):
+    if getActivityByName(db, activity.name):
+        raise HTTPException(
+            status_code=400,
+            detail="An activity with such name is already present in the database",
+        )
+
     else:
+        return createActivity(db, activity)
 
-        return crud.createActivity(db,activity)
-#DONE
+
+# DONE
 
 ## Update activity
 
-@app.patch("/api/activities/{activityID}", response_model=pydanticSchemas.updateActivity)    
+
+@app.patch("/api/activities/{activityID}", response_model=updateActivity)
 async def updateActivity(activityID, newParams: dict, db: Session = Depends(get_db)):
-    
-    activity = crud.getActivity(db, activityID)
+    activity = getActivity(db, activityID)
     if not activity:
         raise HTTPException(
-            status_code= 404,
-            detail=f"Activity with the id:{activityID} does not exist"
-        ) #raise exceptions
+            status_code=404, detail=f"Activity with the id:{activityID} does not exist"
+        )  # raise exceptions
     else:
-        return crud.updateActivity(db, activity, newParams)
-#DONE
+        return updateActivity(db, activity, newParams)
+
+
+# DONE
 
 ## Delete activity
 
-@app.delete("/api/activities/{activityID}", response_model=pydanticSchemas.Activity)
-async def deleteActivity(activityID, db: Session = Depends(get_db)):
 
-    if not crud.getActivity(db,activityID):
+@app.delete("/api/activities/{activityID}", response_model=Activity)
+async def deleteActivity(activityID, db: Session = Depends(get_db)):
+    if not getActivity(db, activityID):
         raise HTTPException(
-            status_code= 404,
-            detail=f"Activity with the id:{activityID} does not exist"
-        ) #raise exceptions
+            status_code=404, detail=f"Activity with the id:{activityID} does not exist"
+        )  # raise exceptions
     else:
-        return crud.deleteActivity(db,activityID)
-#DONE
+        return deleteActivity(db, activityID)
+
+
+# DONE
 
 # Enrollment
 
 ## Enrollment
 
+
 @app.patch("/api/activities/{activityID}/{userID}")
 async def changeInEnrollment(activityID, userID, db: Session = Depends(get_db)):
-    user = crud.getUser(db, userID)
-    activity = crud.getActivity(db, activityID)
+    user = getUser(db, userID)
+    activity = getActivity(db, activityID)
     if not activity or not user:
         raise HTTPException(
-            status_code= 404,
-            detail=f"Activity or user do not exist"
-        ) #raise exceptions
+            status_code=404, detail=f"Activity or user do not exist"
+        )  # raise exceptions
     else:
-        crud.changeInActivityEnrollment(db, activity, user)
+        changeInActivityEnrollment(db, activity, user)
         db.refresh(user)
         db.refresh(activity)
         return activity, user
-    
-#DONE
 
 
-#linker
+# DONE
+
+
+# linker
 @app.patch("/linker/{activityID}/{speakerID}")
 async def linker(activityID, speakerID, db: Session = Depends(get_db)):
-
-    activity = crud.getActivity(db, activityID)
-    speaker = crud.getSpeaker(db, speakerID)
+    activity = getActivity(db, activityID)
+    speaker = getSpeaker(db, speakerID)
     if speaker not in activity.speakers:
-        setattr(activity, 'speakers',  activity.speakers + [speaker])
+        setattr(activity, "speakers", activity.speakers + [speaker])
     else:
         speakers = activity.speakers
         speakers.remove(speaker)
-        setattr(activity, 'speakers',  speakers)
-    
+        setattr(activity, "speakers", speakers)
+
     db.commit()
     db.refresh(speaker)
     db.refresh(activity)
 
-    return activity,speaker
-
-
-
-
-
-    
-
-
-
-
+    return activity, speaker
