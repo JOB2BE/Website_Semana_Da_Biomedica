@@ -1,7 +1,9 @@
 import React from 'react';
+import { registerRootComponent } from 'expo';
+
 import { Router, Route, Routes } from './router/index';
 import { NativeBaseProvider } from 'native-base';
-import { Navbar } from './components/navbar/Navbar'; 
+import { Navbar } from './components/navbar/Navbar';
 import LandingPage from './pages/LandingPage';
 import AboutUsPage from './pages/AboutUsPage';
 import SchedulePage from './pages/SchedulePage';
@@ -37,7 +39,7 @@ const config = {
 	},
 };
 
-export default function App() {
+function App() {
 	// eslint-disable-next-line no-unused-vars
 	const [fontsLoaded] = useFonts({
 		// eslint-disable-next-line no-undef
@@ -93,3 +95,5 @@ export default function App() {
 		</ImageBackground>
 	);
 }
+
+export default registerRootComponent(App);

@@ -1,15 +1,28 @@
-FROM node:16.13.1
-LABEL version=1.2.1
+FROM node:16
 
-ENV ADB_IP="192.168.1.1"
-ENV REACT_NATIVE_PACKAGER_HOSTNAME="192.255.255.255"
+ARG NODE_ENV=production
+ENV NODE_ENV $NODE_ENV
 
-EXPOSE 19000
-EXPOSE 19001
+ARG PORT=19006
+ENV PORT $PORT
+EXPOSE $PORT 19001 19002
 
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH /home/node/.npm-global/bin:$PATH
+RUN npm i --unsafe-perm -g npm@latest expo-cli@latest
 
-WORKDIR /app
+RUN mkdir /react_native_app && chown node:node /react_native_app
 
-COPY package.json app.json ./
-RUN npm i 
-CMD npx expo start --web
+WORKDIR /react_native_app
+
+ENV PATH /react_native_app/.bin:$PATH
+# USER node
+
+COPY ./package.json ./package-lock.json ./
+RUN npm install
+RUN npm install -g expo-cli --force
+
+WORKDIR /react_native_app/
+COPY . .
+
+ENTRYPOINT ["npx", "expo", "start", "--web"]
