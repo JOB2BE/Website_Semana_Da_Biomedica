@@ -20,25 +20,25 @@ export default function AboutUsPage() {
 		},
 	});
 	return (
-		<Column flex={1} space={12}>
-			<Row justifyContent={'center'} style={styles.aboutBox}>
+		<Column space={12} style={styles.aboutBox}>
+			<Row justifyContent={'center'} >
 				<StyledBox headingText={'Sobre:'} flex={0.9}>
-					<Text fontSize={'xs'}>
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-						doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-						veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-						ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-						consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Sed ut
-						perspiciatis unde omnis iste natus error sit voluptatem accusantium
-						doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-						veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-						ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-						consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Sed ut
-						perspiciatis unde omnis iste natus error sit voluptatem accusantium
-						doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-						veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-						ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-						consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+					<Text fontSize={'sm'}>
+						A JOB2BE - Semana da Biomédica 2023 é um evento organizado pelo Núcleo de
+						Estudantes de Engenharia Biomédica do Instituto Superior Técnico da
+						Universidade de Lisboa (NEBM-IST), cuja 2ª edição decorrerá entre os dias 6
+						e 8 de março de 2023, em formato presencial. A nossa missão mantém-se:
+						estreitar a relação entre a comunidade académica, a comunidade científica e
+						o mundo empresarial; assim como divulgar o trabalho desenvolvido atualmente,
+						em Portugal e no Mundo, nos mais diversos setores da área da Engenharia
+						Biomédica. Para fazer cumprir este objetivo, pretendemos, durante estes
+						dias, reunir um conjunto interdisciplinar de estudantes, académicos,
+						empresas e start-ups, fomentando a interação e a partilha de conhecimento
+						entre estas entidades. O evento contará com um ciclo de palestras, workshops
+						e pitches, entre outras atividades. Nesta edição da JOB2BE, abordaremos
+						temas como gamificação na saúde, terapias génicas e edição génica,
+						abordagens inovadoras na investigação do cérebro e data science em medicina,
+						que irão estar distribuídos por quatro painéis.
 					</Text>
 				</StyledBox>
 			</Row>

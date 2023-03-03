@@ -20,7 +20,7 @@ const white = '#ffffff';
 export default function ActivityCard(props) {
 	const styles = StyleSheet.create({
 		aboutBox: {
-			paddingVertical: '1%',
+			paddingVertical: '2.5%',
 		},
 		activityType: {
 			backgroundColor: theme.colors.medYellow[0],
@@ -45,8 +45,8 @@ export default function ActivityCard(props) {
 		},
 	});
 	return (
-		<Column>
-			<Row justifyContent={'center'} style={styles.aboutBox}>
+		<Column style={styles.aboutBox}>
+			<Row justifyContent={'center'} >
 				<ActivityBox
 					padding={12}
 					flex={0.85}

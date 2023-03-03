@@ -23,13 +23,12 @@ const styles = StyleSheet.create({
 		borderBottomLeftRadius: 20,
 		backgroundColor: theme.colors.medYellow['0'],
 		height: '40%',
-		paddingHorizontal: 25,
 	},
 	rightContainer: {
 		borderBottomRightRadius: 20,
 		backgroundColor: theme.colors.medYellow['0'],
 		height: '40%',
-		paddingHorizontal: 25,
+
 		zIndex: -1,
 	},
 	logoContainer: {

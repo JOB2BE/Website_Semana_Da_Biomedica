@@ -79,12 +79,11 @@ export default function PartnershipsPage() {
 
 	return (
 		<Column
-			flex={1}
 			space={20}
 			justifyContent={'center'}
 			alignItems={'center'}
 			alignContent={'center'}
-			py={20}
+			py={'2.5%'}
 		>
 			<StyledBox style={styles.text}>
 				<Heading>Institutional Partners</Heading>

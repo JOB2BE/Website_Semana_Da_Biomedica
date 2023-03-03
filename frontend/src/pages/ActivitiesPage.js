@@ -61,7 +61,7 @@ export default function ActivitiesPage() {
 
 	const [currentIndex, setCurrentIndex] = React.useState(null);
 	return (
-		<Column flex={1} alignItems={'center'} py={'2.5%'}>
+		<Column alignItems={'center'} py={'2.5%'}>
 			<Stack
 				justifyContent={'center'}
 				direction={isScreenSmall ? 'column' : 'row'}
