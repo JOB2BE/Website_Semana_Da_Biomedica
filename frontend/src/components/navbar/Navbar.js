@@ -1,6 +1,5 @@
 import { React, useState } from 'react';
-import { Center, Heading, Box, Stack } from 'native-base';
-import Logo from '../../assets/images/DarkBGLogo';
+import { Center, Heading, Column, Stack, Image } from 'native-base';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
@@ -15,6 +14,8 @@ var idiom = new I18n();
 idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
 idiom.translations = { en, pt }; // All our languages
 idiom.locale = Localization.locale; // get the device's current language code
+
+const logo = require('../../assets/images/dark-background.png');
 
 const styles = StyleSheet.create({
 	leftContainer: {
@@ -229,17 +230,16 @@ export const Navbar = () => {
 							);
 						})}
 					</Stack>
-
-					<Box
-						style={{
-							alignItems: 'center',
-						}}
-					>
-						<Link to='/' style={{ textDecoration: 'none' }}>
-							{/*TODO: CHANGE LOGO TO SMALLER SIZE*/}
-							<Logo style={[styles.logoContainer, styles.shadow]} />
-						</Link>
-					</Box>
+					<Link to='/' style={{ textDecoration: 'none' }}>
+						{/*TODO: CHANGE LOGO TO SMALLER SIZE*/}
+						<Column alignContent={'flex-start'}>
+							<Image
+								size={155}
+								source={logo}
+								style={[styles.logoContainer, styles.shadow]}
+							/>
+						</Column>
+					</Link>
 
 					<Stack
 						direction='row'
