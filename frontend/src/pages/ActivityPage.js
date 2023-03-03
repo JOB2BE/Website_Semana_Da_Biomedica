@@ -1,27 +1,28 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Button, Text, View } from 'native-base';
+import ActivityCard from '../components/activitycard/ActivityCard';
+import { useParams } from '../router';
+import { activitiesSpeakersDay1 } from '../assets/objects/activitiesSpeakersDay1';
+import { activitiesSpeakersDay2 } from '../assets/objects/activitiesSpeakersDay2';
+import { activitiesSpeakersDay3 } from '../assets/objects/activitiesSpeakersDay3';
 
 export default function ActivityPage() {
-	const styles = StyleSheet.create({
-		container: {
-			flex: 1,
-			backgroundColor: '#fff',
-			alignItems: 'center',
-			justifyContent: 'center',
-		},
-	});
+	const activitiesList = activitiesSpeakersDay1
+		.concat(activitiesSpeakersDay2)
+		.concat(activitiesSpeakersDay3);
 
-	const [counter, setCounter] = useState(0);
+	const { id } = useParams();
+	const activity = activitiesList[id];
 
+	console.log(activity.name);
 	return (
-		<View style={styles.container}>
-			<Text>This is the Activity Page!</Text>
-			<Button onPress={() => setCounter(counter + 1)}>Add +1 to counter</Button>
-			<Text>You have pressed the button {counter} times</Text>
-			<StatusBar style='auto' />
-		</View>
+		<ActivityCard
+			title={activity.name}
+			type={activity.activityType}
+			speakers={activity.speakers}
+			description={activity.description}
+			requirements={activity.requirements}
+			schedule={activity.scheduleAndLocation}
+			enrollmentLink = {activity.enrollmentLink}
+		/>
 	);
 }

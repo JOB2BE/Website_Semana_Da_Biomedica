@@ -1,7 +1,10 @@
 import React from 'react';
 import theme from '../../theme';
-import { Box, HStack, VStack, Text, Heading } from 'native-base';
-import { Platform } from 'react-native';
+import { Row, Column, Text, Heading, Center, Button } from 'native-base';
+import { Link } from '../../router';
+import { StyleSheet } from 'react-native';
+import ActivityBox from '../information/ActivityBox';
+import { Link as NBLink } from 'native-base';
 
 const white = '#ffffff';
 
@@ -15,69 +18,111 @@ const white = '#ffffff';
 // />
 
 export default function ActivityCard(props) {
+	const styles = StyleSheet.create({
+		aboutBox: {
+			paddingVertical: '1%',
+		},
+		activityType: {
+			backgroundColor: theme.colors.medYellow[0],
+			borderRadius: 15,
+			shadowColor: theme.colors.dryBlue[0],
+			shadowOffset: {
+				width: 2,
+				height: 2,
+			},
+			shadowRadius: 0.5,
+			shadowOpacity: 0.7,
+			elevation: 10,
+			padding: 10,
+		},
+		bold: {
+			fontWeight: 'bold',
+		},
+		heading: {
+			color: theme.colors.medYellow[0],
+			flexWrap: 'wrap',
+			flex: 1,
+		},
+	});
 	return (
-		<VStack flex='1'>
-			<HStack
-				bg={theme.colors.medYellow}
-				p='3'
-				roundedTop='20'
-				justifyContent='space-between'
-				alignItems='center'
-				flexWrap='wrap'
-			>
-				<Heading>{props.title}</Heading>
+		<Column>
+			<Row justifyContent={'center'} style={styles.aboutBox}>
+				<ActivityBox
+					padding={12}
+					flex={0.85}
+					stackSpace={12}
+					headingChildren={
+						<Row justifyContent={'space-between'}>
+							<Column flex={0.8}>
+								<Heading size='md' style={styles.heading}>
+									{props.title}
+								</Heading>
+							</Column>
+							<Column>
+								<Center style={styles.activityType}>
+									<Text size='md' style={styles.bold}>
+										{props.type}
+									</Text>
+								</Center>
+							</Column>
+						</Row>
+					}
+				>
+					<Row>
+						<Column>
+							<Text size='md' style={styles.bold}>
+								Instrutor(es)/Palestrante(s):
+							</Text>
+							{props.speakers.map((speaker, index) => {
+								return (
+									<Link key={index} to={'/Speaker/' + String(speaker.id)}>
+										<Text paddingLeft={3} size='md'>
+											{speaker.name} ;
+										</Text>
+									</Link>
+								);
+							})}
+						</Column>
+					</Row>
+					<Row>
+						<Column flex={1}>
+							<Text size='md' style={styles.bold}>
+								Descrição:
+							</Text>
+							<Text paddingLeft={3} size='md' flexWrap={'wrap'} flex={1}>
+								{props.description}
+							</Text>
+						</Column>
+					</Row>
 
-				<Box bg={theme.colors.engGrey} rounded='full' px='5' py='2'>
-					<Text _web={{ fontSize: 'lg' }} size='md'>
-						{props.type}
-					</Text>
-				</Box>
-			</HStack>
-			<VStack
-				bg={white}
-				flex='1'
-				p='3'
-				justifyContent='space-between'
-				roundedBottom='20'
-				borderColor={theme.colors.medYellow}
-				borderWidth='2'
-			>
-				<HStack flexWrap='wrap'>
-					<Text _web={{ fontSize: 'md' }} size='lg'>
-						Instrutor/Palestrante:{' '}
-					</Text>
-					<Text _web={{ fontSize: 'md' }} size='lg'>
-						{props.speaker}
-					</Text>
-				</HStack>
+					{props.requirements && (
+						<Row>
+							<Column flexWrap={'wrap'}>
+								<Text size='md' style={styles.bold}>
+									Pré-Requisitos:
+								</Text>
+								<Text paddingLeft={3} size='md'>
+									{props.requirements}
+								</Text>
+							</Column>
+						</Row>
+					)}
 
-				<VStack>
-					<Text _web={{ fontSize: 'md' }} size='lg'>
-						Descrição:
-					</Text>
-					<Text _web={{ fontSize: 'md' }} size='lg'>
-						{props.description}
-					</Text>
-				</VStack>
-
-				<VStack>
-					<Text _web={{ fontSize: 'md' }} size='lg'>
-						Pré-Requisitos:
-					</Text>
-					<Text _web={{ fontSize: 'md' }} size='lg'>
-						{props.requirements}
-					</Text>
-				</VStack>
-
-				<HStack flexWrap='wrap'>
-					<Text _web={{ fontSize: 'md' }} size='lg'>
-						Horário:{' '}
-					</Text>
-					<Text _web={{ fontSize: 'md' }} size='lg'>
-						{props.schedule}
-					</Text>
-				</HStack>
-			</VStack>
-		</VStack>
+					<Row alignItems={'center'} space={4}>
+						<Text size='md' style={styles.bold}>
+							Horário:
+						</Text>
+						<Text size='md'>{props.schedule}</Text>
+					</Row>
+					{props.enrollmentLink && (
+						<Row justifyContent={'center'}>
+							<NBLink href={props.enrollmentLink}>
+								<Button variant={'alternating'}>Inscreve-te!</Button>
+							</NBLink>
+						</Row>
+					)}
+				</ActivityBox>
+			</Row>
+		</Column>
 	);
 }

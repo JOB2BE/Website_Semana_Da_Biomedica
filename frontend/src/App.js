@@ -8,7 +8,8 @@ import SchedulePageAnimated from './pages/SchedulePageAnimated';
 import ActivityPage from './pages/ActivityPage';
 import ActivitiesPage from './pages/ActivitiesPage';
 // import SpeakersPage from './pages/SpeakersPage';
-import SpeakerPage from './pages/SpeakerPage';
+// import SpeakerPage from './pages/SpeakerPage';
+import SpeakerController from './components/controller/SpeakerController';
 import FeedbackPage from './pages/FeedbackPage';
 // import LoginPage from './pages/LoginPage';
 // import RegisterPage from './pages/RegisterPage';
@@ -66,13 +67,13 @@ export default function App() {
 								path='/Schedule'
 								element={<SchedulePageAnimated idiom={i18n} />}
 							/>
-							<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
+							<Route path='/Activity/:id' element={<ActivityPage idiom={i18n} />} />
 							<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
 							{/* <Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} /> */}
 
 							<Route path='/User' element={<UserPage idiom={i18n} />} />
 							{/* <Route path='/Profile' element={<UserPage idiom={i18n} />} /> */}
-							<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
+							<Route path='/Speaker/:id' element={<SpeakerController idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
 							{/* <Route path='/Login' element={<LoginPage idiom={i18n} />} /> */}
 							<Route

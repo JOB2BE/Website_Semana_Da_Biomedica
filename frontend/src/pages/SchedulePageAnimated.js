@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { VStack, HStack, Pressable, Text, Heading, Divider, Collapse, View } from 'native-base';
 import theme from '../theme';
 import { AntDesign } from '@expo/vector-icons';
+import { Link } from '../router';
 
 // TODO: CHECK ON MOBILE
 
@@ -12,7 +13,7 @@ export default function SchedulePageAnimated() {
 		<VStack paddingTop={'2.5%'}>
 			<HStack justifyContent={'center'}>
 				<VStack space='10'>
-					{[6, 7, 8].map((componentDay, index) => (
+					{[6, 7, 8].map((componentDay) => (
 						<VStack key={componentDay} rounded='20' overflow='hidden'>
 							<Pressable
 								onPress={() =>
@@ -55,10 +56,11 @@ export default function SchedulePageAnimated() {
 												</Text>
 
 												<Divider orientation='vertical' />
-
-												<Text size='md' pl='5'>
-													{activity.name}
-												</Text>
+												<Link to={'/Activity/' + String(activity.id)}>
+													<Text size='md' pl='5'>
+														{activity.name}
+													</Text>
+												</Link>
 											</HStack>
 										))}
 									</View>
@@ -79,42 +81,49 @@ const schedule = {
 			name: 'Sessão de Boas-Vindas',
 			local: 'Anf. Abreu Faro',
 			type: '',
+			id: 0,
 		},
 		{
 			time: '9h30 - 11h',
 			name: 'Networking',
 			local: 'Átrio Central',
 			type: 'Networking',
+			id: 1,
 		},
 		{
 			time: '11h - 11h30',
 			name: 'Coffee Break',
 			local: 'Átrio Central',
 			type: '',
+			id: undefined,
 		},
 		{
 			time: '11h30 - 12h',
 			name: 'Pitch',
 			local: 'Anf. Abreu Faro',
 			type: 'Pitch',
+			id: 2,
 		},
 		{
 			time: '13h30 - 15h',
 			name: 'Palestra: Gamificação na Saúde',
 			local: 'Anf. Abreu Faro',
 			type: 'Palestra',
+			id: 3,
 		},
 		{
 			time: '15h - 15h30',
 			name: 'Coffee Break',
 			local: 'Átrio Anf. Abreu Faro',
 			type: '',
+			id: undefined,
 		},
 		{
 			time: '15h30 - 17h',
 			name: 'Workshop',
 			local: 'Sala C01',
 			type: 'Workshop',
+			id: 4,
 		},
 	],
 	7: [
@@ -123,36 +132,42 @@ const schedule = {
 			name: 'Workshop',
 			local: 'Átrio Central',
 			type: '',
+			id: 5,
 		},
 		{
 			time: '10h30 - 11h',
 			name: 'Coffee Break',
 			local: 'Átrio Central',
 			type: '',
+			id: undefined,
 		},
 		{
 			time: '11h - 12h30',
 			name: 'Palestra: Data Science em Medicina',
 			local: 'Anf. Abreu Faro',
 			type: 'Palestra',
+			id: 6,
 		},
 		{
 			time: '14h - 15h30',
 			name: 'Palestra: Engenharia e Neurociências',
 			local: 'Anf. Abreu Faro',
 			type: 'Palestra',
+			id: 7,
 		},
 		{
 			time: '15h30 - 16h',
 			name: 'Coffee Break',
 			local: 'Átrio Anf. Abreu Faro',
 			type: '',
+			id: undefined,
 		},
 		{
 			time: '16h - 17h30',
 			name: 'Workshop',
 			local: 'Sala C01',
 			type: 'Workshop',
+			id: 8,
 		},
 	],
 	8: [
@@ -161,36 +176,42 @@ const schedule = {
 			name: 'Networking',
 			local: 'Sala C01',
 			type: 'Workshop',
+			id: 9,
 		},
 		{
 			time: '10h30 - 11h',
 			name: 'Coffee Break',
 			local: 'Átrio Anf. Abreu Faro',
 			type: '',
+			id: undefined,
 		},
 		{
 			time: '11h - 12h30',
 			name: 'Palestra: Terapia Genética e Edição Genética',
 			local: 'Anf. Abreu Faro',
 			type: 'Palestra',
+			id: 10,
 		},
 		{
 			time: '14h - 15h30',
 			name: 'Sessão Alumni',
 			local: 'Átrio Central',
 			type: '',
+			id: 11,
 		},
 		{
 			time: '15h30 - 16h',
 			name: 'Coffee Break',
 			local: 'Átrio Anf. Abreu Faro',
 			type: '',
+			id: undefined,
 		},
 		{
 			time: '16h - 16h30',
 			name: 'Sessão de Encerramento',
 			local: 'Anf. Abreu Faro',
 			type: '',
+			id: 12,
 		},
 	],
 };
