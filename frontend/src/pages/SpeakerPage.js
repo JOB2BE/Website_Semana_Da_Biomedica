@@ -217,7 +217,7 @@ export default function SpeakerPage(props) {
 							</Pressable>
 							{currentIndex === 2 ? (
 								<Center style={styles.RectangleShapeViewInformation}>
-									<NBLink href={props.contacts}>
+									<NBLink href={props.contacts} isExternal>
 										<FontAwesome5
 											name='linkedin'
 											size={24}
