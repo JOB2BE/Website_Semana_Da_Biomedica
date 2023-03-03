@@ -6,7 +6,7 @@ import LandingPage from './pages/LandingPage';
 import AboutUsPage from './pages/AboutUsPage';
 import SchedulePageAnimated from './pages/SchedulePageAnimated';
 import ActivityPage from './pages/ActivityPage';
-// import ActivitiesPage from './pages/ActivitiesPage';
+import ActivitiesPage from './pages/ActivitiesPage';
 // import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
@@ -67,8 +67,8 @@ export default function App() {
 								element={<SchedulePageAnimated idiom={i18n} />}
 							/>
 							<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
-							{/* <Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
-							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} /> */}
+							<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
+							{/* <Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} /> */}
 
 							<Route path='/User' element={<UserPage idiom={i18n} />} />
 							{/* <Route path='/Profile' element={<UserPage idiom={i18n} />} /> */}

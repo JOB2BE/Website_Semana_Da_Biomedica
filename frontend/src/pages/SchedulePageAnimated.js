@@ -12,7 +12,7 @@ export default function SchedulePageAnimated() {
 		<VStack flex={1} space={120}>
 			<HStack justifyContent={'center'} pt='10%'>
 				<VStack space='10'>
-					{[6, 7, 8].map((componentDay) => (
+					{[6, 7, 8].map((componentDay, index) => (
 						<VStack key={componentDay} rounded='20' overflow='hidden'>
 							<Pressable
 								onPress={() =>
@@ -120,7 +120,7 @@ const schedule = {
 	7: [
 		{
 			time: '9h - 10h30',
-			name: 'Networking',
+			name: 'Workshop',
 			local: 'Átrio Central',
 			type: '',
 		},
@@ -158,7 +158,7 @@ const schedule = {
 	8: [
 		{
 			time: '9h - 10h30',
-			name: 'Workshop',
+			name: 'Networking',
 			local: 'Sala C01',
 			type: 'Workshop',
 		},

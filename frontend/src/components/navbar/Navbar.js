@@ -80,9 +80,9 @@ export const Navbar = () => {
 			route: '/AboutUs',
 		},
 		{
-			name: 'Login',
-			icon: 'door-closed',
-			route: '/Login',
+			name: 'Parcerias',
+			icon: 'people-arrows',
+			route: '/Partnerships',
 		},
 	];
 	if (loggedIn) {
