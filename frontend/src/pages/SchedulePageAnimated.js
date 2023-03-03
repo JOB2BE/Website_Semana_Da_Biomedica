@@ -20,7 +20,7 @@ export default function SchedulePageAnimated() {
 								}
 							>
 								<HStack
-									bg={theme.colors.medYellow}
+									bg={theme.colors.medYellow[0]}
 									justifyContent='space-between'
 									alignItems='center'
 									p='3'
@@ -28,7 +28,7 @@ export default function SchedulePageAnimated() {
 									<AntDesign
 										name='down'
 										size={24}
-										color={theme.colors.medYellow}
+										color={theme.colors.medYellow[0]}
 									/>
 									<Heading>Day {componentDay}</Heading>
 									<AntDesign
@@ -40,7 +40,7 @@ export default function SchedulePageAnimated() {
 							</Pressable>
 
 							<Collapse duration='200' isOpen={selectedDay === componentDay}>
-								<VStack bg={theme.colors.cream} p='5'>
+								<VStack bg={theme.colors.cream[0]} p='5'>
 									<View alignSelf='center'>
 										{schedule[componentDay].map((activity, index) => (
 											<HStack key={index} alignItems='center'>

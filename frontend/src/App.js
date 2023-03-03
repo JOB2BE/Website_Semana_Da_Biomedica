@@ -1,20 +1,20 @@
 import React from 'react';
 import { Router, Route, Routes } from './router/index';
 import { NativeBaseProvider } from 'native-base';
-import { Navbar } from './components/navbar/Navbar'; 
+import { Navbar } from './components/navbar/Navbar';
 import LandingPage from './pages/LandingPage';
 import AboutUsPage from './pages/AboutUsPage';
-import SchedulePage from './pages/SchedulePage';
+import SchedulePageAnimated from './pages/SchedulePageAnimated';
 import ActivityPage from './pages/ActivityPage';
-import ActivitiesPage from './pages/ActivitiesPage';
-import SpeakersPage from './pages/SpeakersPage';
+// import ActivitiesPage from './pages/ActivitiesPage';
+// import SpeakersPage from './pages/SpeakersPage';
 import SpeakerPage from './pages/SpeakerPage';
 import FeedbackPage from './pages/FeedbackPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+// import LoginPage from './pages/LoginPage';
+// import RegisterPage from './pages/RegisterPage';
 import PartnershipsPage from './pages/PartnershipsPage';
-import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
-import PasswordResetPage from './pages/PasswordResetPage';
+// import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
+// import PasswordResetPage from './pages/PasswordResetPage';
 import NotFound from './pages/NotFound';
 import UserPage from './pages/UserPage';
 import theme from './theme';
@@ -62,7 +62,10 @@ export default function App() {
 							<Route path='*' element={<NotFound />} />
 							<Route exact path='/' element={<LandingPage idiom={i18n} />} />
 							<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
-							<Route path='/Schedule' element={<SchedulePage idiom={i18n} />} />
+							<Route
+								path='/Schedule'
+								element={<SchedulePageAnimated idiom={i18n} />}
+							/>
 							<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
 							{/* <Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
 							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} /> */}
