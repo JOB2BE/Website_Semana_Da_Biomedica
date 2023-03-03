@@ -38,14 +38,9 @@ export const MobileDrawer = () => {
 			route: '/AboutUs',
 		},
 		{
-			name: 'Login',
-			icon: 'door-closed',
-			route: '/Login',
-		},
-		{
-			name: 'Página Inicial',
-			icon: 'home',
-			route: '/Login',
+			name: 'Parcerias',
+			icon: 'people-arrows',
+			route: '/Partnerships',
 		},
 	];
 	if (loggedIn) {

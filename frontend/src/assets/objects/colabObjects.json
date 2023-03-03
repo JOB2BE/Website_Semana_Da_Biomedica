@@ -353,5 +353,17 @@
   "contacts": "raquel.neves.coelho@tecnico.ulisboa.pt",
   "researchInterests": "Neuroscience, Brain-Computer Interface, AI",
   "password":"12345"
-}
+},
+{
+  "name": "Laura Barradas",
+  "email": "laura.barradas@tecnico.ulisboa.pt",
+  "university": "IST",
+  "degree": "Engenharia Biomédica",
+  "typeOfUser": "colaborator",
+  "department": "partnerships",
+  "description": "",
+  "contacts": "www.linkedin.com/in/laura-barradas",
+  "researchInterests": "",
+  "password":"1234"
+},
 ];

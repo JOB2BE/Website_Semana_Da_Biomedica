@@ -11,7 +11,7 @@ export default function SchedulePage() {
 	const [selectedDay, setSelectedDay] = useState(new Date().getDate());
 
 	return (
-		<VStack flex={1} space={120}>
+		<VStack flex={1} space={60}>
 			<HStack justifyContent={'center'} pt='10%'>
 				<VStack space='10' w='500'>
 					{[6, 7, 8].map((componentDay) => (

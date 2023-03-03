@@ -1,6 +1,5 @@
 import React from 'react';
 import { Heading, Row, HamburgerIcon, Column } from 'native-base';
-import Logo from '../../assets/images/WhiteBGLogo';
 import theme from '../../theme';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { Link } from '../../router/index';
@@ -8,7 +7,6 @@ import * as Localization from 'expo-localization'; //Internationalisation depend
 import { I18n } from 'i18n-js';
 import { en, pt } from '../../utils/supportedLanguages';
 import responsiveHeight from '../../utils/responsiveHeight';
-import { FontAwesome5 } from '@expo/vector-icons';
 var idiom = new I18n();
 idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
 idiom.translations = { en, pt }; // All our languages

@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { Center, Heading, Column, Stack, Image } from 'native-base';
+import { Center, Heading, Column, Stack, Image, Row } from 'native-base';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { I18n } from 'i18n-js';
 import { en, pt } from '../../utils/supportedLanguages';
 import theme from '../../theme';
 import { NavBarMobile } from './NavBarMobile';
+import responsiveWidth from '../../utils/responsiveWidth';
 
 var idiom = new I18n();
 idiom.enableFallback = true; //If a key is missing the default language will be chosen for that string in the webpage
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
 		marginTop: -20,
 	},
 	sideFlexes: {
-		padding: 10,
+		paddingHorizontal: 10,
 	},
 	shadow: {
 		shadowColor: '#000',
@@ -60,8 +61,10 @@ const styles = StyleSheet.create({
 
 export const Navbar = () => {
 	var window = useWindowDimensions();
-	var isScreenSmall = window.width < 850;
+	var isScreenSmall = window.width < 950;
 	const [loggedIn, setLoggedIn] = useState(false);
+	var sideWidth = responsiveWidth(window, null, null, 0.3);
+	var logoWidth = responsiveWidth(window, null, null, 0.2);
 	var navbarRoutes = [
 		{
 			name: 'Atividades',
@@ -198,14 +201,14 @@ export const Navbar = () => {
 		);
 	}
 	return (
-		<>
-			<Center>
-				<Stack direction='row' justifyContent='space-around' alignContent='center'>
+		<Column flex={1} alignItems={'center'}>
+			<Row>
+				<Column width={sideWidth}>
 					<Stack
 						direction='row'
 						style={[styles.leftContainer, styles.shadow]}
-						justifyContent='flex-start'
-						space={10}
+						justifyContent='space-evenly'
+						alignItems={'center'}
 					>
 						{navbarRoutes.slice(0, 2).map((route, index) => {
 							return (
@@ -230,21 +233,24 @@ export const Navbar = () => {
 							);
 						})}
 					</Stack>
+				</Column>
+				<Column>
 					<Link to='/' style={{ textDecoration: 'none' }}>
-						{/*TODO: CHANGE LOGO TO SMALLER SIZE*/}
 						<Column
 							justifyContent={'flex-start'}
 							style={[styles.logoContainer, styles.shadow]}
+							px={5}
 						>
 							<Image size={175} source={logo} />
 						</Column>
 					</Link>
-
+				</Column>
+				<Column width={sideWidth}>
 					<Stack
 						direction='row'
 						style={[styles.rightContainer, styles.shadow]}
-						justifyContent='flex-start'
-						space={10}
+						justifyContent='space-evenly'
+						alignItems={'center'}
 					>
 						{navbarRoutes.slice(2).map((route, index) => {
 							return (
@@ -269,8 +275,8 @@ export const Navbar = () => {
 							);
 						})}
 					</Stack>
-				</Stack>
-			</Center>
-		</>
+				</Column>
+			</Row>
+		</Column>
 	);
 };

@@ -9,8 +9,8 @@ export default function SchedulePageAnimated() {
 	const [selectedDay, setSelectedDay] = useState(new Date().getDate());
 
 	return (
-		<VStack flex={1} space={120}>
-			<HStack justifyContent={'center'} pt='10%'>
+		<VStack paddingTop={'2.5%'}>
+			<HStack justifyContent={'center'}>
 				<VStack space='10'>
 					{[6, 7, 8].map((componentDay, index) => (
 						<VStack key={componentDay} rounded='20' overflow='hidden'>
@@ -30,7 +30,7 @@ export default function SchedulePageAnimated() {
 										size={24}
 										color={theme.colors.medYellow[0]}
 									/>
-									<Heading>Day {componentDay}</Heading>
+									<Heading>Dia {componentDay}</Heading>
 									<AntDesign
 										name={selectedDay === componentDay ? 'up' : 'down'}
 										size={24}
