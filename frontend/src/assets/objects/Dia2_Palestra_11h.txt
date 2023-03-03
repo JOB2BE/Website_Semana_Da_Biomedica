@@ -1,0 +1,42 @@
+{
+  "name": "Data Science em Medicina",
+  "description": "Nesta palestra serão abordados vários temas sobre Data Science em Medicina, nomeadamente quais os desafios e oportunidades desta ciência. 
+Para além disso, será abordada a produção e gestão de dados no registo oncológico do Instituto Português de Oncologia do Porto e a utilização do registo oncológico para a produção de evidência científica do mundo real. Também será referida a importância de questões relacionadas com a utilização de dados de saúde para planeamento e prestação de cuidados, assim como na investigação através de mecanismos de proteção de dados.
+A Data Science é uma área com cada vez mais crescimento e aplicações na sociedade, apresentando um papel bastante promissor na medicina. Existem várias aplicações na área de saúde, nomeadamente na investigação, prestação de cuidados e gestão de dados de pacientes. Por ser uma ciência emergente, há que ainda ter em conta quais os desafios que a utilização desta nos traz, assim como questões de privacidade de dados.",
+  "requirements": "",
+  "scheduleAndLocation": "07/03/23 - 11h, Anfiteatro Abreu Faro",
+  "activityType": "Palestra",
+  "slots": null,
+  "speakers": [
+{  "name": "Dr. José Miguel Diniz ",
+  "position": "MD (Medical Doctor), MSc (Master of Sciences) e PhD Candidate",
+  "description": "José Miguel Diniz é médico interno de Saúde de Pública no ACeS Lisboa Central, a fazer o Doutoramento em Health Data Science na FMUP onde integra também o grupo de investigação AI4Health (do CINTESIS) e leciona sobre "Decisão, Dados e Saúde Digital". Estagiou na Direção-Geral da Saúde, no âmbito do Projeto PaRIS, uma iniciativa internacional da OCDE para a promoção dos cuidados de saúde centrados na pessoa, com foco nos problemas crónicos de saúde.
+Na sua investigação, explora mecanismos de proteção da privacidade em análise de dados de saúde, com foco nas arquiteturas distribuídas de aprendizagem, e aplicações de inteligência artificial, integrando o projeto Secur-e-Health. Colabora também em trabalhos sobre a utilização e prescrição de ferramentas mHealth.",
+  "contacts": "https://www.linkedin.com/in/jmdiniz/",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",},
+{  "name": "Dra. Maria Teresa Monjardino",
+  "position": "Investigadora Júnior do Grupo de Epidemiologia do Cancro no Centro de Investigação do Instituto Português de Oncologia do Porto (IPOP)",
+  "description": "Licenciatura em Ciências da Nutrição e da Alimentação pela Universidade do Porto (2008). Mestrado em Saúde Pública (2012) e Doutoramento em Saúde Pública pela Universidade do Porto (2019).
+Atualmente integra projetos nacionais e internacionais que monitorizam a eficácia, eficiência, segurança e custos associados a novos tratamentos oncológicos e o seu impacto na qualidade de vida dos doentes utilizando dados reais de registos oncológicos clínicos e populacionais.
+Outros interesses de investigação incluem o estudo de características socioeconómicas, demográficas, psicológicas, comportamentais e ambientais que interagem na produção de resultados de saúde em indivíduos e nas populações na área da saúde musculosquelética, saúde ocupacional, insegurança alimentar e baixo peso ao nascer.",
+  "contacts": "https://www.linkedin.com/in/teresa-monjardino-7b66751a/",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",},
+{  "name": "Dr. Nuno André da Silva ",
+  "position": "Diretor adjunto da Learning Health",
+  "description": "É doutorado em Engenharia pela RWTH Aachen University e MBA do The LisbonMBA (NOVA SBE + Católica SBE). Desenvolveu trabalhos na área de imagem molecular quantitativa (MR-PET) do cérebro, em pequenos animais e humanos, utilizando analítica avançada no Forschungszentrum Jülich da Helmholtz Association. Atualmente, é diretor adjunto da Learning Health, responsável pela área de investigação, com foco em inteligência artificial e sistemas complexos aplicados à saúde.",
+  "contacts": "https://www.linkedin.com/in/nunoandredasilva/",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",},
+{  "name": "Prof.ª Cláudia Antunes",
+  "position": "Professora Associada do Departamento de Engenharia Informática do Técnico
+Vice-presidente do DEI e Coordenadora da Região Sul do Colégio de Engenharia Informática da Ordem dos Engenheiros",
+  "description": "Cláudia Antunes é Professora Auxiliar no Departamento de Engenharia Informática do Instituto Superior Técnico - Universidade de Lisboa, desde 2005.
+Ingressou no Técnico em 1993/94 na licenciatura em Engenharia Informática e de Computadores (ramo de Inteligência Artificial) tendo-a concluído em 1998. Em 2001 terminou o seu mestrado e em 2005 o seu doutoramento. É uma das primeiras doutoradas no país no domínio da ciência de dados, tendo proposto novos métodos e metodologias para lidar com dados temporais, em particular para a descoberta de padrões sequenciais.
+Conta com cerca de uma centena de publicações, tendo orientado mais de quarenta alunos de mestrado e uma aluna de doutoramento. Neste contexto, já coordenou e participou em vários projetos de investigação científica, nacionais e europeus, sempre centrada na área da ciência de dados.",
+  "contacts": "https://www.linkedin.com/in/claudiaantunes/",
+  "researchInterests": "",
+  "typeOfSpeaker": "moderador",}
+]
+}

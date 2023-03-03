@@ -1,0 +1,37 @@
+{
+  "name": "Engenharia e Neurociências",
+  "description": "A capacidade de selecionar ações com base nos objetivos desejados, de acordo com o conhecimento previamente armazenado na memória, é essencial para a sobrevivência. No entanto, também devemos estar prontos para adaptar tal comportamento a mudanças inesperadas no contexto, muitas vezes ao contrário do que seria suportado pelo conhecimento prévio. Os mecanismos por trás dessas operações permanecem desconhecidos, mas os dados disponíveis sugerem que eles dependem da conectividade sináptica que associa o hipocampo às estruturas mesocorticais mediais (cingulado, retrosplenial).",
+  "requirements": "",
+  "scheduleAndLocation": "07/03/23 - 14h, Anfiteatro Abreu Faro",
+  "activityType": "Palestra",
+  "slots": null,
+  "speakers": [
+{  "name": "Rafael Esteves",
+  "position": "Mestre em Ciências Biofarmacêuticas na FFUL, aluno de doutoramento em Engenharia Biomédica na FCUL (Bolseiro FCT) e membro do Biomedical Neuroscience Lab no Diana Prata's Lab (IBEB)",
+  "description": "Licenciado em Ciências Biomédicas, pela Universidade Católica Portuguesa de Viseu, e Mestre em Ciências Biofarmacêuticas, na Faculdade de Farmácia da UL. Pelo seu percurso adquiriu experiência na análise de dados biológicos e desenvolveu uma paixão especial pela Neurobiologia, especificamente Neurociências Comportamentais e Cognitivas. De forma a estudar a influência das alterações moleculares no cérebro sobre o comportamento, realizou a tese de mestrado no laboratório da Dra. Diana Prata no Instituto de Biofísica e Engenharia Biomédica (IBEB) da Faculdade de Ciências da UL, onde posteriormente ingressou no doutoramento em Engenharia Biomédica onde desenvolveu e aprimorou o conhecimento relacionado à recolha e análise de dados de eye-tracking e fMRI, em relação a processos de cognição social, especificamente relacionados ao funcionamento do neuropéptido Oxitocina.",
+  "contacts": "https://www.linkedin.com/in/rafael-esteves-01b569101/",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",},
+{  "name": "Miguel Remondes",
+  "position": "Investigador Visitante no iMM-JLA, Professor Auxiliar de Fisiologia e Farmacologia na ULHT e Professor Auxiliar Convidado de Fisiologia na FMUL",
+  "description": "Licenciado em Medicina Veterinária pela Universidade Técnica de Lisboa, exerceu a profissão de Médico Veterinário durante 5 anos, tendo depois sido seleccionado para o VI Programa Gulbenkian de Doutoramento em Biologia e Medicina. Doutorado pela Universidade de Coimbra, trabalhou no Caltech com a Profª Erin Schuman, onde investigou o papel crucial das sinapses que ligam o neocórtex ao hipocampo na modulação e plasticidade desta estrutura. Ingressou posteriormente no Laboratório do Dr. Matthew Wilson no MIT, para investigar a neurofisiologia de certas regiões cerebrais e perceber como as memórias condicionam as decisões comportamentais.
+Em 2015, formou o seu próprio laboratório no iMM-JLA e aí montou um laboratório de neurociência de sistemas/circuitos onde desenvolveu um novo implante para realizar registos neuronais em roedores. ",
+  "contacts": "https://www.linkedin.com/in/miguel-remondes-dvm-phd-37502926/",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",},
+{  "name": "Luísa Lopes",
+  "position": "Neurocientista, coordenadora de equipa de investigação no Instituto de Medicina Molecular João Lobo Antunes",
+  "description": "Licenciada em Bioquímica pela Faculdade de Ciências de Lisboa e doutorada em Neurociências na Faculdade de Medicina da mesma Universidade. Trabalhou nas Universidade de Cambridge, no Reino Unido, no Instituto Karolinska, em Estocolmo e no Centro de Investigação da Nestle em Lausanne, na Suiça. O seu trabalho centra-se nos mecanismos que causam o envelhecimento precoce das funções associadas à memória, e no desenvolvimento de modelos animais de envelhecimento para estudar o défice cognitivo e neurodegeneração. Tem mais de 60 artigos e capítulos de livros publicados em revistas científicas internacionais e foi vencedora de inúmeros prémios na área da Biomedicina e Investigação Biomédica. É coordenadora de um grupo de investigação no Instituto de Medicina Molecular e Professora Convidada na Faculdade de Medicina da Universidade de Lisboa.
+",
+  "contacts": "https://www.linkedin.com/in/lvlopes/",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",},
+{  "name": "Prof.ª Rita Nunes",
+  "position": "Doutorada pela Universidade de Oxford e licenciada (pré-Bolonha) em Engenharia Física Tecnológica no IST.",
+  "description": "Rita G. Nunes obteve a sua licenciatura pré-Bolonha em Eng. Física Tecnológica no IST em 1999. Mais tarde veio a obter o seu Doutoramento na Universidade de Oxford, Reino Unido em 2005, tendo trabalhado na implementação e otimização de sequências de imagem por ressonância magnética (IRM) ponderadas em difusão. Entretanto passou pelo Imperial College em Londres, onde o seu trabalho se focou na aceleração de IRM através da utilização de várias antenas em paralelo, e também pela FCUL e King's College Londres. 
+Em outubro de 2016 voltou para o IST como Professora Auxiliar. Os seus principais interesses de investigação são o desenvolvimento de sequências de impulsos para IRM quantitativa, incluindo difusão e relaxometria com aplicação em várias regiões do corpo incluindo o coração e o cérebro.",
+  "contacts": "https://www.linkedin.com/in/rita-nunes-9b44973/",
+  "researchInterests": "",
+  "typeOfSpeaker": "moderador",}
+]
+}

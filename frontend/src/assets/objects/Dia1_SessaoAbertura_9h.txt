@@ -1,0 +1,28 @@
+{
+  "name": "Sessão de Abertura",
+  "description": "A JOB2BE vai começar em cheio! Para dar início a esta semana repleta de aprendizagem trazemos como oradores o Prof. João Conde, o Prof. João Sanches e a Catarina Patrão.",
+  "requirements": "",
+  "scheduleAndLocation": "06/03/20 - 09:00, Anfiteatro Abreu Faro",
+  "activityType": "outro",
+  "slots": ?,
+  "speakers": [
+{  "name": "Catarina Patrão",
+  "position": "Vogal da direção da ANEEB",
+  "description": "",
+  "contacts": "",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",},
+{  "name": "Prof. João Conde",
+  "position": " Presidente do Departamento de Bioengenharia do IST",
+  "description": "",
+  "contacts": "",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",},
+{  "name": "Prof. João Sanches",
+  "position": "Coordenador do Mestrado de Engenharia Biomédica",
+  "description": "",
+  "contacts": "",
+  "researchInterests": "",
+  "typeOfSpeaker": "orador",}
+]
+}
