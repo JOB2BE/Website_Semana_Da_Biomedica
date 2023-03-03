@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Column, View } from 'native-base';
+import { Column, View } from 'native-base';
 import PropTypes from 'prop-types';
 import RoundBorderedImage from './RoundBorderedImage';
 
@@ -20,11 +20,13 @@ export default function PartnerShipRow(props) {
 				{objects.map((object, index) => {
 					return (
 						<RoundBorderedImage
-							key={object.id}
+							key={index}
 							source={object.companyImage}
 							containerRadius={props.containerRadius}
-							link={'/Speaker/' + String(object.id)}
+							link={object.url}
 							size={'inherit'}
+							name={object.name}
+							externalURL={true}
 						></RoundBorderedImage>
 					);
 				})}

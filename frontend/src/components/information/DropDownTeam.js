@@ -4,7 +4,6 @@ import { Row, Heading, Column, ChevronDownIcon, ChevronUpIcon, Text, Center } fr
 import PropTypes from 'prop-types';
 import theme from '../../theme';
 import UserRow from './UserRow';
-import RoundBorderedImage from './RoundBorderedImage';
 import { useWindowDimensions } from 'react-native';
 import responsiveWidth from '../../utils/responsiveWidth';
 export default function DropDownTeam(props) {
@@ -28,7 +27,7 @@ export default function DropDownTeam(props) {
 				{
 					name: 'John Doe',
 					id: 1,
-					profileImage: require('../../assets/images/WhiteBGLogo.svg'),
+					profileImage: '',
 				},
 			],
 		},

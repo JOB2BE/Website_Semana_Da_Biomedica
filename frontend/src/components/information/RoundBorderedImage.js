@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Row, Heading, Column, Center, Image } from 'native-base';
+import { Text, Center, Image, Tooltip } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
-import { Link } from '../../router/index';
+import { Link } from '../../router';
+import { Link as NBLink } from 'native-base';
 
 export default function RoundBorderedImage(props) {
 	const styles = StyleSheet.create({
@@ -27,7 +28,21 @@ export default function RoundBorderedImage(props) {
 		},
 	});
 
-	return (
+	return props.externalURL ? (
+		<NBLink href={props.link} style={{ textDecoration: 'none' }} isExternal>
+			{props.hoverText ? (
+				<Center {...props} style={[styles.container, styles.hoverBackground]}>
+					<Text>{props.hoverText}</Text>
+				</Center>
+			) : (
+				<Center style={styles.container}>
+					<Tooltip label={props.name}>
+						<Image {...props} resizeMode={props.resizeMode}></Image>
+					</Tooltip>
+				</Center>
+			)}
+		</NBLink>
+	) : (
 		<Link to={props.link} style={{ textDecoration: 'none' }}>
 			{props.hoverText ? (
 				<Center {...props} style={[styles.container, styles.hoverBackground]}>
@@ -35,7 +50,9 @@ export default function RoundBorderedImage(props) {
 				</Center>
 			) : (
 				<Center style={styles.container}>
-					<Image {...props} resizeMode={props.resizeMode}></Image>
+					<Tooltip label={props.name}>
+						<Image {...props} resizeMode={props.resizeMode}></Image>
+					</Tooltip>
 				</Center>
 			)}
 		</Link>
