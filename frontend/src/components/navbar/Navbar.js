@@ -1,6 +1,5 @@
 import { React, useState } from 'react';
-import { Center, Heading, Box, Stack } from 'native-base';
-import Logo from '../../assets/images/WhiteBGLogo';
+import { Center, Heading, Column, Stack, Image } from 'native-base';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { Link } from '../../router/index';
 import { useLocation } from 'react-router-dom';
@@ -16,16 +15,18 @@ idiom.enableFallback = true; //If a key is missing the default language will be 
 idiom.translations = { en, pt }; // All our languages
 idiom.locale = Localization.locale; // get the device's current language code
 
+const logo = require('../../assets/images/dark-background.png');
+
 const styles = StyleSheet.create({
 	leftContainer: {
 		borderBottomLeftRadius: 20,
-		backgroundColor: theme.colors.dryBlue[0],
+		backgroundColor: theme.colors.medYellow['0'],
 		height: '40%',
 		paddingHorizontal: 25,
 	},
 	rightContainer: {
 		borderBottomRightRadius: 20,
-		backgroundColor: theme.colors.dryBlue[0],
+		backgroundColor: theme.colors.medYellow['0'],
 		height: '40%',
 		paddingHorizontal: 25,
 		zIndex: -1,
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
 	logoContainer: {
 		borderBottomLeftRadius: 100000,
 		borderBottomRightRadius: 100000,
-		backgroundColor: theme.colors.medYellow,
+		backgroundColor: theme.colors.dryBlue['0'],
 		padding: 7,
 	},
 	sideFlexes: {
@@ -221,22 +222,24 @@ export const Navbar = () => {
 										space={2}
 									>
 										<FontAwesome5 name={route.icon} size={24} color={'white'} />
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+										<Heading style={{ color: theme.colors.dryBlue['0'] }}>
+											{route.name}
+										</Heading>
 									</Stack>
 								</Link>
 							);
 						})}
 					</Stack>
-
-					<Box
-						style={{
-							alignItems: 'center',
-						}}
-					>
-						<Link to='/' style={{ textDecoration: 'none' }}>
-							<Logo style={[styles.logoContainer, styles.shadow]} />
-						</Link>
-					</Box>
+					<Link to='/' style={{ textDecoration: 'none' }}>
+						{/*TODO: CHANGE LOGO TO SMALLER SIZE*/}
+						<Column alignContent={'flex-start'}>
+							<Image
+								size={155}
+								source={logo}
+								style={[styles.logoContainer, styles.shadow]}
+							/>
+						</Column>
+					</Link>
 
 					<Stack
 						direction='row'
@@ -259,7 +262,9 @@ export const Navbar = () => {
 										space={2}
 									>
 										<FontAwesome5 name={route.icon} size={24} color={'white'} />
-										<Heading style={{ color: 'white' }}>{route.name}</Heading>
+										<Heading style={{ color: theme.colors.dryBlue['0'] }}>
+											{route.name}
+										</Heading>
 									</Stack>
 								</Link>
 							);

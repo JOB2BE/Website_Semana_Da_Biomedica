@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
-import models
-import pydanticSchemas
-import main
+from .models import *
+from .pydanticSchemas import *
 
 
 def getUser(db: Session, userID):

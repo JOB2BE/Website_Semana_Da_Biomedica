@@ -1,11 +1,10 @@
-from database import Base
+from .database import Base
 from typing import List, Optional
 from sqlalchemy import Table, Column, ForeignKey, Integer, String, Enum
 from sqlalchemy.orm import relationship, Session
 # from sqlalchemy.dialects.postgresql import UUID, ARRAY
 from sqlalchemy.ext.hybrid import hybrid_property
 import enum
-import crud
 
 
 enrolled_table = Table(
