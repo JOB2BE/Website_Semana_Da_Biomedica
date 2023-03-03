@@ -75,7 +75,10 @@ export default function ActivityCard(props) {
 							</Text>
 							{props.speakers.map((speaker, index) => {
 								return (
-									<Link key={index} to={'/Speaker/' + String(speaker.id)}>
+									<Link
+										key={index}
+										to={'/Speaker/' + String(props.id) + '/' + String(index)}
+									>
 										<Text paddingLeft={3} size='md'>
 											{speaker.name} ;
 										</Text>

@@ -30,7 +30,7 @@ export const activitiesSpeakersDay2 = [
 		slots: null,
 		speakers: [
 			{
-				name: 'Dr. José Miguel Diniz ',
+				name: 'Dr. José Miguel Diniz',
 				position: 'MD (Medical Doctor), MSc (Master of Sciences) e PhD Candidate',
 				description:
 					"José Miguel Diniz é médico interno de Saúde de Pública no ACeS Lisboa Central, a fazer o Doutoramento em Health Data Science na FMUP onde integra também o grupo de investigação AI4Health (do CINTESIS) e leciona sobre Decisão, 'Dados e Saúde Digital'. Estagiou na Direção-Geral da Saúde, no âmbito do Projeto PaRIS, uma iniciativa internacional da OCDE para a promoção dos cuidados de saúde centrados na pessoa, com foco nos problemas crónicos de saúde.Na sua investigação, explora mecanismos de proteção da privacidade em análise de dados de saúde, com foco nas arquiteturas distribuídas de aprendizagem, e aplicações de inteligência artificial, integrando o projeto Secur-e-Health. Colabora também em trabalhos sobre a utilização e prescrição de ferramentas mHealth.",
@@ -49,7 +49,7 @@ export const activitiesSpeakersDay2 = [
 				typeOfSpeaker: 'Orador',
 			},
 			{
-				name: 'Dr. Nuno André da Silva ',
+				name: 'Dr. Nuno André da Silva',
 				position: 'Diretor adjunto da Learning Health',
 				description:
 					'É doutorado em Engenharia pela RWTH Aachen University e MBA do The LisbonMBA (NOVA SBE + Católica SBE). Desenvolveu trabalhos na área de imagem molecular quantitativa (MR-PET) do cérebro, em pequenos animais e humanos, utilizando analítica avançada no Forschungszentrum Jülich da Helmholtz Association. Atualmente, é diretor adjunto da Learning Health, responsável pela área de investigação, com foco em inteligência artificial e sistemas complexos aplicados à saúde.',

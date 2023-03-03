@@ -51,6 +51,7 @@ export const activitiesSpeakersDay1 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 			{
 				name: 'BNP Paribas',
@@ -60,6 +61,7 @@ export const activitiesSpeakersDay1 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 			{
 				name: 'Astrolabe Medical',
@@ -69,6 +71,7 @@ export const activitiesSpeakersDay1 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 			{
 				name: 'Teach For Portugal',
@@ -78,6 +81,7 @@ export const activitiesSpeakersDay1 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 			{
 				name: 'Glintt',
@@ -87,6 +91,7 @@ export const activitiesSpeakersDay1 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 		],
 	},
@@ -107,6 +112,7 @@ export const activitiesSpeakersDay1 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 		],
 	},
@@ -125,7 +131,7 @@ export const activitiesSpeakersDay1 = [
 					'Professor Associado e Investigador Sénior na FCUL, e Co-fundador e Conselheiro Científico Principal da Nevaro',
 				description:
 					'Hugo Alexandre Ferreira, formado em medicina e em engenharia física tecnológica, doutorado em física na área das nanotecnologias. Docente universitário e investigador em neurociências, interfaces pessoa-máquina e soluções digitais para a saúde.',
-				contacts: 'linkedin.com/in/hugo-alexandre-ferreira-1b130b2',
+				contacts: 'https://www.linkedin.com/in/hugo-alexandre-ferreira-1b130b2',
 				researchInterests: '',
 				typeOfSpeaker: 'Orador',
 			},
@@ -134,7 +140,7 @@ export const activitiesSpeakersDay1 = [
 				position: 'CEO e co-fundadora da Clynx',
 				description:
 					'Joana Pinto é CEO e co-fundadora da Clynx. Estudou Engenharia Biomédica no Instituto Superior Técnico e a sua vontade de empreender e inovar na área da saúde levou-a a co-fundar uma startup de Saúde Digital. A Clynx ajuda os profissionais de saúde a otimizar suas experiências de Fisioterapia e expandir sua capacidade de resposta, por meio de soluções gamificadas digitais que podem ser usadas nas unidades de saúde e também em tratamentos domiciliares.',
-				contacts: 'linkedin.com/in/joana-figueiredo-pinto',
+				contacts: 'https://www.linkedin.com/in/joana-figueiredo-pinto',
 				researchInterests: '',
 				typeOfSpeaker: 'Orador',
 			},
@@ -143,7 +149,7 @@ export const activitiesSpeakersDay1 = [
 				position: 'Professora na Escola Superior de Enfermagem do Porto',
 				description:
 					'Marisa Lourenço Professora na Escola Superior de Enfermagem do Porto desde 2007. Investigadora integrada no Centro de Investigação em Tecnologias e Serviços de Saúde CINTESIS. Pós graduação avançada: Intervenção clínica em cuidados paliativos no Instituto Português de Psicologia, desde 2021. Doutorada em Ciências de Enfermagem pelo Instituto Superior de Saúde da Universidade Católica Portuguesa, desde 2015, Mestre em Enfermagem, pelo Instituto de Ciências e Biomédicas Abel Salazar, desde 2004. Especialista em enfermagem Médico-cirúrgica, vertente Geriatria Gerontologia, desde 1999. Enfermeira desde 1991, tendo exercido atividade clinica no Instituto Português de Oncologia do Porto, entre outros contextos clínicos.',
-				contacts: 'linkedin.com/in/marisa-lourenço-58443521',
+				contacts: 'https://www.linkedin.com/in/marisa-lourenço-58443521',
 				researchInterests: '',
 				typeOfSpeaker: 'Orador',
 			},
@@ -175,7 +181,7 @@ export const activitiesSpeakersDay1 = [
 				position: 'Data Scientist da iLoF',
 				description:
 					'Data Scientist da iLoF que tem um PhD em Theoretical Neuroscience da Ecole Normale Superieure em Paris. O seu trabalho envolve o desenvolvimento de modelos teóricos que relacionam fenómenos físicos com impressões digitais óticas geradas pela plataforma da iLoF assim como a criação de modelos de machine learning que extraiam informação relevante destes sinais.A iLoF é uma start-up de tecnologia de saúde que está a desenvolver uma plataforma de AI cujo objetivo é facilitar a descoberta e desenvolvimento de fármacos personalizados. Esta utiliza AI avançada e fototónica para recolha de dados através de deteção de biomarcadores, criando uma biblioteca digital destes e de perfis biológicos que permitem um acompanhamento personalizado de pacientes assim como ferramentas de estratificação.',
-				contacts: 'linkedin.com/in/allan-mancoo',
+				contacts: 'https://www.linkedin.com/in/allan-mancoo',
 				researchInterests: '',
 				typeOfSpeaker: 'workshop',
 			},

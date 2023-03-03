@@ -16,17 +16,16 @@ import { useWindowDimensions } from 'react-native';
 import responsiveWidth from '../utils/responsiveWidth';
 import RoundBorderedImage from '../components/information/RoundBorderedImage';
 import StyledBox from '../components/information/StyledBox';
-import { Link, useParams } from '../router';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Link as NBLink } from 'native-base';
 
 export default function SpeakerPage(props) {
-	const { id } = useParams();
 	//const speaker = getSpeaker(id)
 	var window = useWindowDimensions();
 	var pageWidth = responsiveWidth(window, null, null, 0.85);
 	var imageRadius = responsiveWidth(window, 100, 450, 0.15);
 	var isScreenSmall = window.width < 850;
 	const styles = StyleSheet.create({
-
 		TextName: {
 			fontWeight: '1000',
 		},
@@ -52,13 +51,12 @@ export default function SpeakerPage(props) {
 
 		page: {
 			width: pageWidth,
-
 		},
 	});
 
 	const [currentIndex, setCurrentIndex] = React.useState(null);
 	return (
-		<Column flex={1} alignItems={'center'} py={'2.5%'}>
+		<Column flex={1} alignItems={'center'} paddingVertical={'1%'}>
 			<Stack
 				justifyContent={'center'}
 				direction={isScreenSmall ? 'column' : 'row'}
@@ -68,25 +66,25 @@ export default function SpeakerPage(props) {
 				<Column>
 					<StyledBox stackSpace={10} childrenInRow={isScreenSmall} centerChildren={true}>
 						<RoundBorderedImage
-							source={speaker.profileImage ? speaker.profileImage : ''}
+							source={props.profileImage ? props.profileImage : ''}
 							containerRadius={imageRadius}
 							size={'inherit'}
 						></RoundBorderedImage>
 						<Column alignItems='center' space={3}>
-							<Heading> {speaker.name} </Heading>
+							<Heading> {props.name} </Heading>
 							<Text fontWeight={1000} size='md'>
-								{speaker.typeOfSpeaker}
+								{props.typeOfSpeaker}
 							</Text>
-							{speaker.postion && (
+							{props.position && (
 								<Text fontWeight={1000} size='md'>
-									{speaker.position}
+									{props.position}
 								</Text>
 							)}
 						</Column>
 					</StyledBox>
 				</Column>
 				<Column flex={0.7} space={currentIndex !== null ? 2 : 8}>
-					{speaker.description && (
+					{props.description && (
 						<Column>
 							<Pressable
 								onPress={() => {
@@ -121,7 +119,7 @@ export default function SpeakerPage(props) {
 							{currentIndex === 0 ? (
 								<Center style={styles.RectangleShapeViewInformation}>
 									<Text style={styles.textBody} size='md'>
-										{speaker.description}
+										{props.description}
 									</Text>
 								</Center>
 							) : (
@@ -129,7 +127,7 @@ export default function SpeakerPage(props) {
 							)}
 						</Column>
 					)}
-					{speaker.activities[0] && (
+					{/* {props.activities[0] && (
 						<Column>
 							<Pressable
 								onPress={() => {
@@ -184,8 +182,8 @@ export default function SpeakerPage(props) {
 								<></>
 							)}
 						</Column>
-					)}
-					{speaker.contacts && (
+					)} */}
+					{props.contacts && (
 						<Column>
 							<Pressable
 								onPress={() => {
@@ -219,16 +217,20 @@ export default function SpeakerPage(props) {
 							</Pressable>
 							{currentIndex === 2 ? (
 								<Center style={styles.RectangleShapeViewInformation}>
-									<Text style={styles.textBody} size='md'>
-										{speaker.contacts}
-									</Text>
+									<NBLink href={props.contacts}>
+										<FontAwesome5
+											name='linkedin'
+											size={24}
+											color={theme.colors.medYellow[0]}
+										/>
+									</NBLink>
 								</Center>
 							) : (
 								<></>
 							)}
 						</Column>
 					)}
-					{speaker.researchInterests && (
+					{props.researchInterests && (
 						<Column>
 							<Pressable
 								onPress={() => {
@@ -263,7 +265,7 @@ export default function SpeakerPage(props) {
 							{currentIndex === 3 ? (
 								<Center style={styles.RectangleShapeViewInformation}>
 									<Text style={styles.textBody} size='md'>
-										{speaker.researchInterests}
+										{props.researchInterests}
 									</Text>
 								</Center>
 							) : (

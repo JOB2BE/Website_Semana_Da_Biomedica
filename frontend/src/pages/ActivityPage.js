@@ -13,7 +13,6 @@ export default function ActivityPage() {
 	const { id } = useParams();
 	const activity = activitiesList[id];
 
-	console.log(activity.name);
 	return (
 		<ActivityCard
 			title={activity.name}
@@ -22,7 +21,8 @@ export default function ActivityPage() {
 			description={activity.description}
 			requirements={activity.requirements}
 			schedule={activity.scheduleAndLocation}
-			enrollmentLink = {activity.enrollmentLink}
+			enrollmentLink={activity.enrollmentLink}
+			id={id}
 		/>
 	);
 }

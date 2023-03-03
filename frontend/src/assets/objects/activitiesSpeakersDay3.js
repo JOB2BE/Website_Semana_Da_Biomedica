@@ -16,6 +16,7 @@ export const activitiesSpeakersDay3 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 			{
 				name: 'Astrolabe Medical',
@@ -25,6 +26,7 @@ export const activitiesSpeakersDay3 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 			{
 				name: 'Teach For Portugal',
@@ -34,6 +36,7 @@ export const activitiesSpeakersDay3 = [
 				contacts: '',
 				researchInterests: '',
 				typeOfSpeaker: 'Empresa',
+				profilePicture: false,
 			},
 		],
 	},
