@@ -52,11 +52,83 @@ export default function ActivitiesPage() {
 		},
 	});
 	var activitiesObject = [
-		{ name: 'Palestras', activities: [{ name: 'placeholder', id: 0 }] },
-		{ name: 'Workshops', activities: [{ name: 'placeholder', id: 0 }] },
-		{ name: 'Sessões de Networking', activities: [{ name: 'placeholder', id: 0 }] },
-		{ name: 'Sessões Alumni', activities: [{ name: 'placeholder', id: 0 }] },
-		{ name: 'Outras', activities: [{ name: 'placeholder', id: 0 }] },
+		{
+			name: 'Palestras',
+			activities: [
+				{
+					name: 'Palestra: Gamificação na Saúde',
+					id: 3,
+				},
+				{
+					name: 'Palestra: Data Science em Medicina',
+					id: 6,
+				},
+				{
+					name: 'Palestra: Engenharia e Neurociências',
+					id: 7,
+				},
+				{
+					name: 'Palestra: Terapia Genética e Edição Genética',
+					id: 10,
+				},
+			],
+		},
+		{
+			name: 'Workshops',
+			activities: [
+				{
+					name: 'Workshop: Paving the way for personalised medicine: challenges of data science in healthcare',
+					id: 4,
+				},
+				{
+					name: 'Workshop: Agile Project Management in Healthcare',
+					id: 5,
+				},
+				{
+					name: 'Workshop: Breaking Down the Black Box: A Workshop on Responsible AI Development',
+					id: 8,
+				},
+			],
+		},
+		{
+			name: 'Sessões de Networking',
+			activities: [
+				{
+					name: 'Networking - Dia 6',
+					id: 1,
+				},
+				{
+					name: 'Networking - Dia 8',
+					id: 9,
+				},
+			],
+		},
+		{
+			name: 'Sessões Alumni',
+			activities: [
+				{
+					name: 'Sessão Alumni',
+					id: 11,
+				},
+			],
+		},
+		{
+			name: 'Outras',
+			activities: [
+				{
+					name: 'Sessão de Boas-Vindas',
+					id: 0,
+				},
+				{
+					name: 'Pitch',
+					id: 2,
+				},
+				{
+					name: 'Sessão de Encerramento',
+					id: 12,
+				},
+			],
+		},
 	];
 
 	const [currentIndex, setCurrentIndex] = React.useState(null);
@@ -111,7 +183,7 @@ export default function ActivitiesPage() {
 												return (
 													<Link
 														key={activity.id}
-														to={'../Activity/' + String(activity.id)}
+														to={'/Activity/' + String(activity.id)}
 													>
 														<Text
 															fontWeight={'bold'}

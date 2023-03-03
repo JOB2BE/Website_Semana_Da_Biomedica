@@ -56,21 +56,21 @@ export default function SpeakerPage(props) {
 
 	const [currentIndex, setCurrentIndex] = React.useState(null);
 	return (
-		<Column flex={1} alignItems={'center'} paddingVertical={'1%'}>
+		<Column alignItems={'center'} py={'2.5%'}>
 			<Stack
 				justifyContent={'center'}
 				direction={isScreenSmall ? 'column' : 'row'}
 				space={25}
 				style={styles.page}
 			>
-				<Column>
+				<Column flex={!isScreenSmall && 0.3}>
 					<StyledBox stackSpace={10} childrenInRow={isScreenSmall} centerChildren={true}>
 						<RoundBorderedImage
 							source={props.profileImage ? props.profileImage : ''}
 							containerRadius={imageRadius}
 							size={'inherit'}
 						></RoundBorderedImage>
-						<Column alignItems='center' space={3}>
+						<Column alignItems='center' space={3} flex={1}>
 							<Heading> {props.name} </Heading>
 							<Text fontWeight={1000} size='md'>
 								{props.typeOfSpeaker}
