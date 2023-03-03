@@ -9,7 +9,8 @@
     "web": "npx expo start --web",
     "format": "prettier \"**/*.js\" --write",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "build:digitalocean": "npx expo install && npx serve web-build"
   },
   "dependencies": {
     "@expo/webpack-config": "^0.17.0",
