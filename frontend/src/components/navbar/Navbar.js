@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 		borderBottomLeftRadius: 100000,
 		borderBottomRightRadius: 100000,
 		backgroundColor: theme.colors.dryBlue['0'],
-		padding: 7,
+		marginTop: -20,
 	},
 	sideFlexes: {
 		padding: 10,
@@ -232,12 +232,11 @@ export const Navbar = () => {
 					</Stack>
 					<Link to='/' style={{ textDecoration: 'none' }}>
 						{/*TODO: CHANGE LOGO TO SMALLER SIZE*/}
-						<Column alignContent={'flex-start'}>
-							<Image
-								size={155}
-								source={logo}
-								style={[styles.logoContainer, styles.shadow]}
-							/>
+						<Column
+							justifyContent={'flex-start'}
+							style={[styles.logoContainer, styles.shadow]}
+						>
+							<Image size={175} source={logo} />
 						</Column>
 					</Link>
 

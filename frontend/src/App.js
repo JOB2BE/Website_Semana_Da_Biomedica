@@ -64,20 +64,20 @@ export default function App() {
 							<Route path='/AboutUs' element={<AboutUsPage idiom={i18n} />} />
 							<Route path='/Schedule' element={<SchedulePage idiom={i18n} />} />
 							<Route path='/Activity' element={<ActivityPage idiom={i18n} />} />
-							<Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
-							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} />
+							{/* <Route path='/Activities' element={<ActivitiesPage idiom={i18n} />} />
+							<Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} /> */}
 
-							<Route path='/User/:id' element={<UserPage idiom={i18n} />} />
-							<Route path='/Profile' element={<UserPage idiom={i18n} />} />
-							<Route path='/Speaker/:id' element={<SpeakerPage idiom={i18n} />} />
+							<Route path='/User' element={<UserPage idiom={i18n} />} />
+							{/* <Route path='/Profile' element={<UserPage idiom={i18n} />} /> */}
+							<Route path='/Speaker' element={<SpeakerPage idiom={i18n} />} />
 							<Route path='/Feedback' element={<FeedbackPage idiom={i18n} />} />
-							<Route path='/Login' element={<LoginPage idiom={i18n} />} />
+							{/* <Route path='/Login' element={<LoginPage idiom={i18n} />} /> */}
 							<Route
 								path='/Partnerships'
 								element={<PartnershipsPage idiom={i18n} />}
 							/>
 							<Route path='/MobileDrawer' element={<MobileDrawer idiom={i18n} />} />
-							<Route path='/Register' element={<RegisterPage idiom={i18n} />} />
+							{/* <Route path='/Register' element={<RegisterPage idiom={i18n} />} />
 							<Route
 								path='/ResetPassword'
 								element={<PasswordResetPage idiom={i18n} />}
@@ -85,7 +85,7 @@ export default function App() {
 							<Route
 								path='/RecoverPassword'
 								element={<PasswordRecoveryPage idiom={i18n} />}
-							/>
+							/> */}
 						</Routes>
 					</Router>
 				</NativeBaseProvider>
