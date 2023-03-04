@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 import RoundBorderedImage from './RoundBorderedImage';
 
 export default function UserRow(props) {
-	const objects = props.objects;
-	const [hoverText, setHoverText] = useState(undefined);
-
 	return (
 		<Column {...props}>
 			<View
@@ -18,25 +15,16 @@ export default function UserRow(props) {
 					gap: 25,
 				}}
 			>
-				{objects.map((object, index) => {
+				{props.objects.map((object) => {
 					return (
-						<Pressable
+						<RoundBorderedImage
 							key={object.id}
-							onHoverIn={() => {
-								setHoverText(object.name);
-							}}
-							onHoverOut={() => {
-								setHoverText(undefined);
-							}}
-						>
-							<RoundBorderedImage
-								source={object.profileImage}
-								containerRadius={props.containerRadius}
-								link={'/User/' + String(object.id)}
-								size={'inherit'}
-								hoverText={hoverText}
-							></RoundBorderedImage>
-						</Pressable>
+							source={require(`../../assets/images/colabs/${String(object.id)}.png`)}
+							containerRadius={props.containerRadius}
+							link={'/User/' + String(object.id)}
+							size={'inherit'}
+							name={object.name}
+						></RoundBorderedImage>
 					);
 				})}
 			</View>

@@ -54,7 +54,7 @@ export default function AboutUsPage() {
 						}}
 						flex={1}
 					>
-						<DropDownTeam year={'2022/2023'} team={{}} index={currentIndex} />
+						<DropDownTeam year={'2022/2023'} index={currentIndex} />
 					</Pressable>
 				</StyledBox>
 			</Row>

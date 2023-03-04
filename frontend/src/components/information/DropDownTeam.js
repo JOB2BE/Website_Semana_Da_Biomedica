@@ -6,11 +6,18 @@ import theme from '../../theme';
 import UserRow from './UserRow';
 import { useWindowDimensions } from 'react-native';
 import responsiveWidth from '../../utils/responsiveWidth';
+import { colabs } from '../../assets/objects/colabObjects';
 export default function DropDownTeam(props) {
 	var currentIndex = props.index;
 	var window = useWindowDimensions();
-	var imageRadius = responsiveWidth(window, 100, 300, 0.1);
+	var imageRadius = responsiveWidth(window, 150, 300, 0.1);
 	var parternshipBoxWidth = responsiveWidth(window, null, null, 0.6);
+
+	// colabs.forEach((colab, index) => {
+	// 	colab['id'] = index;
+	// });
+	// console.log(colabs);
+	// Run this when new colabs are added to the file to atribute new ids, or insert them manually by incrementation
 
 	const styles = StyleSheet.create({
 		heading: {
@@ -24,53 +31,190 @@ export default function DropDownTeam(props) {
 		{
 			name: 'Presidência',
 			elements: [
-				{
-					name: 'John Doe',
-					id: 1,
-					profileImage: '',
-				},
+				{ id: 26, name: 'Irina Lopes' },
+				{ id: 34, name: 'João Brázia' },
+				{ id: 10, name: 'Alexandra Bob' },
 			],
 		},
 		{
 			name: 'Departamento de Tech',
-			elements: [{}],
+			elements: [{ id: 33, name: 'Miguel Dinis de Sousa' }],
 			title: 'Cordenador',
-			subelements: [],
+			subelements: [
+				{
+					name: 'David Fontoura',
+					id: 0,
+				},
+				{
+					name: 'Maria Pereira',
+					id: 13,
+				},
+				{
+					name: 'Isabel Campagnolo',
+					id: 35,
+				},
+			],
 			subtitle: 'Colaboradores',
 		},
 		{
 			name: 'Departamento de Design',
-			elements: [],
+			elements: [
+				{
+					name: 'Maria Louro',
+					id: 4,
+				},
+			],
 			title: 'Cordenador',
-			subelements: [],
+			subelements: [
+				{
+					name: 'Ana Alfaiate',
+					id: 9,
+				},
+				{
+					name: 'Raquel Coelho',
+					id: 29,
+				},
+				{
+					name: 'Tomás Serra',
+					id: 36,
+				},
+			],
 			subtitle: 'Colaboradores',
 		},
 		{
 			name: 'Departamento de Media',
-			elements: [],
+			elements: [
+				{
+					name: 'Carolina Ruas',
+					id: 20,
+				},
+			],
 			title: 'Cordenador',
-			subelements: [],
+			subelements: [
+				{
+					name: 'Beatriz Martins',
+					id: 8,
+				},
+				{
+					name: 'Martina Machado',
+					id: 12,
+				},
+				{
+					name: 'Inês Mabutana',
+					id: 15,
+				},
+				{
+					name: 'Beatriz Martins',
+					id: 19,
+				},
+			],
 			subtitle: 'Colaboradores',
 		},
 		{
 			name: 'Departamento de Logística',
-			elements: [],
+			elements: [
+				{
+					name: 'Tiago Engenheiro',
+					id: 11,
+				},
+			],
 			title: 'Cordenador',
-			subelements: [],
+			subelements: [
+				{
+					name: 'Marta Alves',
+					id: 2,
+				},
+				{
+					name: 'Joana Andrade',
+					id: 14,
+				},
+				{
+					name: 'Filipa Araújo',
+					id: 16,
+				},
+				{
+					name: 'João Mata',
+					id: 27,
+				},
+				{
+					name: 'João Freitas',
+					id: 31,
+				},
+			],
 			subtitle: 'Colaboradores',
 		},
 		{
 			name: 'Departamento de Research',
-			elements: [],
+			elements: [
+				{
+					name: 'Daniela Ferreira',
+					id: 17,
+				},
+			],
 			title: 'Cordenador',
-			subelements: [],
+			subelements: [
+				{
+					name: 'André Pestana',
+					id: 21,
+				},
+				{
+					name: 'Mariana Oliveira',
+					id: 3,
+				},
+				{
+					name: 'Mafalda Carreira',
+					id: 5,
+				},
+				{
+					name: 'Letícia Sousa',
+					id: 6,
+				},
+				{
+					name: 'Isabel Encarnação',
+					id: 7,
+				},
+				{
+					name: 'Beatriz Martins',
+					id: 18,
+				},
+			],
 			subtitle: 'Colaboradores',
 		},
 		{
 			name: 'Departamento de Partnerships',
-			elements: [],
+			elements: [
+				{
+					name: 'Tomás Inácio',
+					id: 32,
+				},
+				{
+					name: 'Beatriz Saragoça',
+					id: 23,
+				},
+			],
 			title: 'Cordenador',
-			subelements: [],
+			subelements: [
+				{
+					name: 'Matilde Correia',
+					id: 1,
+				},
+				{
+					name: 'Ana Silva',
+					id: 24,
+				},
+				{
+					name: 'Francisco Neves da Silva',
+					id: 25,
+				},
+				{
+					name: 'Maria Pio',
+					id: 28,
+				},
+				{
+					name: 'Laura Barradas',
+					id: 30,
+				},
+			],
 			subtitle: 'Colaboradores',
 		},
 	];
@@ -148,5 +292,4 @@ DropDownTeam.propTypes = {
 DropDownTeam.defaultProps = {
 	team: {},
 	index: null,
-
 };

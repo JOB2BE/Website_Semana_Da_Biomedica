@@ -18,6 +18,7 @@ import PartnershipsPage from './pages/PartnershipsPage';
 // import PasswordResetPage from './pages/PasswordResetPage';
 import NotFound from './pages/NotFound';
 import UserPage from './pages/UserPage';
+import UserController from './components/controller/UserController';
 import theme from './theme';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -72,6 +73,7 @@ export default function App() {
 							{/* <Route path='/Speakers' element={<SpeakersPage idiom={i18n} />} /> */}
 
 							<Route path='/User' element={<UserPage idiom={i18n} />} />
+							<Route path='/User/:id' element={<UserController idiom={i18n} />} />
 							{/* <Route path='/Profile' element={<UserPage idiom={i18n} />} /> */}
 							<Route
 								path='/Speaker/:idActivity/:idSpeaker'

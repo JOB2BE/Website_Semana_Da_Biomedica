@@ -56,11 +56,17 @@ export default function SchedulePageAnimated() {
 												</Text>
 
 												<Divider orientation='vertical' />
-												<Link to={'/Activity/' + String(activity.id)}>
+												{activity.id !== undefined ? (
+													<Link to={'/Activity/' + String(activity.id)}>
+														<Text size='md' pl='5'>
+															{activity.name}
+														</Text>
+													</Link>
+												) : (
 													<Text size='md' pl='5'>
 														{activity.name}
 													</Text>
-												</Link>
+												)}
 											</HStack>
 										))}
 									</View>

@@ -33,7 +33,6 @@ export default function ActivitiesPage() {
 			backgroundColor: theme.colors.medYellow[0],
 			paddingHorizontal: 15,
 			paddingVertical: 7,
-
 		},
 
 		RectangleShapeViewInformation: {
@@ -178,7 +177,11 @@ export default function ActivitiesPage() {
 										</Row>
 									</Pressable>
 									{currentIndex === index ? (
-										<Center style={styles.RectangleShapeViewInformation}>
+										<Column
+											space={6}
+											alignItems={'center'}
+											style={styles.RectangleShapeViewInformation}
+										>
 											{object.activities.map((activity) => {
 												return (
 													<Link
@@ -195,7 +198,7 @@ export default function ActivitiesPage() {
 													</Link>
 												);
 											})}
-										</Center>
+										</Column>
 									) : (
 										<></>
 									)}

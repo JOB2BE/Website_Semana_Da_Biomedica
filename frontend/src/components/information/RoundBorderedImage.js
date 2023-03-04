@@ -1,12 +1,13 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, Center, Image, Tooltip } from 'native-base';
+import { Text, Center, Image, Tooltip, Pressable } from 'native-base';
 import PropTypes from 'prop-types';
 import theme from '../../theme';
 import { Link } from '../../router';
 import { Link as NBLink } from 'native-base';
 
 export default function RoundBorderedImage(props) {
+	const [hoverText, setHoverText] = useState(undefined);
 	const styles = StyleSheet.create({
 		container: {
 			borderRadius: props.borderRadius,
@@ -28,34 +29,43 @@ export default function RoundBorderedImage(props) {
 		},
 	});
 
-	return props.externalURL ? (
-		<NBLink href={props.link} style={{ textDecoration: 'none' }} isExternal>
-			{props.hoverText ? (
-				<Center {...props} style={[styles.container, styles.hoverBackground]}>
-					<Text>{props.hoverText}</Text>
-				</Center>
+	return (
+		<Pressable
+			onHoverIn={() => {
+				setHoverText(props.name);
+			}}
+			onHoverOut={() => {
+				setHoverText(undefined);
+			}}
+		>
+			{props.externalURL ? (
+				<NBLink href={props.link} style={{ textDecoration: 'none' }} isExternal>
+					{hoverText ? (
+						<Center {...props} style={[styles.container, styles.hoverBackground]}>
+							<Text>{hoverText}</Text>
+						</Center>
+					) : (
+						<Center style={styles.container}>
+							<Tooltip label={props.name}>
+								<Image {...props} resizeMode={props.resizeMode}></Image>
+							</Tooltip>
+						</Center>
+					)}
+				</NBLink>
 			) : (
-				<Center style={styles.container}>
-					<Tooltip label={props.name}>
-						<Image {...props} resizeMode={props.resizeMode}></Image>
-					</Tooltip>
-				</Center>
+				<Link to={props.link} style={{ textDecoration: 'none' }}>
+					{hoverText ? (
+						<Center {...props} style={[styles.container, styles.hoverBackground]}>
+							<Text>{hoverText}</Text>
+						</Center>
+					) : (
+						<Center style={styles.container}>
+							<Image {...props} resizeMode={props.resizeMode}></Image>
+						</Center>
+					)}
+				</Link>
 			)}
-		</NBLink>
-	) : (
-		<Link to={props.link} style={{ textDecoration: 'none' }}>
-			{props.hoverText ? (
-				<Center {...props} style={[styles.container, styles.hoverBackground]}>
-					<Text>{props.hoverText}</Text>
-				</Center>
-			) : (
-				<Center style={styles.container}>
-					<Tooltip label={props.name}>
-						<Image {...props} resizeMode={props.resizeMode}></Image>
-					</Tooltip>
-				</Center>
-			)}
-		</Link>
+		</Pressable>
 	);
 }
 
