@@ -10,7 +10,7 @@ import { colabs } from '../../assets/objects/colabObjects';
 export default function DropDownTeam(props) {
 	var currentIndex = props.index;
 	var window = useWindowDimensions();
-	var imageRadius = responsiveWidth(window, 150, 300, 0.1);
+	var imageRadius = responsiveWidth(window, 150, 300, 0.12);
 	var parternshipBoxWidth = responsiveWidth(window, null, null, 0.6);
 
 	// colabs.forEach((colab, index) => {
@@ -39,7 +39,7 @@ export default function DropDownTeam(props) {
 		{
 			name: 'Departamento de Tech',
 			elements: [{ id: 33, name: 'Miguel Dinis de Sousa' }],
-			title: 'Cordenador',
+			title: 'Coordenador',
 			subelements: [
 				{
 					name: 'David Fontoura',
@@ -64,7 +64,7 @@ export default function DropDownTeam(props) {
 					id: 4,
 				},
 			],
-			title: 'Cordenador',
+			title: 'Coordenador',
 			subelements: [
 				{
 					name: 'Ana Alfaiate',
@@ -89,7 +89,7 @@ export default function DropDownTeam(props) {
 					id: 20,
 				},
 			],
-			title: 'Cordenador',
+			title: 'Coordenador',
 			subelements: [
 				{
 					name: 'Beatriz Martins',
@@ -117,13 +117,13 @@ export default function DropDownTeam(props) {
 					name: 'Tiago Engenheiro',
 					id: 11,
 				},
-			],
-			title: 'Cordenador',
-			subelements: [
 				{
 					name: 'Marta Alves',
 					id: 2,
 				},
+			],
+			title: 'Coordenador',
+			subelements: [
 				{
 					name: 'Joana Andrade',
 					id: 14,
@@ -151,7 +151,7 @@ export default function DropDownTeam(props) {
 					id: 17,
 				},
 			],
-			title: 'Cordenador',
+			title: 'Coordenador',
 			subelements: [
 				{
 					name: 'André Pestana',
@@ -192,7 +192,7 @@ export default function DropDownTeam(props) {
 					id: 23,
 				},
 			],
-			title: 'Cordenador',
+			title: 'Coordenador',
 			subelements: [
 				{
 					name: 'Matilde Correia',
