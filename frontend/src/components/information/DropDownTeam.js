@@ -104,7 +104,7 @@ export default function DropDownTeam(props) {
 					id: 15,
 				},
 				{
-					name: 'Beatriz Martins',
+					name: 'Marta Santos',
 					id: 19,
 				},
 			],
