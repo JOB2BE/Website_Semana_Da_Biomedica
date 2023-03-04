@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { VStack, HStack, Pressable, Text, Heading, Divider, Collapse, View } from 'native-base';
+import { VStack, HStack, Pressable, Text, Heading, Center, Collapse, View } from 'native-base';
 import theme from '../theme';
 import { AntDesign } from '@expo/vector-icons';
 import { Link } from '../router';
+import { useWindowDimensions } from 'react-native';
+import responsiveWidth from '../utils/responsiveWidth';
 
 // TODO: CHECK ON MOBILE
 
 export default function SchedulePageAnimated() {
+	var window = useWindowDimensions();
+	var isSmallScreen = window.width < 850;
+	var widthBars = responsiveWidth(window, null, null, isSmallScreen ? 0.95 : 0.65);
 	const [selectedDay, setSelectedDay] = useState(new Date().getDate());
 
 	return (
-		<VStack paddingTop={'2.5%'}>
+		<VStack flexGrow={0} paddingTop={'2.5%'}>
 			<HStack justifyContent={'center'}>
-				<VStack space='10'>
+				<VStack width={widthBars} space='10'>
 					{[6, 7, 8].map((componentDay) => (
 						<VStack key={componentDay} rounded='20' overflow='hidden'>
 							<Pressable
@@ -41,35 +46,30 @@ export default function SchedulePageAnimated() {
 							</Pressable>
 
 							<Collapse duration='200' isOpen={selectedDay === componentDay}>
-								<VStack bg={theme.colors.cream[0]} p='5'>
-									<View alignSelf='center'>
+								<VStack
+									bg={theme.colors.cream[0]}
+									py={5}
+									space={1.5}
+									alignItems={'center'}
+									justifyContent={'center'}
+								>
+									<Center>
 										{schedule[componentDay].map((activity, index) => (
-											<HStack key={index} alignItems='center'>
-												<Text
-													size='md'
-													pr='5'
-													textAlign='center'
-													w='105'
-													flexShrink='0'
-												>
-													{activity.time}
+											<HStack key={index} space={4} alignSelf={'flex-start'}>
+												<Text size='md' fontWeight={'bold'}>
+													{activity.time} ➔
 												</Text>
 
-												<Divider orientation='vertical' />
 												{activity.id !== undefined ? (
 													<Link to={'/Activity/' + String(activity.id)}>
-														<Text size='md' pl='5'>
-															{activity.name}
-														</Text>
+														<Text size='md'>{activity.name}</Text>
 													</Link>
 												) : (
-													<Text size='md' pl='5'>
-														{activity.name}
-													</Text>
+													<Text size='md'>{activity.name}</Text>
 												)}
 											</HStack>
 										))}
-									</View>
+									</Center>
 								</VStack>
 							</Collapse>
 						</VStack>

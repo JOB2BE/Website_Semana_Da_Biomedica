@@ -12,8 +12,8 @@ export default function SchedulePage() {
 
 	return (
 		<VStack flex={1} space={60}>
-			<HStack justifyContent={'center'} pt='10%'>
-				<VStack space='10' w='500'>
+			<HStack justifyContent={'center'}>
+				<VStack space='10'>
 					{[6, 7, 8].map((componentDay) => (
 						<VStack key={componentDay}>
 							<Pressable
