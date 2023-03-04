@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VStack, HStack, Pressable, Text, Heading, Center, Collapse, View } from 'native-base';
+import { VStack, HStack, Pressable, Text, Heading, Row, Collapse, Column } from 'native-base';
 import theme from '../theme';
 import { AntDesign } from '@expo/vector-icons';
 import { Link } from '../router';
@@ -46,7 +46,47 @@ export default function SchedulePageAnimated() {
 							</Pressable>
 
 							<Collapse duration='200' isOpen={selectedDay === componentDay}>
-								<VStack
+								<Row
+									bg={theme.colors.cream[0]}
+									py={5}
+									justifyContent={'center'}
+									alignItems={'center'}
+								>
+									<Column flex={0.7} flexGrow={1}>
+										{schedule[componentDay].map((activity, index) => (
+											<Row
+												key={index}
+												space={isSmallScreen ? 2 : 4}
+												justifyContent='center'
+											>
+												<Column flex={0.1} flexGrow={0.25}>
+													<Text size='md' fontWeight={'bold'}>
+														{activity.time}
+													</Text>
+												</Column>
+
+												<Column flex={0.05}>
+													<Text size='md' fontWeight={'bold'}>
+														➔
+													</Text>
+												</Column>
+												<Column flex={0.3} flexGrow={0.4}>
+													{activity.id !== undefined ? (
+														<Link
+															to={'/Activity/' + String(activity.id)}
+														>
+															<Text size='md'>{activity.name}</Text>
+														</Link>
+													) : (
+														<Text size='md'>{activity.name}</Text>
+													)}
+												</Column>
+											</Row>
+										))}
+									</Column>
+								</Row>
+
+								{/* <VStack
 									bg={theme.colors.cream[0]}
 									py={5}
 									space={1.5}
@@ -55,7 +95,11 @@ export default function SchedulePageAnimated() {
 								>
 									<Center>
 										{schedule[componentDay].map((activity, index) => (
-											<HStack key={index} space={4} alignSelf={'flex-start'}>
+											<HStack
+												key={index}
+												space={isSmallScreen ? 2 : 4}
+												alignSelf={'flex-start'}
+											>
 												<Text size='md' fontWeight={'bold'}>
 													{activity.time} ➔
 												</Text>
@@ -70,7 +114,7 @@ export default function SchedulePageAnimated() {
 											</HStack>
 										))}
 									</Center>
-								</VStack>
+								</VStack> */}
 							</Collapse>
 						</VStack>
 					))}
