@@ -47,7 +47,7 @@ export default function PartnershipsPage() {
 	const goldPartners = [
 		{
 			name: 'Accenture',
-			companyImage: require('../assets/images/partners/Logo accenture.png'),
+			companyImage: require('../assets/images/partners/accenture.png'),
 			url: 'https://www.accenture.com/pt-pt',
 		},
 		{
@@ -151,11 +151,11 @@ export default function PartnershipsPage() {
 			companyImage: require('../assets/images/partners/tetley.png'),
 			url: 'https://www.tetley.pt/',
 		},
-		{
-			name: 'Saborosa',
-			companyImage: require('../assets/images/partners/saborosa.png'),
-			url: 'https://saborosa.pt/',
-		},
+		// {
+		// 	name: 'Saborosa',
+		// 	companyImage: require('../assets/images/partners/saborosa.png'),
+		// 	url: 'https://saborosa.pt/',
+		// },
 	];
 	// const LogoIst = require('../assets/images/logo_ist.svg');
 	// const LogoNEBM = require('../assets/images/Logo_NEBM.svg');
