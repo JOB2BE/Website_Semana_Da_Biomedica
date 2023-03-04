@@ -12,18 +12,22 @@ export default function SchedulePageAnimated() {
 	var window = useWindowDimensions();
 	var isSmallScreen = window.width < 850;
 	var widthBars = responsiveWidth(window, null, null, isSmallScreen ? 0.95 : 0.65);
-	const [selectedDay, setSelectedDay] = useState(new Date().getDate());
+	const [selectedDay, setSelectedDay] = useState(undefined);
 
 	return (
-		<VStack flexGrow={0} paddingTop={'2.5%'}>
-			<HStack justifyContent={'center'}>
-				<VStack width={widthBars} space='10'>
+		<VStack flex={isSmallScreen ? 1 : true} my={'2.5%'}>
+			<HStack justifyContent={'center'} alignItems={'center'}>
+				<VStack width={widthBars} space={selectedDay !== undefined ? 3 : 10}>
 					{[6, 7, 8].map((componentDay) => (
 						<VStack key={componentDay} rounded='20' overflow='hidden'>
 							<Pressable
-								onPress={() =>
-									setSelectedDay(selectedDay === componentDay ? 0 : componentDay)
-								}
+								onPress={() => {
+									if (selectedDay === undefined) {
+										setSelectedDay(componentDay);
+									} else {
+										setSelectedDay(undefined);
+									}
+								}}
 							>
 								<HStack
 									bg={theme.colors.medYellow[0]}
@@ -45,7 +49,7 @@ export default function SchedulePageAnimated() {
 								</HStack>
 							</Pressable>
 
-							<Collapse duration='200' isOpen={selectedDay === componentDay}>
+							<Collapse duration='400' isOpen={selectedDay === componentDay}>
 								<Row
 									bg={theme.colors.cream[0]}
 									py={5}
