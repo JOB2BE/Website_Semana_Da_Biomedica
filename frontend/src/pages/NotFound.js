@@ -27,7 +27,7 @@ export default function NotFound() {
 	});
 
 	return (
-		<Column flex={1} space={120} style={styles.aboutBox}>
+		<Column space={120} style={styles.aboutBox}>
 			<Row justifyContent={'center'}>
 				<StyledBox
 					width={isSmallScreen ? boxWidthMobile : boxWidth}

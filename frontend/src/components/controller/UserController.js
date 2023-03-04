@@ -7,7 +7,7 @@ export default function UserController() {
 	const { id } = useParams();
 
 	const demouser = colabObjects[id];
-	console.log(demouser);
+
 
 	return (
 		<SpeakerPage

@@ -97,7 +97,6 @@ export default function UserEdition(props) {
 				id,
 				title: 'PDF selecionado!',
 			});
-			console.log(JSON.stringify(cv, null, 2));
 		}
 	}, [cv]);
 	useEffect(() => {
@@ -106,7 +105,6 @@ export default function UserEdition(props) {
 				id,
 				title: 'Imagem selecionada!',
 			});
-			console.log(JSON.stringify(photo, null, 2));
 		}
 	}, [photo]);
 	return (
