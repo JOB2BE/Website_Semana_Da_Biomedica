@@ -46,14 +46,13 @@ export default function ActivityCard(props) {
 	});
 	return (
 		<Column style={styles.aboutBox}>
-			<Row justifyContent={'center'} >
+			<Row justifyContent={'center'}>
 				<ActivityBox
-					padding={12}
-					flex={0.85}
+					flex={0.95}
 					stackSpace={12}
 					headingChildren={
 						<Row justifyContent={'space-between'}>
-							<Column flex={0.8}>
+							<Column flex={0.95}>
 								<Heading size='md' style={styles.heading}>
 									{props.title}
 								</Heading>
@@ -88,11 +87,11 @@ export default function ActivityCard(props) {
 						</Column>
 					</Row>
 					<Row>
-						<Column flex={1}>
+						<Column flex={1} flexWrap={'wrap'}>
 							<Text size='md' style={styles.bold}>
 								Descrição:
 							</Text>
-							<Text paddingLeft={3} size='md' flexWrap={'wrap'} flex={1}>
+							<Text paddingLeft={3} size='md'>
 								{props.description}
 							</Text>
 						</Column>

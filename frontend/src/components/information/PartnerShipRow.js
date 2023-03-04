@@ -27,6 +27,7 @@ export default function PartnerShipRow(props) {
 							size={'inherit'}
 							name={object.name}
 							externalURL={true}
+							isHover={false}
 						></RoundBorderedImage>
 					);
 				})}

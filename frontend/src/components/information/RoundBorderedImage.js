@@ -32,10 +32,10 @@ export default function RoundBorderedImage(props) {
 	return (
 		<Pressable
 			onHoverIn={() => {
-				setHoverText(props.name);
+				props.isHover && setHoverText(props.name);
 			}}
 			onHoverOut={() => {
-				setHoverText(undefined);
+				props.isHover && setHoverText(undefined);
 			}}
 		>
 			{props.externalURL ? (
@@ -84,6 +84,7 @@ RoundBorderedImage.propTypes = {
 	borderWidth: PropTypes.number,
 	link: PropTypes.string,
 	hoverText: PropTypes.string,
+	isHover: PropTypes.bool,
 };
 RoundBorderedImage.defaultProps = {
 	borderRadius: 1500,
@@ -99,4 +100,5 @@ RoundBorderedImage.defaultProps = {
 	resizeMode: 'contain',
 	borderColor: theme.colors.medYellow[0],
 	borderWidth: 5,
+	isHover: true,
 };

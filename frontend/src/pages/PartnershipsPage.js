@@ -8,7 +8,7 @@ import theme from '../theme';
 
 export default function PartnershipsPage() {
 	var window = useWindowDimensions();
-	var imageRadius = responsiveWidth(window, 70, 300, 0.1);
+	var imageRadius = responsiveWidth(window, 100, 300, 0.1);
 	var parternshipBoxWidth = responsiveWidth(window, null, null, 0.6);
 
 	const styles = StyleSheet.create({
