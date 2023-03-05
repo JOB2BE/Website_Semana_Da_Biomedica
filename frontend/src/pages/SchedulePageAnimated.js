@@ -15,7 +15,7 @@ export default function SchedulePageAnimated() {
 	const [selectedDay, setSelectedDay] = useState(undefined);
 
 	return (
-		<VStack flex={isSmallScreen ? 1 : true} my={'2.5%'}>
+		<VStack flex={isSmallScreen ? 1 : true} py={'1.5%'}>
 			<HStack justifyContent={'center'} alignItems={'center'}>
 				<VStack width={widthBars} space={selectedDay !== undefined ? 3 : 10}>
 					{[6, 7, 8].map((componentDay) => (
@@ -174,7 +174,7 @@ const schedule = {
 		},
 		{
 			time: '15h30 - 17h',
-			name: 'Workshop',
+			name: 'Workshop: Breaking Down the Black Box: A Workshop on Responsible AI Development',
 			local: 'Sala C01',
 			type: 'Workshop',
 			id: 4,
@@ -183,9 +183,9 @@ const schedule = {
 	7: [
 		{
 			time: '9h - 10h30',
-			name: 'Workshop',
+			name: 'Workshop: Agile Project Management in Healthcare',
 			local: 'Átrio Central',
-			type: '',
+			type: 'Workshop',
 			id: 5,
 		},
 		{
@@ -218,7 +218,7 @@ const schedule = {
 		},
 		{
 			time: '16h - 17h30',
-			name: 'Workshop',
+			name: 'Workshop: Paving the way for personalised medicine: challenges of data science in healthcare',
 			local: 'Sala C01',
 			type: 'Workshop',
 			id: 8,
@@ -229,7 +229,7 @@ const schedule = {
 			time: '9h - 10h30',
 			name: 'Networking',
 			local: 'Sala C01',
-			type: 'Workshop',
+			type: 'Networking',
 			id: 9,
 		},
 		{

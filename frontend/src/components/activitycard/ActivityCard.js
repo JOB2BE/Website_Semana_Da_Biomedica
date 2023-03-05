@@ -78,8 +78,8 @@ export default function ActivityCard(props) {
 										key={index}
 										to={'/Speaker/' + String(props.id) + '/' + String(index)}
 									>
-										<Text paddingLeft={3} size='md'>
-											{speaker.name} ;
+										<Text paddingLeft={3} size='md' fontWeight={'bold'}>
+											{speaker.name}
 										</Text>
 									</Link>
 								);

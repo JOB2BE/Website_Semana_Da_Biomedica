@@ -55,19 +55,19 @@ export default function ActivitiesPage() {
 			name: 'Palestras',
 			activities: [
 				{
-					name: 'Palestra: Gamificação na Saúde',
+					name: 'Gamificação na Saúde',
 					id: 3,
 				},
 				{
-					name: 'Palestra: Data Science em Medicina',
+					name: 'Data Science em Medicina',
 					id: 6,
 				},
 				{
-					name: 'Palestra: Engenharia e Neurociências',
+					name: 'Engenharia e Neurociências',
 					id: 7,
 				},
 				{
-					name: 'Palestra: Terapia Genética e Edição Genética',
+					name: 'Terapia Genética e Edição Genética',
 					id: 10,
 				},
 			],
@@ -76,15 +76,15 @@ export default function ActivitiesPage() {
 			name: 'Workshops',
 			activities: [
 				{
-					name: 'Workshop: Paving the way for personalised medicine: challenges of data science in healthcare',
+					name: 'Paving the way for personalised medicine: challenges of data science in healthcare',
 					id: 4,
 				},
 				{
-					name: 'Workshop: Agile Project Management in Healthcare',
+					name: 'Agile Project Management in Healthcare',
 					id: 5,
 				},
 				{
-					name: 'Workshop: Breaking Down the Black Box: A Workshop on Responsible AI Development',
+					name: 'Breaking Down the Black Box: A Workshop on Responsible AI Development',
 					id: 8,
 				},
 			],

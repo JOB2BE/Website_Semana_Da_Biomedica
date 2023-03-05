@@ -121,23 +121,23 @@ export const activitiesSpeakersDay2 = [
 		],
 	},
 	{
-		name: 'Breaking Down the Black Box: A Workshop on Responsible AI Development',
+		name: 'Paving the way for personalised medicine: challenges of data science in healthcare',
 		description:
-			'A Inteligência Artificial (IA) está a mudar o mundo como o conhecemos, mas com grandes poderes vêm grandes responsabilidades. Neste workshop, vamos enfrentar o enorme potencial mostrado pelos modelos recentes de Inteligência Artificial contra as suas limitações, especialmente no que diz respeito a questões como parcialidade, transparência e uso indevido. Isto é seguido por uma breve introdução aos algoritmos de machine learning para compreender alguns dos conceitos-chave mais importantes. Por fim, discutiremos vários exemplos do mundo real de desenvolvimento responsável de IA, incluindo projetos do Fraunhofer Portugal AICOS, e veremos como isso pode aumentar a confiança do utilizador. Junta-te a nós e descobre como o Desenvolvimento Responsável de IA pode nos ajudar a construir um futuro melhor para todos.',
+			"While the potential of artificial intelligence (AI) to transform healthcare is widely recognised, its adoption in current clinical practices is still lagging behind. In this workshop, we will address some of AI's impediments in real-world healthcare applications. In particular, we will focus on iLoF, a Portuguese biotech startup that aims to develop an AI platform to accelerate the future of drug discovery and personalised development as a use- case. We will brainstorm the challenges the proposed AI platform may face and how these challenges can be overcome",
 		requirements: '',
 		scheduleAndLocation: '07/03/23 - 16:00, Sala Q01',
 		activityType: 'Workshop',
-		enrollmentLink: 'https://www.eventbrite.com/e/570787449627',
 		slots: null,
+		enrollmentLink: 'https://www.eventbrite.com/e/570118990247',
 		speakers: [
 			{
-				name: 'André Carreiro',
-				position: 'Gerente de projeto, mentor e líder técnico de IA na Fraunhofer AICOS',
+				name: 'Dr. Allan Mancoo',
+				position: 'Data Scientist da iLoF',
 				description:
-					'A Inteligência Artificial (IA) está a mudar o mundo como o conhecemos, mas com grandes poderes vêm grandes responsabilidades.  Neste Workshop, vamos enfrentar o enorme potencial mostrado pelos modelos recentes de Inteligência Artificial contra as suas limitações, especialmente no que diz respeito a questões como parcialidade, transparência e uso indevido. Isto é seguido por uma breve introdução aos algoritmos de machine learning para compreender alguns dos conceitos-chave mais importantes. Por fim, discutiremos vários exemplos do mundo real de desenvolvimento responsável de IA, incluindo projetos do Fraunhofer Portugal AICOS, e veremos como isso pode aumentar a confiança do utilizador. Junta-te a nós e descobre como o Desenvolvimento Responsável de IA pode nos ajudar a construir um futuro melhor para todos. André Carreiro é Engenheiro Biomédico com forte experiência em Data Science e Machine Learning. Concluiu o mestrado e o doutoramento em Engenharia Biomédica no Instituto Superior Técnico Lisboa. Desde que concluiu o seu doutoramento em 2016, trabalhou como software developer, cientista de dados e engenheiro de IA em diversos ambientes. Atualmente, é gerente de projeto, mentor e líder técnico de IA na Fraunhofer AICOS. Também lidera um projeto focado em IA responsável, com o objetivo de construir uma plataforma de suporte à certificação de soluções de IA, que conquistou o segundo lugar no Prêmio Inovação IN3+ da Imprensa Nacional – Casa da Moeda.',
-				contacts: 'https://www.linkedin.com/in/andrevcarreiro/',
+					'Data Scientist da iLoF que tem um PhD em Theoretical Neuroscience da Ecole Normale Superieure em Paris. O seu trabalho envolve o desenvolvimento de modelos teóricos que relacionam fenómenos físicos com impressões digitais óticas geradas pela plataforma da iLoF assim como a criação de modelos de machine learning que extraiam informação relevante destes sinais.A iLoF é uma start-up de tecnologia de saúde que está a desenvolver uma plataforma de AI cujo objetivo é facilitar a descoberta e desenvolvimento de fármacos personalizados. Esta utiliza AI avançada e fototónica para recolha de dados através de deteção de biomarcadores, criando uma biblioteca digital destes e de perfis biológicos que permitem um acompanhamento personalizado de pacientes assim como ferramentas de estratificação.',
+				contacts: 'https://www.linkedin.com/in/allan-mancoo',
 				researchInterests: '',
-				typeOfSpeaker: 'Workshop',
+				typeOfSpeaker: 'workshop',
 			},
 		],
 	},
