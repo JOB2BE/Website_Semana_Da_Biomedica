@@ -40,14 +40,10 @@ export default function App() {
 		return null;
 	}
 
-	var background = require('../assets/images/background.svg');
-	
+	var background = require('./assets/images/background.svg');
+
 	return (
-		<ImageBackground
-			source={background}
-			style={{ flex: 1 }}
-			resizeMode={'cover'}
-		>
+		<ImageBackground source={background} style={{ flex: 1 }} resizeMode={'cover'}>
 			<View>
 				{' '}
 				<NativeBaseProvider theme={theme} config={config}>
