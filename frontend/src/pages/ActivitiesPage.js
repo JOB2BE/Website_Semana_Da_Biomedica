@@ -77,7 +77,7 @@ export default function ActivitiesPage() {
 			activities: [
 				{
 					name: 'Paving the way for personalised medicine: challenges of data science in healthcare',
-					id: 4,
+					id: 8,
 				},
 				{
 					name: 'Agile Project Management in Healthcare',
@@ -85,7 +85,7 @@ export default function ActivitiesPage() {
 				},
 				{
 					name: 'Breaking Down the Black Box: A Workshop on Responsible AI Development',
-					id: 8,
+					id: 4,
 				},
 			],
 		},

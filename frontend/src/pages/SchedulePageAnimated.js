@@ -11,11 +11,12 @@ import responsiveWidth from '../utils/responsiveWidth';
 export default function SchedulePageAnimated() {
 	var window = useWindowDimensions();
 	var isSmallScreen = window.width < 850;
+	var hasSomeHeight = window.height > 850
 	var widthBars = responsiveWidth(window, null, null, isSmallScreen ? 0.95 : 0.65);
 	const [selectedDay, setSelectedDay] = useState(undefined);
 
 	return (
-		<VStack flex={isSmallScreen ? 1 : true} py={'1.5%'}>
+		<VStack flex={isSmallScreen && hasSomeHeight ? 1 : true} py={'1.5%'}>
 			<HStack justifyContent={'center'} alignItems={'center'}>
 				<VStack width={widthBars} space={selectedDay !== undefined ? 3 : 10}>
 					{[6, 7, 8].map((componentDay) => (
